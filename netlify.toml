@@ -1,0 +1,27 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/progress"
+  to = "/.netlify/functions/progress"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/send-code"
+  to = "/.netlify/functions/send-code"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/verify-code"
+  to = "/.netlify/functions/verify-code"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/ask-ai"
+  to = "/.netlify/functions/ask-ai"
+  status = 200
+  force = true
