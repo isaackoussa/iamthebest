@@ -1,4 +1,4 @@
-//const { getStore } = require("@netlify/blobs");
+const { getStore } = require("@netlify/blobs");
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -14,8 +14,8 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Email et code requis" }) };
   }
 
-  //const authStore = getStore("imthebest-auth");
-  //const record = await authStore.get(email, { type: "json" });
+  const authStore = getStore("imthebest-auth");
+  const record = await authStore.get(email, { type: "json" });
 
   if (!record) {
     return { statusCode: 400, body: JSON.stringify({ error: "Aucun code demandé pour cet email. Redemande un code." }) };
