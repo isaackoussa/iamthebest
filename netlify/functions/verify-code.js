@@ -14,8 +14,8 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Email et code requis" }) };
   }
 
-  const authStore = getStore("imthebest-auth");
-  const record = await authStore.get(email, { type: "json" });
+console.log("SITE_ID =", process.env.NETLIFY_SITE_ID);
+console.log("TOKEN =", !!process.env.NETLIFY_BLOBS_TOKEN);
 
   if (!record) {
     return { statusCode: 400, body: JSON.stringify({ error: "Aucun code demandé pour cet email. Redemande un code." }) };
