@@ -1,4 +1,4 @@
-const { getStore } = require("@netlify/blobs");
+//const { getStore } = require("@netlify/blobs");
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -14,8 +14,9 @@ exports.handler = async (event) => {
   }
 
   const code = Math.floor(100000 + Math.random() * 900000).toString();
-  const authStore = getStore("imthebest-auth");
-  await authStore.setJSON(email, { code, expiresAt: Date.now() + 10 * 60 * 1000 });
+  console.log(`Code OTP pour ${email} : ${code}`);
+ //const authStore = getStore("imthebest-auth");
+  //await authStore.setJSON(email, { code, expiresAt: Date.now() + 10 * 60 * 1000 });
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
