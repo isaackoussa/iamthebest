@@ -14,8 +14,8 @@ exports.handler = async (event) => {
   }
 
   const code = Math.floor(100000 + Math.random() * 900000).toString();
- const authStore = getStore("imthebest-auth");
-await authStore.setJSON(email, { code, expiresAt: Date.now() + 10 * 60 * 1000 });
+console.log("SITE_ID =", process.env.NETLIFY_SITE_ID);
+console.log("TOKEN =", !!process.env.NETLIFY_BLOBS_TOKEN);
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
