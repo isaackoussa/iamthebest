@@ -1,9 +1,0 @@
-{
-  "name": "imthebest",
-  "version": "1.0.0",
-  "private": true,
-  "description": "I'm The Best — cours et évaluations 4ème",
-  "dependencies": {
-    "@netlify/blobs": "^8.1.0"
-  }
-}
