@@ -6,94 +6,72 @@ const PRACTICE = {
 
   // ---------- MATHS ----------
   m1: [
-    { statement:"Calcule : (−8) + 5 − (−3) − 7.", solution:"(−8) + 5 = −3. Puis −3 − (−3) = 0. Enfin 0 − 7 = <strong>−7</strong>" },
-    { statement:"Calcule : 7 − 12 + (−4).", solution:"7 − 12 = −5. Puis −5 + (−4) = <strong>−9</strong>" },
-    { statement:"Range dans l'ordre croissant : −5 ; 3 ; −8 ; 0.", solution:"<strong>−8 ; −5 ; 0 ; 3</strong>" }
+    { statement:"Écris 560 000 en écriture scientifique (a×10^p).", solution:"<p>5,6 × 10⁵ (on déplace la virgule de 5 rangs vers la gauche).</p>" },
+    { statement:"Calcule (5×10²) × (3×10³) et donne le résultat en écriture scientifique.", solution:"<p>5×3=15 et 10²⁺³=10⁵, donc 15×10⁵ = 1,5×10⁶ (on ajuste car 15 > 10).</p>" }
   ],
   m2: [
-    { statement:"Écris 5³ × 5⁴ ÷ 5² sous la forme d'une seule puissance, puis calcule.", solution:"5^(3+4−2) = 5⁵ = <strong>3125</strong>" },
-    { statement:"Calcule 2⁵ et 10⁻².", solution:"2⁵ = <strong>32</strong> ; 10⁻² = 1/100 = <strong>0,01</strong>" },
-    { statement:"Simplifie (3²)³ en une seule puissance puis calcule.", solution:"(3²)³ = 3^(2×3) = 3⁶ = <strong>729</strong>" }
+    { statement:"Les droites (d1) et (d2) sont parallèles à (d3). Que peut-on en conclure sur (d1) et (d2) ?", solution:"<p>D'après la propriété du parallélisme, (d1) et (d2) sont parallèles entre elles.</p>" },
+    { statement:"(d1) ⊥ (d2) et (d2) // (d3). Que peut-on dire de (d1) et (d3) ?", solution:"<p>Une droite perpendiculaire à l'une de deux droites parallèles est perpendiculaire à l'autre : (d1) ⊥ (d3).</p>" }
   ],
   m3: [
-    { statement:"Calcule et simplifie : 2/5 + 3/10 − 1/2.", solution:"4/10 + 3/10 − 5/10 = 2/10 = <strong>1/5</strong>" },
-    { statement:"Calcule : 3/4 × 8/9.", solution:"(3×8)/(4×9) = 24/36 = <strong>2/3</strong>" },
-    { statement:"Calcule : 5/6 ÷ 2/3.", solution:"5/6 × 3/2 = 15/12 = <strong>5/4</strong>" }
+    { statement:"Calcule A = (3/5) − (1/4).", solution:"<p>Dénominateur commun 20 : 3/5=12/20, 1/4=5/20, donc A = 12/20 − 5/20 = 7/20.</p>" },
+    { statement:"Simplifie et calcule (−2/3) ÷ (4/9).", solution:"<p>(−2/3) × (9/4) = −18/12 = −3/2 après simplification par 6.</p>" }
   ],
   m4: [
-    { statement:"Développe et réduis : 3(x + 2) − 2(x − 5).", solution:"3x + 6 − 2x + 10 = <strong>x + 16</strong>" },
-    { statement:"Factorise : 5x + 15.", solution:"5 est facteur commun : <strong>5(x + 3)</strong>" },
-    { statement:"Développe : (x + 3)(x − 2).", solution:"x² − 2x + 3x − 6 = <strong>x² + x − 6</strong>" }
+    { statement:"A a pour abscisse −6 et B a pour abscisse 2. Calcule AB et l'abscisse du milieu de [AB].", solution:"<p>AB = |2−(−6)| = 8. Milieu : (−6+2)/2 = −2.</p>" },
+    { statement:"I est le milieu de [AB], A a pour abscisse 3 et I a pour abscisse 7. Trouve l'abscisse de B.", solution:"<p>x_I = (x_A+x_B)/2, donc 7 = (3+x_B)/2, d'où x_B = 14−3 = 11.</p>" }
   ],
   m5: [
-    { statement:"Dans un triangle ABC, M ∈ [AB], N ∈ [AC], (MN)//(BC). AM=4cm, AB=10cm, AC=15cm. Calcule AN.", solution:"AN = (AM×AC)/AB = (4×15)/10 = <strong>6 cm</strong>" },
-    { statement:"Même configuration : si AM/AB = 2/5 et BC = 20 cm, calcule MN.", solution:"MN = (2/5) × 20 = <strong>8 cm</strong>" },
-    { statement:"Énonce en une phrase à quoi sert la réciproque du théorème de Thalès.", solution:"Elle permet de <strong>démontrer que deux droites sont parallèles</strong> à partir de l'égalité de rapports de longueurs." }
+    { statement:"Dans un triangle ABC, I milieu de [AB], J milieu de [AC], BC=14cm. Calcule IJ.", solution:"<p>D'après la droite des milieux, IJ = BC/2 = 7 cm.</p>" },
+    { statement:"Explique la différence entre une projection parallèle et une projection orthogonale.", solution:"<p>La projection parallèle se fait selon une direction quelconque (d'), la projection orthogonale se fait selon une direction perpendiculaire à la droite d'arrivée.</p>" }
   ],
   m6: [
-    { statement:"Un triangle rectangle a des côtés de l'angle droit de 6 cm et 8 cm. Calcule l'hypoténuse.", solution:"√(6²+8²) = √100 = <strong>10 cm</strong>" },
-    { statement:"Un triangle a des côtés 5, 12, 13. Est-il rectangle ? Justifie.", solution:"5²+12² = 25+144 = 169 = 13². L'égalité est vérifiée, donc <strong>le triangle est rectangle</strong> (réciproque de Pythagore)." },
-    { statement:"Un triangle rectangle a une hypoténuse de 13 cm et un côté de 5 cm. Calcule l'autre côté.", solution:"√(13²−5²) = √(169−25) = √144 = <strong>12 cm</strong>" }
+    { statement:"Transforme x = 0,4545... (SDIP de période 2) en quotient d'entiers.", solution:"<p>100x = 45,4545..., donc 100x − x = 45, soit 99x = 45, d'où x = 45/99 = 5/11.</p>" },
+    { statement:"1/9 est-il un nombre rationnel ? Justifie et donne son écriture décimale.", solution:"<p>Oui, c'est un quotient d'entiers. 1/9 = 0,111... (SDIP de période 1).</p>" }
   ],
   m7: [
-    { statement:"Résous : 5x − 3 = 2x + 9.", solution:"3x = 12 → x = <strong>4</strong>" },
-    { statement:"Résous : 2(x + 3) = 16.", solution:"2x + 6 = 16 → 2x = 10 → x = <strong>5</strong>" },
-    { statement:"Résous : x/3 + 2 = 5.", solution:"x/3 = 3 → x = <strong>9</strong>" }
+    { statement:"Quelle est la somme des angles intérieurs d'un décagone (10 côtés) ?", solution:"<p>(10−2)×180 = 1440°.</p>" },
+    { statement:"Un polygone régulier a 9 côtés. Quel est le nom de ce polygone et la mesure de chaque angle ?", solution:"<p>C'est un ennéagone. Somme des angles : (9−2)×180=1260°, donc chaque angle mesure 1260/9=140°.</p>" }
   ],
   m8: [
-    { statement:"Simplifie √72.", solution:"√(36×2) = <strong>6√2</strong>" },
-    { statement:"Calcule √16 × √25.", solution:"4 × 5 = <strong>20</strong>" },
-    { statement:"Simplifie √98.", solution:"√(49×2) = <strong>7√2</strong>" }
+    { statement:"MNPQ est tel que le vecteur MN = (3;1) et le vecteur QP = (3;1). MNPQ est-il un parallélogramme ?", solution:"<p>Oui, car vecteur MN = vecteur QP : c'est la caractérisation vectorielle du parallélogramme.</p>" },
+    { statement:"ABCD est un parallélogramme, A(1;1), B(4;1), D(1;3). Trouve les coordonnées de C.", solution:"<p>Vecteur AB = vecteur DC, donc C = D + vecteur AB = (1+3;3+0) = (4;3).</p>" }
   ],
   m9: [
-    { statement:"Dans une classe de 20 élèves : 5 ont eu 10, 8 ont eu 12, 7 ont eu 15. Calcule la moyenne.", solution:"(5×10+8×12+7×15)/20 = 251/20 = <strong>12,55</strong>" },
-    { statement:"Calcule la fréquence d'une valeur ayant un effectif de 6 pour un effectif total de 24.", solution:"6/24 = 0,25 = <strong>25 %</strong>" },
-    { statement:"5 amis mesurent 150, 152, 148, 155, 150 cm. Calcule la taille moyenne.", solution:"(150+152+148+155+150)/5 = 755/5 = <strong>151 cm</strong>" }
+    { statement:"Simplifie vecteur AB + vecteur BC + vecteur CD.", solution:"<p>D'après Chasles : AB+BC=AC, puis AC+CD=AD. Résultat : vecteur AD.</p>" },
+    { statement:"I est le milieu de [AB]. Exprime vecteur AB en fonction de vecteur AI.", solution:"<p>Vecteur AI = vecteur IB, donc vecteur AB = vecteur AI + vecteur IB = 2×vecteur AI.</p>" }
   ],
   m10: [
-    { statement:"Un triangle a deux angles de 50° et 65°. Calcule le troisième.", solution:"180 − 50 − 65 = <strong>65°</strong>" },
-    { statement:"Un quadrilatère a 3 angles de 80°, 100°, 90°. Calcule le 4e.", solution:"360 − 80 − 100 − 90 = <strong>90°</strong>" },
-    { statement:"Deux angles sont complémentaires ; l'un mesure 35°. Calcule l'autre.", solution:"90 − 35 = <strong>55°</strong>" }
+    { statement:"3/4 est-il un nombre réel ? Est-il rationnel ?", solution:"<p>Oui aux deux : 3/4 est un quotient d'entiers (rationnel), et ℚ ⊂ ℝ, donc c'est aussi un réel.</p>" },
+    { statement:"√2 est-il rationnel ? Justifie brièvement.", solution:"<p>Non, √2 est irrationnel : son écriture décimale est illimitée et non périodique (elle ne peut pas s'écrire comme quotient exact de deux entiers).</p>" }
   ],
   m11: [
-    { statement:"Triangle rectangle en A, angle en B = 40°, BC = 12 cm. Calcule AB (arrondi au dixième).", solution:"AB = 12 × cos(40°) ≈ <strong>9,2 cm</strong>" },
-    { statement:"Un triangle rectangle a une hypoténuse de 10 cm et un angle de 60°. Calcule le côté adjacent (cos 60° = 0,5).", solution:"10 × 0,5 = <strong>5 cm</strong>" },
-    { statement:"Si le côté adjacent mesure 6 cm et l'hypoténuse 10 cm, calcule le cosinus de l'angle.", solution:"cos(angle) = 6/10 = <strong>0,6</strong>" }
+    { statement:"Une série a les valeurs 5(×3), 10(×4), 15(×3). Calcule la moyenne.", solution:"<p>(5×3+10×4+15×3)/(3+4+3) = (15+40+45)/10 = 100/10 = 10.</p>" },
+    { statement:"Dans un diagramme circulaire, une catégorie a une fréquence de 40%. Quel est l'angle de son secteur ?", solution:"<p>360° × 0,40 = 144°.</p>" }
   ],
   m12: [
-    { statement:"Calcule le volume d'un cylindre de rayon 3 cm et hauteur 10 cm (π≈3,14).", solution:"3,14×9×10 = <strong>282,6 cm³</strong>" },
-    { statement:"Calcule l'aire d'un disque de rayon 4 cm (π≈3,14).", solution:"3,14×16 = <strong>50,24 cm²</strong>" },
-    { statement:"Calcule le volume d'un prisme droit de base 6 cm² et de hauteur 9 cm.", solution:"6×9 = <strong>54 cm³</strong>" }
+    { statement:"Cite trois applications étudiées en 4e.", solution:"<p>La symétrie centrale, la symétrie orthogonale, la projection (ou les fonctions monômes/polynômes).</p>" },
+    { statement:"Si f(x)=x−1 et g(x)=2x, calcule (g∘f)(5).", solution:"<p>f(5)=4, puis g(4)=8. Donc (g∘f)(5)=8.</p>" }
   ],
   m13: [
-    { statement:"Range dans l'ordre croissant : −3/4 ; 0,6 ; −1 ; 5/2.", solution:"<strong>−1 ; −3/4 ; 0,6 ; 5/2</strong>" },
-    { statement:"Écris 7/2 sous forme décimale.", solution:"<strong>3,5</strong>" },
-    { statement:"Compare −2/3 et −3/4 : lequel est le plus grand ?", solution:"−2/3 ≈ −0,667 et −3/4 = −0,75. <strong>−2/3 est le plus grand</strong> (plus proche de 0)." }
+    { statement:"Développe (2x+3)(x−4).", solution:"<p>2x²−8x+3x−12 = 2x²−5x−12.</p>" },
+    { statement:"Factorise 5x²−20.", solution:"<p>5x²−20 = 5(x²−4) = 5(x−2)(x+2).</p>" }
   ],
   m14: [
-    { statement:"Un pavé droit mesure 5×4×3 cm. Calcule son volume et l'aire de sa base (5×4).", solution:"Volume = 60 cm³ ; aire de base = <strong>20 cm²</strong>" },
-    { statement:"Un cube a une arête de 4 cm. Calcule son volume et l'aire d'une face.", solution:"Volume = 64 cm³ ; aire d'une face = <strong>16 cm²</strong>" },
-    { statement:"Un pavé droit a un volume de 120 cm³ et une base de 10×4 cm. Calcule sa hauteur.", solution:"h = 120/(10×4) = <strong>3 cm</strong>" }
+    { statement:"A(3;−2), vecteur de translation u(−1;5). Trouve les coordonnées de l'image A' de A.", solution:"<p>A' = (3−1;−2+5) = (2;3).</p>" },
+    { statement:"Cite deux propriétés conservées par une translation.", solution:"<p>Les longueurs et les angles (aussi le parallélisme).</p>" }
   ],
   m15: [
-    { statement:"Un article à 8000 FCFA a une remise de 15 %. Calcule le nouveau prix.", solution:"Remise = 1200 FCFA. Nouveau prix = <strong>6800 FCFA</strong>" },
-    { statement:"Sur une carte à l'échelle 1/100, une distance de 5 cm représente quelle distance réelle ?", solution:"5 × 100 = 500 cm = <strong>5 m</strong>" },
-    { statement:"Un prix passe de 20 000 à 24 000 FCFA. Calcule le pourcentage d'augmentation.", solution:"(4000/20000)×100 = <strong>20 %</strong>" }
+    { statement:"Quelle est la composée d'une translation de vecteur u(2;3) suivie d'une translation de vecteur v(−1;4) ?", solution:"<p>C'est une translation de vecteur u+v = (1;7).</p>" },
+    { statement:"Que donne la composée de deux symétries orthogonales d'axes perpendiculaires ?", solution:"<p>Une symétrie centrale, de centre le point d'intersection des deux axes.</p>" }
   ],
   m16: [
-    { statement:"A(2;3) a pour symétrique A' par rapport à O(0;0). Donne les coordonnées de A'.", solution:"A' = <strong>(−2 ; −3)</strong>" },
-    { statement:"B(−1;4) a pour symétrique B' par rapport à O. Donne les coordonnées de B'.", solution:"B' = <strong>(1 ; −4)</strong>" },
-    { statement:"Cite deux propriétés conservées par une symétrie centrale.", solution:"Par exemple : <strong>les longueurs et les angles</strong> (aussi les aires et le parallélisme)." }
+    { statement:"Un cube d'arête 6 cm est coupé par un plan parallèle à une face. Quelle est la forme et la taille de la section ?", solution:"<p>C'est un carré de 6 cm de côté, identique à la face du cube.</p>" },
+    { statement:"À quoi sert la perspective cavalière ?", solution:"<p>Elle permet de représenter un solide en 3 dimensions sur une feuille plane.</p>" }
   ],
   m17: [
-    { statement:"Le vecteur AB a pour coordonnées (3;−2). M(1;4). Donne les coordonnées de M', image de M par la translation de vecteur AB.", solution:"M' = (1+3 ; 4−2) = <strong>(4 ; 2)</strong>" },
-    { statement:"Le vecteur CD a pour coordonnées (−2;5). N(3;−1). Donne les coordonnées de N', image de N par cette translation.", solution:"N' = (3−2 ; −1+5) = <strong>(1 ; 4)</strong>" },
-    { statement:"Un vecteur AB va de A(0;0) à B(4;3). Donne ses coordonnées.", solution:"AB = <strong>(4 ; 3)</strong>" }
-  ],
-  m18: [
-    { statement:"Un cercle a un rayon de 5 cm. Calcule son périmètre et l'aire du disque (π≈3,14).", solution:"Périmètre = 31,4 cm ; aire = <strong>78,5 cm²</strong>" },
-    { statement:"Un cercle a un diamètre de 14 cm. Calcule son rayon et son périmètre (π≈3,14).", solution:"Rayon = 7 cm ; périmètre = 2×3,14×7 = <strong>43,96 cm</strong>" },
-    { statement:"Où se trouve le centre du cercle circonscrit à un triangle rectangle ?", solution:"Il se trouve <strong>au milieu de l'hypoténuse</strong>." }
+    { statement:"Résous l'équation 7x − 4 = 3x + 8.", solution:"<p>7x−3x = 8+4, donc 4x=12, d'où x=3.</p>" },
+    { statement:"Résous l'inéquation −4x + 8 ≤ 0.", solution:"<p>−4x ≤ −8, on divise par −4 en inversant le sens : x ≥ 2.</p>" }
   ],
 
   // ---------- FRANÇAIS ----------
@@ -181,6 +159,38 @@ const PRACTICE = {
     { statement:"Rédige la formule d'appel et l'objet d'une lettre au censeur pour demander un duplicata de bulletin.", solution:"Objet : Demande de duplicata de bulletin scolaire. Formule d'appel : « Monsieur le Censeur, »" },
     { statement:"Cite 3 parties obligatoires d'une lettre officielle.", solution:"Par exemple : <strong>le lieu et la date, l'objet, la formule de politesse</strong>." },
     { statement:"Rédige une formule de politesse pour clore une lettre officielle.", solution:"Exemple : « Je vous prie d'agréer, Monsieur le Censeur, l'expression de mon profond respect. »" }
+  ],
+  f18: [
+    { statement:"Analyse le groupe nominal : « la maison de mon oncle que nous avons visitée ».", solution:"<p>Nom noyau : maison. Déterminant : la. Complément du nom : de mon oncle. Subordonnée relative : que nous avons visitée.</p>" },
+    { statement:"Donne un exemple de groupe nominal avec un adjectif épithète.", solution:"<p>Exemple : « la grande maison » — « grande » est l'adjectif épithète relié au nom « maison ».</p>" }
+  ],
+  f19: [
+    { statement:"Pronominalise : « Le maître donne un livre à Kofi. »", solution:"<p>« Le maître le lui donne. » (le = livre, lui = à Kofi)</p>" },
+    { statement:"Pourquoi n'y a-t-il pas de déterminant dans « Adjoua est venue » ?", solution:"<p>« Adjoua » est un nom propre : c'est un cas de déterminant zéro.</p>" }
+  ],
+  f20: [
+    { statement:"Le verbe « devenir » dans « Il devient médecin » est-il un verbe d'action ou d'état ?", solution:"<p>C'est un verbe d'état : il relie le sujet « Il » à l'attribut « médecin ».</p>" },
+    { statement:"Le verbe « se coiffer » dans « Elle se coiffe » est-il pronominal ?", solution:"<p>Oui, il est construit avec le pronom réfléchi « se ».</p>" }
+  ],
+  f21: [
+    { statement:"Identifie la subordonnée dans « Je crois qu'il a raison. »", solution:"<p>« qu'il a raison » est une subordonnée conjonctive complétive, complément d'objet du verbe « crois ».</p>" },
+    { statement:"Identifie la subordonnée relative dans « Le fruit que tu manges est mûr. »", solution:"<p>« que tu manges » est la subordonnée relative, elle complète le nom « fruit ».</p>" }
+  ],
+  f22: [
+    { statement:"Le mot « impatience » est-il formé par composition ou dérivation ? Décompose-le.", solution:"<p>Par dérivation : préfixe « im » + radical « patience ».</p>" },
+    { statement:"Donne un exemple de mot formé par composition.", solution:"<p>Exemple : « grand-mère » (grand + mère) ou « porte-clé » (porte + clé).</p>" }
+  ],
+  f23: [
+    { statement:"Complète et justifie : « Beaucoup de spectateurs ___ (applaudir) à la fin du spectacle. »", solution:"<p>« ont applaudi » : le verbe s'accorde avec « spectateurs », pluriel.</p>" },
+    { statement:"Complète et justifie : « Peu de temps ___ (rester) avant l'examen. »", solution:"<p>« reste » : le verbe s'accorde avec « temps », singulier.</p>" }
+  ],
+  f24: [
+    { statement:"Rédige un court argument (2-3 phrases) pour un débat sur : « Faut-il interdire les téléphones portables à l'école ? » (position : pour l'interdiction).", solution:"<p>Exemple : « Je pense que les téléphones doivent être interdits en classe, car ils détournent l'attention des élèves pendant les cours. De plus, ils favorisent les comparaisons et le harcèlement entre élèves. »</p>" },
+    { statement:"Donne un exemple de formule de concession utile dans un débat.", solution:"<p>Exemple : « Certes, les téléphones permettent de rester joignable en cas d'urgence, mais leur usage doit rester limité pendant les cours. »</p>" }
+  ],
+  f25: [
+    { statement:"Propose un plan en 3 parties pour un exposé sur « Les activités économiques de la Côte d'Ivoire ».", solution:"<p>Introduction (présenter le sujet), I. Le secteur primaire (agriculture, cacao), II. Le secteur secondaire (transformation), III. Le secteur tertiaire (commerce, services), Conclusion.</p>" },
+    { statement:"Pourquoi préparer des fiches de mots-clés pour un exposé ?", solution:"<p>Pour garder un contact visuel avec le public et parler avec un débit naturel, plutôt que de lire un texte en entier.</p>" }
   ],
 
   // ---------- ANGLAIS ----------
@@ -282,94 +292,176 @@ const PRACTICE = {
 
   // ---------- PHYSIQUE-CHIMIE ----------
   p1: [
-    { statement:"Une lampe éclaire un objet opaque devant un mur. Explique ce qui se forme et pourquoi.", solution:"Une <strong>ombre portée</strong> se forme, car l'objet opaque bloque la propagation rectiligne de la lumière." },
-    { statement:"Explique pourquoi on ne voit aucune ombre la nuit, sans aucune source de lumière.", solution:"Sans source lumineuse, il n'y a <strong>pas de lumière à bloquer</strong>, donc pas d'ombre possible : tout est simplement dans l'obscurité." },
-    { statement:"Cite une source primaire et une source secondaire de lumière.", solution:"Source primaire : <strong>le Soleil</strong> (ou une lampe). Source secondaire : <strong>la Lune</strong> (ou un objet éclairé)." }
+    { statement:"Cite les trois états de la matière.", solution:"<p>Solide, liquide, gazeux.</p>" },
+    { statement:"Dans quel état les molécules sont-elles les plus espacées ?", solution:"<p>À l'état gazeux.</p>" }
   ],
   p2: [
-    { statement:"On verse de l'huile dans de l'eau. Quel type de mélange obtient-on, et comment les séparer ?", solution:"Mélange <strong>hétérogène</strong> ; on sépare par <strong>décantation</strong>." },
-    { statement:"Quelle technique utiliser pour séparer du sable d'eau ?", solution:"La <strong>filtration</strong> (le sable, solide non dissous, est retenu par le filtre)." },
-    { statement:"L'air est-il un corps pur ou un mélange ? Justifie.", solution:"C'est un <strong>mélange</strong> (homogène), car il contient plusieurs gaz : azote, oxygène, dioxyde de carbone, etc." }
+    { statement:"Convertis 4,7 kg en grammes.", solution:"<p>4,7 × 1000 = 4700 g.</p>" },
+    { statement:"Avec quel instrument mesure-t-on une masse ?", solution:"<p>Une balance.</p>" }
   ],
   p3: [
-    { statement:"Un glaçon à −18°C est laissé à température ambiante jusqu'à ébullition complète. Décris les changements d'état.", solution:"<strong>Fusion</strong> (solide→liquide) puis <strong>vaporisation</strong> (liquide→gaz)." },
-    { statement:"Nomme le changement d'état du gaz vers le liquide.", solution:"C'est la <strong>liquéfaction</strong>." },
-    { statement:"Pourquoi la température reste-t-elle constante pendant un changement d'état ?", solution:"Parce que l'énergie apportée sert entièrement à <strong>transformer l'état de la matière</strong>, et non à augmenter sa température, tant que le changement n'est pas terminé." }
+    { statement:"Un objet fait monter le niveau d'eau de 80 mL à 125 mL. Quel est son volume ?", solution:"<p>125−80 = 45 mL = 45 cm³.</p>" },
+    { statement:"Convertis 3,4 L en cm³.", solution:"<p>3,4 × 1000 = 3400 cm³.</p>" }
   ],
   p4: [
-    { statement:"Pour allumer 2 ampoules de façon indépendante, quel montage utiliser ? Pourquoi ?", solution:"Un montage <strong>en dérivation</strong>, pour qu'une coupure sur une branche n'affecte pas l'autre." },
-    { statement:"Cite les 3 éléments indispensables d'un circuit électrique simple.", solution:"Un <strong>générateur</strong>, un <strong>récepteur</strong> et des <strong>fils de connexion</strong>." },
-    { statement:"Que se passe-t-il si le circuit est ouvert ?", solution:"Le courant <strong>ne circule pas</strong> ; les récepteurs restent inactifs (l'ampoule ne s'allume pas)." }
+    { statement:"Un objet a une masse de 340 g pour un volume de 200 cm³. Calcule sa masse volumique.", solution:"<p>ρ = 340/200 = 1,7 g/cm³.</p>" },
+    { statement:"Un corps de densité 0,9 flotte-t-il ou coule-t-il dans l'eau ?", solution:"<p>Il flotte, car sa densité est inférieure à 1 (celle de l'eau).</p>" }
   ],
   p5: [
-    { statement:"Un objet a une masse de 270 g pour un volume de 100 cm³. Calcule sa masse volumique et dis s'il flotte.", solution:"ρ = 2,7 g/cm³ ; comme c'est <strong>plus dense que l'eau, il coule</strong>." },
-    { statement:"Calcule la masse volumique d'un objet de masse 500 g pour un volume de 200 cm³.", solution:"ρ = 500/200 = <strong>2,5 g/cm³</strong>" },
-    { statement:"Quel appareil permet de mesurer un volume liquide ?", solution:"<strong>L'éprouvette graduée</strong>." }
+    { statement:"À quelle température l'eau bout-elle sous pression normale ?", solution:"<p>100°C.</p>" },
+    { statement:"Quel phénomène physique explique le fonctionnement d'un thermomètre à liquide ?", solution:"<p>La dilatation thermique du liquide quand la température augmente.</p>" }
   ],
   p6: [
-    { statement:"Écris le bilan de la combustion complète du carbone.", solution:"<strong>Carbone + dioxygène → dioxyde de carbone</strong>" },
-    { statement:"Cite un danger lié à une combustion incomplète.", solution:"La formation de <strong>monoxyde de carbone (CO)</strong>, un gaz toxique, incolore et inodore." },
-    { statement:"Quel gaz est produit par la combustion du carbone ?", solution:"Le <strong>dioxyde de carbone (CO₂)</strong>." }
+    { statement:"Cite les trois modes de propagation de la chaleur.", solution:"<p>Conduction, convection, rayonnement.</p>" },
+    { statement:"Par quel mode la chaleur du Soleil nous parvient-elle ?", solution:"<p>Par rayonnement (peut traverser le vide).</p>" }
   ],
   p7: [
-    { statement:"Un circuit série a 2 ampoules identiques alimentées par 9V. Quelle est la tension à chaque ampoule ?", solution:"9 / 2 = <strong>4,5 V</strong> par ampoule." },
-    { statement:"Comment se branche un voltmètre dans un circuit ?", solution:"<strong>En dérivation</strong> (en parallèle) aux bornes du composant." },
-    { statement:"Cite l'unité de la tension électrique.", solution:"Le <strong>volt (V)</strong>." }
+    { statement:"Comment s'appelle le passage de l'état liquide à l'état gazeux ?", solution:"<p>La vaporisation.</p>" },
+    { statement:"Que se passe-t-il pour la température pendant un changement d'état ?", solution:"<p>Elle reste constante tant que le changement d'état n'est pas terminé.</p>" }
   ],
   p8: [
-    { statement:"Une résistance de 20 Ω est traversée par 0,5 A. Calcule la tension.", solution:"U = R×I = <strong>10 V</strong>" },
-    { statement:"Calcule R sachant U = 6 V et I = 0,3 A.", solution:"R = U/I = <strong>20 Ω</strong>" },
-    { statement:"Quel appareil mesure directement une résistance ?", solution:"<strong>L'ohmmètre</strong>." }
+    { statement:"Qu'est-ce qu'une solution saturée ?", solution:"<p>Une solution dans laquelle on ne peut plus dissoudre de soluté supplémentaire.</p>" },
+    { statement:"Quelle technique sépare un solide non dissous d'un liquide ?", solution:"<p>La filtration.</p>" }
   ],
   p9: [
-    { statement:"Une ampoule fonctionne sous 220 V, traversée par 0,3 A. Calcule sa puissance.", solution:"P = U×I = <strong>66 W</strong>" },
-    { statement:"Calcule I sachant P = 100 W et U = 220 V.", solution:"I = P/U = 100/220 ≈ <strong>0,45 A</strong>" },
-    { statement:"Quelle est l'unité de la puissance électrique ?", solution:"Le <strong>watt (W)</strong>." }
+    { statement:"Quelle est la différence entre un circuit en série et un circuit en dérivation ?", solution:"<p>En série, retirer un composant coupe tout le circuit ; en dérivation, les autres composants continuent de fonctionner.</p>" },
+    { statement:"Quel est le sens conventionnel du courant électrique ?", solution:"<p>De la borne + vers la borne − à l'extérieur du générateur.</p>" }
   ],
   p10: [
-    { statement:"Une molécule de CO₂ contient combien d'atomes, de quels éléments ?", solution:"<strong>3 atomes</strong> : 1 carbone (C) et 2 oxygène (O)." },
-    { statement:"Donne le symbole chimique de l'oxygène et de l'hydrogène.", solution:"<strong>O</strong> et <strong>H</strong>." },
-    { statement:"Qu'est-ce qui compose le noyau d'un atome ?", solution:"Des <strong>protons et des neutrons</strong>." }
+    { statement:"Comment se branche un voltmètre ?", solution:"<p>En dérivation, aux bornes du composant à mesurer.</p>" },
+    { statement:"Un générateur de 9V alimente 3 lampes identiques en série. Quelle tension reçoit chaque lampe ?", solution:"<p>9/3 = 3 V (loi d'additivité des tensions).</p>" }
   ],
   p11: [
-    { statement:"Explique pourquoi une personne myope voit flou de loin.", solution:"Chez le myope, l'image se forme <strong>avant la rétine</strong>, ce qui rend la vision de loin floue." },
-    { statement:"Quel est le rôle de la rétine ?", solution:"Elle <strong>reçoit la lumière et la transforme en signal nerveux</strong> transmis au cerveau." },
-    { statement:"Quel est le rôle du cristallin ?", solution:"Il fait <strong>converger la lumière</strong> comme une lentille, pour former une image nette sur la rétine." }
+    { statement:"Deux piles de 1,5V sont associées en série dans le même sens. Quelle est la tension totale ?", solution:"<p>1,5+1,5 = 3 V.</p>" },
+    { statement:"Que se passe-t-il si les deux piles sont branchées en opposition ?", solution:"<p>Les tensions s'annulent, la tension totale est 0V.</p>" }
   ],
   p12: [
-    { statement:"Cite 2 comportements dangereux à éviter avec l'électricité, et pourquoi.", solution:"Toucher un appareil avec les mains mouillées (l'eau conduit le courant) ; démonter un appareil branché (risque de contact direct avec des éléments sous tension)." },
-    { statement:"Que fait un disjoncteur en cas de surintensité ?", solution:"Il <strong>coupe automatiquement le courant</strong>, évitant surchauffe et incendie." },
-    { statement:"Pourquoi la prise de terre est-elle importante ?", solution:"Elle <strong>évacue le courant vers le sol</strong> en cas de défaut, protégeant les personnes contre l'électrisation." }
+    { statement:"Quel dispositif de sécurité doit être remplacé après avoir coupé un circuit ?", solution:"<p>Le fusible.</p>" },
+    { statement:"Que faut-il faire en premier face à une personne électrisée ?", solution:"<p>Couper le courant avant de la toucher.</p>" }
   ],
   p13: [
-    { statement:"Dans un circuit série, l'intensité mesurée en un point est 0,4A. Que peut-on dire ailleurs dans ce circuit ?", solution:"L'intensité est <strong>la même partout</strong> dans un circuit série : 0,4 A partout." },
-    { statement:"Où doit être branché un ampèremètre : en série ou en dérivation ?", solution:"<strong>En série</strong>, dans le circuit." },
-    { statement:"Dans un circuit en dérivation à 2 branches de 0,3A et 0,2A, quelle est l'intensité totale ?", solution:"0,3 + 0,2 = <strong>0,5 A</strong>" }
+    { statement:"Cite les 4 caractéristiques d'une force.", solution:"<p>Point d'application, direction, sens, intensité.</p>" },
+    { statement:"Avec quel instrument mesure-t-on l'intensité d'une force ?", solution:"<p>Un dynamomètre.</p>" }
   ],
   p14: [
-    { statement:"Une pile de lampe de poche fournit-elle un courant continu ou alternatif ? Justifie.", solution:"<strong>Continu</strong> : le courant circule toujours dans le même sens, avec une intensité stable." },
-    { statement:"Cite un appareil qui fonctionne en courant continu.", solution:"Par exemple : <strong>une lampe de poche</strong> (ou un téléphone portable)." },
-    { statement:"Quel type de courant produit une courbe sinusoïdale à l'oscilloscope ?", solution:"Le courant <strong>alternatif</strong>." }
+    { statement:"Calcule le poids d'une masse de 40 kg sur Terre (g=10N/kg).", solution:"<p>P = m×g = 40×10 = 400 N.</p>" },
+    { statement:"La masse d'un objet change-t-elle sur la Lune ?", solution:"<p>Non, la masse reste la même ; seul le poids change (car g est différent).</p>" }
   ],
   p15: [
-    { statement:"Le sel dissous dans l'eau donne quels ions ? La solution est-elle conductrice ?", solution:"Ions <strong>Na⁺</strong> et <strong>Cl⁻</strong> ; oui, la solution est conductrice." },
-    { statement:"Qu'est-ce qu'un cation ?", solution:"Un ion <strong>chargé positivement</strong> (a perdu des électrons)." },
-    { statement:"Pourquoi l'eau pure conduit-elle très peu le courant électrique ?", solution:"Parce qu'elle contient <strong>très peu d'ions dissous</strong>, contrairement à une solution ionique." }
+    { statement:"À quoi est égale la poussée d'Archimède ?", solution:"<p>Au poids du volume de fluide déplacé par le corps immergé.</p>" },
+    { statement:"Pourquoi un bateau en acier peut-il flotter ?", solution:"<p>Sa forme creuse déplace un grand volume d'eau, générant une poussée suffisante pour équilibrer son poids.</p>" }
   ],
   p16: [
-    { statement:"Un jus de citron a un pH de 2, une eau savonneuse a un pH de 10. Laquelle est acide, laquelle est basique ?", solution:"Le jus de citron (pH<7) est <strong>acide</strong> ; l'eau savonneuse (pH>7) est <strong>basique</strong>." },
-    { statement:"Le pH de l'eau pure est-il acide, neutre ou basique ?", solution:"<strong>Neutre</strong> (pH = 7)." },
-    { statement:"Cite un exemple de solution basique de la vie courante.", solution:"Par exemple : <strong>l'eau savonneuse</strong> (ou un produit d'entretien)." }
+    { statement:"Quelle différence entre une source primaire et une source secondaire de lumière ?", solution:"<p>La source primaire produit sa propre lumière, la source secondaire ne fait que la réfléchir.</p>" },
+    { statement:"La Lune est-elle une source primaire ou secondaire ?", solution:"<p>Secondaire : elle réfléchit la lumière du Soleil.</p>" }
   ],
   p17: [
-    { statement:"Écris le bilan de la combustion complète du méthane (produit CO₂ et eau).", solution:"<strong>Méthane + dioxygène → dioxyde de carbone + eau</strong>" },
-    { statement:"Dans une réaction chimique, qu'appelle-t-on « réactifs » ?", solution:"Les <strong>substances de départ</strong>, avant la réaction." },
-    { statement:"Que signifie « la masse se conserve » dans une réaction chimique ?", solution:"La <strong>masse totale des réactifs est égale à la masse totale des produits</strong> : rien ne se crée, rien ne se perd." }
+    { statement:"À quelle vitesse la lumière se propage-t-elle dans le vide ?", solution:"<p>Environ 300 000 km/s.</p>" },
+    { statement:"Combien de temps met la lumière du Soleil pour atteindre la Terre ?", solution:"<p>Environ 8 minutes.</p>" }
   ],
   p18: [
-    { statement:"Un objet absorbe toutes les couleurs sauf le vert, qu'il diffuse. De quelle couleur apparaît-il ?", solution:"Il apparaît <strong>vert</strong> (seule couleur renvoyée vers l'œil)." },
-    { statement:"Quelles sont les 3 couleurs primaires de la lumière ?", solution:"<strong>Rouge, vert, bleu</strong>." },
-    { statement:"Pourquoi un objet noir ne diffuse-t-il aucune lumière ?", solution:"Parce qu'il <strong>absorbe toutes les couleurs</strong> de la lumière qu'il reçoit, sans en renvoyer vers l'œil." }
+    { statement:"Quelle différence entre ombre propre et ombre portée ?", solution:"<p>L'ombre propre est la partie non éclairée de l'objet lui-même ; l'ombre portée est projetée sur un écran derrière l'objet.</p>" },
+    { statement:"Une éclipse de Soleil illustre quel phénomène ?", solution:"<p>Une ombre portée à l'échelle astronomique : celle de la Lune sur la Terre.</p>" }
+  ],
+  p19: [
+    { statement:"Quels sont les trois éléments du triangle du feu ?", solution:"<p>Combustible, comburant, source de chaleur.</p>" },
+    { statement:"Que faut-il faire pour éteindre un feu ?", solution:"<p>Supprimer un seul des trois éléments du triangle du feu.</p>" }
+  ],
+  p20: [
+    { statement:"Quelle différence entre combustion complète et incomplète ?", solution:"<p>La complète produit CO2+eau, l'incomplète produit en plus du CO (toxique) et de la suie, par manque de dioxygène.</p>" },
+    { statement:"Comment détecte-t-on le CO2 produit par une combustion ?", solution:"<p>Avec l'eau de chaux, qui se trouble en sa présence.</p>" }
+  ],
+  p21: [
+    { statement:"Pourquoi le gaz domestique est-il odorisé ?", solution:"<p>Pour permettre de détecter une fuite par l'odorat.</p>" },
+    { statement:"Que faire en cas de suspicion de fuite de gaz ?", solution:"<p>Couper l'arrivée de gaz, aérer, ne pas actionner d'interrupteur électrique.</p>" }
+  ],
+  p22: [
+    { statement:"Combien d'atomes contient une molécule de CO2 ?", solution:"<p>3 atomes : 1 de carbone et 2 d'oxygène.</p>" },
+    { statement:"Un atome est-il chargé électriquement ?", solution:"<p>Non, il est neutre (autant de protons que d'électrons).</p>" }
+  ],
+  p23: [
+    { statement:"Que contient le noyau d'un atome ?", solution:"<p>Des protons et des neutrons.</p>" },
+    { statement:"L'oxygène a pour numéro atomique Z=8. Combien de protons possède-t-il ?", solution:"<p>8 protons (et 8 électrons, l'atome étant neutre).</p>" }
+  ],
+  p24: [
+    { statement:"Écris l'équation de la combustion du carbone.", solution:"<p>C + O2 → CO2.</p>" },
+    { statement:"Cette équation est-elle équilibrée ? Justifie.", solution:"<p>Oui : 1 atome de C et 2 atomes de O de chaque côté.</p>" }
+  ],
+  p25: [
+    { statement:"Écris l'équation de la combustion du dihydrogène.", solution:"<p>2H2 + O2 → 2H2O.</p>" },
+    { statement:"Comment reconnaît-on le dihydrogène par un test à la flamme ?", solution:"<p>Il produit une détonation caractéristique (« pop »).</p>" }
+  ],
+
+  // ---------- SVT ----------
+  s1: [
+    { statement:"Cite les trois types de transformations qui apparaissent à la puberté.", solution:"<p>Morphologiques, physiologiques et psychologiques.</p>" },
+    { statement:"Quelle hormone est principalement responsable des transformations chez le garçon ?", solution:"<p>La testostérone.</p>" }
+  ],
+  s2: [
+    { statement:"Qu'est-ce que la fécondation ?", solution:"<p>La rencontre et la fusion d'un spermatozoïde et d'un ovule.</p>" },
+    { statement:"Quel organe assure les échanges entre la mère et le fœtus ?", solution:"<p>Le placenta.</p>" }
+  ],
+  s3: [
+    { statement:"Quelle est la différence entre roche volcanique et roche plutonique ?", solution:"<p>La roche volcanique refroidit rapidement en surface (texture fine), la plutonique refroidit lentement en profondeur (gros cristaux).</p>" },
+    { statement:"D'où provient une roche endogène ?", solution:"<p>Du refroidissement du magma.</p>" }
+  ],
+  s4: [
+    { statement:"Qu'est-ce que la gélifraction ?", solution:"<p>La fragmentation d'une roche par le gel et le dégel répété de l'eau infiltrée dans ses fissures.</p>" },
+    { statement:"Cite un facteur d'altération des roches.", solution:"<p>Les variations de température, l'eau (gel/dégel), ou l'action des êtres vivants (racines).</p>" }
+  ],
+  s5: [
+    { statement:"Qu'est-ce que l'humus ?", solution:"<p>La matière organique issue de la décomposition des végétaux et animaux.</p>" },
+    { statement:"De quoi se compose un sol ?", solution:"<p>De fragments minéraux, de matière organique (humus), d'eau, d'air et d'organismes vivants.</p>" }
+  ],
+  s6: [
+    { statement:"Quelle est la texture d'un sol qui draine vite mais se dessèche rapidement ?", solution:"<p>Un sol sableux.</p>" },
+    { statement:"Quel type de sol retient bien l'eau mais draine mal ?", solution:"<p>Un sol argileux.</p>" }
+  ],
+  s7: [
+    { statement:"Comment se transmet le paludisme ?", solution:"<p>Par la piqûre de moustiques qui se reproduisent dans les eaux stagnantes.</p>" },
+    { statement:"Cite deux maladies transmises par une eau souillée par des bactéries.", solution:"<p>Le choléra et la fièvre typhoïde.</p>" }
+  ],
+  s8: [
+    { statement:"Cite deux mesures pour lutter contre le paludisme.", solution:"<p>Éliminer les eaux stagnantes et utiliser des moustiquaires imprégnées.</p>" },
+    { statement:"Pourquoi éloigner les latrines des points d'eau ?", solution:"<p>Pour éviter toute infiltration de matières contaminantes dans l'eau potable.</p>" }
+  ],
+  s9: [
+    { statement:"Cite les trois grandes étapes de traitement d'une eau souillée.", solution:"<p>Décantation, filtration, désinfection.</p>" },
+    { statement:"Qu'est-ce que la méthode SODIS ?", solution:"<p>Désinfecter l'eau en l'exposant aux rayons UV du soleil plusieurs heures dans une bouteille transparente.</p>" }
+  ],
+
+  // ---------- HISTOIRE-GEO ----------
+  h1: [
+    { statement:"Cite deux des cinq grandes zones culturelles de la Côte d'Ivoire évoquées dans ce cours.", solution:"<p>Exemple de réponse : Akan et Krou (on pouvait aussi citer Gour/Voltaïque, Mandé du Nord ou Mandé du Sud).</p>" },
+    { statement:"Explique une conséquence sociale des migrations de peuplement du XVIe au XVIIIe siècle.", solution:"<p>Exemple : la disparition de certaines structures politiques anciennes, compensée par des rapprochements linguistiques et religieux grâce aux alliances entre peuples.</p>" }
+  ],
+  h2: [
+    { statement:"Pourquoi la France a-t-elle établi un comptoir à Assinie dès 1687 ?", solution:"<p>Pour développer le commerce (troc de produits tropicaux et de minéraux contre des marchandises européennes comme le fer, le corail ou les textiles) et asseoir sa présence sur la côte.</p>" },
+    { statement:"Nomme les trois zones commerciales du littoral ivoirien à l'époque des premiers contacts avec les Européens.", solution:"<p>La Côte des Graines (ouest), la Côte des Dents (centre) et la Côte des Quaquas (est).</p>" }
+  ],
+  h3: [
+    { statement:"Explique la différence entre la négociation et la médiation comme mécanismes de résolution des conflits.", solution:"<p>La négociation est un dialogue direct entre les deux parties en conflit, sans intermédiaire. La médiation fait intervenir un tiers neutre qui aide les parties à trouver un accord volontaire.</p>" },
+    { statement:"Donne un exemple d'alliance par serment chez les peuples de Côte d'Ivoire.", solution:"<p>L'alliance entre Agni et Baoulé, scellée par un serment sacré de ne jamais verser le sang entre alliés.</p>" }
+  ],
+  h4: [
+    { statement:"Décris les trois étapes du commerce triangulaire.", solution:"<p>1) Un navire part d'Europe avec de la pacotille vers l'Afrique. 2) Sur la côte africaine, cette pacotille est échangée contre des esclaves, transportés vers l'Amérique. 3) En Amérique, les esclaves sont vendus, et le navire revient en Europe chargé de produits tropicaux.</p>" },
+    { statement:"Cite une action du mouvement abolitionniste anglais et une conséquence culturelle de la traite dans les Amériques.", solution:"<p>Action abolitionniste : la reconnaissance par Granville Sharp, dès 1787, que l'esclavage était illégal sur le sol anglais. Conséquence culturelle : l'intégration d'éléments culturels africains (samba, vaudou) dans la société brésilienne.</p>" }
+  ],
+  h5: [
+    { statement:"Cite deux facteurs qui expliquent le démarrage de la révolution industrielle en Angleterre vers 1760.", solution:"<p>Exemple : les capitaux issus du commerce atlantique finançant la recherche et l'industrie, et les ressources naturelles anglaises (fer, cuivre, charbon).</p>" },
+    { statement:"Explique une conséquence sociale de la révolution industrielle.", solution:"<p>L'apparition de deux nouvelles classes sociales aux intérêts opposés : la bourgeoisie industrielle (propriétaire des usines et des capitaux) et le prolétariat ouvrier (travailleurs des usines, souvent dans des conditions difficiles).</p>" }
+  ],
+  h6: [
+    { statement:"Que s'est-il passé le 14 juillet 1789 et quelle est la signification symbolique de cet événement ?", solution:"<p>La prise de la Bastille, prison symbole de l'arbitraire royal, marquant symboliquement la fin de l'absolutisme monarchique.</p>" },
+    { statement:"Que proclame la Déclaration des droits de l'homme et du citoyen ?", solution:"<p>Des droits naturels : la liberté (de conscience, de religion, de la presse) et l'égalité (suppression des privilèges hiérarchiques, avancement possible au mérite).</p>" }
+  ],
+  h7: [
+    { statement:"Distingue déconcentration et décentralisation à l'aide d'un exemple pour chacune.", solution:"<p>Déconcentration : un préfet, nommé par l'État et agissant en son nom, sans budget propre indépendant. Décentralisation : une commune, dirigée par un maire élu, disposant de son propre budget et prenant des décisions locales de façon autonome.</p>" },
+    { statement:"Cite deux difficultés rencontrées par l'administration ivoirienne.", solution:"<p>Exemple : ressources financières limitées et conflits de compétences entre autorités (on pouvait aussi citer le personnel qualifié insuffisant ou la corruption).</p>" }
+  ],
+  h8: [
+    { statement:"Cite un avantage et une limite de l'intégration régionale à travers l'exemple de la CEDEAO.", solution:"<p>Avantage : la suppression des visas entre citoyens des États membres, facilitant la libre circulation. Limite : le commerce intracommunautaire reste faible, freiné par une réduction lente des tarifs douaniers et l'instabilité politique dans certains États.</p>" },
+    { statement:"Cite deux institutions de l'Union européenne et leur rôle.", solution:"<p>Exemple : le Parlement européen (785 députés, fonctions législative et budgétaire) et la Commission européenne (27 commissaires qui proposent les lois et exécutent le budget).</p>" }
   ]
 
 };
@@ -445,23 +537,23 @@ const SITUATIONS = {
 
   pc: [
     {
-      title:"L'installation électrique de la classe",
-      context:"La classe veut installer 3 lampes identiques en dérivation, alimentées par 12 V. Chaque lampe a une résistance de 24 Ω.",
+      title:"Le radeau de fortune",
+      context:"Des élèves construisent un petit radeau avec un bloc de bois de volume 4000 cm³ et de masse 3,2 kg, pour vérifier s'il peut flotter sur la rivière avec du matériel dessus.",
       tasks:[
-        {prompt:"1) Quelle est la tension aux bornes de chaque lampe ?", solution:"En dérivation, chaque branche reçoit <strong>12 V</strong>."},
-        {prompt:"2) Calcule l'intensité qui traverse une lampe.", solution:"I = U/R = 12/24 = <strong>0,5 A</strong>"},
-        {prompt:"3) Calcule la puissance consommée par une lampe.", solution:"P = U×I = <strong>6 W</strong>"},
-        {prompt:"4) Quelle est l'intensité totale fournie par le générateur ?", solution:"0,5 × 3 = <strong>1,5 A</strong>"}
+        {prompt:"1) Calcule la masse volumique du bois utilisé.", solution:"ρ = m/V = 3200/4000 = <strong>0,8 g/cm³</strong>"},
+        {prompt:"2) Ce bois va-t-il flotter sur l'eau ? Justifie.", solution:"Oui, car sa masse volumique (0,8 g/cm³) est <strong>inférieure à celle de l'eau</strong> (1 g/cm³)."},
+        {prompt:"3) Calcule le poids du bloc de bois sur Terre (g=10 N/kg).", solution:"P = m×g = 3,2×10 = <strong>32 N</strong>"},
+        {prompt:"4) Explique avec la poussée d'Archimède pourquoi le radeau peut soutenir un poids supplémentaire avant de couler.", solution:"Tant que la poussée d'Archimède (poids du volume d'eau déplacé) reste <strong>supérieure au poids total</strong> (radeau + charge), l'ensemble continue de flotter."}
       ]
     },
     {
-      title:"Analyse d'une boisson",
-      context:"On analyse un jus de fruit non filtré (pulpe visible), de pH égal à 3.",
+      title:"La cuisine à gaz de la cantine",
+      context:"La cantine de l'école utilise une bouteille de gaz butane pour cuisiner. Un jour, une légère odeur de gaz est détectée près de la cuisinière.",
       tasks:[
-        {prompt:"1) Mélange homogène ou hétérogène ? Justifie.", solution:"<strong>Hétérogène</strong>, la pulpe est visible à l'œil nu."},
-        {prompt:"2) Quelle technique séparerait la pulpe du liquide ?", solution:"La <strong>filtration</strong>."},
-        {prompt:"3) Ce jus est-il acide, neutre ou basique ?", solution:"<strong>Acide</strong> (pH < 7)."},
-        {prompt:"4) Si on y dissout du sel, la solution devient-elle plus conductrice ? Pourquoi ?", solution:"Oui, car le sel libère des <strong>ions</strong> qui favorisent le passage du courant."}
+        {prompt:"1) Pourquoi une odeur de gaz peut-elle être sentie alors que le butane est naturellement inodore ?", solution:"Le gaz domestique est <strong>volontairement odorisé</strong> par le fournisseur pour permettre de détecter une fuite."},
+        {prompt:"2) Que faut-il faire immédiatement en cas de doute sur une fuite de gaz ?", solution:"<strong>Couper l'arrivée de gaz, aérer la pièce</strong>, et ne surtout pas actionner d'interrupteur électrique."},
+        {prompt:"3) Écris l'équation de la combustion complète du carbone contenu dans ce type de gaz.", solution:"<strong>C + O₂ → CO₂</strong>"},
+        {prompt:"4) Quel test simple permet de vérifier la présence de CO₂ dans les fumées de cuisson ?", solution:"Le test à <strong>l'eau de chaux</strong>, qui se trouble en présence de CO₂."}
       ]
     }
   ]
