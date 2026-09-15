@@ -12,6 +12,8 @@
 
   function updateTopbarUser(){
     const el = document.getElementById("topbar-user");
+    const nav = document.getElementById("topnav");
+    if (nav) nav.style.display = currentEmail ? "flex" : "none";
     if (!el) return;
     if (currentEmail){
       el.innerHTML = `<span class="user-email">${esc(currentEmail)}</span> <button id="logout-btn" class="btn-link">Changer de compte</button>`;
@@ -146,6 +148,8 @@
     if (parts[0] === "quiz" && parts[1] && parts[2]) return renderQuiz(parts[1], parts[2]);
     if (parts[0] === "situations" && parts[1]) return renderSituations(parts[1]);
     if (parts[0] === "notes" && parts[1]) return renderNotes(parts[1]);
+    if (parts[0] === "generator") return renderGenerator(parts[1], parts[2]);
+    if (parts[0] === "translate") return renderTranslate();
     return renderHome();
   }
 
@@ -246,6 +250,7 @@
       <div class="subject-links">
         <a class="btn btn-ghost" style="--subj-color:${subj.color}" href="#/notes/${key}">📔 Mes notes</a>
         ${SITUATIONS[key] ? `<a class="btn btn-ghost" style="--subj-color:${subj.color}" href="#/situations/${key}">📋 Situations d'évaluation</a>` : ""}
+        <a class="btn btn-ghost" style="--subj-color:${subj.color}" href="#/generator/${key}">🧠 Générer un exercice</a>
       </div>
       <ul class="lesson-list">${rows}</ul>
     `;
@@ -281,11 +286,21 @@
         </div>
         <div id="ai-answer" class="ai-answer"></div>
       </div>
+      ${key === "anglais" ? `
+      <div class="mini-translate" style="--subj-color:${subj.color}">
+        <div class="practice-label">🔤 Traduire un mot ou une phrase de cette leçon</div>
+        <div class="ai-row">
+          <input type="text" id="mt-text" class="auth-input ai-input" placeholder="Ex : to go fishing / je voudrais...">
+          <button class="btn btn-primary" id="mt-btn" style="--subj-color:${subj.color}">Traduire</button>
+        </div>
+        <div id="mt-result" class="ai-answer"></div>
+      </div>` : ""}
       <div class="lesson-actions">
         <button class="btn btn-primary" id="go-quiz" style="--subj-color:${subj.color}">
           ${p && p.done ? "🔁 Refaire l'évaluation" : "📝 Faire l'évaluation"}
         </button>
         <a class="btn btn-ghost" href="#/subject/${key}">← Retour aux leçons</a>
+        <a class="btn btn-ghost" href="#/generator/${key}/${id}">🧠 Générer un exercice sur cette leçon</a>
       </div>
     `;
     const aiBtn = document.getElementById("ai-ask-btn");
@@ -318,6 +333,16 @@
     }
     aiBtn.addEventListener("click", askAI);
     aiInput.addEventListener("keydown", e => { if (e.key === "Enter") askAI(); });
+
+    const mtBtn = document.getElementById("mt-btn");
+    if (mtBtn){
+      const mtInput = document.getElementById("mt-text");
+      const mtResult = document.getElementById("mt-result");
+      const goTranslate = () => runTranslate((mtInput.value || "").trim(), "auto", mtResult, mtBtn, "Traduire");
+      mtBtn.addEventListener("click", goTranslate);
+      mtInput.addEventListener("keydown", e => { if (e.key === "Enter") goTranslate(); });
+    }
+
     document.getElementById("go-quiz").addEventListener("click", () => {
       location.hash = `#/quiz/${key}/${id}`;
     });
@@ -475,6 +500,237 @@
         renderNotes(key);
       });
     });
+  }
+
+  /* ---------- Générateur d'exercices IA ---------- */
+  function renderGenerator(preKey, preLessonId){
+    const subjectKeys = Object.keys(COURSES);
+    let selKey = preKey && COURSES[preKey] ? preKey : subjectKeys[0];
+    let selLesson = "";
+    if (preLessonId && COURSES[selKey] && findLesson(selKey, preLessonId)) selLesson = preLessonId;
+
+    function lessonOptions(k){
+      const subj = COURSES[k];
+      let opts = subj.lessons.map(l => `<option value="${l.id}" ${l.id===selLesson?"selected":""}>${esc(l.title)}</option>`).join("");
+      opts += `<option value="__custom__" ${selLesson==="__custom__"?"selected":""}>✏️ Autre thème (à préciser)</option>`;
+      return opts;
+    }
+
+    root.innerHTML = `
+      <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <span>Générateur d'exercices</span></div>
+      <div class="tool-header"><span class="sh-icon">🧠</span><h1>Générateur d'exercices</h1></div>
+      <p class="tool-sub">Choisis une matière et une leçon (ou un thème libre), et l'IA te génère un nouvel exercice à chaque fois — jamais le même deux fois.</p>
+
+      <div class="tool-form">
+        <div class="tool-form-row">
+          <select id="gen-subject" class="auth-input tool-select">
+            ${subjectKeys.map(k => `<option value="${k}" ${k===selKey?"selected":""}>${COURSES[k].icon} ${esc(COURSES[k].name)}</option>`).join("")}
+          </select>
+          <select id="gen-lesson" class="auth-input tool-select">${lessonOptions(selKey)}</select>
+        </div>
+        <div class="tool-form-row" id="gen-topic-row" style="${selLesson==="__custom__" ? "" : "display:none;"}">
+          <input type="text" id="gen-topic" class="auth-input tool-select" placeholder="Ex : les triangles semblables, le conditionnel, la Révolution française...">
+        </div>
+        <div class="tool-form-row">
+          <select id="gen-type" class="auth-input tool-select-sm">
+            <option value="qcm">📝 QCM</option>
+            <option value="open">✏️ Exercice ouvert</option>
+          </select>
+          <select id="gen-difficulty" class="auth-input tool-select-sm">
+            <option value="facile">Facile</option>
+            <option value="moyen" selected>Moyen</option>
+            <option value="difficile">Difficile</option>
+          </select>
+          <button class="btn btn-primary" id="gen-btn">🎲 Générer un exercice</button>
+        </div>
+        <p class="tool-error" id="gen-error"></p>
+      </div>
+
+      <div id="gen-result"></div>
+    `;
+
+    const subjectSel = document.getElementById("gen-subject");
+    const lessonSel = document.getElementById("gen-lesson");
+    const topicRow = document.getElementById("gen-topic-row");
+    const topicInput = document.getElementById("gen-topic");
+    const errEl = document.getElementById("gen-error");
+    const resultEl = document.getElementById("gen-result");
+    const genBtn = document.getElementById("gen-btn");
+
+    subjectSel.addEventListener("change", () => {
+      selKey = subjectSel.value;
+      lessonSel.innerHTML = lessonOptions(selKey);
+      topicRow.style.display = lessonSel.value === "__custom__" ? "" : "none";
+    });
+    lessonSel.addEventListener("change", () => {
+      topicRow.style.display = lessonSel.value === "__custom__" ? "" : "none";
+    });
+
+    function askAgain(){
+      const key = subjectSel.value;
+      const subj = COURSES[key];
+      const lessonId = lessonSel.value;
+      const isCustom = lessonId === "__custom__";
+      const lesson = isCustom ? null : findLesson(key, lessonId);
+      const topic = isCustom ? (topicInput.value || "").trim() : "";
+      const type = document.getElementById("gen-type").value;
+      const difficulty = document.getElementById("gen-difficulty").value;
+
+      if (isCustom && !topic){
+        errEl.textContent = "Précise un thème pour générer l'exercice.";
+        return;
+      }
+      errEl.textContent = "";
+      genBtn.disabled = true; genBtn.textContent = "Génération en cours...";
+      resultEl.innerHTML = `<p class="empty">🧠 L'IA prépare ton exercice...</p>`;
+
+      fetch("/api/generate-exercise", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          subjectName: subj.name,
+          lessonTitle: lesson ? lesson.title : "",
+          lessonText: lesson ? (lesson.content || "").replace(/<[^>]+>/g, " ") : "",
+          topic,
+          type,
+          difficulty
+        })
+      }).then(r => r.json().then(data => ({ok:r.ok, data}))).then(({ok, data}) => {
+        genBtn.disabled = false; genBtn.textContent = "🎲 Générer un exercice";
+        if (!ok){
+          resultEl.innerHTML = `<p class="tool-error">⚠️ ${esc((data && data.error) || "Erreur inconnue")}</p>`;
+          return;
+        }
+        renderGenResult(subj, data.type, data.exercise, askAgain);
+      }).catch(() => {
+        genBtn.disabled = false; genBtn.textContent = "🎲 Générer un exercice";
+        resultEl.innerHTML = `<p class="tool-error">⚠️ Générateur indisponible ici (fonctionne une fois l'app déployée sur Netlify avec une clé API configurée).</p>`;
+      });
+    }
+
+    function renderGenResult(subj, type, exercise, onAgain){
+      if (type === "qcm"){
+        let locked = false, selected = null;
+        function paint(){
+          const optsHtml = exercise.options.map((opt, i) => {
+            let cls = "quiz-option";
+            if (locked){
+              if (i === exercise.correct) cls += " correct";
+              else if (i === selected && selected !== exercise.correct) cls += " wrong";
+            } else if (i === selected){
+              cls += " selected";
+            }
+            const letters = ["A","B","C","D"];
+            return `<li class="${cls}" data-i="${i}"><span class="opt-letter">${letters[i]}</span><span>${esc(opt)}</span></li>`;
+          }).join("");
+          resultEl.innerHTML = `
+            <div class="quiz-card" style="--subj-color:${subj.color}">
+              <div class="quiz-q-label">Exercice généré — QCM</div>
+              <h2 class="quiz-question">${esc(exercise.q)}</h2>
+              <ul class="quiz-options">${optsHtml}</ul>
+              <div class="quiz-explain ${locked ? "show" : ""}">${locked ? esc(exercise.exp) : ""}</div>
+              <div class="quiz-footer">
+                <span></span>
+                <button class="btn btn-primary" id="gen-again-btn" style="--subj-color:${subj.color}">🎲 Générer un autre</button>
+              </div>
+            </div>`;
+          resultEl.querySelectorAll(".quiz-option").forEach(el => {
+            el.addEventListener("click", () => {
+              if (locked) return;
+              selected = parseInt(el.dataset.i, 10);
+              locked = true;
+              paint();
+            });
+          });
+          document.getElementById("gen-again-btn").addEventListener("click", onAgain);
+        }
+        paint();
+      } else {
+        let revealed = false;
+        function paint(){
+          resultEl.innerHTML = `
+            <div class="quiz-card" style="--subj-color:${subj.color}">
+              <div class="quiz-q-label">Exercice généré — Pratique ✏️</div>
+              <p class="quiz-question practice-statement">${esc(exercise.statement)}</p>
+              <button class="btn btn-ghost" id="gen-reveal-btn">${revealed ? "Masquer la correction" : "Voir la correction"}</button>
+              <div class="quiz-explain ${revealed ? "show" : ""}">${revealed ? exercise.solution : ""}</div>
+              <div class="quiz-footer">
+                <span></span>
+                <button class="btn btn-primary" id="gen-again-btn" style="--subj-color:${subj.color}">🎲 Générer un autre</button>
+              </div>
+            </div>`;
+          document.getElementById("gen-reveal-btn").addEventListener("click", () => { revealed = !revealed; paint(); });
+          document.getElementById("gen-again-btn").addEventListener("click", onAgain);
+        }
+        paint();
+      }
+    }
+
+    genBtn.addEventListener("click", askAgain);
+  }
+
+  /* ---------- Traducteur FR / EN ---------- */
+  function runTranslate(text, direction, targetEl, btnEl, btnLabel){
+    if (!text) return;
+    btnEl.disabled = true; btnEl.textContent = "...";
+    targetEl.classList.add("show");
+    targetEl.innerHTML = `<p class="empty">🔤 Traduction en cours...</p>`;
+    fetch("/api/translate", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ text, direction })
+    }).then(r => r.json().then(data => ({ok:r.ok, data}))).then(({ok, data}) => {
+      btnEl.disabled = false; btnEl.textContent = btnLabel;
+      if (!ok){
+        targetEl.innerHTML = `<p class="tool-error">⚠️ ${esc((data && data.error) || "Erreur inconnue")}</p>`;
+        return;
+      }
+      const langLabel = data.sourceLang === "en" ? "Anglais → Français" : "Français → Anglais";
+      targetEl.innerHTML = `
+        <div class="translate-lang">${langLabel}</div>
+        <p class="translate-text">${esc(data.translation)}</p>
+        ${data.note ? `<div class="translate-note">${esc(data.note)}</div>` : ""}
+      `;
+    }).catch(() => {
+      btnEl.disabled = false; btnEl.textContent = btnLabel;
+      targetEl.innerHTML = `<p class="tool-error">⚠️ Traducteur indisponible ici (fonctionne une fois l'app déployée sur Netlify avec une clé API configurée).</p>`;
+    });
+  }
+
+  function renderTranslate(){
+    root.innerHTML = `
+      <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <span>Traducteur</span></div>
+      <div class="tool-header"><span class="sh-icon">🔤</span><h1>Traducteur Français ⇄ Anglais</h1></div>
+      <p class="tool-sub">Tape un mot ou une phrase, choisis le sens si besoin, et obtiens une traduction adaptée au niveau collège.</p>
+
+      <div class="tool-form">
+        <textarea id="tr-text" class="tool-textarea" placeholder="Écris ici un mot, une expression ou une phrase..."></textarea>
+        <div class="tool-form-row">
+          <select id="tr-direction" class="auth-input tool-select-sm">
+            <option value="auto">Détection automatique</option>
+            <option value="fr-en">Français → Anglais</option>
+            <option value="en-fr">Anglais → Français</option>
+          </select>
+          <button class="btn btn-primary" id="tr-btn">Traduire</button>
+        </div>
+      </div>
+
+      <div id="tr-result" class="translate-result" style="display:none;"></div>
+    `;
+    const textEl = document.getElementById("tr-text");
+    const dirEl = document.getElementById("tr-direction");
+    const btn = document.getElementById("tr-btn");
+    const resultEl = document.getElementById("tr-result");
+    textEl.focus();
+
+    function go(){
+      const text = (textEl.value || "").trim();
+      if (!text) return;
+      resultEl.style.display = "block";
+      runTranslate(text, dirEl.value, resultEl, btn, "Traduire");
+    }
+    btn.addEventListener("click", go);
+    textEl.addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) go(); });
   }
 
   function renderQuiz(key, id){

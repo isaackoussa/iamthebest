@@ -1,7 +1,20 @@
 const { getStore } = require("@netlify/blobs");
 
+function openStore() {
+  // Sur certains déploiements, le contexte Blobs auto-injecté n'atteint pas
+  // la fonction (MissingBlobsEnvironmentError) même en production depuis GitHub.
+  // On passe donc siteID/token manuellement quand ils sont disponibles en
+  // variables d'environnement, en secours du contexte automatique.
+  const siteID = process.env.NETLIFY_SITE_ID;
+  const token = process.env.NETLIFY_BLOBS_TOKEN;
+  if (siteID && token) {
+    return getStore({ name: "imthebest-progress", siteID, token });
+  }
+  return getStore("imthebest-progress");
+}
+
 exports.handler = async (event) => {
-  const store = getStore("imthebest-progress");
+  const store = openStore();
   const email = ((event.queryStringParameters && event.queryStringParameters.email) || "").trim().toLowerCase();
 
   if (!email) {

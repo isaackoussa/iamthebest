@@ -15,7 +15,8 @@ maths: {
       <p><strong>Addition :</strong> pour additionner deux relatifs de même signe, on additionne leurs distances à zéro et on garde le signe commun. Pour additionner deux relatifs de signes différents, on soustrait la plus petite distance à zéro de la plus grande et on garde le signe du nombre qui a la plus grande distance à zéro.</p>
       <p>Exemple : (+5) + (−8) = −3 car 8 − 5 = 3 et −8 a la plus grande distance à zéro.</p>
       <p><strong>Soustraction :</strong> soustraire un nombre relatif revient à ajouter son opposé. (+5) − (−8) = (+5) + (+8) = +13.</p>
-      <p><strong>Multiplication et division :</strong> le produit (ou le quotient) de deux nombres de même signe est positif ; le produit (ou le quotient) de deux nombres de signes différents est négatif.</p>`,
+      <p><strong>Multiplication et division :</strong> le produit (ou le quotient) de deux nombres de même signe est positif ; le produit (ou le quotient) de deux nombres de signes différents est négatif.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Astuce pratique : pour ne pas te tromper, retiens la règle des signes : (+)×(+)=+, (−)×(−)=+, (+)×(−)=−, (−)×(+)=−, valable aussi pour la division. Pour additionner plusieurs nombres relatifs, tu peux d'abord regrouper les positifs entre eux et les négatifs entre eux, puis faire la différence finale. Exemple : (+7) + (−3) + (+2) + (−9) = (+9) + (−12) = −3.</p>`,
       quiz: [
         {q:"Que vaut (+7) + (−12) ?", options:["+19","−5","+5","−19"], correct:1, exp:"12 − 7 = 5, et −12 a la plus grande distance à zéro donc le résultat est négatif : −5."},
         {q:"Que vaut (−4) − (−9) ?", options:["−13","+5","−5","+13"], correct:1, exp:"Soustraire −9 revient à ajouter +9 : (−4) + (+9) = +5."},
@@ -30,7 +31,8 @@ maths: {
       content: `<p>Une <strong>puissance</strong> est une écriture simplifiée d'un produit de facteurs identiques. Pour un nombre a et un entier n : aⁿ = a × a × ... × a (n fois). Le nombre n est appelé l'exposant.</p>
       <p><strong>Règles de calcul :</strong> aⁿ × aᵐ = aⁿ⁺ᵐ (on additionne les exposants) ; aⁿ ÷ aᵐ = aⁿ⁻ᵐ ; (aⁿ)ᵐ = aⁿˣᵐ (on multiplie les exposants).</p>
       <p><strong>Cas particuliers :</strong> a⁰ = 1 (pour a ≠ 0) ; a¹ = a ; a⁻ⁿ = 1/aⁿ.</p>
-      <p><strong>Puissances de 10 :</strong> 10ⁿ s'écrit avec n zéros après le 1 (ex : 10³ = 1000). 10⁻ⁿ = 1/10ⁿ, utile pour l'écriture scientifique des très petits ou très grands nombres.</p>`,
+      <p><strong>Puissances de 10 :</strong> 10ⁿ s'écrit avec n zéros après le 1 (ex : 10³ = 1000). 10⁻ⁿ = 1/10ⁿ, utile pour l'écriture scientifique des très petits ou très grands nombres.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour l'écriture scientifique, on écrit un nombre sous la forme a × 10ⁿ avec 1 ≤ a < 10. Exemple : 45 000 = 4,5 × 10⁴ et 0,0032 = 3,2 × 10⁻³. Cette écriture est très utile pour comparer facilement de très grands ou très petits nombres, et pour simplifier les calculs en physique-chimie.</p>`,
       quiz: [
         {q:"Que vaut 2⁴ ?", options:["8","16","6","4"], correct:1, exp:"2⁴ = 2×2×2×2 = 16."},
         {q:"Que vaut 3² × 3³ ?", options:["3⁵","3⁶","9⁵","3¹"], correct:0, exp:"On additionne les exposants de même base : 3² × 3³ = 3⁽²⁺³⁾ = 3⁵."},
@@ -46,7 +48,8 @@ maths: {
       <p><strong>Addition/soustraction :</strong> il faut d'abord réduire les fractions au même dénominateur, puis additionner ou soustraire les numérateurs. Ex : 1/3 + 1/6 = 2/6 + 1/6 = 3/6 = 1/2.</p>
       <p><strong>Multiplication :</strong> on multiplie les numérateurs entre eux et les dénominateurs entre eux : a/b × c/d = (a×c)/(b×d).</p>
       <p><strong>Division :</strong> diviser par une fraction revient à multiplier par son inverse : a/b ÷ c/d = a/b × d/c.</p>
-      <p>Une fraction est <strong>irréductible</strong> lorsqu'elle ne peut plus être simplifiée (numérateur et dénominateur n'ont plus de diviseur commun autre que 1).</p>`,
+      <p>Une fraction est <strong>irréductible</strong> lorsqu'elle ne peut plus être simplifiée (numérateur et dénominateur n'ont plus de diviseur commun autre que 1).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour rendre une fraction irréductible rapidement, cherche le PGCD (plus grand commun diviseur) du numérateur et du dénominateur, puis divise les deux par ce nombre. Exemple : pour 18/24, le PGCD de 18 et 24 est 6, donc 18/24 = 3/4. Vérifie toujours que le résultat final ne peut plus être simplifié.</p>`,
       quiz: [
         {q:"Que vaut 1/4 + 1/2 ?", options:["2/6","3/4","1/6","2/4"], correct:1, exp:"1/2 = 2/4, donc 1/4 + 2/4 = 3/4."},
         {q:"Que vaut 2/3 × 3/5 ?", options:["6/15","5/8","6/8","2/5"], correct:0, exp:"On multiplie numérateurs et dénominateurs : (2×3)/(3×5) = 6/15 (soit 2/5 simplifié)."},
@@ -61,7 +64,8 @@ maths: {
       content: `<p>Le <strong>calcul littéral</strong> consiste à manipuler des expressions contenant des lettres (comme x) représentant des nombres inconnus.</p>
       <p><strong>Développer</strong> une expression, c'est transformer un produit en somme, grâce à la distributivité : a(b + c) = ab + ac. Avec la double distributivité : (a+b)(c+d) = ac + ad + bc + bd.</p>
       <p><strong>Réduire</strong> une expression, c'est regrouper les termes semblables (ceux qui ont la même lettre au même exposant) pour simplifier l'écriture. Ex : 3x + 5x − 2 = 8x − 2.</p>
-      <p><strong>Factoriser</strong>, c'est l'opération inverse du développement : transformer une somme en produit, en cherchant un facteur commun. Ex : 6x + 9 = 3(2x + 3).</p>`,
+      <p><strong>Factoriser</strong>, c'est l'opération inverse du développement : transformer une somme en produit, en cherchant un facteur commun. Ex : 6x + 9 = 3(2x + 3).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Attention à l'erreur classique : (x + 3)² n'est PAS égal à x² + 9 ! Il faut développer avec la règle (a+b)² = a² + 2ab + b², ce qui donne x² + 6x + 9. Ces identités remarquables ((a+b)², (a−b)², (a+b)(a−b)) seront très utiles au lycée pour factoriser et résoudre des équations plus rapidement.</p>`,
       quiz: [
         {q:"Développer 3(x + 4) donne :", options:["3x + 4","3x + 12","7x","x + 12"], correct:1, exp:"3(x+4) = 3×x + 3×4 = 3x + 12."},
         {q:"Réduire 5x + 2x − x donne :", options:["6x","5x","7x","4x"], correct:0, exp:"5x + 2x − x = (5+2−1)x = 6x."},
@@ -76,7 +80,8 @@ maths: {
       content: `<p>Le <strong>théorème de Thalès</strong> s'applique dans une configuration de deux droites sécantes coupées par deux droites parallèles (souvent deux triangles emboîtés partageant un sommet).</p>
       <p>Si dans un triangle ABC, un point M est sur (AB), un point N est sur (AC), et si (MN) est parallèle à (BC), alors : AM/AB = AN/AC = MN/BC.</p>
       <p>Ce théorème permet de <strong>calculer une longueur manquante</strong> lorsqu'on connaît les autres, à condition d'avoir bien identifié le parallélisme et les sommets correspondants.</p>
-      <p>La <strong>réciproque</strong> du théorème de Thalès permet, à l'inverse, de démontrer que deux droites sont parallèles si les rapports de longueurs sont égaux.</p>`,
+      <p>La <strong>réciproque</strong> du théorème de Thalès permet, à l'inverse, de démontrer que deux droites sont parallèles si les rapports de longueurs sont égaux.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Attention : le théorème de Thalès ne s'applique que si les droites (MN) et (BC) sont parallèles — vérifie toujours cette condition avant de calculer, sinon les rapports de longueurs ne sont pas égaux. Sa réciproque, elle, sert à prouver que deux droites SONT parallèles à partir de l'égalité des rapports : c'est le raisonnement inverse.</p>`,
       quiz: [
         {q:"Le théorème de Thalès nécessite deux droites :", options:["perpendiculaires","parallèles","sécantes en deux points","de même longueur"], correct:1, exp:"Le théorème s'applique quand deux droites sont parallèles dans une configuration de triangles emboîtés."},
         {q:"Si AM/AB = AN/AC = MN/BC, alors (MN) et (BC) sont :", options:["perpendiculaires","parallèles","confondues","sécantes"], correct:1, exp:"L'égalité des rapports correspond à la conclusion du théorème : les droites sont parallèles."},
@@ -91,7 +96,8 @@ maths: {
       content: `<p>Dans un <strong>triangle rectangle</strong>, le théorème de Pythagore relie les longueurs des trois côtés : le carré de l'hypoténuse (le côté opposé à l'angle droit, le plus long côté) est égal à la somme des carrés des deux autres côtés.</p>
       <p>Si ABC est rectangle en A, alors : BC² = AB² + AC².</p>
       <p>Ce théorème permet de <strong>calculer la longueur d'un côté</strong> manquant dans un triangle rectangle, à condition de connaître les deux autres côtés.</p>
-      <p>La <strong>réciproque</strong> du théorème de Pythagore permet de démontrer qu'un triangle est rectangle : si l'égalité BC² = AB² + AC² est vérifiée, alors le triangle est rectangle en A.</p>`,
+      <p>La <strong>réciproque</strong> du théorème de Pythagore permet de démontrer qu'un triangle est rectangle : si l'égalité BC² = AB² + AC² est vérifiée, alors le triangle est rectangle en A.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Piège fréquent : le théorème de Pythagore ne fonctionne que dans un triangle rectangle, et le carré de l'hypoténuse (le côté le plus long, opposé à l'angle droit) doit toujours être isolé d'un côté de l'égalité. Pour vérifier si un triangle est rectangle, compare le carré du plus grand côté à la somme des carrés des deux autres : s'ils sont égaux, le triangle est rectangle ; sinon, il ne l'est pas.</p>`,
       quiz: [
         {q:"Le théorème de Pythagore s'applique dans un triangle :", options:["isocèle","équilatéral","rectangle","quelconque"], correct:2, exp:"Ce théorème est spécifique aux triangles rectangles."},
         {q:"Si ABC est rectangle en A, la formule est :", options:["AB²=BC²+AC²","BC²=AB²+AC²","AC²=AB²+BC²","BC²=AB²−AC²"], correct:1, exp:"L'hypoténuse BC (opposée à l'angle droit en A) est reliée par BC² = AB² + AC²."},
@@ -108,7 +114,8 @@ maths: {
       <p>- On peut <strong>ajouter ou soustraire</strong> le même nombre des deux côtés.<br>
       - On peut <strong>multiplier ou diviser</strong> les deux côtés par un même nombre non nul.</p>
       <p>Exemple : 3x + 5 = 20 → 3x = 20 − 5 → 3x = 15 → x = 15/3 → x = 5.</p>
-      <p>Une équation peut avoir <strong>une seule solution</strong>, aucune solution, ou une infinité de solutions selon les cas.</p>`,
+      <p>Une équation peut avoir <strong>une seule solution</strong>, aucune solution, ou une infinité de solutions selon les cas.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Après avoir trouvé la solution d'une équation, prends l'habitude de vérifier en remplaçant x par ta valeur dans l'équation de départ : si les deux membres sont égaux, ta solution est correcte. Exemple : pour 5x − 3 = 2x + 9, on trouve x = 4 ; vérification : 5×4−3 = 17 et 2×4+9 = 17. ✓</p>`,
       quiz: [
         {q:"Résoudre 2x + 3 = 11 donne x =", options:["3","4","7","5"], correct:1, exp:"2x = 11 − 3 = 8, donc x = 8/2 = 4."},
         {q:"Résoudre x − 7 = 2 donne x =", options:["5","9","−5","14"], correct:1, exp:"x = 2 + 7 = 9."},
@@ -123,7 +130,8 @@ maths: {
       content: `<p>La <strong>racine carrée</strong> d'un nombre positif a, notée √a, est le nombre positif dont le carré est égal à a. Par exemple, √9 = 3 car 3² = 9.</p>
       <p><strong>Propriétés utiles :</strong> √(a×b) = √a × √b (pour a et b positifs) ; √(a/b) = √a / √b (pour b non nul).</p>
       <p>Ces propriétés permettent de <strong>simplifier une racine carrée</strong> en la décomposant en produit d'un carré parfait et d'un autre facteur. Exemple : √50 = √(25×2) = √25 × √2 = 5√2.</p>
-      <p>Attention : √a n'est définie que pour a ≥ 0, et en général √(a+b) ≠ √a + √b.</p>`,
+      <p>Attention : √a n'est définie que pour a ≥ 0, et en général √(a+b) ≠ √a + √b.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Attention : √a + √b n'est JAMAIS égal à √(a+b) ! Par exemple √9 + √16 = 3 + 4 = 7, alors que √(9+16) = √25 = 5. En revanche, la multiplication et la division se distribuent bien : √a × √b = √(a×b) et √a ÷ √b = √(a÷b) (pour a, b positifs).</p>`,
       quiz: [
         {q:"Que vaut √25 ?", options:["5","12,5","625","50"], correct:0, exp:"5² = 25, donc √25 = 5."},
         {q:"Que vaut √4 × √9 ?", options:["√36 = 6","√13","36","13"], correct:0, exp:"√4 × √9 = √(4×9) = √36 = 6 (on retrouve aussi 2×3=6)."},
@@ -138,7 +146,8 @@ maths: {
       content: `<p>Une étude statistique porte sur une <strong>population</strong> et un <strong>caractère</strong> étudié. Chaque valeur du caractère a un <strong>effectif</strong> (nombre de fois qu'elle apparaît).</p>
       <p>La <strong>fréquence</strong> d'une valeur est le rapport entre son effectif et l'effectif total, souvent exprimée en pourcentage : fréquence = effectif / effectif total.</p>
       <p>La <strong>moyenne</strong> d'une série de données se calcule en additionnant toutes les valeurs puis en divisant par le nombre total de valeurs (ou, avec des effectifs, en pondérant chaque valeur par son effectif).</p>
-      <p>Les données peuvent être représentées par un <strong>diagramme</strong> (bâtons, circulaire) pour faciliter la lecture et la comparaison.</p>`,
+      <p>Les données peuvent être représentées par un <strong>diagramme</strong> (bâtons, circulaire) pour faciliter la lecture et la comparaison.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> En plus de la moyenne, deux autres indicateurs sont utiles : la médiane (la valeur qui partage la série en deux groupes égaux quand on range les données dans l'ordre) et le mode (la valeur la plus fréquente). Exemple : pour la série 8, 10, 10, 12, 15, le mode est 10 (il apparaît deux fois) et la médiane est 10 (valeur du milieu).</p>`,
       quiz: [
         {q:"L'effectif total est :", options:["la plus grande valeur de la série","la somme de tous les effectifs","la moyenne des valeurs","le nombre de catégories"], correct:1, exp:"L'effectif total est la somme des effectifs de toutes les valeurs de la série."},
         {q:"La fréquence d'une valeur se calcule par :", options:["effectif × effectif total","effectif / effectif total","effectif total / effectif","effectif + effectif total"], correct:1, exp:"La fréquence est le rapport de l'effectif de la valeur sur l'effectif total."},
@@ -153,7 +162,8 @@ maths: {
       content: `<p>Dans un <strong>triangle</strong>, la somme des trois angles est toujours égale à 180°.</p>
       <p>Dans un <strong>quadrilatère</strong> (4 côtés), la somme des angles est égale à 360°. Plus généralement, dans un polygone à n côtés, la somme des angles vaut (n − 2) × 180°.</p>
       <p><strong>Angles particuliers</strong> : deux angles sont <strong>complémentaires</strong> si leur somme fait 90°, <strong>supplémentaires</strong> si leur somme fait 180°. Deux angles opposés par le sommet sont toujours égaux.</p>
-      <p>Lorsque deux droites parallèles sont coupées par une sécante, on retrouve des angles égaux (angles alternes-internes, angles correspondants).</p>`,
+      <p>Lorsque deux droites parallèles sont coupées par une sécante, on retrouve des angles égaux (angles alternes-internes, angles correspondants).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour un polygone à n côtés, la somme de ses angles intérieurs vaut (n−2) × 180°. Exemple : un pentagone (5 côtés) a une somme d'angles de (5−2)×180 = 540°. Cette formule généralise ce que tu sais déjà pour le triangle (n=3 : 180°) et le quadrilatère (n=4 : 360°).</p>`,
       quiz: [
         {q:"La somme des angles d'un triangle est :", options:["90°","180°","270°","360°"], correct:1, exp:"La somme des angles d'un triangle vaut toujours 180°."},
         {q:"La somme des angles d'un quadrilatère est :", options:["180°","270°","360°","400°"], correct:2, exp:"Un quadrilatère peut se décomposer en deux triangles, soit 2×180° = 360°."},
@@ -168,7 +178,8 @@ maths: {
       content: `<p>Dans un <strong>triangle rectangle</strong>, le cosinus d'un angle aigu est le rapport entre la longueur du côté adjacent à cet angle et la longueur de l'hypoténuse.</p>
       <p>Formule : cos(angle) = côté adjacent / hypoténuse.</p>
       <p>Cette relation permet de <strong>calculer une longueur</strong> (si on connaît l'angle et une longueur) ou de <strong>calculer un angle</strong> (si on connaît deux longueurs), à l'aide de la calculatrice.</p>
-      <p>Le cosinus d'un angle est toujours compris entre 0 et 1 pour un angle aigu (entre 0° et 90°).</p>`,
+      <p>Le cosinus d'un angle est toujours compris entre 0 et 1 pour un angle aigu (entre 0° et 90°).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Le cosinus n'est qu'une des trois relations trigonométriques dans le triangle rectangle : cos(angle) = adjacent/hypoténuse, sin(angle) = opposé/hypoténuse, tan(angle) = opposé/adjacent. Choisis la bonne relation selon les côtés connus et recherchés : si tu connais l'hypoténuse et le côté adjacent, utilise le cosinus ; si tu connais l'opposé et l'adjacent, utilise la tangente.</p>`,
       quiz: [
         {q:"Le cosinus d'un angle aigu se calcule avec :", options:["opposé/hypoténuse","adjacent/hypoténuse","opposé/adjacent","hypoténuse/adjacent"], correct:1, exp:"cos(angle) = côté adjacent / hypoténuse."},
         {q:"Le cosinus d'un angle aigu est toujours compris entre :", options:["0 et 1","−1 et 1","0 et 90","1 et 10"], correct:0, exp:"Pour un angle aigu (0°-90°), le cosinus est compris entre 0 et 1."},
@@ -183,7 +194,8 @@ maths: {
       content: `<p><strong>Aires courantes</strong> : rectangle = longueur × largeur ; triangle = (base × hauteur) / 2 ; disque = π × rayon².</p>
       <p><strong>Volume d'un prisme droit</strong> (ou d'un cylindre) = aire de la base × hauteur.</p>
       <p>Exemple : le volume d'un cylindre de rayon r et de hauteur h est V = π × r² × h.</p>
-      <p>Il est important de garder des <strong>unités cohérentes</strong> : pour un volume en cm³, les longueurs doivent être en cm ; pour un volume en m³, les longueurs doivent être en m.</p>`,
+      <p>Il est important de garder des <strong>unités cohérentes</strong> : pour un volume en cm³, les longueurs doivent être en cm ; pour un volume en m³, les longueurs doivent être en m.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Astuce pratique : pour convertir un volume, retiens que 1 dm³ = 1 litre = 1000 cm³, et 1 m³ = 1000 litres. Cela permet de vérifier si un résultat est réaliste : un réservoir de 2 m³ contient donc 2000 litres d'eau.</p>`,
       quiz: [
         {q:"L'aire d'un rectangle se calcule par :", options:["longueur + largeur","longueur × largeur","2×(longueur+largeur)","longueur / largeur"], correct:1, exp:"L'aire d'un rectangle est le produit de sa longueur par sa largeur."},
         {q:"L'aire d'un triangle se calcule par :", options:["base × hauteur","(base × hauteur)/2","base + hauteur","2×base×hauteur"], correct:1, exp:"L'aire d'un triangle est la moitié du produit de la base par la hauteur."},
@@ -198,7 +210,8 @@ maths: {
       content: `<p>Un <strong>nombre rationnel</strong> est un nombre qui peut s'écrire sous la forme d'un quotient a/b, où a et b sont des entiers relatifs et b est différent de 0.</p>
       <p>Tous les entiers, toutes les fractions et tous les nombres décimaux sont des nombres rationnels. Par exemple, 5 (= 5/1), −3/4 et 0,25 (= 1/4) sont des nombres rationnels.</p>
       <p>Pour <strong>comparer deux nombres rationnels</strong>, on peut les réduire au même dénominateur puis comparer leurs numérateurs, ou les convertir en écriture décimale.</p>
-      <p>Sur une <strong>droite graduée</strong>, plus un nombre rationnel est grand, plus il est situé à droite.</p>`,
+      <p>Sur une <strong>droite graduée</strong>, plus un nombre rationnel est grand, plus il est situé à droite.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour comparer deux fractions rapidement sans les mettre au même dénominateur, on peut utiliser le produit en croix : pour comparer a/b et c/d (avec b, d > 0), on compare a×d et b×c. Exemple : 3/4 et 5/7 → 3×7=21 et 4×5=20, donc 21>20, donc 3/4 > 5/7.</p>`,
       quiz: [
         {q:"Un nombre rationnel s'écrit sous la forme :", options:["a×b","a/b avec b≠0","a+b","√a"], correct:1, exp:"Un nombre rationnel est un quotient a/b d'entiers relatifs, avec b différent de 0."},
         {q:"Lequel de ces nombres n'est PAS rationnel (niveau 4e, cas particulier vu en cours) ?", options:["3","−2/5","0,75","√2 (nombre non rationnel étudié plus tard)"], correct:3, exp:"√2 ne peut pas s'écrire comme un quotient exact d'entiers : ce n'est pas un rationnel (notion abordée en approfondissement)."},
@@ -213,7 +226,8 @@ maths: {
       content: `<p>Le <strong>cube</strong> est un solide dont les six faces sont des carrés identiques. Le <strong>pavé droit</strong> (ou parallélépipède rectangle) a six faces rectangulaires, opposées deux à deux et identiques.</p>
       <p>Le <strong>patron</strong> d'un solide est une figure plane qui, une fois découpée et pliée, permet de reconstituer ce solide.</p>
       <p>La <strong>perspective cavalière</strong> est une façon de représenter un solide en trois dimensions sur une feuille plane, en gardant les faces avant et arrière parallèles et identiques, et en traçant les arêtes fuyantes selon une direction et un angle donnés (souvent 45°, réduites de moitié).</p>
-      <p><strong>Volume du pavé droit</strong> = longueur × largeur × hauteur. <strong>Volume du cube</strong> de côté c = c × c × c = c³.</p>`,
+      <p><strong>Volume du pavé droit</strong> = longueur × largeur × hauteur. <strong>Volume du cube</strong> de côté c = c × c × c = c³.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> N'oublie pas que pour calculer le volume d'un pavé droit, il suffit de multiplier ses trois dimensions : longueur × largeur × hauteur. Pour un cube d'arête a, le volume est a³ et l'aire totale (les 6 faces) est 6×a². Le patron d'un solide (sa représentation à plat) t'aide à visualiser toutes ses faces avant de calculer son aire totale.</p>`,
       quiz: [
         {q:"Un cube a :", options:["4 faces carrées","6 faces carrées identiques","6 faces rectangulaires différentes","8 faces"], correct:1, exp:"Un cube possède 6 faces, toutes carrées et identiques."},
         {q:"Le volume d'un pavé droit se calcule par :", options:["longueur + largeur + hauteur","longueur × largeur × hauteur","2×(longueur+largeur)","longueur × largeur"], correct:1, exp:"Le volume du pavé droit est le produit de ses trois dimensions."},
@@ -229,7 +243,8 @@ maths: {
       <p>Le <strong>produit en croix</strong> permet de retrouver une valeur manquante dans un tableau de proportionnalité : si a/b = c/x, alors x = (b × c) / a.</p>
       <p>Un <strong>pourcentage</strong> exprime une proportion sur 100. Calculer t % d'une quantité Q revient à calculer (t × Q) / 100.</p>
       <p>Exemple : 15 % de 80 = (15 × 80) / 100 = 12.</p>
-      <p>La proportionnalité s'utilise aussi pour les <strong>échelles</strong> (cartes, plans) et les <strong>vitesses</strong> (distance = vitesse × temps).</p>`,
+      <p>La proportionnalité s'utilise aussi pour les <strong>échelles</strong> (cartes, plans) et les <strong>vitesses</strong> (distance = vitesse × temps).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Piège classique : pour une augmentation de 20 % suivie d'une réduction de 20 %, le résultat final N'EST PAS le prix de départ ! Exemple : 100 × 1,2 = 120, puis 120 × 0,8 = 96. On ne retrouve donc pas 100 : les pourcentages successifs ne s'annulent pas simplement.</p>`,
       quiz: [
         {q:"Deux grandeurs sont proportionnelles si :", options:["leur somme est constante","on passe de l'une à l'autre en multipliant par un même nombre","elles sont toujours égales","leur différence est nulle"], correct:1, exp:"La proportionnalité se caractérise par un coefficient multiplicateur constant entre les deux grandeurs."},
         {q:"Le produit en croix pour a/b = c/x donne x =", options:["(a×c)/b","(b×c)/a","(a×b)/c","a+b−c"], correct:1, exp:"En croisant les produits, x = (b × c) / a."},
@@ -244,7 +259,8 @@ maths: {
       content: `<p>La <strong>symétrie centrale</strong> de centre O associe à un point M un point M' tel que O soit le <strong>milieu</strong> du segment [MM'].</p>
       <p><strong>Propriétés conservées</strong> par la symétrie centrale : les longueurs, les angles, les aires, le parallélisme et l'alignement des points.</p>
       <p>L'image d'une droite par une symétrie centrale est une <strong>droite parallèle</strong> à la droite de départ. L'image d'un cercle est un cercle de même rayon.</p>
-      <p>Une figure possède un <strong>centre de symétrie</strong> si elle est sa propre image par une symétrie centrale de ce point (ex : un rectangle, un losange, un cercle).</p>`,
+      <p>Une figure possède un <strong>centre de symétrie</strong> si elle est sa propre image par une symétrie centrale de ce point (ex : un rectangle, un losange, un cercle).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La symétrie centrale conserve les longueurs, les angles et le parallélisme : c'est une isométrie. Le centre de symétrie est toujours le milieu du segment reliant un point à son image. Pour construire l'image d'une figure, il suffit donc de construire l'image de chacun de ses sommets, puis de relier les points obtenus dans le même ordre.</p>`,
       quiz: [
         {q:"Dans une symétrie centrale de centre O, O est :", options:["un point quelconque","le milieu du segment [MM']","toujours à l'extérieur de la figure","un sommet du triangle"], correct:1, exp:"Par définition, O est le milieu du segment reliant un point à son image."},
         {q:"La symétrie centrale conserve :", options:["seulement les angles","seulement les longueurs","les longueurs, les angles et les aires","rien de particulier"], correct:2, exp:"La symétrie centrale conserve toutes les propriétés métriques : longueurs, angles, aires."},
@@ -259,7 +275,8 @@ maths: {
       content: `<p>Une <strong>translation</strong> déplace tous les points d'une figure dans une même direction, un même sens et sur une même distance, sans la déformer ni la faire tourner.</p>
       <p>Un <strong>vecteur</strong> représente ce déplacement : il est caractérisé par une direction, un sens et une longueur (norme). On le note souvent avec une flèche, par exemple le vecteur AB.</p>
       <p>Si M' est l'image de M par la translation de vecteur AB, alors MM' a la même direction, le même sens et la même longueur que AB.</p>
-      <p>La translation, comme la symétrie centrale, conserve les longueurs, les angles et les aires : c'est une transformation qui ne déforme pas les figures.</p>`,
+      <p>La translation, comme la symétrie centrale, conserve les longueurs, les angles et les aires : c'est une transformation qui ne déforme pas les figures.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La relation de Chasles permet d'additionner des vecteurs : pour tous points A, B, C, on a vecteur AB + vecteur BC = vecteur AC. Cette relation est très utile pour démontrer que des points sont alignés ou pour simplifier des sommes de vecteurs dans un exercice de géométrie.</p>`,
       quiz: [
         {q:"Une translation modifie une figure en la :", options:["faisant tourner","déplaçant sans la déformer","agrandissant","réduisant"], correct:1, exp:"La translation déplace la figure dans une direction donnée, sans la déformer ni la faire tourner."},
         {q:"Un vecteur est caractérisé par :", options:["seulement sa longueur","direction, sens et longueur","seulement sa direction","sa couleur"], correct:1, exp:"Un vecteur regroupe trois informations : direction, sens et longueur (norme)."},
@@ -274,7 +291,8 @@ maths: {
       content: `<p>Un <strong>cercle</strong> de centre O et de rayon r est l'ensemble des points situés à la distance r du point O. Le <strong>diamètre</strong> est égal à deux fois le rayon.</p>
       <p><strong>Périmètre</strong> d'un cercle = 2 × π × r. <strong>Aire</strong> d'un disque = π × r².</p>
       <p>Le <strong>cercle circonscrit</strong> à un triangle passe par ses trois sommets ; son centre est équidistant des trois sommets. Le <strong>cercle inscrit</strong> dans un triangle est tangent aux trois côtés ; son centre est équidistant des trois côtés.</p>
-      <p>Un <strong>angle inscrit</strong> dans un cercle, qui intercepte le même arc qu'un angle au centre, mesure la moitié de cet angle au centre.</p>`,
+      <p>Un <strong>angle inscrit</strong> dans un cercle, qui intercepte le même arc qu'un angle au centre, mesure la moitié de cet angle au centre.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Propriété utile : une tangente à un cercle en un point est toujours perpendiculaire au rayon en ce point. Aussi, dans un triangle rectangle, le cercle circonscrit a pour centre le milieu de l'hypoténuse — une propriété pratique pour certains exercices de construction.</p>`,
       quiz: [
         {q:"Le diamètre d'un cercle est égal à :", options:["le rayon", "deux fois le rayon","la moitié du rayon","π × rayon"], correct:1, exp:"Le diamètre est toujours le double du rayon."},
         {q:"Le périmètre d'un cercle de rayon r est :", options:["π×r","2×π×r","π×r²","4×r"], correct:1, exp:"Le périmètre (circonférence) d'un cercle se calcule par 2×π×r."},
@@ -300,7 +318,8 @@ francais: {
       3. <strong>Péripéties</strong> : suite d'actions et d'épreuves que traverse le personnage principal.<br>
       4. <strong>Élément de résolution</strong> : l'événement qui permet de résoudre le problème.<br>
       5. <strong>Situation finale</strong> : le nouvel équilibre, souvent différent du point de départ.</p>
-      <p>Ce schéma se retrouve dans les contes, romans, nouvelles et fables, même si l'ordre peut parfois être bousculé pour créer du suspense.</p>`,
+      <p>Ce schéma se retrouve dans les contes, romans, nouvelles et fables, même si l'ordre peut parfois être bousculé pour créer du suspense.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour bien enchaîner les étapes de ton récit, utilise des connecteurs logiques et temporels : d'abord, ensuite, soudain, tout à coup, finalement, peu après... Ils guident le lecteur et donnent du rythme à ton texte.</p>`,
       quiz: [
         {q:"Combien d'étapes comporte le schéma narratif classique ?", options:["3","4","5","6"], correct:2, exp:"Le schéma narratif comporte cinq étapes."},
         {q:"L'élément perturbateur intervient :", options:["au début du récit","après la situation initiale","à la toute fin","il n'existe pas toujours"], correct:1, exp:"Il rompt l'équilibre présenté dans la situation initiale."},
@@ -315,7 +334,8 @@ francais: {
       content: `<p>La <strong>description</strong> permet de représenter un lieu, un objet ou un personnage avec précision, en s'appuyant sur les cinq sens.</p>
       <p>On distingue le <strong>portrait</strong> (description d'un personnage : traits physiques, vêtements, caractère) du <strong>paysage</strong> (description d'un lieu).</p>
       <p><strong>Procédés fréquents :</strong> l'utilisation d'adjectifs qualificatifs, de comparaisons, d'un vocabulaire précis, et d'une organisation spatiale claire (du général au particulier, de haut en bas, de loin à près).</p>
-      <p>La description a plusieurs fonctions : informer le lecteur, créer une atmosphère, révéler la psychologie d'un personnage, ou ralentir le rythme du récit avant un moment important.</p>`,
+      <p>La description a plusieurs fonctions : informer le lecteur, créer une atmosphère, révéler la psychologie d'un personnage, ou ralentir le rythme du récit avant un moment important.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour rendre une description vivante, mobilise plusieurs sens (pas seulement la vue) : les bruits, les odeurs, les textures. Exemple : « Le marché grouillait de monde ; les cris des vendeurs se mêlaient à l'odeur épicée de l'attiéké et à la chaleur écrasante du soleil de midi. »</p>`,
       quiz: [
         {q:"Le portrait décrit principalement :", options:["un lieu","un personnage","une action","un sentiment"], correct:1, exp:"Le portrait est la description d'un personnage."},
         {q:"Une description s'appuie souvent sur :", options:["les cinq sens","uniquement la vue","uniquement le toucher","aucun sens en particulier"], correct:0, exp:"Une bonne description mobilise plusieurs sens (vue, ouïe, odorat, toucher, goût)."},
@@ -331,7 +351,8 @@ francais: {
       <p><strong>La comparaison</strong> rapproche deux éléments à l'aide d'un mot de comparaison (comme, tel, pareil à...). Ex : « Il est fort comme un lion. »</p>
       <p><strong>La métaphore</strong> rapproche deux éléments sans mot de comparaison, en fusionnant directement les deux images. Ex : « Cet homme est un lion. »</p>
       <p><strong>La personnification</strong> attribue des caractéristiques humaines à un objet, un animal ou une idée. Ex : « Le vent hurlait de rage. »</p>
-      <p>Ces figures rendent un texte plus imagé, plus expressif, et permettent au lecteur de mieux ressentir ce qui est décrit.</p>`,
+      <p>Ces figures rendent un texte plus imagé, plus expressif, et permettent au lecteur de mieux ressentir ce qui est décrit.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Deux autres figures utiles : l'hyperbole, qui exagère pour insister (« Je meurs de faim ! »), et l'antithèse, qui oppose deux idées contraires dans la même phrase (« Il pleure de joie. »). Repérer ces figures t'aide autant à mieux écrire qu'à mieux analyser un texte littéraire.</p>`,
       quiz: [
         {q:"« Elle court comme le vent » est une :", options:["métaphore","comparaison","personnification","antithèse"], correct:1, exp:"Le mot « comme » signale une comparaison."},
         {q:"« Le temps est un voleur » est une :", options:["comparaison","métaphore","personnification","énumération"], correct:1, exp:"Il n'y a pas de mot de comparaison : les deux éléments sont directement fusionnés, c'est une métaphore."},
@@ -350,7 +371,8 @@ francais: {
       - <strong>Injonctive (ou impérative)</strong> : donne un ordre ou un conseil.</p>
       <p>Chaque type de phrase peut être combiné avec une <strong>forme</strong> :</p>
       <p>- <strong>Affirmative</strong> ou <strong>négative</strong> (avec ne...pas, ne...jamais, ne...plus).<br>
-      - <strong>Active</strong> (le sujet fait l'action) ou <strong>passive</strong> (le sujet subit l'action).</p>`,
+      - <strong>Active</strong> (le sujet fait l'action) ou <strong>passive</strong> (le sujet subit l'action).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> N'oublie pas la forme négative, qui s'oppose à la forme affirmative : elle se construit avec « ne...pas », « ne...jamais », « ne...plus », « ne...rien ». Exemple : « Il vient. » (affirmative) → « Il ne vient pas. » (négative). On peut combiner plusieurs formes dans une même phrase : une phrase peut être interrogative ET négative : « Ne viens-tu pas ? »</p>`,
       quiz: [
         {q:"« Range ta chambre ! » est une phrase :", options:["déclarative","interrogative","injonctive","exclamative"], correct:2, exp:"Elle donne un ordre : c'est une phrase injonctive."},
         {q:"« Quelle belle journée ! » est une phrase :", options:["déclarative","exclamative","interrogative","injonctive"], correct:1, exp:"Elle exprime une émotion forte : c'est une phrase exclamative."},
@@ -364,7 +386,8 @@ francais: {
       title: "Le discours rapporté",
       content: `<p>Le <strong>discours direct</strong> rapporte les paroles exactes d'un personnage, entre guillemets, souvent introduites par un verbe de parole (dire, demander, répondre...). Ex : Il a dit : « Je viendrai demain. »</p>
       <p>Le <strong>discours indirect</strong> rapporte les paroles sans les citer mot à mot, en les intégrant dans une proposition subordonnée introduite par « que » ou un mot interrogatif. Ex : Il a dit qu'il viendrait le lendemain.</p>
-      <p>Le passage du discours direct à l'indirect entraîne des changements : les <strong>pronoms</strong> (je → il), les <strong>temps</strong> (présent → imparfait, futur → conditionnel) et les <strong>indicateurs de temps/lieu</strong> (demain → le lendemain, ici → là).</p>`,
+      <p>Le passage du discours direct à l'indirect entraîne des changements : les <strong>pronoms</strong> (je → il), les <strong>temps</strong> (présent → imparfait, futur → conditionnel) et les <strong>indicateurs de temps/lieu</strong> (demain → le lendemain, ici → là).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Comme en anglais, le discours rapporté en français entraîne des transformations : le présent devient l'imparfait, le futur devient le conditionnel présent, et les indicateurs de temps changent (aujourd'hui → ce jour-là, demain → le lendemain, hier → la veille). Exemple : « Je viendrai demain », dit-il → Il dit qu'il viendrait le lendemain.</p>`,
       quiz: [
         {q:"Le discours direct utilise :", options:["des guillemets","toujours le futur","aucune ponctuation particulière","uniquement la troisième personne"], correct:0, exp:"Les paroles rapportées au discours direct sont encadrées de guillemets."},
         {q:"« Je viendrai demain » devient au discours indirect :", options:["qu'il viendrait le lendemain","qu'il vient demain","qu'il viendra ici","qu'il est venu hier"], correct:0, exp:"Le futur devient conditionnel et « demain » devient « le lendemain »."},
@@ -379,7 +402,8 @@ francais: {
       content: `<p>La <strong>lettre argumentative</strong> vise à convaincre un destinataire d'adopter un point de vue ou d'agir d'une certaine façon.</p>
       <p><strong>Structure</strong> : une formule d'appel, une introduction qui présente le sujet, un développement organisé en arguments (chacun illustré par un exemple), et une formule de politesse pour conclure.</p>
       <p><strong>Les arguments</strong> doivent être reliés par des connecteurs logiques (d'abord, ensuite, de plus, enfin, cependant...) pour rendre le raisonnement clair.</p>
-      <p>Un bon argument s'appuie sur un <strong>exemple concret</strong> ou un fait vérifiable, ce qui le rend plus convaincant qu'une simple opinion.</p>`,
+      <p>Un bon argument s'appuie sur un <strong>exemple concret</strong> ou un fait vérifiable, ce qui le rend plus convaincant qu'une simple opinion.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour organiser tes arguments, utilise des connecteurs logiques : d'une part / d'autre part, de plus, en outre, cependant, par conséquent, en conclusion. Ils structurent ta pensée et rendent ton argumentation plus convaincante et plus facile à suivre pour le lecteur.</p>`,
       quiz: [
         {q:"Le but d'une lettre argumentative est de :", options:["raconter une histoire","décrire un lieu","convaincre le destinataire","donner une recette"], correct:2, exp:"Elle cherche à persuader le lecteur d'un point de vue ou d'une action."},
         {q:"Un connecteur logique utile dans une argumentation est :", options:["soudain","de plus","il était une fois","au clair de lune"], correct:1, exp:"« De plus » relie logiquement deux arguments."},
@@ -394,7 +418,8 @@ francais: {
       content: `<p>La <strong>classe grammaticale</strong> (ou nature) d'un mot indique sa catégorie : nom, verbe, adjectif, adverbe, pronom, préposition, conjonction, déterminant...</p>
       <p><strong>Le nom</strong> désigne une personne, un animal, une chose ou une idée (commun ou propre). <strong>Le verbe</strong> exprime une action ou un état, et se conjugue. <strong>L'adjectif</strong> qualifie un nom. <strong>L'adverbe</strong> modifie un verbe, un adjectif ou un autre adverbe et est invariable.</p>
       <p><strong>Le pronom</strong> remplace un nom (il, elle, celui-ci, qui...). <strong>La préposition</strong> (à, de, sur, pour...) et la <strong>conjonction</strong> (et, mais, donc...) relient des mots ou des groupes de mots.</p>
-      <p>Connaître la classe d'un mot aide à comprendre sa fonction et à éviter des erreurs d'accord.</p>`,
+      <p>Connaître la classe d'un mot aide à comprendre sa fonction et à éviter des erreurs d'accord.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> N'oublie pas les classes grammaticales invariables : l'adverbe (modifie un verbe, un adjectif ou un autre adverbe : rapidement, très, bien), la préposition (introduit un complément : à, de, pour, dans) et la conjonction (relie deux mots ou deux propositions : et, mais, car, donc).</p>`,
       quiz: [
         {q:"Dans « Le chat dort », « chat » est :", options:["un verbe","un nom","un adjectif","une préposition"], correct:1, exp:"« Chat » désigne un être vivant : c'est un nom."},
         {q:"Un adverbe est un mot :", options:["qui se conjugue","variable en genre et nombre","invariable","qui remplace un nom"], correct:2, exp:"L'adverbe est par nature invariable, contrairement à l'adjectif."},
@@ -409,7 +434,8 @@ francais: {
       content: `<p>Contrairement à la classe grammaticale (nature), la <strong>fonction</strong> d'un mot dépend de son rôle dans la phrase.</p>
       <p><strong>Le sujet</strong> fait ou subit l'action exprimée par le verbe. <strong>Le complément d'objet direct (COD)</strong> répond à la question « qui ? » ou « quoi ? » posée après le verbe, sans préposition. <strong>Le complément d'objet indirect (COI)</strong> répond aux mêmes questions mais introduit par une préposition (à, de).</p>
       <p><strong>Le complément circonstanciel</strong> précise les circonstances de l'action : lieu, temps, manière, cause... Il peut souvent être déplacé ou supprimé sans rendre la phrase incorrecte.</p>
-      <p>Un même mot (ex : un nom) peut occuper différentes fonctions selon la phrase.</p>`,
+      <p>Un même mot (ex : un nom) peut occuper différentes fonctions selon la phrase.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour distinguer COD et COI, pose la question juste après le verbe : « le professeur explique QUOI ? » → « la leçon » (COD, sans préposition) ; « le professeur parle À QUI ? » → « aux élèves » (COI, avec préposition). Astuce : si tu peux remplacer le complément par « le/la/les », c'est un COD ; si tu dois utiliser « lui/leur », c'est souvent un COI.</p>`,
       quiz: [
         {q:"Dans « Marie mange une pomme », « une pomme » est :", options:["sujet","COD","COI","complément circonstanciel"], correct:1, exp:"« Une pomme » répond à « mange quoi ? » sans préposition : c'est le COD."},
         {q:"Dans « Il parle à son ami », « à son ami » est :", options:["COD","COI","sujet","attribut"], correct:1, exp:"« À son ami » répond à « parle à qui ? » avec une préposition : c'est le COI."},
@@ -424,7 +450,8 @@ francais: {
       content: `<p>Dans un récit au passé, on utilise généralement deux temps complémentaires : l'<strong>imparfait</strong> et le <strong>passé simple</strong>.</p>
       <p>L'<strong>imparfait</strong> décrit un décor, une situation qui dure, une habitude, ou exprime un état dans le passé (arrière-plan de l'action). Ex : Il faisait beau, les oiseaux chantaient.</p>
       <p>Le <strong>passé simple</strong> exprime une action brève, ponctuelle, qui fait avancer le récit (premier plan de l'action). Ex : Soudain, il entendit un bruit.</p>
-      <p>L'alternance entre ces deux temps permet de distinguer ce qui sert de cadre (imparfait) et ce qui constitue les événements marquants (passé simple).</p>`,
+      <p>L'alternance entre ces deux temps permet de distinguer ce qui sert de cadre (imparfait) et ce qui constitue les événements marquants (passé simple).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Astuce pour ne pas se tromper : le passé simple s'utilise pour une action brève et précise qui fait avancer l'histoire (souvent introduite par « soudain », « tout à coup »), tandis que l'imparfait décrit le décor, une action longue ou habituelle. Exemple : « Il pleuvait (imparfait, décor) quand, soudain, la porte s'ouvrit (passé simple, action brève). »</p>`,
       quiz: [
         {q:"L'imparfait sert surtout à :", options:["exprimer une action brève","décrire un décor ou une habitude","poser une question","donner un ordre"], correct:1, exp:"L'imparfait installe le cadre, la description ou une habitude, à l'arrière-plan du récit."},
         {q:"Le passé simple sert surtout à :", options:["décrire un décor","exprimer une action ponctuelle qui fait avancer le récit","exprimer une vérité générale","donner un conseil"], correct:1, exp:"Le passé simple marque les événements précis qui font progresser l'histoire."},
@@ -439,7 +466,8 @@ francais: {
       content: `<p>Le <strong>conditionnel</strong> exprime une action soumise à une condition, un souhait poli, ou un fait imaginaire. Ex : Si j'avais de l'argent, je voyagerais.</p>
       <p>Le conditionnel présent se forme avec le radical du futur + les terminaisons de l'imparfait (-ais, -ais, -ait, -ions, -iez, -aient).</p>
       <p>Le <strong>subjonctif</strong> exprime un souhait, un doute, une nécessité, une émotion ou une volonté, souvent après « que ». Ex : Il faut que tu viennes.</p>
-      <p>Le subjonctif présent se reconnaît par ses terminaisons -e, -es, -e, -ions, -iez, -ent, après des expressions comme « il faut que », « je souhaite que », « bien que ».</p>`,
+      <p>Le subjonctif présent se reconnaît par ses terminaisons -e, -es, -e, -ions, -iez, -ent, après des expressions comme « il faut que », « je souhaite que », « bien que ».</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Le conditionnel sert aussi à exprimer la politesse (« Pourriez-vous m'aider ? ») ou une information non confirmée (« Le voleur serait un habitant du quartier »). Le subjonctif, lui, s'emploie après des expressions de doute, de souhait ou d'obligation : « Il faut que tu viennes », « Je doute qu'il réussisse ».</p>`,
       quiz: [
         {q:"« Je voyagerais si j'avais de l'argent » utilise :", options:["le futur","le conditionnel","le subjonctif","l'impératif"], correct:1, exp:"Cette phrase exprime une action soumise à une condition : c'est le conditionnel."},
         {q:"Le conditionnel présent se forme avec :", options:["le radical du passé + terminaisons du présent","le radical du futur + terminaisons de l'imparfait","le radical du présent + terminaisons du futur","l'infinitif seul"], correct:1, exp:"Le conditionnel présent combine le radical du futur et les terminaisons de l'imparfait."},
@@ -454,7 +482,8 @@ francais: {
       content: `<p>Une <strong>proposition subordonnée relative</strong> complète un nom ou un pronom (son antécédent) et est introduite par un <strong>pronom relatif</strong> : qui, que, dont, où, lequel...</p>
       <p><strong>Qui</strong> remplace le sujet du verbe qui suit. <strong>Que</strong> remplace le COD. <strong>Dont</strong> remplace un complément introduit par « de ». <strong>Où</strong> indique un lieu ou un temps.</p>
       <p>Exemple : « Le livre que je lis est passionnant. » → « que » remplace « le livre », COD du verbe « lis ».</p>
-      <p>La subordonnée relative a une fonction de <strong>complément de l'antécédent</strong> (souvent appelé complément du nom).</p>`,
+      <p>La subordonnée relative a une fonction de <strong>complément de l'antécédent</strong> (souvent appelé complément du nom).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> N'oublie pas les pronoms relatifs « dont » (remplace un complément introduit par « de » : le livre dont je parle) et « où » (remplace un complément de lieu ou de temps : la ville où je suis né, le jour où il est parti). Bien choisir son pronom relatif évite de répéter le nom inutilement.</p>`,
       quiz: [
         {q:"Dans « L'homme qui parle est mon voisin », « qui » remplace :", options:["le COD","le sujet du verbe « parle »","un complément circonstanciel","rien, c'est un mot vide"], correct:1, exp:"« Qui » reprend « l'homme » comme sujet du verbe « parle »."},
         {q:"Dans « Le livre que je lis », « que » a pour fonction :", options:["sujet","COD","COI","complément circonstanciel"], correct:1, exp:"« Que » remplace « le livre », complément d'objet direct de « lis »."},
@@ -470,7 +499,8 @@ francais: {
       <p>Pour exprimer la <strong>conséquence</strong> (le résultat), on utilise des connecteurs comme : donc, alors, par conséquent, si bien que, c'est pourquoi.</p>
       <p>Exemple de cause : « Il est resté chez lui parce qu'il pleuvait. »<br>
       Exemple de conséquence : « Il pleuvait, donc il est resté chez lui. »</p>
-      <p>Bien choisir ses connecteurs logiques permet de structurer un raisonnement clair, notamment dans un texte argumentatif ou explicatif.</p>`,
+      <p>Bien choisir ses connecteurs logiques permet de structurer un raisonnement clair, notamment dans un texte argumentatif ou explicatif.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Connecteurs de cause : parce que, car, puisque, comme, grâce à, à cause de. Connecteurs de conséquence : donc, alors, par conséquent, c'est pourquoi, si bien que. Exemple combinant les deux : « Il a beaucoup révisé, c'est pourquoi il a réussi son examen. »</p>`,
       quiz: [
         {q:"« Parce que » introduit :", options:["une cause","une conséquence","une comparaison","une condition"], correct:0, exp:"« Parce que » explique la raison d'un fait : c'est un connecteur de cause."},
         {q:"« Donc » introduit :", options:["une cause","une conséquence","une opposition","un but"], correct:1, exp:"« Donc » indique le résultat qui découle de ce qui précède : c'est un connecteur de conséquence."},
@@ -484,7 +514,8 @@ francais: {
       title: "Le texte explicatif",
       content: `<p>Le <strong>texte explicatif</strong> a pour but de faire comprendre un phénomène naturel, scientifique ou socioculturel à un lecteur, en répondant surtout à la question « pourquoi » ou « comment ».</p>
       <p>Il se reconnaît à certains procédés : un <strong>vocabulaire précis</strong> lié au thème, des <strong>mots ou expressions explicatifs</strong> (c'est-à-dire, en d'autres termes...), des <strong>connecteurs logiques</strong> (d'abord, ensuite, enfin...), un <strong>ton neutre et objectif</strong> (souvent au présent de vérité générale), et une ponctuation qui aide à la clarté (deux points, parenthèses).</p>
-      <p>Il s'organise en trois parties : une <strong>introduction</strong> qui présente le thème et son importance, un <strong>développement</strong> qui explique le phénomène étape par étape avec des exemples, et une <strong>conclusion</strong> qui résume les points clés.</p>`,
+      <p>Il s'organise en trois parties : une <strong>introduction</strong> qui présente le thème et son importance, un <strong>développement</strong> qui explique le phénomène étape par étape avec des exemples, et une <strong>conclusion</strong> qui résume les points clés.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Un bon texte explicatif répond généralement à une question implicite (pourquoi ? comment ?) et suit un plan clair : une introduction qui pose le sujet, un développement qui explique étape par étape (souvent avec des exemples et des connecteurs logiques), et une conclusion qui résume l'essentiel.</p>`,
       quiz: [
         {q:"Le texte explicatif répond surtout à la question :", options:["qui ?","pourquoi/comment ?","où ?","quand ?"], correct:1, exp:"Ce type de texte cherche à faire comprendre un phénomène, donc à expliquer son fonctionnement ou sa cause."},
         {q:"Le ton d'un texte explicatif est généralement :", options:["passionné et personnel","neutre et objectif","humoristique","poétique"], correct:1, exp:"Le texte explicatif reste neutre et objectif, pour bien transmettre une information vérifiable."},
@@ -499,7 +530,8 @@ francais: {
       content: `<p>Le <strong>résumé de texte</strong> consiste à réduire un texte à environ un tiers de sa longueur initiale, tout en respectant fidèlement l'ordre et le sens des idées développées par l'auteur.</p>
       <p><strong>Méthode</strong> : lire le texte plusieurs fois, repérer les idées essentielles (en écartant exemples, répétitions et détails secondaires), suivre l'ordre du texte sans rien ajouter ni juger, puis reformuler ces idées avec ses propres mots.</p>
       <p><strong>Règles à respecter</strong> : ne pas donner son avis personnel, ne pas changer le sens du texte, éviter les mots trop familiers, ne pas garder le titre dans le résumé, et indiquer le nombre de mots utilisés à la fin.</p>
-      <p>Contrairement à d'autres rédactions, le résumé <strong>ne comporte ni introduction ni conclusion</strong> séparées : c'est une reformulation continue et condensée du texte.</p>`,
+      <p>Contrairement à d'autres rédactions, le résumé <strong>ne comporte ni introduction ni conclusion</strong> séparées : c'est une reformulation continue et condensée du texte.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Règles essentielles du résumé : garde le même temps verbal et le même point de vue (« je » reste « je », on ne dit pas « l'auteur dit que... »), n'ajoute aucune opinion personnelle, et réduis le texte à environ un quart de sa longueur initiale tout en conservant les idées essentielles dans leur ordre.</p>`,
       quiz: [
         {q:"Un résumé de texte doit généralement représenter :", options:["la moitié du texte original","environ un tiers du texte original","le double du texte original","seulement le titre"], correct:1, exp:"Le résumé réduit le texte à environ un tiers de sa longueur initiale."},
         {q:"Pour résumer, il faut d'abord :", options:["donner son opinion","repérer les idées essentielles","ajouter des exemples personnels","changer l'ordre des idées"], correct:1, exp:"La première étape consiste à identifier les idées essentielles du texte, sans les détails secondaires."},
@@ -514,7 +546,8 @@ francais: {
       content: `<p>Le <strong>compte rendu de réunion</strong> est un rapport qui présente fidèlement le déroulement et le contenu d'une réunion, rédigé le plus souvent par un secrétaire de séance.</p>
       <p><strong>Présentation formelle</strong> : il comporte un en-tête avec l'intitulé, la date, le lieu, l'heure, le nom du responsable et du rapporteur, la liste des membres présents et absents, l'ordre du jour, le déroulement de la réunion, et la signature du rapporteur.</p>
       <p>Le compte rendu <strong>débute par une phrase d'introduction</strong> rappelant la nature, la date, l'heure et le lieu de la réunion, puis résume brièvement chaque intervention en mentionnant son auteur.</p>
-      <p>Il se termine par une formule indiquant que l'ordre du jour a été épuisé et précisant l'heure de la levée de séance.</p>`,
+      <p>Il se termine par une formule indiquant que l'ordre du jour a été épuisé et précisant l'heure de la levée de séance.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Le compte rendu doit rester neutre et objectif : on rapporte les faits et les décisions prises, sans donner son avis personnel. Il se rédige souvent à la troisième personne et au passé, avec une structure claire : présents/absents, ordre du jour, décisions, date de la prochaine réunion.</p>`,
       quiz: [
         {q:"Le compte rendu de réunion est généralement rédigé par :", options:["le président uniquement","le secrétaire de séance","un participant au hasard","un journaliste"], correct:1, exp:"C'est le secrétaire de séance qui est chargé de rédiger le compte rendu."},
         {q:"L'en-tête du compte rendu doit indiquer notamment :", options:["uniquement le titre","la date, le lieu, l'heure et les participants","seulement les absents","rien de particulier"], correct:1, exp:"L'en-tête regroupe les informations essentielles : intitulé, date, lieu, heure, participants."},
@@ -529,7 +562,8 @@ francais: {
       content: `<p>Le <strong>dialogue argumentatif</strong> met en scène un échange entre deux ou plusieurs personnages qui ne partagent pas le même point de vue ; il a pour but de convaincre l'interlocuteur en utilisant des arguments.</p>
       <p><strong>Organisation</strong> : une introduction qui présente le sujet de discussion, les interlocuteurs et leurs points de vue respectifs ; un développement où chaque personnage intervient à tour de rôle en appuyant ses arguments d'exemples ; une conclusion qui indique sur quelle note (accord ou désaccord) se termine l'échange.</p>
       <p><strong>Outils de langue utiles</strong> : les indices de la 1ère et 2ème personne, les marques du dialogue (tirets, discours direct), des verbes introducteurs de parole, et des connecteurs logiques pour enchaîner les arguments.</p>
-      <p>Le dialogue peut aussi être <strong>rapporté par un narrateur</strong>, qui présente alors les deux points de vue et fait un bilan final des échanges.</p>`,
+      <p>Le dialogue peut aussi être <strong>rapporté par un narrateur</strong>, qui présente alors les deux points de vue et fait un bilan final des échanges.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> N'oublie pas la ponctuation du dialogue : chaque changement de locuteur commence par un tiret (—), et les verbes de parole (dire, répondre, affirmer, objecter) permettent de varier la présentation des répliques sans répéter toujours « il dit ».</p>`,
       quiz: [
         {q:"Le but du dialogue argumentatif est de :", options:["décrire un paysage","convaincre l'interlocuteur","raconter une légende","donner une recette"], correct:1, exp:"Ce type de dialogue vise à faire changer d'avis ou à convaincre l'autre personnage."},
         {q:"Le dialogue argumentatif comporte :", options:["seulement un développement","une introduction, un développement et une conclusion","seulement une conclusion","uniquement des questions"], correct:1, exp:"Comme les autres types de textes structurés, il suit un plan en trois parties."},
@@ -544,7 +578,8 @@ francais: {
       content: `<p>La <strong>lettre officielle</strong> est adressée à une autorité compétente (maire, directeur, administration) pour demander une information, un document ou un service, dans un cadre formel.</p>
       <p><strong>Caractéristiques</strong> : elle respecte une mise en page précise, un niveau de langue soutenu, et des formules de politesse codifiées.</p>
       <p><strong>Parties principales</strong> : le lieu et la date, les coordonnées de l'émetteur, la désignation du destinataire, l'objet de la lettre, la formule d'appel, le corps de la lettre (qui expose clairement la demande), la formule de politesse finale, la mention des pièces jointes éventuelles, et la signature.</p>
-      <p>Le corps de la lettre commence souvent par une formule comme « J'ai l'honneur de solliciter... » pour exposer poliment et clairement l'objet de la demande.</p>`,
+      <p>Le corps de la lettre commence souvent par une formule comme « J'ai l'honneur de solliciter... » pour exposer poliment et clairement l'objet de la demande.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La formule de politesse finale doit reprendre les termes de la formule d'appel. Exemple : si tu as commencé par « Monsieur le Censeur, », tu dois terminer par quelque chose comme « Je vous prie d'agréer, Monsieur le Censeur, l'expression de mes salutations respectueuses. »</p>`,
       quiz: [
         {q:"La lettre officielle s'adresse à :", options:["un ami proche","une autorité compétente","un personnage imaginaire","un animal"], correct:1, exp:"Elle est destinée à une autorité (administration, direction...) dans un cadre formel."},
         {q:"Le niveau de langue d'une lettre officielle doit être :", options:["familier","soutenu","argotique","enfantin"], correct:1, exp:"Une lettre officielle exige un registre de langue soutenu et respectueux."},
@@ -738,6 +773,238 @@ anglais: {
         {q:"« I would like... » s'utilise pour :", options:["donner un ordre","exprimer poliment un souhait","poser une question sur le prix","refuser un achat"], correct:1, exp:"« I would like » est une formule polie pour exprimer ce que l'on souhaite (souvent acheter ou commander)."},
         {q:"« Receipt » signifie :", options:["la liste de courses","le ticket de caisse","le prix","le magasin"], correct:1, exp:"« Receipt » désigne le ticket de caisse remis après un achat."}
       ]
+    },
+    {
+      id: "au1",
+      title: "Unit 1 – At School: holidays, habits and conditions",
+      content: `<p>📘 Cette longue leçon reprend le programme officiel ivoirien « Unit 1 – At School » : trois points de grammaire essentiels, avec tout le vocabulaire et de nombreux exemples.</p>
+
+      <h3>1. Parler d'événements passés : le Past Simple avec les Wh-questions</h3>
+      <p>Pour raconter ce qu'on a fait pendant les vacances, on utilise le <strong>Past Simple</strong> avec des mots interrogatifs (Where, What...).</p>
+      <p><em>Where did you spend your holidays?</em> → <em>I spent my holidays in Abidjan.</em><br>
+      <em>What did you do during the holidays?</em> → <em>During the holidays, I went fishing in the lagoon.</em></p>
+      <p>Autres exemples : <em>During the holidays, we played a football tournament in my village. / I helped my father hunting animals in the cocoa plantation.</em></p>
+      <p><strong>Vocabulaire :</strong> holidays (vacances), to spend holidays (passer ses vacances), holiday time (le temps des vacances, opposé de school time), a countryside (une zone rurale), to go hunting (aller chasser), to go fishing (aller pêcher), to do a holiday job (faire un petit boulot pendant les vacances), to play a tournament (participer à un tournoi), to help parents at home/in the plantation, to meet new friends, to sell/buy things.</p>
+      <p><strong>Verbes irréguliers utiles :</strong> to be → was/were (être), to have → had (avoir), to do → did (faire), to go → went (aller), to spend → spent (passer/dépenser), to buy → bought (acheter), to eat → ate (manger), to get → got (obtenir), to give → gave (donner), to learn → learnt (apprendre), to meet → met (rencontrer), to sell → sold (vendre), to speak → spoke (parler).</p>
+
+      <h3>2. Parler d'habitudes passées : used to / didn't use to</h3>
+      <p>Pour dire ce qu'on faisait habituellement dans le passé (mais plus maintenant), on utilise <strong>used to</strong> + base verbale. À la forme négative : <strong>didn't use to</strong> + base verbale (attention : pas de -d à « use » dans la négation).</p>
+      <p><em>At primary school, I used to eat in the classroom.</em> (à l'école primaire, j'avais l'habitude de manger en classe)<br>
+      <em>In form one, the big boys used to beat small boys.</em><br>
+      <em>At primary school, I didn't use to cheat in the classroom.</em> (je n'avais pas l'habitude de tricher)</p>
+      <p>Pour dire qu'une habitude a cessé aujourd'hui, on ajoute <strong>any more</strong> en fin de phrase (forme négative) ou <strong>no longer</strong> avant le verbe :</p>
+      <p><em>Today, I don't steal pens from my neighbors any more.</em><br>
+      <em>Now, I no longer weep at school.</em> / <em>Today, my friend is no longer a bad-tempered boy.</em></p>
+      <p><strong>Vocabulaire :</strong> a school memory (un souvenir d'école), to cheat in classroom (tricher pendant un contrôle), to chat in classroom (bavarder pendant le cours), to eat in classroom, to beat (donner une punition corporelle), to fight with classmates (se bagarrer), to come late in the classroom, to sleep in the classroom, to steal (voler), to hurt (blesser), to frighten (effrayer), to weep (pleurer), to be cruel ≠ to be cool, to be bad-tempered (être coléreux).</p>
+
+      <h3>3. Exprimer une condition : If + present, ... will + base verbale</h3>
+      <p>Pour dire ce qui se passera <strong>si</strong> une condition est remplie, on utilise : <strong>If</strong> + sujet + present simple, sujet + <strong>will</strong> + base verbale. On peut aussi utiliser <strong>unless</strong> (= if...not) pour exprimer une condition négative.</p>
+      <p><em>If I work harder, I will improve my school results.</em><br>
+      <em>If you don't study your lessons, you will fail.</em><br>
+      <em>Konaté will not (won't) obtain good results if he doesn't work harder.</em><br>
+      <em>You will fail this year unless you catch up.</em> (= if you don't catch up)</p>
+      <p><strong>Vocabulaire :</strong> to work harder (travailler plus dur), to go up ≠ to stay down (passer dans la classe supérieure ≠ redoubler), to obtain good results, to improve school results (améliorer ses résultats), to pass/fail an exam, a hardworking student (un élève travailleur), to achieve a goal (atteindre un objectif), to catch up (rattraper son retard), an aim (un objectif), to take an exam, a grade (une note).</p>`,
+      quiz: [
+        {q:"« ___ did you spend your holidays? » — « I spent my holidays in Abidjan. »", options:["When","Where","Who","Why"], correct:1, exp:"« Where » interroge sur le lieu où on a passé ses vacances."},
+        {q:"« During the holidays, I ___ fishing in the lagoon. »", options:["go","went","goes","going"], correct:1, exp:"Le Past Simple de « to go » est irrégulier : « went »."},
+        {q:"« At primary school, I ___ eat in the classroom. » (habitude passée révolue)", options:["use to","used to","am used to","using"], correct:1, exp:"« Used to » + base verbale exprime une habitude passée qui n'existe plus."},
+        {q:"« Today, I don't steal pens from my neighbors ___. »", options:["already","any more","yet","ever"], correct:1, exp:"« Any more » en fin de phrase négative indique qu'une habitude a cessé."},
+        {q:"« If Koffi ___ harder, he will improve his results. »", options:["works","will work","worked","work"], correct:0, exp:"Après « if » dans une condition de type 1, on utilise le present simple : « works »."},
+        {q:"« You will fail this year ___ you catch up. » (= if you don't catch up)", options:["if","unless","because","although"], correct:1, exp:"« Unless » signifie « à moins que / sauf si » = « if...not »."}
+      ]
+    },
+    {
+      id: "au2",
+      title: "Unit 2 – Women at Work: ability, rights and opinions",
+      content: `<p>📘 Cette leçon (programme officiel « Unit 2 – Women at Work ») couvre l'expression de la capacité, des droits/devoirs, des opinions et des comparaisons — avec le discours rapporté en prime.</p>
+
+      <h3>1. Exprimer une capacité : can / to be able to</h3>
+      <p><strong>Can</strong> (+ base verbale) exprime une capacité ou une permission ; <strong>to be able to</strong> a le même sens et se conjugue à tous les temps.</p>
+      <p><em>Rural women can cook food on firewood.</em> = <em>Rural women are able to cook on firewood.</em><br>
+      <em>Rural women cannot teach English.</em> = <em>Rural women are not able to teach English.</em></p>
+      <p><strong>Vocabulaire :</strong> to farm (cultiver), to cook on firewood (cuisiner au feu de bois), to fetch water from a well/river (puiser de l'eau), to do the washing / the washing up (faire la lessive / la vaisselle), to breed cattle (élever du bétail).</p>
+      <p><strong>Le discours rapporté (introduction) :</strong> quand on rapporte les paroles de quelqu'un, « can » devient « could » et le present devient le past : <em>Direct : Jane said: "Rural women can cook food on firewood."</em> → <em>Indirect : Jane said that rural women could cook food on firewood.</em> De même, <em>Mary said: "Rural women sweep the yard every day."</em> → <em>Mary said that rural women swept the yard every day.</em></p>
+
+      <h3>2. Exprimer des droits et des devoirs : have the right to / have the duty to</h3>
+      <p><strong>To have the right to</strong> + base verbale = avoir le droit de. <strong>To have the duty to / must</strong> + base verbale = avoir le devoir de, devoir.</p>
+      <p><em>Women have the right to express their opinions. / All the women have the right to take part in elections.</em><br>
+      <em>This girl is a student. She has the duty to study her lessons. / Women must provide the children with a good education. / Men mustn't rape women.</em></p>
+      <p><strong>Vocabulaire :</strong> a right (un droit), to express an opinion, to be respected, to succeed in life, a leader, to take part in an election (voter), a white-collar job (métier de bureau) ≠ a blue-collar job (métier manuel), a duty (un devoir), to obey (obéir), to abuse someone (maltraiter/insulter), to provide good education.</p>
+
+      <h3>3. Donner son opinion et comparer</h3>
+      <p>Pour donner une opinion : <strong>In my opinion, / I think (that) / For me, / From my view point,</strong> ... .</p>
+      <p><em>In my opinion, girls can be successful at school. / I think that girls are as intelligent as boys.</em></p>
+      <p><strong>Comparatif de supériorité :</strong> adjectif court + <strong>-er</strong> + than (<em>brighter than</em>) ; adjectif long : <strong>more</strong> + adjectif + than (<em>more successful than</em>).<br>
+      <strong>Comparatif d'égalité :</strong> <strong>as</strong> + adjectif + <strong>as</strong> (<em>Girls are as skilled as boys.</em>)</p>
+      <p><strong>Vocabulaire :</strong> to be successful, to graduate (obtenir un diplôme), a housewife (femme au foyer), to discriminate (faire une discrimination), equal treatment, to accomplish an ambition, clever/bright/smart (intelligent), to be skilled (être qualifié), to win a scholarship (obtenir une bourse).</p>`,
+      quiz: [
+        {q:"« Rural women ___ cook food on firewood. » (capacité)", options:["must","can","should","have to"], correct:1, exp:"« Can » exprime une capacité à faire quelque chose."},
+        {q:"Forme équivalente de « can » pour exprimer une capacité :", options:["to be able to","to have to","to be going to","to be used to"], correct:0, exp:"« To be able to » a le même sens que « can » et se conjugue à tous les temps."},
+        {q:"Discours rapporté : Jane said: « Rural women can cook on firewood. » → Jane said that rural women ___ cook on firewood.", options:["can","could","will can","cans"], correct:1, exp:"Au discours rapporté (verbe introducteur au passé), « can » devient « could »."},
+        {q:"« Women ___ express their opinions. » (droit)", options:["have the duty to","have the right to","must not","are able"], correct:1, exp:"« Have the right to » exprime un droit."},
+        {q:"« This girl ___ study her lessons. » (devoir/obligation)", options:["has the right to","has the duty to","is able to","can"], correct:1, exp:"« Have the duty to » exprime un devoir, une obligation."},
+        {q:"« Girls are ___ boys. » (égalité, skilled)", options:["more skilled than","as skilled as","skilled than","the most skilled"], correct:1, exp:"Le comparatif d'égalité se forme avec « as + adjectif + as »."}
+      ]
+    },
+    {
+      id: "au3",
+      title: "Unit 3 – Travelling: means of transport, necessity and reported speech",
+      content: `<p>📘 Programme officiel « Unit 3 – Travelling » : les moyens de transport, la nécessité, les préférences et le discours rapporté au passé.</p>
+
+      <h3>1. Les moyens de transport : on foot / by + moyen de transport</h3>
+      <p>Pour dire comment on se déplace : <strong>on foot</strong> (à pied), <strong>by</strong> + moyen de transport (by car, by plane, by train, by boat, by canoe, by bicycle).</p>
+      <p><em>How do you go to school? → I go to school on foot. / You go to France by plane. / We go to Burkina Faso by train.</em></p>
+      <p><strong>Vocabulaire :</strong> a bicycle, a car, a plane, a boat, a canoe, a train, to drive a car, to ride a bicycle, to fly a plane, to pilot a train, to paddle a canoe.</p>
+      <p>Pour exprimer un souhait de transport : <strong>want to</strong> / <strong>would like to</strong> + base verbale. <em>I want to go by car. = I would like to go by car.</em></p>
+
+      <h3>2. Exprimer la nécessité et les préférences</h3>
+      <p><strong>Need to</strong> / <strong>don't need to</strong> + base verbale = avoir besoin de / ne pas avoir besoin de.</p>
+      <p><em>When you travel by plane, you need to go to the airport. / When you travel by car, you don't need to go to the airport.</em></p>
+      <p>Pour les préférences : <strong>I like to... / I prefer...ing / I prefer X to Y / I'd rather</strong> + base verbale.</p>
+      <p><em>I like to travel abroad by plane. / I prefer travelling by plane. / I prefer airways to railroad. / I'd rather travel by waterway.</em></p>
+      <p><strong>Vocabulaire :</strong> airport, passport, boarding pass, to board, luggage, passenger, check-in desk, a departure lounge, to take off (décoller), to land (atterrir), a flight attendant, a pilot.</p>
+
+      <h3>3. Le discours rapporté (reported speech)</h3>
+      <p>Pour rapporter ce que quelqu'un a dit, plusieurs changements ont lieu : le temps recule d'un cran (present → past, past → past perfect...), les pronoms et les indicateurs de temps changent.</p>
+      <p><em>Direct : "I am the first black student in this college." He told me.</em> → <em>Indirect : He told me that he was the first black student in that college.</em><br>
+      <em>Direct : "I always visit London with my parents." Kadi said.</em> → <em>Indirect : Kadi said that she always visited London with her parents.</em></p>
+      <table><tr><th>Discours direct</th><th>Discours indirect</th></tr>
+      <tr><td>am / is</td><td>was</td></tr><tr><td>are</td><td>were</td></tr><tr><td>will</td><td>would</td></tr>
+      <tr><td>can</td><td>could</td></tr><tr><td>must</td><td>had to</td></tr>
+      <tr><td>today</td><td>that day</td></tr><tr><td>tomorrow</td><td>the following day</td></tr>
+      <tr><td>yesterday</td><td>the day before</td></tr><tr><td>this / here</td><td>that / there</td></tr></table>
+      <p><strong>Vocabulaire :</strong> to stand for (signifier), to settle in (s'installer), scholarship (bourse), foreign (étranger), a king/queen, a kingdom, a palace, rude (impoli), to make out (comprendre).</p>`,
+      quiz: [
+        {q:"« I go to school ___ foot. »", options:["by","on","in","with"], correct:1, exp:"On dit « on foot » (à pied), sans « by »."},
+        {q:"« We go to Burkina Faso ___ train. »", options:["on","in","by","with"], correct:2, exp:"Pour les autres moyens de transport, on utilise « by »."},
+        {q:"« When you travel by car, you ___ go to the airport. »", options:["need to","don't need to","must","have to"], correct:1, exp:"Voyager en voiture ne nécessite pas d'aller à l'aéroport : « don't need to »."},
+        {q:"« I'd rather travel ___ waterway. »", options:["by","on","in","with"], correct:0, exp:"« By waterway » : par voie fluviale/maritime."},
+        {q:"Discours direct : « I am the first student. » He said. → Discours indirect : He said that he ___ the first student.", options:["is","was","has been","will be"], correct:1, exp:"Au discours rapporté, « am » devient « was »."},
+        {q:"Discours direct : « I visited London yesterday. » → au discours indirect, « yesterday » devient :", options:["the day before","the following day","that day","today"], correct:0, exp:"« Yesterday » devient « the day before » au discours indirect."}
+      ]
+    },
+    {
+      id: "au4",
+      title: "Unit 4 – Fashion: present tenses, passive voice and past habits",
+      content: `<p>📘 Programme officiel « Unit 4 – Fashion » : Present Simple/Continuous, la voix passive, used to (rappel) et le choix entre Present Perfect et Past Simple.</p>
+
+      <h3>1. Actions répétées ou en cours : Present Simple vs Present Continuous</h3>
+      <p><strong>Present Simple</strong> : habitude, vérité générale. <strong>Present Continuous</strong> (be + verbe-ing) : action en cours, souvent avec « Today » ou « Look! ».</p>
+      <p><em>Ivorian students wear uniforms.</em> (habitude) vs <em>Today, I am wearing a jacket.</em> (maintenant)<br>
+      <em>Look! Seka is wearing a nice polo T-shirt today.</em></p>
+      <p><strong>Vocabulaire :</strong> fashion (mode), fashionable ≠ old-fashioned, young people, clothes, to wear, to wash, a hairstyle, a hairdresser, a pair of sneakers, a shoemaker, to give up (abandonner).</p>
+
+      <h3>2. Décrire comment les choses sont faites : la voix passive</h3>
+      <p>Structure : sujet + <strong>be</strong> (conjugué) + <strong>participe passé</strong> (+ by + agent).</p>
+      <p><em>Designers create fashionable clothes.</em> (actif) → <em>Fashionable clothes are created by designers.</em> (passif)<br>
+      <em>Jeans, T-shirts and sneakers are worn by everybody nowadays.</em></p>
+      <p><strong>Vocabulaire :</strong> scarf, polo shirt, kita, jeans, sneakers, bubu, cap, suit. Et pour les habitudes passées (rappel de l'Unit 1) : <em>In the past, many people used to wear traditional clothes. Afro hairstyle, long/short-sleeved shirt, baggy trousers, gloves, a brand.</em></p>
+
+      <h3>3. Present Perfect ou Past Simple pour parler du passé</h3>
+      <p><strong>Present Perfect</strong> (have/has + participe passé) : une action passée sans date précise, ou dont le résultat compte encore. <strong>Past Simple</strong> : une action terminée à un moment précis (dates, « last week », « yesterday »).</p>
+      <p><em>The tailor has already made your shirt. / We have just bought new clothes for the wedding. / Sanogo has not set up his business yet.</em> (Present Perfect)<br>
+      <em>This artist wore a beautiful wig last week. / Aya bought a new dress in Treichville two weeks ago.</em> (Past Simple)</p>
+      <p><strong>Vocabulaire :</strong> success, business, a fashion show, to set up a business, well-known, a wig, a top model, a catwalk (podium), a seamstress, a tailor, to order, a sewing machine.</p>`,
+      quiz: [
+        {q:"« Ivorian students ___ uniforms. » (habitude générale)", options:["wear","are wearing","wore","have worn"], correct:0, exp:"Une habitude générale s'exprime au Present Simple."},
+        {q:"« Look! Seka ___ a nice T-shirt today. »", options:["wears","is wearing","wore","has worn"], correct:1, exp:"« Look! » + « today » indiquent une action en cours : Present Continuous."},
+        {q:"Passif de « Designers create fashionable clothes » :", options:["Fashionable clothes create designers.","Fashionable clothes are created by designers.","Designers are created by fashionable clothes.","Fashionable clothes created designers."], correct:1, exp:"Le COD devient sujet, et on utilise be + participe passé + by + agent."},
+        {q:"« In the past, many people ___ wear traditional clothes. » (habitude passée)", options:["use to","used to","are used to","using"], correct:1, exp:"« Used to » exprime une habitude passée révolue."},
+        {q:"« We ___ new clothes for the wedding. » (action récente, sans date précise)", options:["bought","have just bought","are buying","will buy"], correct:1, exp:"Une action récente sans date précise se met au Present Perfect : « have just bought »."},
+        {q:"« Aya ___ a new dress in Treichville two weeks ago. » (date précise)", options:["has bought","buys","bought","is buying"], correct:2, exp:"« Two weeks ago » précise un moment du passé : Past Simple."}
+      ]
+    },
+    {
+      id: "au5",
+      title: "Unit 5 – City or Village: wishes, feelings and consequences",
+      content: `<p>📘 Programme officiel « Unit 5 – City or Village » : exprimer un souhait, décrire un changement, exprimer un sentiment et une conséquence.</p>
+
+      <h3>1. Exprimer un souhait : wish + past simple</h3>
+      <p>Pour exprimer un souhait sur une situation présente (regret), on utilise <strong>wish</strong> + sujet + <strong>past simple</strong> (même si le souhait porte sur le présent !).</p>
+      <p><em>I wish I lived in Abidjan.</em> (je souhaiterais vivre à Abidjan, mais ce n'est pas le cas)<br>
+      <em>Abou wishes he lived in London. / I wish I was/were in a palace.</em></p>
+      <p>Pour décrire un changement entre le passé et aujourd'hui : <strong>there used to be... but now there is/are...</strong></p>
+      <p><em>In the past, Abidjan used to be a small village, but today, it is a big town. / In the past, there used to be no traffic lights in Abidjan, but today, there are many.</em></p>
+      <p><strong>Vocabulaire :</strong> a bridge, an airport, highways, a stadium, a street, running water, a university, traffic lights, a round about, a crossroads, a traffic jam, a cathedral, buildings, the urban population, a city-dweller.</p>
+
+      <h3>2. Exprimer un sentiment et poser des questions</h3>
+      <p>Pour exprimer un sentiment : <strong>to feel</strong> + adjectif.</p>
+      <p><em>I feel sad today. / Kouao has produced 10 tons of cotton. He feels very proud.</em></p>
+      <p><strong>Vocabulaire des sentiments :</strong> glad (content), proud (fier), worried (inquiet), sad (triste), excited (excité).<br>
+      <strong>Vocabulaire de la campagne :</strong> a hut (une case), to grow/to plant (cultiver), to weed (désherber), food crops, cash crops (cultures de rente).</p>
+      <p>On peut poser des questions avec les <strong>Wh-questions</strong> (When, Why...) ou des <strong>Yes/No questions</strong> (auxiliaire en tête de phrase) : <em>When did Côte d'Ivoire become a French colony? / Do you know the date Côte d'Ivoire became independent?</em></p>
+
+      <h3>3. Exprimer une conséquence : so + adjectif/adverbe + that</h3>
+      <p>Structure : <strong>so</strong> + adjectif (ou adverbe) + <strong>that</strong> + conséquence.</p>
+      <p><em>Farm work is so difficult that many young people prefer city life. / Rain is so rare that all the plants die. / He worked so well that he passed his exam.</em> (adverbe)</p>
+      <p><strong>Vocabulaire :</strong> employment, rural exodus (exode rural), juvenile delinquency, a tiring work, youngsters, attractive places, overcrowded (surpeuplé), depopulation, drug addiction, poverty, bad living conditions, temptations.</p>`,
+      quiz: [
+        {q:"« I wish I ___ in Abidjan. » (souhait présent)", options:["live","lived","will live","am living"], correct:1, exp:"Après « wish » pour un souhait présent, on utilise le past simple : « lived »."},
+        {q:"« In the past, there ___ no traffic lights in Abidjan. »", options:["are","were","used to be","use to be"], correct:2, exp:"« Used to be » décrit une situation passée qui n'existe plus."},
+        {q:"« Kouao has produced 10 tons of cotton. He ___ very proud. »", options:["feels","is feeling","felt","has felt"], correct:0, exp:"« To feel + adjectif » exprime un sentiment ressenti actuellement : Present Simple."},
+        {q:"« ___ did Côte d'Ivoire become a French colony? » (question sur le moment)", options:["What","When","Who","How"], correct:1, exp:"« When » interroge sur le moment."},
+        {q:"« Farm work is ___ difficult that many young people prefer city life. »", options:["such","so","very","too"], correct:1, exp:"« So + adjectif + that » exprime une conséquence."},
+        {q:"« He worked ___ well that he passed his exam. » (adverbe)", options:["so","such","such a","very"], correct:0, exp:"« So » s'utilise aussi devant un adverbe pour exprimer une conséquence."}
+      ]
+    },
+    {
+      id: "au6",
+      title: "Unit 6 – Human Rights: requests, duties and obligation",
+      content: `<p>📘 Programme officiel « Unit 6 – Human Rights » : faire une demande polie, exprimer des devoirs et l'obligation avec have got to.</p>
+
+      <h3>1. Faire une demande polie avec Can</h3>
+      <p><strong>Can you...? / Can I...?</strong> permettent de faire une demande polie.</p>
+      <p><em>Can you tell me where to buy a stamp, please? / Can I have a stamp? / Can I get an identity card, please?</em></p>
+      <p><strong>Vocabulaire :</strong> a birth certificate (acte de naissance), an identity card, a scholarship, to vaccinate, a driving license, health care.</p>
+      <p>On exprime aussi l'<strong>obligation</strong> avec <strong>must</strong> et l'<strong>interdiction</strong> avec <strong>mustn't</strong> : <em>Citizens must pay taxes. / Citizens mustn't destroy public services. / Children mustn't smoke cigarettes.</em></p>
+      <p><strong>Vocabulaire :</strong> to pay taxes, to obey the law, to get a job, public services, to be protected.</p>
+
+      <h3>2. Exprimer un devoir : have the duty to / it's my duty to</h3>
+      <p><em>It's my duty to respect the laws of my country. / I have the duty to obey my parents. / He has the duty to respect the law.</em></p>
+      <p>Pour l'absence de nécessité (« ce n'est pas obligatoire ») : <strong>don't have to / doesn't have to</strong>.</p>
+      <p><em>I don't have the duty to obey my friends. / It's not my duty to break the school rules.</em></p>
+      <p><strong>Vocabulaire :</strong> a duty (un devoir), a citizen (un citoyen), to disobey, to break the rules, to destroy.</p>
+
+      <h3>3. Exprimer l'obligation avec have got to</h3>
+      <p><strong>Have got to / has got to</strong> + base verbale a le même sens que « must », pour exprimer une nécessité forte.</p>
+      <p><em>People have got to practice peace. / Sally has got to practice tolerance.</em></p>
+      <p><strong>Vocabulaire :</strong> tolerance (tolérance), reconciliation (réconciliation), peace ≠ conflict/war, a peace-maker, love, solidarity, non-violence, to reconcile, to prevent (éviter).</p>`,
+      quiz: [
+        {q:"« ___ you tell me where to buy a stamp, please? » (demande polie)", options:["Do","Can","Must","Shall"], correct:1, exp:"« Can you...? » sert à faire une demande polie."},
+        {q:"« Citizens ___ pay taxes. » (obligation)", options:["can","mustn't","must","are able to"], correct:2, exp:"« Must » exprime une obligation forte."},
+        {q:"« Children ___ smoke cigarettes. » (interdiction)", options:["mustn't","don't have to","can","should"], correct:0, exp:"« Mustn't » exprime une interdiction."},
+        {q:"« It's ___ duty to respect the laws of my country. »", options:["a","my","the","some"], correct:1, exp:"« It's my duty to... » : c'est mon devoir de..."},
+        {q:"« I ___ obey my friends. » (absence de nécessité)", options:["don't have to","mustn't","have to","must"], correct:0, exp:"« Don't have to » exprime l'absence de nécessité (ce n'est pas obligatoire)."},
+        {q:"« People ___ practice peace. » (have got to)", options:["have got to","has got to","having got to","have got"], correct:0, exp:"Avec « people » (pluriel), on utilise « have got to »."}
+      ]
+    },
+    {
+      id: "au7",
+      title: "Unit 7 – Hygiene and Health: advice, passive and suggestions",
+      content: `<p>📘 Programme officiel « Unit 7 – Hygiene and Health » : donner un conseil avec should, la voix passive au présent continu, et faire une suggestion.</p>
+
+      <h3>1. Donner un conseil : should / shouldn't</h3>
+      <p><strong>Should</strong> + base verbale exprime un conseil. <strong>Shouldn't</strong> pour un conseil négatif.</p>
+      <p><em>You should go to hospital when you are sick. / You shouldn't drink dirty water.</em></p>
+      <p><strong>Vocabulaire :</strong> a disease (une maladie), sick ≠ healthy, a fever (fièvre), a medicine, a tablet/a pill, a chemistry (pharmacie), a prescription, to recover (guérir), to suffer from, a headache, a stomach ache, to vomit, malaria, a mosquito bite.</p>
+
+      <h3>2. La voix passive pour décrire une action en cours</h3>
+      <p>Structure : sujet + <strong>be</strong> (conjugué) + <strong>participe passé</strong>, y compris au présent continu (<strong>be being + participe passé</strong>).</p>
+      <p><em>Nina was bitten by a mosquito. / What happened to Nina? She was bitten by a mosquito. / The patient's temperature is being taken by the doctor.</em></p>
+
+      <h3>3. Exprimer une opinion et faire une suggestion</h3>
+      <p>Pour donner son opinion : <strong>I think...</strong> Pour faire une suggestion : <strong>Why don't you / we...?</strong></p>
+      <p><em>Do you think it is important to keep our school clean? — Yes, I think we need to create an Environment Club.</em><br>
+      <em>I am suffocating. — Why don't you open the windows? / Our classroom is dirty. — Why don't we clean it?</em></p>
+      <p><strong>Vocabulaire :</strong> a gutter (caniveau), a water tap (robinet), to weed the garden, a dustbin (poubelle), Wellington boots (bottes), a hoe (houe), a broom (balai), soap, litter/rubbish (déchets), to suffocate (suffoquer), bushy (broussailleux).</p>`,
+      quiz: [
+        {q:"« You ___ go to hospital when you are sick. » (conseil)", options:["must","should","can","are able to"], correct:1, exp:"« Should » exprime un conseil."},
+        {q:"« You ___ drink dirty water. » (conseil négatif)", options:["mustn't","shouldn't","don't have to","can't"], correct:1, exp:"« Shouldn't » exprime un conseil négatif, une déconseille."},
+        {q:"« Nina ___ by a mosquito. » (voix passive, past)", options:["bit","was bitten","has bitten","is biting"], correct:1, exp:"Voix passive au passé : be (was) + participe passé (bitten)."},
+        {q:"« The patient's temperature ___ by the doctor right now. » (passif, présent continu)", options:["is taken","is being taken","was taken","takes"], correct:1, exp:"Voix passive au présent continu : is/are being + participe passé."},
+        {q:"« ___ you think it is important to keep our school clean? »", options:["Are","Do","Can","Have"], correct:1, exp:"« Do you think... » sert à demander une opinion."},
+        {q:"« Our classroom is dirty. ___ we clean it? » (suggestion)", options:["Why don't","Why not to","Should not","Can't"], correct:0, exp:"« Why don't we...? » sert à faire une suggestion."}
+      ]
     }
   ]
 },
@@ -753,7 +1020,8 @@ pc: {
       content: `<p>La lumière se propage en <strong>ligne droite</strong> dans un milieu transparent et homogène (comme l'air ou le vide). C'est ce qu'on appelle la propagation rectiligne de la lumière.</p>
       <p>Une <strong>source de lumière</strong> peut être primaire (elle produit sa propre lumière, comme le Soleil ou une lampe) ou secondaire (elle renvoie la lumière reçue, comme la Lune ou un objet éclairé).</p>
       <p>Quand un objet opaque bloque la lumière, il se forme une <strong>ombre</strong> derrière lui. Plus la source est proche de l'objet, plus l'ombre est grande.</p>
-      <p>La lumière peut aussi être <strong>réfléchie</strong> (miroir) ou <strong>réfractée</strong> (déviée en changeant de milieu, comme dans l'eau).</p>`,
+      <p>La lumière peut aussi être <strong>réfléchie</strong> (miroir) ou <strong>réfractée</strong> (déviée en changeant de milieu, comme dans l'eau).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La lumière se propage à environ 300 000 km/s dans le vide, ce qui explique qu'on la voie quasiment instantanément. On distingue l'ombre propre (la partie non éclairée de l'objet lui-même) de l'ombre portée (la zone sombre projetée sur un écran ou un mur derrière l'objet).</p>`,
       quiz: [
         {q:"Dans un milieu transparent homogène, la lumière se propage :", options:["en cercle","en ligne droite","en zigzag","elle ne se propage pas"], correct:1, exp:"La propagation de la lumière est rectiligne dans un milieu transparent et homogène."},
         {q:"Le Soleil est une source de lumière :", options:["secondaire","primaire","artificielle","réfléchie"], correct:1, exp:"Le Soleil produit sa propre lumière : c'est une source primaire."},
@@ -767,7 +1035,8 @@ pc: {
       title: "Mélanges et corps purs",
       content: `<p>Un <strong>corps pur</strong> est constitué d'une seule espèce chimique (ex : eau distillée, sel pur). Un <strong>mélange</strong> contient plusieurs espèces chimiques.</p>
       <p>Un mélange est <strong>homogène</strong> quand on ne distingue pas ses constituants à l'œil nu (ex : eau salée). Il est <strong>hétérogène</strong> quand on distingue les constituants (ex : eau et huile, eau boueuse).</p>
-      <p><strong>Techniques de séparation</strong> : la <strong>filtration</strong> sépare un solide non dissous d'un liquide ; la <strong>décantation</strong> sépare des liquides non miscibles ou un solide qui se dépose ; la <strong>distillation</strong> sépare des liquides miscibles selon leur température d'ébullition.</p>`,
+      <p><strong>Techniques de séparation</strong> : la <strong>filtration</strong> sépare un solide non dissous d'un liquide ; la <strong>décantation</strong> sépare des liquides non miscibles ou un solide qui se dépose ; la <strong>distillation</strong> sépare des liquides miscibles selon leur température d'ébullition.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Dans une solution, le soluté est la substance dissoute (par exemple le sel) et le solvant est le liquide qui dissout (par exemple l'eau). Une solution est dite saturée quand on ne peut plus rien dissoudre de plus : l'excès de soluté reste visible, non dissous, au fond du récipient.</p>`,
       quiz: [
         {q:"L'eau distillée est un exemple de :", options:["mélange homogène","mélange hétérogène","corps pur","solution saturée"], correct:2, exp:"L'eau distillée ne contient qu'une seule espèce chimique : c'est un corps pur."},
         {q:"L'eau salée est un mélange :", options:["hétérogène","homogène","pur","gazeux uniquement"], correct:1, exp:"On ne distingue pas le sel dissous dans l'eau à l'œil nu : c'est un mélange homogène."},
@@ -781,7 +1050,8 @@ pc: {
       title: "États de la matière et changements d'état",
       content: `<p>La matière existe sous trois états principaux : <strong>solide</strong> (forme et volume propres), <strong>liquide</strong> (volume propre, prend la forme du récipient) et <strong>gazeux</strong> (occupe tout l'espace disponible).</p>
       <p><strong>Changements d'état :</strong> fusion (solide → liquide), solidification (liquide → solide), vaporisation (liquide → gaz), liquéfaction (gaz → liquide), sublimation (solide → gaz directement).</p>
-      <p>Chaque changement d'état se produit à une <strong>température précise</strong> pour un corps pur donné (ex : l'eau fond à 0°C et bout à 100°C sous pression atmosphérique normale), et cette température reste constante pendant tout le changement d'état.</p>`,
+      <p>Chaque changement d'état se produit à une <strong>température précise</strong> pour un corps pur donné (ex : l'eau fond à 0°C et bout à 100°C sous pression atmosphérique normale), et cette température reste constante pendant tout le changement d'état.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Il existe aussi des changements d'état plus rares : la sublimation (passage direct du solide au gaz, sans passer par le liquide, comme la neige carbonique) et son inverse, la condensation solide. Retiens que pendant un changement d'état, la température reste constante tant que la transformation n'est pas terminée.</p>`,
       quiz: [
         {q:"Le passage du solide au liquide s'appelle :", options:["vaporisation","fusion","solidification","sublimation"], correct:1, exp:"La fusion est le passage de l'état solide à l'état liquide."},
         {q:"Le passage du liquide au gaz s'appelle :", options:["fusion","vaporisation","liquéfaction","solidification"], correct:1, exp:"La vaporisation est le passage de l'état liquide à l'état gazeux."},
@@ -796,7 +1066,8 @@ pc: {
       content: `<p>Un <strong>circuit électrique</strong> simple comprend un générateur (pile), des fils conducteurs, et un ou plusieurs récepteurs (ampoule, moteur), souvent avec un interrupteur.</p>
       <p>Le courant électrique circule dans un circuit <strong>fermé</strong> : s'il y a une coupure, le courant ne passe plus (circuit ouvert).</p>
       <p>Deux montages principaux : le <strong>circuit série</strong> (les récepteurs sont placés les uns à la suite des autres, le courant est le même partout) et le <strong>circuit en dérivation</strong> (les récepteurs sont sur des branches différentes, chacun peut fonctionner indépendamment).</p>
-      <p><strong>Convention</strong> : le sens conventionnel du courant va de la borne + vers la borne − du générateur à l'extérieur de celui-ci.</p>`,
+      <p><strong>Convention</strong> : le sens conventionnel du courant va de la borne + vers la borne − du générateur à l'extérieur de celui-ci.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Par convention, le sens du courant électrique va de la borne + vers la borne − à l'extérieur du générateur (même si, en réalité, ce sont les électrons qui circulent en sens inverse). C'est ce sens conventionnel qu'on utilise toujours pour représenter un circuit sur un schéma.</p>`,
       quiz: [
         {q:"Pour que le courant circule, le circuit doit être :", options:["ouvert","fermé","en série obligatoirement","sans générateur"], correct:1, exp:"Le courant circule uniquement dans un circuit fermé, sans coupure."},
         {q:"Dans un circuit série, si une ampoule grille :", options:["les autres restent allumées","toutes les ampoules s'éteignent","rien ne change","le courant double"], correct:1, exp:"En série, tous les récepteurs sont sur le même chemin : une coupure éteint tout le circuit."},
@@ -811,7 +1082,8 @@ pc: {
       content: `<p>La <strong>masse</strong> d'un objet (en kg ou g) mesure la quantité de matière qu'il contient ; elle se mesure avec une balance.</p>
       <p>Le <strong>volume</strong> (en L ou cm³/m³) mesure l'espace occupé par un objet ou un liquide ; il se mesure avec une éprouvette graduée ou par calcul (pour les solides réguliers).</p>
       <p>La <strong>masse volumique</strong> ρ (rho) d'un matériau est le rapport entre sa masse et son volume : ρ = m / V, généralement exprimée en g/cm³ ou kg/m³.</p>
-      <p>La masse volumique permet de comparer des matériaux : par exemple, l'eau a une masse volumique de 1 g/cm³, et un objet plus dense que l'eau coule, tandis qu'un objet moins dense flotte.</p>`,
+      <p>La masse volumique permet de comparer des matériaux : par exemple, l'eau a une masse volumique de 1 g/cm³, et un objet plus dense que l'eau coule, tandis qu'un objet moins dense flotte.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Pour savoir si un objet flotte sur l'eau, compare sa masse volumique à celle de l'eau (1 g/cm³ = 1000 kg/m³) : si elle est inférieure, l'objet flotte ; si elle est supérieure, il coule. C'est pourquoi le bois (moins dense) flotte alors que le fer (plus dense) coule.</p>`,
       quiz: [
         {q:"La masse se mesure avec :", options:["une éprouvette","une balance","un thermomètre","un chronomètre"], correct:1, exp:"On mesure la masse d'un objet à l'aide d'une balance."},
         {q:"La formule de la masse volumique est :", options:["ρ = V/m","ρ = m × V","ρ = m/V","ρ = m + V"], correct:2, exp:"La masse volumique se calcule en divisant la masse par le volume : ρ = m/V."},
@@ -826,7 +1098,8 @@ pc: {
       content: `<p>Une <strong>combustion</strong> est une réaction chimique entre un combustible (ex : bois, charbon, gaz) et un comburant (généralement le dioxygène de l'air), produisant de la chaleur et de la lumière.</p>
       <p>La <strong>combustion du carbone</strong> produit du dioxyde de carbone (CO₂) : carbone + dioxygène → dioxyde de carbone.</p>
       <p>La <strong>combustion du méthane</strong> (gaz naturel) produit du dioxyde de carbone et de l'eau : méthane + dioxygène → dioxyde de carbone + eau.</p>
-      <p>Une combustion <strong>incomplète</strong> (manque de dioxygène) produit du monoxyde de carbone (CO), un gaz toxique, dangereux car incolore et inodore.</p>`,
+      <p>Une combustion <strong>incomplète</strong> (manque de dioxygène) produit du monoxyde de carbone (CO), un gaz toxique, dangereux car incolore et inodore.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Une combustion nécessite trois éléments réunis, appelés le « triangle du feu » : un combustible (ce qui brûle), un comburant (le dioxygène de l'air, en général) et une source de chaleur suffisante. Supprimer un seul de ces trois éléments suffit à éteindre le feu — c'est le principe des extincteurs.</p>`,
       quiz: [
         {q:"Une combustion nécessite un combustible et :", options:["un comburant","un solvant","un catalyseur uniquement","de l'eau"], correct:0, exp:"La combustion est une réaction entre un combustible et un comburant (souvent le dioxygène)."},
         {q:"La combustion du carbone produit :", options:["de l'eau seule","du dioxyde de carbone","de l'azote","du monoxyde d'azote"], correct:1, exp:"Carbone + dioxygène → dioxyde de carbone (CO₂)."},
@@ -841,7 +1114,8 @@ pc: {
       content: `<p>La <strong>tension électrique</strong> (notée U, en volts V) mesure la différence de potentiel électrique entre deux points d'un circuit ; elle représente ce qui « pousse » le courant à circuler.</p>
       <p>La tension se mesure avec un <strong>voltmètre</strong>, branché en <strong>dérivation</strong> (en parallèle) aux bornes du composant étudié.</p>
       <p>Dans un circuit <strong>série</strong>, la tension totale du générateur est égale à la somme des tensions aux bornes de chaque récepteur. Dans un circuit en <strong>dérivation</strong>, la tension est la même aux bornes de chaque branche.</p>
-      <p>Une pile de 4,5 V fournit par exemple une tension de 4,5 volts à un circuit simple.</p>`,
+      <p>Une pile de 4,5 V fournit par exemple une tension de 4,5 volts à un circuit simple.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Dans un circuit en série, les tensions aux bornes des différents récepteurs s'additionnent pour donner la tension totale du générateur. Dans un circuit en dérivation, au contraire, tous les récepteurs reçoivent la même tension que le générateur — une différence essentielle avec la loi des intensités.</p>`,
       quiz: [
         {q:"La tension électrique se mesure avec :", options:["un ampèremètre","un voltmètre","un thermomètre","une balance"], correct:1, exp:"Le voltmètre est l'appareil utilisé pour mesurer une tension électrique."},
         {q:"Le voltmètre se branche :", options:["en série","en dérivation","à l'intérieur du générateur","il ne se branche pas"], correct:1, exp:"Le voltmètre se branche toujours en dérivation (en parallèle) aux bornes du composant à mesurer."},
@@ -856,7 +1130,8 @@ pc: {
       content: `<p>Un <strong>résistor</strong> (ou résistance) est un composant qui s'oppose au passage du courant électrique. Sa valeur R se mesure en <strong>ohms</strong> (Ω) à l'aide d'un <strong>ohmmètre</strong>.</p>
       <p>La <strong>loi d'Ohm</strong> relie la tension U aux bornes d'un résistor, l'intensité I qui le traverse, et sa résistance R : U = R × I.</p>
       <p>Cette loi permet de calculer l'une des trois grandeurs si les deux autres sont connues : I = U/R, ou R = U/I.</p>
-      <p>Plus la résistance est grande, plus elle limite le passage du courant pour une même tension.</p>`,
+      <p>Plus la résistance est grande, plus elle limite le passage du courant pour une même tension.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La loi d'Ohm (U = R × I) se représente par une droite passant par l'origine sur un graphique U en fonction de I : plus la pente de cette droite est grande, plus la résistance est élevée. C'est une relation de proportionnalité entre la tension et l'intensité, pour une résistance donnée.</p>`,
       quiz: [
         {q:"La résistance électrique se mesure en :", options:["volts","ampères","ohms","watts"], correct:2, exp:"L'unité de la résistance électrique est l'ohm (Ω)."},
         {q:"La loi d'Ohm s'écrit :", options:["U = R + I","U = R × I","U = R / I","U = I / R"], correct:1, exp:"La loi d'Ohm relie tension, résistance et intensité par U = R × I."},
@@ -871,7 +1146,8 @@ pc: {
       content: `<p>La <strong>puissance électrique</strong> P (en watts, W) d'un appareil indique la quantité d'énergie électrique qu'il consomme (ou produit) par unité de temps.</p>
       <p>Elle se calcule par la formule : P = U × I, où U est la tension (en volts) et I l'intensité (en ampères).</p>
       <p>La puissance nominale d'un appareil est souvent indiquée par le fabricant (ex : une ampoule de 60 W). L'<strong>énergie électrique</strong> consommée dépend de la puissance et de la durée d'utilisation : E = P × t.</p>
-      <p>Comprendre la puissance permet d'estimer la consommation électrique et le coût en électricité d'un appareil.</p>`,
+      <p>Comprendre la puissance permet d'estimer la consommation électrique et le coût en électricité d'un appareil.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> L'énergie électrique consommée se calcule avec E = P × t (puissance × durée), et s'exprime en watt-heure (Wh) ou kilowatt-heure (kWh) sur les factures d'électricité. Exemple : un appareil de 1000 W (1 kW) utilisé pendant 2 heures consomme 2 kWh d'énergie.</p>`,
       quiz: [
         {q:"La puissance électrique se calcule par :", options:["P = U + I","P = U × I","P = U / I","P = I / U"], correct:1, exp:"La puissance électrique est le produit de la tension par l'intensité : P = U × I."},
         {q:"L'unité de la puissance électrique est :", options:["le volt","l'ampère","le watt","l'ohm"], correct:2, exp:"La puissance électrique se mesure en watts (W)."},
@@ -886,7 +1162,8 @@ pc: {
       content: `<p>Toute matière est constituée de particules extrêmement petites appelées <strong>atomes</strong>. Un atome est composé d'un <strong>noyau</strong> (protons et neutrons) entouré d'<strong>électrons</strong> qui se déplacent autour de lui.</p>
       <p>Une <strong>molécule</strong> est un assemblage de plusieurs atomes liés entre eux. Par exemple, une molécule d'eau (H₂O) est formée de deux atomes d'hydrogène (H) et un atome d'oxygène (O).</p>
       <p>Un <strong>élément chimique</strong> est caractérisé par son type d'atome (ex : carbone, oxygène, hydrogène), représenté par un symbole chimique (C, O, H...).</p>
-      <p>Lors d'une réaction chimique, les atomes se réorganisent pour former de nouvelles molécules, mais ils ne disparaissent jamais : c'est la <strong>conservation de la matière</strong>.</p>`,
+      <p>Lors d'une réaction chimique, les atomes se réorganisent pour former de nouvelles molécules, mais ils ne disparaissent jamais : c'est la <strong>conservation de la matière</strong>.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Un atome est électriquement neutre : il possède autant de protons (charge +) que d'électrons (charge −). Lorsqu'un atome perd ou gagne des électrons, il devient un ion chargé électriquement — un phénomène étudié plus en détail avec les solutions ioniques.</p>`,
       quiz: [
         {q:"Un atome est composé d'un noyau et de :", options:["molécules","électrons","ions uniquement","protons uniquement"], correct:1, exp:"Un atome est formé d'un noyau (protons + neutrons) entouré d'électrons."},
         {q:"Une molécule d'eau est formée de :", options:["1 atome d'hydrogène et 2 d'oxygène","2 atomes d'hydrogène et 1 d'oxygène","2 atomes d'oxygène seulement","1 atome de carbone et 2 d'oxygène"], correct:1, exp:"La molécule d'eau, H₂O, contient 2 atomes d'hydrogène et 1 atome d'oxygène."},
@@ -900,7 +1177,8 @@ pc: {
       title: "Vision et l'œil",
       content: `<p>L'<strong>œil</strong> est l'organe qui permet de percevoir la lumière et de former des images. La lumière entre par la <strong>pupille</strong> (ouverture réglée par l'iris), traverse le <strong>cristallin</strong> (qui fait office de lentille convergente), et forme une image sur la <strong>rétine</strong>, au fond de l'œil.</p>
       <p>La rétine transforme la lumière reçue en signal nerveux, transmis au cerveau par le <strong>nerf optique</strong>, qui interprète l'image.</p>
-      <p>Certains défauts de vision sont courants : la <strong>myopie</strong> (mauvaise vision de loin), l'<strong>hypermétropie</strong> (mauvaise vision de près), corrigés par des lunettes à verres appropriés (divergents ou convergents).</p>`,
+      <p>Certains défauts de vision sont courants : la <strong>myopie</strong> (mauvaise vision de loin), l'<strong>hypermétropie</strong> (mauvaise vision de près), corrigés par des lunettes à verres appropriés (divergents ou convergents).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> À l'inverse du myope, la personne hypermétrope voit flou de près, car l'image se forme derrière la rétine. Ces deux défauts de vision se corrigent avec des lunettes adaptées : des verres divergents pour la myopie, des verres convergents pour l'hypermétropie.</p>`,
       quiz: [
         {q:"La lumière entre dans l'œil par :", options:["la rétine","la pupille","le nerf optique","le cristallin uniquement"], correct:1, exp:"La pupille est l'ouverture par laquelle la lumière pénètre dans l'œil."},
         {q:"L'image se forme sur :", options:["la pupille","l'iris","la rétine","le cristallin"], correct:2, exp:"C'est sur la rétine, au fond de l'œil, que l'image se forme."},
@@ -915,7 +1193,8 @@ pc: {
       content: `<p>Le courant électrique peut être dangereux : une <strong>électrisation</strong> se produit lorsqu'un courant traverse le corps humain, ce qui peut provoquer des brûlures ou perturber le fonctionnement du cœur (dans les cas graves, on parle d'électrocution).</p>
       <p><strong>Règles de sécurité de base</strong> : ne jamais toucher un appareil électrique avec les mains mouillées, ne jamais démonter une prise ou un appareil branché, utiliser du matériel isolé et en bon état.</p>
       <p>Le <strong>disjoncteur</strong> et les <strong>fusibles</strong> protègent une installation en coupant automatiquement le courant en cas de surintensité (court-circuit, surcharge), évitant ainsi les incendies.</p>
-      <p>La <strong>prise de terre</strong> permet d'évacuer le courant vers le sol en cas de défaut, protégeant les personnes contre l'électrisation.</p>`,
+      <p>La <strong>prise de terre</strong> permet d'évacuer le courant vers le sol en cas de défaut, protégeant les personnes contre l'électrisation.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Le fusible et le disjoncteur jouent un rôle similaire de protection contre les surintensités, mais le fusible doit être remplacé après avoir « sauté », alors que le disjoncteur peut simplement être réenclenché manuellement après avoir coupé le courant, ce qui le rend plus pratique au quotidien.</p>`,
       quiz: [
         {q:"Une électrisation se produit quand :", options:["on regarde un appareil électrique","un courant traverse le corps humain","on allume la lumière","on utilise une pile neuve"], correct:1, exp:"L'électrisation résulte du passage d'un courant électrique à travers le corps humain."},
         {q:"Il ne faut jamais toucher un appareil électrique avec :", options:["des gants isolants","les mains mouillées","une pince isolée","les mains sèches"], correct:1, exp:"L'eau conduit l'électricité, ce qui augmente fortement le risque d'électrisation."},
@@ -930,7 +1209,8 @@ pc: {
       content: `<p>L'<strong>intensité du courant électrique</strong> (notée I, en ampères A) mesure le débit de charges électriques qui traverse un circuit chaque seconde.</p>
       <p>Elle se mesure avec un <strong>ampèremètre</strong>, qui doit être branché <strong>en série</strong> dans le circuit (contrairement au voltmètre qui se branche en dérivation).</p>
       <p>Dans un circuit <strong>série</strong>, l'intensité est la même en tout point du circuit. Dans un circuit en <strong>dérivation</strong>, l'intensité du courant principal est égale à la somme des intensités dans chaque branche.</p>
-      <p>Il ne faut jamais brancher un ampèremètre directement aux bornes d'un générateur : cela créerait un court-circuit dangereux.</p>`,
+      <p>Il ne faut jamais brancher un ampèremètre directement aux bornes d'un générateur : cela créerait un court-circuit dangereux.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Attention à ne jamais brancher un ampèremètre en dérivation (en parallèle) : comme il a une résistance presque nulle, cela provoquerait un court-circuit dangereux. Il doit toujours être inséré en série, directement dans le fil du circuit à mesurer.</p>`,
       quiz: [
         {q:"L'intensité du courant électrique se mesure avec :", options:["un voltmètre","un ampèremètre","un ohmmètre","un thermomètre"], correct:1, exp:"L'ampèremètre est l'appareil dédié à la mesure de l'intensité du courant."},
         {q:"L'ampèremètre doit être branché :", options:["en dérivation","en série","à l'extérieur du circuit","cela n'a pas d'importance"], correct:1, exp:"Contrairement au voltmètre, l'ampèremètre se branche toujours en série dans le circuit."},
@@ -945,7 +1225,8 @@ pc: {
       content: `<p>Le <strong>courant continu</strong> circule toujours dans le même sens, avec une intensité qui peut rester constante (ex : courant fourni par une pile ou une batterie).</p>
       <p>Le <strong>courant alternatif</strong> change périodiquement de sens et d'intensité au cours du temps (ex : courant du secteur, distribué dans les maisons).</p>
       <p>On peut visualiser la différence entre ces deux types de courant à l'aide d'un <strong>oscilloscope</strong>, qui affiche la variation de la tension au cours du temps : une ligne droite horizontale pour un courant continu, une courbe périodique (souvent sinusoïdale) pour un courant alternatif.</p>
-      <p>Le courant du secteur utilisé dans les habitations est un courant alternatif, tandis que la plupart des appareils portables (téléphones, lampes de poche) fonctionnent en courant continu, ce qui nécessite parfois un adaptateur pour convertir l'un en l'autre.</p>`,
+      <p>Le courant du secteur utilisé dans les habitations est un courant alternatif, tandis que la plupart des appareils portables (téléphones, lampes de poche) fonctionnent en courant continu, ce qui nécessite parfois un adaptateur pour convertir l'un en l'autre.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> En Côte d'Ivoire comme dans la plupart des pays, le courant alternatif du secteur (les prises de la maison) a une fréquence de 50 Hz, ce qui signifie que le sens du courant s'inverse 50 fois par seconde. C'est très différent du courant continu d'une pile, toujours dans le même sens.</p>`,
       quiz: [
         {q:"Le courant continu circule :", options:["toujours dans le même sens","en changeant sans cesse de sens","seulement dans les câbles du secteur","de façon aléatoire"], correct:0, exp:"Le courant continu garde un sens constant, contrairement au courant alternatif."},
         {q:"Le courant alternatif se caractérise par :", options:["un sens qui ne change jamais","un changement périodique de sens et d'intensité","une intensité toujours nulle","l'absence de tension"], correct:1, exp:"Le courant alternatif varie périodiquement en sens et en intensité au cours du temps."},
@@ -960,7 +1241,8 @@ pc: {
       content: `<p>Un <strong>ion</strong> est un atome (ou groupe d'atomes) qui a perdu ou gagné un ou plusieurs électrons, ce qui lui donne une charge électrique. Un <strong>cation</strong> est un ion chargé positivement (a perdu des électrons), un <strong>anion</strong> est chargé négativement (a gagné des électrons).</p>
       <p>Une <strong>solution ionique</strong> contient des ions dissous, ce qui la rend <strong>conductrice</strong> du courant électrique (contrairement à l'eau pure, très peu conductrice).</p>
       <p>Exemple courant : le sel de cuisine (chlorure de sodium) dissous dans l'eau se sépare en ions sodium (Na⁺, cation) et ions chlorure (Cl⁻, anion), ce qui rend l'eau salée conductrice.</p>
-      <p>Des tests chimiques simples permettent de reconnaître la présence de certains ions dans une solution.</p>`,
+      <p>Des tests chimiques simples permettent de reconnaître la présence de certains ions dans une solution.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Un cation est un ion positif (l'atome a perdu des électrons, ex : Na⁺), tandis qu'un anion est un ion négatif (l'atome a gagné des électrons, ex : Cl⁻). Dans une solution ionique, ce sont ces ions en mouvement qui permettent au courant électrique de circuler.</p>`,
       quiz: [
         {q:"Un ion est un atome qui a :", options:["changé de masse","perdu ou gagné un ou plusieurs électrons","fusionné avec un autre atome","perdu son noyau"], correct:1, exp:"Un ion résulte d'un atome ayant gagné ou perdu des électrons, ce qui crée une charge électrique."},
         {q:"Un cation est un ion :", options:["chargé positivement","chargé négativement","neutre","toujours métallique uniquement"], correct:0, exp:"Le cation a perdu des électrons et porte donc une charge positive."},
@@ -975,7 +1257,8 @@ pc: {
       content: `<p>Une solution peut être <strong>acide</strong>, <strong>neutre</strong> ou <strong>basique</strong>. On caractérise ce niveau à l'aide du <strong>pH</strong> (potentiel hydrogène), une échelle qui va généralement de 0 à 14.</p>
       <p>Un pH inférieur à 7 indique une solution <strong>acide</strong> (ex : jus de citron, vinaigre) ; un pH égal à 7 correspond à une solution <strong>neutre</strong> (ex : eau pure) ; un pH supérieur à 7 indique une solution <strong>basique</strong> (ex : eau savonneuse, produits d'entretien).</p>
       <p>Le pH peut se mesurer à l'aide de <strong>papier pH</strong> (qui change de couleur) ou d'un <strong>pH-mètre</strong> électronique.</p>
-      <p>Les acides et les bases doivent être manipulés avec précaution : les solutions très acides ou très basiques peuvent être corrosives et dangereuses pour la peau ou les yeux.</p>`,
+      <p>Les acides et les bases doivent être manipulés avec précaution : les solutions très acides ou très basiques peuvent être corrosives et dangereuses pour la peau ou les yeux.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Quand on mélange une solution acide et une solution basique dans les bonnes proportions, elles se neutralisent : le pH du mélange se rapproche de 7 (neutre). Cette réaction de neutralisation est utilisée, par exemple, pour traiter certains sols trop acides en agriculture.</p>`,
       quiz: [
         {q:"Le pH d'une solution neutre est égal à :", options:["0","7","14","−7"], correct:1, exp:"Une solution neutre, comme l'eau pure, a un pH égal à 7."},
         {q:"Un pH inférieur à 7 indique une solution :", options:["basique","acide","neutre","impossible à déterminer"], correct:1, exp:"Un pH en dessous de 7 caractérise une solution acide."},
@@ -990,7 +1273,8 @@ pc: {
       content: `<p>Une <strong>réaction chimique</strong> transforme des <strong>réactifs</strong> (substances de départ) en <strong>produits</strong> (nouvelles substances formées), avec réorganisation des atomes.</p>
       <p>Le <strong>bilan d'une réaction</strong> s'écrit sous la forme : réactifs → produits (ex : carbone + dioxygène → dioxyde de carbone), en indiquant les proportions si nécessaire.</p>
       <p>Il existe des réactions <strong>complètes</strong>, où au moins un des réactifs est totalement consommé, et des réactions <strong>limitées</strong>, où les réactifs ne sont que partiellement transformés et coexistent avec les produits formés.</p>
-      <p>Comme vu avec les combustions, la <strong>masse totale</strong> est conservée au cours d'une réaction chimique : rien ne se crée, rien ne se perd, tout se transforme.</p>`,
+      <p>Comme vu avec les combustions, la <strong>masse totale</strong> est conservée au cours d'une réaction chimique : rien ne se crée, rien ne se perd, tout se transforme.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Une équation chimique doit toujours être équilibrée : le nombre d'atomes de chaque élément doit être identique avant et après la réaction (loi de conservation de la matière de Lavoisier). C'est pourquoi on utilise des nombres devant les formules chimiques pour ajuster l'équation, sans jamais modifier les formules elles-mêmes.</p>`,
       quiz: [
         {q:"Dans une réaction chimique, les réactifs sont :", options:["les substances formées à la fin","les substances de départ","toujours des gaz","toujours des métaux"], correct:1, exp:"Les réactifs sont les substances présentes avant la réaction, qui vont se transformer."},
         {q:"Le bilan d'une réaction chimique s'écrit sous la forme :", options:["produits → réactifs","réactifs → produits","réactifs = produits toujours identiques","aucune des propositions"], correct:1, exp:"Le bilan indique la transformation des réactifs en produits, avec une flèche orientée des réactifs vers les produits."},
@@ -1004,7 +1288,8 @@ pc: {
       title: "La décomposition de la lumière et les couleurs",
       content: `<p>La <strong>lumière blanche</strong> (comme celle du Soleil) est en réalité composée de plusieurs couleurs. Elle peut être <strong>décomposée</strong> à l'aide d'un prisme, qui dévie différemment chaque couleur, révélant un spectre allant du rouge au violet (comme dans un arc-en-ciel).</p>
       <p>Les <strong>couleurs primaires</strong> de la lumière sont le rouge, le vert et le bleu : en les combinant dans différentes proportions, on peut recréer toutes les autres couleurs, y compris le blanc (addition des trois).</p>
-      <p>La couleur perçue d'un objet éclairé en lumière blanche dépend des couleurs qu'il <strong>absorbe</strong> et de celles qu'il <strong>diffuse</strong> (renvoie) vers l'œil. Un objet qui diffuse toutes les couleurs paraît blanc ; un objet qui les absorbe toutes paraît noir.</p>`,
+      <p>La couleur perçue d'un objet éclairé en lumière blanche dépend des couleurs qu'il <strong>absorbe</strong> et de celles qu'il <strong>diffuse</strong> (renvoie) vers l'œil. Un objet qui diffuse toutes les couleurs paraît blanc ; un objet qui les absorbe toutes paraît noir.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La lumière blanche du Soleil est en réalité composée de toutes les couleurs de l'arc-en-ciel : un prisme (ou les gouttelettes d'eau dans l'air) la décompose en un spectre visible allant du rouge au violet. C'est ce phénomène de décomposition qui explique la formation naturelle de l'arc-en-ciel après la pluie.</p>`,
       quiz: [
         {q:"La lumière blanche est en réalité :", options:["une seule couleur pure","composée de plusieurs couleurs","toujours invisible","seulement rouge"], correct:1, exp:"La lumière blanche est un mélange de toutes les couleurs du spectre visible."},
         {q:"Un prisme permet de :", options:["créer de la lumière","décomposer la lumière blanche en ses différentes couleurs","supprimer les couleurs","mesurer une tension"], correct:1, exp:"Le prisme dévie différemment chaque couleur, ce qui sépare visuellement le spectre de la lumière blanche."},
@@ -1026,7 +1311,8 @@ hg: {
       title: "Histoire : les grands empires africains précoloniaux",
       content: `<p>Avant la colonisation, l'Afrique de l'Ouest a connu de puissants <strong>empires et royaumes</strong>, prospères grâce au commerce transsaharien (or, sel, esclaves) et à des organisations politiques structurées.</p>
       <p>L'<strong>Empire du Ghana</strong> (VIIIe-XIe siècle) contrôlait le commerce de l'or et du sel. L'<strong>Empire du Mali</strong> (XIIIe-XVe siècle), sous Soundiata Keïta puis Kankou Moussa, fut l'un des plus riches et des plus étendus, avec Tombouctou comme centre intellectuel. L'<strong>Empire Songhaï</strong> lui succéda, avec Gao comme capitale.</p>
-      <p>Sur le territoire actuel de la Côte d'Ivoire, des royaumes comme le <strong>royaume de Kong</strong> ou le <strong>royaume Abron</strong> se sont aussi développés, jouant un rôle important dans les échanges régionaux.</p>`,
+      <p>Sur le territoire actuel de la Côte d'Ivoire, des royaumes comme le <strong>royaume de Kong</strong> ou le <strong>royaume Abron</strong> se sont aussi développés, jouant un rôle important dans les échanges régionaux.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Ces grands empires (Ghana, Mali, Songhaï) devaient une grande partie de leur richesse au commerce transsaharien, notamment l'échange de l'or (venu du sud) contre le sel (venu du nord du Sahara). Des villes comme Tombouctou sont devenues de grands centres commerciaux et intellectuels grâce à cette position stratégique sur les routes caravanières.</p>`,
       quiz: [
         {q:"L'Empire du Ghana contrôlait principalement le commerce :", options:["du pétrole","de l'or et du sel","du café","des textiles"], correct:1, exp:"L'Empire du Ghana devait sa richesse au commerce transsaharien de l'or et du sel."},
         {q:"Kankou Moussa fut un souverain célèbre de :", options:["l'Empire du Ghana","l'Empire du Mali","l'Empire Songhaï","le royaume de Kong"], correct:1, exp:"Kankou Moussa, connu pour son pèlerinage fastueux à la Mecque, régna sur l'Empire du Mali."},
@@ -1040,7 +1326,8 @@ hg: {
       title: "Histoire : la traite négrière",
       content: `<p>La <strong>traite négrière</strong> désigne la capture, la déportation et la mise en esclavage de millions d'Africains, principalement du XVIe au XIXe siècle, vers les Amériques (traite atlantique), mais aussi vers le monde arabe (traite orientale).</p>
       <p>Ce commerce s'organisait souvent en <strong>« commerce triangulaire »</strong> : des produits manufacturés européens étaient échangés en Afrique contre des captifs, qui étaient déportés vers les Amériques pour travailler dans les plantations, dont les productions (sucre, coton) repartaient vers l'Europe.</p>
-      <p>La traite a eu des <strong>conséquences dramatiques</strong> : perte démographique massive pour l'Afrique, déstructuration de sociétés entières, et un héritage de souffrance dont les effets se font encore sentir aujourd'hui.</p>`,
+      <p>La traite a eu des <strong>conséquences dramatiques</strong> : perte démographique massive pour l'Afrique, déstructuration de sociétés entières, et un héritage de souffrance dont les effets se font encore sentir aujourd'hui.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La traite négrière transatlantique fonctionnait selon un système appelé le « commerce triangulaire » : des marchandises européennes étaient échangées contre des esclaves en Afrique, qui étaient ensuite déportés vers les Amériques pour y travailler dans les plantations, dont les productions (sucre, coton) repartaient vers l'Europe.</p>`,
       quiz: [
         {q:"Le commerce triangulaire reliait principalement :", options:["l'Europe, l'Afrique et les Amériques","l'Asie et l'Océanie","l'Europe et l'Antarctique","l'Afrique et l'Australie"], correct:0, exp:"Le commerce triangulaire s'organisait entre l'Europe, l'Afrique et les Amériques."},
         {q:"La traite négrière a duré principalement :", options:["du Ier au IVe siècle","du XVIe au XIXe siècle","au XXe siècle uniquement","avant l'an 500"], correct:1, exp:"La traite atlantique s'est déroulée principalement du XVIe au XIXe siècle."},
@@ -1054,7 +1341,8 @@ hg: {
       title: "Histoire : la colonisation de l'Afrique",
       content: `<p>À la fin du XIXe siècle, les puissances européennes se partagent l'Afrique lors de la <strong>Conférence de Berlin</strong> (1884-1885), sans consulter les populations africaines, marquant le début de la « course à l'Afrique ».</p>
       <p>La <strong>conquête coloniale</strong> s'est faite par des expéditions militaires, souvent violentes, face à la résistance de nombreux royaumes et peuples africains (comme Samory Touré en Afrique de l'Ouest).</p>
-      <p>L'<strong>administration coloniale</strong> a imposé de nouvelles frontières, une exploitation économique des ressources (cultures d'exportation, matières premières), le travail forcé, et une domination politique et culturelle qui a profondément bouleversé les sociétés africaines.</p>`,
+      <p>L'<strong>administration coloniale</strong> a imposé de nouvelles frontières, une exploitation économique des ressources (cultures d'exportation, matières premières), le travail forcé, et une domination politique et culturelle qui a profondément bouleversé les sociétés africaines.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Le partage de l'Afrique entre puissances européennes a été officialisé lors de la Conférence de Berlin (1884-1885), où les frontières ont souvent été tracées sans tenir compte des royaumes et des peuples déjà existants — une cause de nombreuses tensions encore visibles aujourd'hui entre certains pays africains.</p>`,
       quiz: [
         {q:"La Conférence de Berlin a eu lieu en :", options:["1884-1885","1960","1914","1800"], correct:0, exp:"La Conférence de Berlin, qui organise le partage colonial de l'Afrique, s'est tenue en 1884-1885."},
         {q:"La Conférence de Berlin a été organisée :", options:["avec la participation des peuples africains","sans consulter les populations africaines","par l'Union Africaine","après les indépendances"], correct:1, exp:"Les puissances européennes ont décidé du partage de l'Afrique sans consulter les Africains."},
@@ -1069,7 +1357,8 @@ hg: {
       content: `<p>La Côte d'Ivoire présente une diversité de <strong>milieux naturels</strong>, du sud vers le nord.</p>
       <p>Le <strong>sud</strong>, proche du littoral, connaît un climat équatorial chaud et humide, avec une forêt dense (forêt tropicale humide), particulièrement adaptée à des cultures comme le cacao, l'hévéa et le palmier à huile.</p>
       <p>Le <strong>centre et le nord</strong> connaissent un climat tropical avec une saison sèche plus marquée, une végétation de savane (arbustes et hautes herbes), favorable à des cultures comme le coton, l'anacarde et à l'élevage.</p>
-      <p>Le pays possède aussi un important réseau <strong>hydrographique</strong> (fleuves Bandama, Comoé, Sassandra) qui structure les paysages et les activités humaines.</p>`,
+      <p>Le pays possède aussi un important réseau <strong>hydrographique</strong> (fleuves Bandama, Comoé, Sassandra) qui structure les paysages et les activités humaines.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La Côte d'Ivoire présente une diversité de milieux naturels liée à son climat : une zone forestière humide au sud (climat équatorial, fortes précipitations), et une zone de savane au nord (climat tropical, saison sèche plus marquée). Cette diversité explique en partie la variété des cultures pratiquées selon les régions (cacao/café au sud, coton/anacarde au nord).</p>`,
       quiz: [
         {q:"Le sud de la Côte d'Ivoire a un climat :", options:["désertique","équatorial chaud et humide","polaire","méditerranéen"], correct:1, exp:"Le sud du pays, proche du littoral, connaît un climat équatorial chaud et humide."},
         {q:"La végétation dominante du sud est :", options:["la savane","la forêt dense","le désert","la toundra"], correct:1, exp:"Le sud est couvert d'une forêt tropicale dense, adaptée aux cultures comme le cacao."},
@@ -1083,7 +1372,8 @@ hg: {
       title: "Géographie : population et évolution",
       content: `<p>La <strong>population</strong> d'un pays se caractérise par sa répartition (souvent inégale, avec des zones plus peuplées comme les grandes villes) et son évolution démographique (natalité, mortalité, migrations).</p>
       <p>La Côte d'Ivoire connaît une <strong>croissance démographique</strong> importante, avec une population jeune. Les grandes villes comme Abidjan concentrent une part importante de la population, phénomène appelé <strong>urbanisation</strong>.</p>
-      <p>Les <strong>migrations</strong> internes (des campagnes vers les villes, appelées exode rural) et internationales influencent aussi la répartition de la population et sa structure.</p>`,
+      <p>Les <strong>migrations</strong> internes (des campagnes vers les villes, appelées exode rural) et internationales influencent aussi la répartition de la population et sa structure.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La Côte d'Ivoire connaît une urbanisation rapide : de plus en plus d'habitants quittent les zones rurales pour s'installer dans les grandes villes, notamment Abidjan, à la recherche d'emploi et de meilleures conditions de vie — un phénomène appelé exode rural, qui pose aussi des défis (logement, transport, emploi) pour les villes.</p>`,
       quiz: [
         {q:"La répartition de la population dans un pays est généralement :", options:["parfaitement égale","inégale","toujours concentrée au nord","impossible à mesurer"], correct:1, exp:"La population se concentre souvent dans certaines zones (villes, littoral) plus que dans d'autres."},
         {q:"L'exode rural désigne :", options:["le départ des habitants des villes vers les campagnes","le départ des habitants des campagnes vers les villes","une migration internationale uniquement","l'absence de migration"], correct:1, exp:"L'exode rural est le déplacement des populations rurales vers les villes."},
@@ -1098,7 +1388,8 @@ hg: {
       content: `<p>L'économie de la Côte d'Ivoire repose sur plusieurs <strong>activités économiques</strong> complémentaires.</p>
       <p>L'<strong>agriculture</strong> reste centrale, avec des cultures d'exportation (cacao, café, hévéa, anacarde, palmier à huile) et des cultures vivrières (igname, manioc, riz, maïs) destinées à la consommation locale.</p>
       <p>L'<strong>élevage</strong> se développe surtout dans le nord, plus favorable aux pâturages. Les <strong>ressources minières</strong> (or, manganèse, pétrole offshore) contribuent aussi à l'économie.</p>
-      <p>Le <strong>secteur secondaire</strong> (transformation agroalimentaire, industrie) et le <strong>secteur tertiaire</strong> (commerce, transport, services) se développent, notamment autour du port d'Abidjan.</p>`,
+      <p>Le <strong>secteur secondaire</strong> (transformation agroalimentaire, industrie) et le <strong>secteur tertiaire</strong> (commerce, transport, services) se développent, notamment autour du port d'Abidjan.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> On classe généralement les activités économiques en trois secteurs : le secteur primaire (agriculture, pêche, exploitation minière), le secteur secondaire (transformation industrielle, comme la transformation du cacao) et le secteur tertiaire (commerce, transport, services). La Côte d'Ivoire cherche aujourd'hui à développer davantage son secteur secondaire pour transformer localement ses matières premières plutôt que de les exporter brutes.</p>`,
       quiz: [
         {q:"Une culture d'exportation majeure de la Côte d'Ivoire est :", options:["le blé","le cacao","l'orge","le seigle"], correct:1, exp:"La Côte d'Ivoire est le premier producteur mondial de cacao."},
         {q:"Une culture vivrière (destinée à la consommation locale) est :", options:["le cacao","le café","l'igname","l'hévéa"], correct:2, exp:"L'igname est une culture vivrière destinée principalement à la consommation locale."},
@@ -1121,7 +1412,8 @@ svt: {
       content: `<p>La reproduction assure la <strong>survie des espèces</strong>. On distingue la reproduction sexuée et la reproduction asexuée.</p>
       <p>La <strong>reproduction sexuée</strong> nécessite la fusion d'une cellule reproductrice mâle et d'une cellule reproductrice femelle (fécondation), produisant une descendance génétiquement différente des parents.</p>
       <p>Chez les <strong>plantes à fleurs</strong>, la reproduction sexuée passe par la pollinisation (transport du pollen des étamines vers le pistil, souvent par le vent ou les insectes), puis la fécondation, qui aboutit à la formation d'une graine et d'un fruit.</p>
-      <p>La <strong>reproduction asexuée</strong> (bouturage, division cellulaire) ne nécessite pas de fécondation et produit des individus génétiquement identiques au parent.</p>`,
+      <p>La <strong>reproduction asexuée</strong> (bouturage, division cellulaire) ne nécessite pas de fécondation et produit des individus génétiquement identiques au parent.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La puberté marque le début de la capacité de reproduction chez l'être humain : elle s'accompagne de transformations physiques (développement des caractères sexuels secondaires) contrôlées par des hormones (testostérone chez le garçon, œstrogènes chez la fille), généralement entre 10 et 16 ans selon les individus.</p>`,
       quiz: [
         {q:"La reproduction sexuée nécessite :", options:["une seule cellule","la fusion de deux cellules reproductrices","aucune cellule spécifique","uniquement la lumière"], correct:1, exp:"La reproduction sexuée résulte de la fécondation, fusion d'une cellule mâle et d'une cellule femelle."},
         {q:"La pollinisation est le transport :", options:["de l'eau vers les racines","du pollen des étamines vers le pistil","des graines vers le sol","de la sève dans la tige"], correct:1, exp:"La pollinisation transporte le pollen, souvent par le vent ou les insectes, jusqu'au pistil."},
@@ -1136,7 +1428,8 @@ svt: {
       content: `<p>La <strong>digestion</strong> est l'ensemble des transformations que subissent les aliments dans le tube digestif pour être assimilables par l'organisme.</p>
       <p>Le <strong>tube digestif</strong> comprend : la bouche (mastication, salive), l'œsophage (transport), l'estomac (brassage, sucs gastriques), l'intestin grêle (digestion finale et absorption des nutriments) et le gros intestin (absorption d'eau, formation des déchets).</p>
       <p>Les aliments sont transformés en <strong>nutriments</strong> (sucres simples, acides aminés, acides gras) suffisamment petits pour traverser la paroi de l'intestin grêle et passer dans le sang.</p>
-      <p>Les <strong>déchets non digérés</strong> sont évacués sous forme de selles.</p>`,
+      <p>Les <strong>déchets non digérés</strong> sont évacués sous forme de selles.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La digestion transforme les aliments grâce à des enzymes digestives (présentes dans la salive, le suc gastrique, le suc pancréatique...) qui découpent les grosses molécules (glucides, protéines, lipides) en petites molécules simples, suffisamment petites pour traverser la paroi intestinale et passer dans le sang.</p>`,
       quiz: [
         {q:"La mastication se déroule dans :", options:["l'estomac","la bouche","l'intestin grêle","le gros intestin"], correct:1, exp:"La mastication est la première étape de la digestion, réalisée dans la bouche."},
         {q:"L'absorption des nutriments a lieu principalement dans :", options:["l'œsophage","l'estomac","l'intestin grêle","la bouche"], correct:2, exp:"C'est au niveau de l'intestin grêle que les nutriments traversent la paroi pour passer dans le sang."},
@@ -1151,7 +1444,8 @@ svt: {
       content: `<p>La <strong>respiration</strong> permet aux êtres vivants d'échanger des gaz avec leur milieu : absorption du dioxygène (O₂) et rejet du dioxyde de carbone (CO₂).</p>
       <p>Chez l'être humain, l'air entre par le nez ou la bouche, traverse la trachée, puis les bronches, jusqu'aux <strong>poumons</strong>, où se trouvent de minuscules sacs appelés alvéoles pulmonaires.</p>
       <p>C'est au niveau des <strong>alvéoles pulmonaires</strong>, entourées de vaisseaux sanguins, que se réalisent les échanges gazeux : le dioxygène passe dans le sang, tandis que le dioxyde de carbone passe du sang vers l'air pour être expiré.</p>
-      <p>Le mouvement de la <strong>cage thoracique</strong> et du diaphragme permet l'inspiration (entrée d'air) et l'expiration (sortie d'air).</p>`,
+      <p>Le mouvement de la <strong>cage thoracique</strong> et du diaphragme permet l'inspiration (entrée d'air) et l'expiration (sortie d'air).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Les échanges gazeux se font au niveau des alvéoles pulmonaires, de minuscules sacs entourés de vaisseaux sanguins : le dioxygène de l'air passe dans le sang, tandis que le dioxyde de carbone du sang passe dans l'air pour être expiré. Plus il y a d'alvéoles (des millions dans chaque poumon), plus la surface d'échange est grande et efficace.</p>`,
       quiz: [
         {q:"La respiration permet d'absorber :", options:["du dioxyde de carbone","du dioxygène","de l'azote pur","de la vapeur d'eau uniquement"], correct:1, exp:"La respiration absorbe le dioxygène nécessaire à l'organisme."},
         {q:"Les échanges gazeux se font au niveau :", options:["de la trachée","des bronches","des alvéoles pulmonaires","du nez"], correct:2, exp:"Les alvéoles pulmonaires, entourées de vaisseaux sanguins, sont le lieu des échanges gazeux."},
@@ -1165,7 +1459,8 @@ svt: {
       title: "La circulation sanguine",
       content: `<p>Le <strong>cœur</strong> est un muscle qui fonctionne comme une pompe, propulsant le sang dans tout l'organisme à travers un réseau de vaisseaux sanguins.</p>
       <p>On distingue les <strong>artères</strong> (transportent le sang du cœur vers les organes, souvent riche en dioxygène), les <strong>veines</strong> (ramènent le sang vers le cœur, souvent chargé en dioxyde de carbone) et les <strong>capillaires</strong> (vaisseaux très fins où se font les échanges avec les cellules).</p>
-      <p>Le <strong>sang</strong> transporte le dioxygène, les nutriments, mais aussi les déchets et le dioxyde de carbone. Il est composé de plasma, de globules rouges (transport de l'O₂), de globules blancs (défense de l'organisme) et de plaquettes (coagulation).</p>`,
+      <p>Le <strong>sang</strong> transporte le dioxygène, les nutriments, mais aussi les déchets et le dioxyde de carbone. Il est composé de plasma, de globules rouges (transport de l'O₂), de globules blancs (défense de l'organisme) et de plaquettes (coagulation).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> La circulation sanguine humaine est dite « double » : la petite circulation relie le cœur aux poumons (pour oxygéner le sang), tandis que la grande circulation relie le cœur à tous les autres organes du corps (pour leur apporter cet oxygène). Le cœur, avec ses quatre cavités, agit comme une double pompe qui assure ces deux circuits.</p>`,
       quiz: [
         {q:"Le cœur fonctionne comme :", options:["un filtre","une pompe","un réservoir uniquement","un capteur"], correct:1, exp:"Le cœur pompe le sang pour le faire circuler dans tout le corps."},
         {q:"Les artères transportent le sang :", options:["des organes vers le cœur","du cœur vers les organes","uniquement dans les poumons","elles ne transportent pas de sang"], correct:1, exp:"Les artères conduisent le sang depuis le cœur vers les différents organes."},
@@ -1180,7 +1475,8 @@ svt: {
       content: `<p>Le <strong>système nerveux</strong> permet de recevoir des informations de l'environnement, de les traiter et de commander une réponse de l'organisme.</p>
       <p>Il comprend le <strong>système nerveux central</strong> (cerveau et moelle épinière) et le <strong>système nerveux périphérique</strong> (les nerfs, qui relient le système central aux organes des sens et aux muscles).</p>
       <p>Un <strong>réflexe</strong> est une réponse rapide et involontaire à un stimulus (ex : retirer sa main d'une plaque chaude), qui passe par la moelle épinière sans nécessiter le traitement conscient du cerveau, ce qui la rend très rapide.</p>
-      <p>Le <strong>cerveau</strong> est le centre de commande volontaire : il gère la pensée, la mémoire, et les mouvements volontaires.</p>`,
+      <p>Le <strong>cerveau</strong> est le centre de commande volontaire : il gère la pensée, la mémoire, et les mouvements volontaires.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Le réflexe est une réponse rapide et involontaire du système nerveux : par exemple, si tu touches accidentellement quelque chose de très chaud, ta main se retire avant même que tu aies eu le temps d'y penser consciemment. C'est le fameux « arc réflexe », qui passe directement par la moelle épinière sans passer par le cerveau, pour gagner en rapidité.</p>`,
       quiz: [
         {q:"Le système nerveux central comprend :", options:["les nerfs uniquement","le cerveau et la moelle épinière","les muscles","les organes des sens"], correct:1, exp:"Le système nerveux central regroupe le cerveau et la moelle épinière."},
         {q:"Un réflexe est une réponse :", options:["lente et volontaire","rapide et involontaire","toujours consciente","impossible à expliquer"], correct:1, exp:"Le réflexe est une réponse rapide et automatique, sans traitement conscient du cerveau."},
@@ -1194,7 +1490,8 @@ svt: {
       title: "Écosystèmes et relations alimentaires",
       content: `<p>Un <strong>écosystème</strong> est formé d'un milieu de vie (biotope) et de l'ensemble des êtres vivants qui y habitent (biocénose), en interaction les uns avec les autres.</p>
       <p>Une <strong>chaîne alimentaire</strong> représente les relations « est mangé par » entre les êtres vivants d'un écosystème, en partant des <strong>producteurs</strong> (végétaux, qui produisent leur matière grâce à la photosynthèse), suivis des <strong>consommateurs</strong> (herbivores, puis carnivores), et enfin des <strong>décomposeurs</strong> (champignons, bactéries) qui recyclent la matière organique morte.</p>
-      <p>Un <strong>réseau alimentaire</strong> regroupe plusieurs chaînes alimentaires en interaction, illustrant la complexité des relations dans un écosystème.</p>`,
+      <p>Un <strong>réseau alimentaire</strong> regroupe plusieurs chaînes alimentaires en interaction, illustrant la complexité des relations dans un écosystème.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Une chaîne alimentaire simple (herbe → gazelle → lion) fait en réalité partie d'un réseau alimentaire plus complexe, où chaque espèce peut avoir plusieurs sources de nourriture et plusieurs prédateurs. À chaque niveau de la chaîne, une grande partie de l'énergie se perd (sous forme de chaleur), ce qui explique pourquoi il y a toujours beaucoup moins de prédateurs que de proies dans un écosystème équilibré.</p>`,
       quiz: [
         {q:"Le biotope désigne :", options:["l'ensemble des êtres vivants","le milieu de vie physique","uniquement les plantes","uniquement les animaux"], correct:1, exp:"Le biotope est le milieu physique (sol, eau, climat) dans lequel vivent les organismes."},
         {q:"Les producteurs dans une chaîne alimentaire sont généralement :", options:["les carnivores","les végétaux","les décomposeurs","les champignons uniquement"], correct:1, exp:"Les végétaux, grâce à la photosynthèse, produisent leur propre matière organique : ce sont les producteurs."},

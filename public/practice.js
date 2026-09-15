@@ -244,6 +244,41 @@ const PRACTICE = {
     { statement:"Translate: 'Ce magasin est trop cher.'", solution:"'This shop is too expensive.'" },
     { statement:"Write a sentence using 'I would like' to order food.", solution:"Example: 'I would like a plate of rice, please.'" }
   ],
+  au1: [
+    { statement:"Put the verb in brackets in the Past Simple: 'Last week, I ___ (dance) for an artist in a big ceremony.'", solution:"'Last week, I <strong>danced</strong> for an artist in a big ceremony.'" },
+    { statement:"Rewrite using 'used to': 'In the past, I ate in the classroom, but I don't do that any more.'", solution:"'In the past, I <strong>used to eat</strong> in the classroom, but I don't do that any more.'" },
+    { statement:"Complete with 'if' or 'unless': 'You will fail your exams ___ you don't work harder.'", solution:"'You will fail your exams <strong>unless</strong> you work harder.' (ou : if you don't work harder)" }
+  ],
+  au2: [
+    { statement:"Turn into reported speech: Jane said: \"Rural women can cook food on firewood.\"", solution:"'Jane said that rural women <strong>could</strong> cook food on firewood.'" },
+    { statement:"Complete with 'have the right to' or 'have the duty to': 'Women ___ express their opinions.'", solution:"'Women <strong>have the right to</strong> express their opinions.'" },
+    { statement:"Write a comparative sentence of equality: 'Girls / skilled / boys.'", solution:"'Girls are <strong>as skilled as</strong> boys.'" }
+  ],
+  au3: [
+    { statement:"Complete: 'When you travel by plane, you ___ (need) a passport.'", solution:"'When you travel by plane, you <strong>need to have</strong> a passport.'" },
+    { statement:"Turn into reported speech: \"My new life in the UK is difficult.\" Aya said.", solution:"'Aya said that <strong>her new life in the UK was difficult</strong>.'" },
+    { statement:"Complete with the right preposition: 'We go to Burkina Faso ___ train.'", solution:"'We go to Burkina Faso <strong>by</strong> train.'" }
+  ],
+  au4: [
+    { statement:"Choose Present Simple or Continuous: 'Look! Seka ___ (wear) a nice T-shirt today.'", solution:"'Look! Seka <strong>is wearing</strong> a nice T-shirt today.'" },
+    { statement:"Turn into the passive voice: 'Tailors make men's clothing from kita.'", solution:"'Men's clothing <strong>is made</strong> from kita <strong>by tailors</strong>.'" },
+    { statement:"Choose Present Perfect or Past Simple: 'Aya ___ (buy) a new dress in Treichville two weeks ago.'", solution:"'Aya <strong>bought</strong> a new dress in Treichville two weeks ago.' (date précise → Past Simple)" }
+  ],
+  au5: [
+    { statement:"Complete: 'I wish I ___ (live) in Abidjan.'", solution:"'I wish I <strong>lived</strong> in Abidjan.'" },
+    { statement:"Rewrite using 'so...that': 'The towns are crowded. People live in bad conditions.'", solution:"'The towns are <strong>so crowded that</strong> people live in bad conditions.'" },
+    { statement:"Write a sentence expressing a feeling using 'feel + adjective'.", solution:"Example: 'Kouao has produced 10 tons of cotton. He feels very proud.'" }
+  ],
+  au6: [
+    { statement:"Write a polite request using 'Can': you want someone to show you their ID card.", solution:"'<strong>Can you show me your ID card?</strong>'" },
+    { statement:"Complete with must / mustn't: 'Citizens ___ pay taxes, but they ___ destroy public services.'", solution:"'Citizens <strong>must</strong> pay taxes, but they <strong>mustn't</strong> destroy public services.'" },
+    { statement:"Complete with 'have got to' or 'has got to': 'Sally ___ practice tolerance.'", solution:"'Sally <strong>has got to</strong> practice tolerance.'" }
+  ],
+  au7: [
+    { statement:"Give advice using 'should': 'Konan doesn't feel well.'", solution:"'Konan doesn't feel well, he <strong>should go to hospital</strong>.'" },
+    { statement:"Turn into the passive voice (present continuous): 'The doctor is taking the patient's temperature.'", solution:"'The patient's temperature <strong>is being taken</strong> by the doctor.'" },
+    { statement:"Make a suggestion using 'Why don't...?': 'Our classroom is dirty.'", solution:"'Our classroom is dirty. <strong>Why don't we clean it?</strong>'" }
+  ],
 
   // ---------- PHYSIQUE-CHIMIE ----------
   p1: [

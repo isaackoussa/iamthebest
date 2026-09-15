@@ -3,11 +3,14 @@
 App de cours et d'évaluations pour la classe de 4ème : Mathématiques, Français, Anglais,
 Physique-Chimie, Histoire-Géographie et SVT.
 
-- 6 matières (77 leçons au total, dont 18 en maths, 17 en français, 12 en anglais, 18 en physique-chimie, 6 en histoire-géo, 6 en SVT)
-- Chaque leçon a un cours rédigé + une évaluation combinant QCM et exercices de pratique ouverts (avec correction)
+- 6 matières (84 leçons au total, dont 18 en maths, 17 en français, 19 en anglais — les 12 leçons de grammaire habituelles + 7 nouvelles leçons "Unit 1 à 7" tirées du programme officiel ivoirien —, 18 en physique-chimie, 6 en histoire-géo, 6 en SVT)
+- Chaque leçon a un cours rédigé (enrichi d'un paragraphe "Pour aller plus loin" pour maths/français/physique-chimie/histoire-géo/SVT, et de leçons "Unit" longues pour l'anglais) + une évaluation combinant QCM et exercices de pratique ouverts (avec correction)
 - Situations d'évaluation par matière (problèmes contextualisés combinant plusieurs leçons)
-- Compte par email : chaque élève entre son email (pas de vérification, juste une identification), et sa progression est enregistrée séparément et synchronisée entre appareils
+- **Générateur d'exercices IA** : sur n'importe quelle matière/leçon (ou un thème libre), génère un nouvel exercice à la demande (QCM ou exercice ouvert), jamais deux fois le même
+- **Traducteur Français ⇄ Anglais** : accessible partout via le menu, et intégré directement dans chaque leçon d'anglais pour traduire un mot ou une phrase de la leçon
+- Compte par email : chaque élève entre son email (pas de vérification, juste une identification), et sa progression (+ notes) est enregistrée séparément et synchronisée entre appareils
 - Assistant IA sur chaque leçon (via l'API Gemini, gratuite)
+- Suivi des notes de devoirs/interrogations/compositions par matière (moyenne simple + moyenne pondérée selon un coefficient libre)
 - Thème "tableau noir / craie", une couleur différente par matière pour repérer facilement chaque cours
 
 ## Structure du projet
@@ -16,12 +19,14 @@ Physique-Chimie, Histoire-Géographie et SVT.
 public/            → tout le site (HTML, CSS, JS, contenu des cours)
   index.html
   style.css
-  app.js            → routage, affichage, gestion du compte
+  app.js            → routage, affichage, gestion du compte, générateur, traducteur
   data.js           → contenu pédagogique (cours + quiz)
   practice.js        → exercices de pratique + situations d'évaluation
 netlify/functions/
-  progress.js       → sauvegarde la progression, par compte (email)
-  ask-ai.js         → assistant IA (via l'API Gemini)
+  progress.js           → sauvegarde la progression + les notes, par compte (email)
+  ask-ai.js             → assistant IA sur chaque leçon (via l'API Gemini)
+  generate-exercise.js  → générateur d'exercices à la demande (via l'API Gemini)
+  translate.js          → traducteur français ⇄ anglais (via l'API Gemini)
 netlify.toml
 package.json
 ```
@@ -39,11 +44,11 @@ Au premier lancement, l'élève entre simplement son email (aucune vérification
 Cet email sert uniquement de clé pour retrouver sa progression : s'il revient plus tard, ou se connecte
 depuis un autre appareil avec le même email, il retrouve automatiquement où il en était.
 
-## Configurer l'assistant IA (Gemini — gratuit)
+## Configurer l'IA (Gemini — gratuit) : assistant, générateur, traducteur
 
-Chaque page de leçon a un petit assistant IA auquel l'élève peut poser une question ; il répond en
-se basant sur le contenu de la leçon. Ça utilise l'API **Gemini** de Google (gratuite, sans carte
-bancaire, via Google AI Studio).
+Trois fonctionnalités partagent la même clé API **Gemini** de Google (gratuite, sans carte
+bancaire, via Google AI Studio) : l'assistant IA sur chaque leçon, le générateur d'exercices et le
+traducteur.
 
 1. Va sur **aistudio.google.com**, connecte-toi avec un compte Google.
 2. Clique sur **Get API key** (ou "Obtenir une clé API") → **Create API key** → copie la clé
@@ -53,8 +58,25 @@ bancaire, via Google AI Studio).
 4. Redéploie le site.
 
 Le plan gratuit de Gemini permet plusieurs centaines de requêtes par jour, largement suffisant pour
-un usage personnel/familial. Si l'assistant ne répond pas, vérifie que la variable est bien
-enregistrée et que le site a été redéployé après son ajout.
+un usage personnel/familial. Si une des trois fonctionnalités ne répond pas, vérifie que la variable
+est bien enregistrée et que le site a été redéployé après son ajout.
+
+## Si le suivi de notes/progression ne se synchronise pas (MissingBlobsEnvironmentError)
+
+Sur certains déploiements, le contexte Netlify Blobs auto-injecté n'atteint pas la fonction
+`progress.js`, même en production depuis GitHub. Si tu vois cette erreur :
+
+1. Sur Netlify, ouvre ton site → **Site settings** → **General** → copie le **Site ID** (ou
+   **API ID**).
+2. Crée un **Personal access token** : Netlify → icône de profil (en haut à droite) →
+   **User settings** → **Applications** → **New access token**.
+3. Ajoute deux variables d'environnement (Site settings → Environment variables) :
+   - `NETLIFY_SITE_ID` — le Site ID copié à l'étape 1.
+   - `NETLIFY_BLOBS_TOKEN` — le token créé à l'étape 2.
+4. Redéploie le site.
+
+`progress.js` utilise ces deux variables en secours dès qu'elles sont présentes, ce qui règle le
+problème dans la grande majorité des cas.
 
 ## Modifier ou ajouter du contenu
 
