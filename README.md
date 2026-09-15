@@ -4,7 +4,7 @@ App de cours et d'évaluations pour la classe de 4ème : Mathématiques, França
 Physique-Chimie, Histoire-Géographie et SVT.
 
 - 6 matières (84 leçons au total, dont 18 en maths, 17 en français, 19 en anglais — les 12 leçons de grammaire habituelles + 7 nouvelles leçons "Unit 1 à 7" tirées du programme officiel ivoirien —, 18 en physique-chimie, 6 en histoire-géo, 6 en SVT)
-- Chaque leçon a un cours rédigé (enrichi d'un paragraphe "Pour aller plus loin" pour maths/français/physique-chimie/histoire-géo/SVT, et de leçons "Unit" longues pour l'anglais) + une évaluation combinant QCM et exercices de pratique ouverts (avec correction)
+- Chaque leçon a un cours rédigé et enrichi en deux temps : un paragraphe "🔎 Pour aller plus loin" (astuce, nuance, piège à éviter) puis une section "📝 Explication détaillée et exemple corrigé" (exemple entièrement résolu ou approfondissement) pour les 77 leçons hors "Unit" — et les 7 leçons "Unit" d'anglais sont déjà rédigées comme de longs cours structurés en plusieurs sous-parties. Chaque leçon se termine par une évaluation combinant QCM et exercices de pratique ouverts (avec correction).
 - Situations d'évaluation par matière (problèmes contextualisés combinant plusieurs leçons)
 - **Générateur d'exercices IA** : sur n'importe quelle matière/leçon (ou un thème libre), génère un nouvel exercice à la demande (QCM ou exercice ouvert), jamais deux fois le même
 - **Traducteur Français ⇄ Anglais** : accessible partout via le menu, et intégré directement dans chaque leçon d'anglais pour traduire un mot ou une phrase de la leçon
@@ -48,7 +48,8 @@ depuis un autre appareil avec le même email, il retrouve automatiquement où il
 
 Trois fonctionnalités partagent la même clé API **Gemini** de Google (gratuite, sans carte
 bancaire, via Google AI Studio) : l'assistant IA sur chaque leçon, le générateur d'exercices et le
-traducteur.
+traducteur. Les trois fonctions Netlify utilisent le modèle **`gemini-3.8-flash`** (Gemini 3), avec
+le nouveau format de sortie structurée (`generationConfig.responseFormat`).
 
 1. Va sur **aistudio.google.com**, connecte-toi avec un compte Google.
 2. Clique sur **Get API key** (ou "Obtenir une clé API") → **Create API key** → copie la clé

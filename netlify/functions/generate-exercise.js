@@ -50,12 +50,12 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
 {"q": "...", "options": ["...","...","...","..."], "correct": 0, "exp": "..."}
 où "correct" est l'index (0 à 3) de la bonne réponse dans "options".`;
     responseSchema = {
-      type: "OBJECT",
+      type: "object",
       properties: {
-        q: { type: "STRING" },
-        options: { type: "ARRAY", items: { type: "STRING" }, minItems: 4, maxItems: 4 },
-        correct: { type: "INTEGER" },
-        exp: { type: "STRING" }
+        q: { type: "string" },
+        options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+        correct: { type: "integer" },
+        exp: { type: "string" }
       },
       required: ["q", "options", "correct", "exp"]
     };
@@ -70,10 +70,10 @@ Le corrigé doit être rédigé en HTML simple (des balises <p>, <strong>, <br> 
 Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exact :
 {"statement": "...", "solution": "..."}`;
     responseSchema = {
-      type: "OBJECT",
+      type: "object",
       properties: {
-        statement: { type: "STRING" },
-        solution: { type: "STRING" }
+        statement: { type: "string" },
+        solution: { type: "string" }
       },
       required: ["statement", "solution"]
     };
@@ -81,7 +81,7 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
 
   try {
     const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
       {
         method: "POST",
         headers: {
@@ -90,12 +90,16 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
         },
         body: JSON.stringify({
           system_instruction: { parts: [{ text: systemInstruction }] },
-          contents: [{ role: "user", parts: [{ text: `Génère l'exercice demandé (matière : ${subjectName}, ${subjectTopic}, difficulté : ${difficulty}).` }] }],
+          contents: [{ role: "user", parts: [{ text: `Génère l'exercice demandé (matière : ${subjectName}, ${subjectTopic}, difficulté : ${difficulty}). Varie le sujet à chaque fois pour ne jamais répéter un exercice précédent.` }] }],
           generationConfig: {
-            maxOutputTokens: 700,
-            temperature: 0.9,
-            responseMimeType: "application/json",
-            responseSchema
+            maxOutputTokens: 900,
+            thinkingConfig: { thinkingLevel: "low" },
+            responseFormat: {
+              text: {
+                mimeType: "application/json",
+                schema: responseSchema
+              }
+            }
           }
         })
       }

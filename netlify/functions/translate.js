@@ -37,7 +37,7 @@ où "note" contient la nature grammaticale et/ou un exemple si pertinent (chaîn
 
   try {
     const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
       {
         method: "POST",
         headers: {
@@ -48,17 +48,21 @@ où "note" contient la nature grammaticale et/ou un exemple si pertinent (chaîn
           system_instruction: { parts: [{ text: systemInstruction }] },
           contents: [{ role: "user", parts: [{ text }] }],
           generationConfig: {
-            maxOutputTokens: 300,
-            temperature: 0.2,
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: "OBJECT",
-              properties: {
-                sourceLang: { type: "STRING" },
-                translation: { type: "STRING" },
-                note: { type: "STRING" }
-              },
-              required: ["sourceLang", "translation", "note"]
+            maxOutputTokens: 350,
+            thinkingConfig: { thinkingLevel: "low" },
+            responseFormat: {
+              text: {
+                mimeType: "application/json",
+                schema: {
+                  type: "object",
+                  properties: {
+                    sourceLang: { type: "string" },
+                    translation: { type: "string" },
+                    note: { type: "string" }
+                  },
+                  required: ["sourceLang", "translation", "note"]
+                }
+              }
             }
           }
         })

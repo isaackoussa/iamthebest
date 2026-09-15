@@ -36,7 +36,7 @@ Garde ta réponse concise (maximum 120 mots), sans formules d'introduction inuti
 
   try {
     const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
       {
         method: "POST",
         headers: {
@@ -46,7 +46,7 @@ Garde ta réponse concise (maximum 120 mots), sans formules d'introduction inuti
         body: JSON.stringify({
           system_instruction: { parts: [{ text: systemInstruction }] },
           contents: [{ role: "user", parts: [{ text: question }] }],
-          generationConfig: { maxOutputTokens: 400, temperature: 0.4 }
+          generationConfig: { maxOutputTokens: 400, thinkingConfig: { thinkingLevel: "low" } }
         })
       }
     );
