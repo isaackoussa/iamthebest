@@ -36,7 +36,11 @@
   /* ---------- Progress state ---------- */
   let progress = loadLocal();
   const LS_GRADES_KEY = "imthebest_grades_v1";
-  let grades = loadGradesLocal(); // { subjectKey: [ {id, type, label, score, outOf, date} ] }
+  const LS_COEFS_KEY = "imthebest_coefs_v1";
+  const LS_SUBJECTS_KEY = "imthebest_subjects_v1";
+  let grades = loadGradesLocal(); // { subjectKey: [ {id, type, label, score, outOf, coef, term, date} ] }
+  let subjectCoefs = loadJsonLocal(LS_COEFS_KEY, {});   // coefficients par matière, modifiables
+  let customSubjects = loadJsonLocal(LS_SUBJECTS_KEY, []); // matières ajoutées par l'élève
 
   function loadLocal(){
     try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
@@ -46,18 +50,30 @@
     try{ return JSON.parse(localStorage.getItem(LS_GRADES_KEY)) || {}; }
     catch(e){ return {}; }
   }
+  function loadJsonLocal(key, fallback){
+    try{
+      const v = JSON.parse(localStorage.getItem(key));
+      return (v && typeof v === "object") ? v : fallback;
+    }catch(e){ return fallback; }
+  }
   function saveLocal(){
     try{ localStorage.setItem(LS_KEY, JSON.stringify(progress)); }catch(e){ /* storage blocked in preview */ }
   }
   function saveGradesLocal(){
     try{ localStorage.setItem(LS_GRADES_KEY, JSON.stringify(grades)); }catch(e){ /* storage blocked in preview */ }
   }
+  function saveNotesConfigLocal(){
+    try{
+      localStorage.setItem(LS_COEFS_KEY, JSON.stringify(subjectCoefs));
+      localStorage.setItem(LS_SUBJECTS_KEY, JSON.stringify(customSubjects));
+    }catch(e){ /* storage blocked in preview */ }
+  }
   function saveRemote(){
     if (!currentEmail) return;
     fetch(`/api/progress?email=${encodeURIComponent(currentEmail)}`, {
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ progress, grades })
+      body: JSON.stringify({ progress, grades, subjectCoefs, customSubjects })
     }).catch(()=>{ /* offline: ok, local storage keeps it */ });
   }
   function loadRemoteThenRender(){
@@ -68,6 +84,17 @@
         const remoteGrades = remote.grades && typeof remote.grades === "object" ? remote.grades : {};
         if (Object.keys(remoteProgress).length){ progress = Object.assign({}, progress, remoteProgress); saveLocal(); }
         if (Object.keys(remoteGrades).length){ grades = Object.assign({}, grades, remoteGrades); saveGradesLocal(); }
+        let cfgChanged = false;
+        if (remote.subjectCoefs && typeof remote.subjectCoefs === "object" && Object.keys(remote.subjectCoefs).length){
+          subjectCoefs = Object.assign({}, subjectCoefs, remote.subjectCoefs); cfgChanged = true;
+        }
+        if (Array.isArray(remote.customSubjects) && remote.customSubjects.length){
+          const seen = {};
+          customSubjects = customSubjects.concat(remote.customSubjects)
+            .filter(s => s && s.key && !seen[s.key] && (seen[s.key] = true));
+          cfgChanged = true;
+        }
+        if (cfgChanged) saveNotesConfigLocal();
       }
     }).catch(()=>{}).finally(render);
   }
@@ -147,7 +174,12 @@
     if (parts[0] === "lesson" && parts[1] && parts[2]) return renderLesson(parts[1], parts[2]);
     if (parts[0] === "quiz" && parts[1] && parts[2]) return renderQuiz(parts[1], parts[2]);
     if (parts[0] === "situations" && parts[1]) return renderSituations(parts[1]);
-    if (parts[0] === "notes" && parts[1]) return renderNotes(parts[1]);
+    if (parts[0] === "notes"){
+      // Ancien lien par matière (#/notes/maths) : on ouvre le tableau global
+      // avec cette matière dépliée.
+      if (parts[1]){ notesOpen = parts[1]; location.hash = "#/notes"; return; }
+      return renderNotesBoard();
+    }
     if (parts[0] === "generator") return renderGenerator(parts[1], parts[2]);
     if (parts[0] === "translate") return renderTranslate();
     return renderHome();
@@ -401,105 +433,335 @@
     { key:"compo", label:"Composition" }
   ];
 
-  function renderNotes(key){
-    const subj = COURSES[key];
-    if (!subj){ root.innerHTML = `<p class="empty">Matière introuvable.</p>`; return; }
-    const list = grades[key] || [];
+  /* ---------- Suivi des notes de classe (toutes matières) ---------- */
 
-    // Statistiques
-    function avgOf(items){
-      if (!items.length) return null;
-      const sum = items.reduce((a, g) => a + (g.score / g.outOf) * 20, 0);
-      return sum / items.length;
-    }
-    const overallAvg = avgOf(list);
-    let weightedSum = 0, weightedCoef = 0;
+  // Matières de 4ème (Côte d'Ivoire) qui n'ont pas de cours dans l'appli mais
+  // comptent dans le bulletin.
+  const EXTRA_SUBJECTS = [
+    { key:"edhc",     name:"EDHC",     color:"#E8A94B", icon:"⚖️" },
+    { key:"eps",      name:"EPS",      color:"#6FD1C7", icon:"🏃" },
+    { key:"espagnol", name:"Espagnol", color:"#E85C8A", icon:"🇪🇸" }
+  ];
+
+  // Coefficients pré-remplis, TOUS modifiables dans l'interface : Français 4,
+  // Maths 4 et Anglais 3 sont les valeurs officielles les plus couramment
+  // citées ; les autres sont des valeurs usuelles à ajuster selon
+  // l'établissement (les tableaux officiels de la DPFC ne sont publiés qu'en
+  // PDF scannés, non vérifiables automatiquement).
+  const DEFAULT_COEFS = { maths:4, francais:4, anglais:3, pc:2, hg:2, svt:2, edhc:1, eps:1, espagnol:2 };
+
+  const TERMS = [
+    { key:1, short:"T1", label:"1er trimestre" },
+    { key:2, short:"T2", label:"2e trimestre" },
+    { key:3, short:"T3", label:"3e trimestre" }
+  ];
+
+  const CUSTOM_COLORS = ["#C98BD6", "#7FB8E8", "#E8C15C", "#6FD18F", "#E89B7F", "#8F9BE8"];
+
+  let notesTerm = 1;     // 1, 2, 3 ou "annee"
+  let notesOpen = null;  // clé de la matière dépliée
+
+  // Liste complète des matières suivies : les 6 de l'appli, puis les matières
+  // de bulletin supplémentaires, puis celles ajoutées par l'élève.
+  function gradeSubjects(){
+    const base = Object.keys(COURSES).map(k => ({
+      key:k, name:COURSES[k].name, color:COURSES[k].color, icon:COURSES[k].icon, inApp:true
+    }));
+    const extra = EXTRA_SUBJECTS.map(s => Object.assign({}, s, { inApp:false }));
+    const custom = customSubjects.map(s => Object.assign({}, s, { inApp:false, custom:true }));
+    return base.concat(extra, custom);
+  }
+  function coefOf(key){
+    const c = subjectCoefs[key];
+    if (typeof c === "number" && c > 0) return c;
+    return DEFAULT_COEFS[key] || 1;
+  }
+  // Les notes saisies avant l'ajout des trimestres sont rattachées au 1er.
+  function notesOf(key, term){
+    return (grades[key] || []).filter(g => (g.term || 1) === term);
+  }
+  function countAllTerms(key){
+    return TERMS.reduce((n, t) => n + notesOf(key, t.key).length, 0);
+  }
+  // Moyenne sur 20, pondérée par le coefficient propre à chaque note.
+  function avg20(list){
+    let sum = 0, coefSum = 0;
     list.forEach(g => {
-      const coef = g.coef && g.coef > 0 ? g.coef : 1;
-      weightedSum += (g.score / g.outOf) * 20 * coef;
-      weightedCoef += coef;
+      const c = g.coef > 0 ? g.coef : 1;
+      sum += (g.score / g.outOf) * 20 * c;
+      coefSum += c;
     });
-    const weightedAvg = weightedCoef ? weightedSum / weightedCoef : null;
+    return coefSum ? sum / coefSum : null;
+  }
+  function subjectTermAvg(key, term){ return avg20(notesOf(key, term)); }
+  // Moyenne annuelle d'une matière = moyenne de ses trimestres déjà notés.
+  function subjectAnnualAvg(key){
+    const vals = TERMS.map(t => subjectTermAvg(key, t.key)).filter(v => v !== null);
+    if (!vals.length) return null;
+    return vals.reduce((a, b) => a + b, 0) / vals.length;
+  }
+  function subjectAvg(key, term){
+    return term === "annee" ? subjectAnnualAvg(key) : subjectTermAvg(key, term);
+  }
+  // Moyenne générale = moyennes des matières pondérées par leurs coefficients
+  // (seules les matières ayant au moins une note sont comptées).
+  function generalAvg(term){
+    let sum = 0, coefSum = 0, noteCount = 0;
+    gradeSubjects().forEach(s => {
+      const avg = subjectAvg(s.key, term);
+      if (avg === null) return;
+      const c = coefOf(s.key);
+      sum += avg * c;
+      coefSum += c;
+      noteCount += term === "annee" ? countAllTerms(s.key) : notesOf(s.key, term).length;
+    });
+    return { avg: coefSum ? sum / coefSum : null, coefSum, noteCount };
+  }
+  function appreciation(avg){
+    if (avg === null) return "";
+    if (avg >= 16) return "Excellent";
+    if (avg >= 14) return "Très bien";
+    if (avg >= 12) return "Bien";
+    if (avg >= 10) return "Assez bien";
+    if (avg >= 8) return "Insuffisant";
+    return "Très insuffisant";
+  }
+  function fmtAvg(v){ return v === null ? "—" : v.toFixed(2).replace(".", ","); }
+  function termLabel(term){
+    if (term === "annee") return "année";
+    const t = TERMS.find(x => x.key === term);
+    return t ? t.label : "trimestre";
+  }
 
-    const statsHtml = NOTE_TYPES.map(t => {
-      const items = list.filter(g => g.type === t.key);
-      const avg = avgOf(items);
-      return `<div class="notes-stat"><span class="num">${avg !== null ? avg.toFixed(1) : "—"}</span><span class="label">${t.label} (${items.length})</span></div>`;
+  function renderNotesBoard(){
+    const isYear = notesTerm === "annee";
+    const g = generalAvg(notesTerm);
+
+    const tabsHtml =
+      TERMS.map(t => `<button class="term-tab ${notesTerm === t.key ? "active" : ""}" data-term="${t.key}">${t.short}</button>`).join("") +
+      `<button class="term-tab ${isYear ? "active" : ""}" data-term="annee">Année</button>`;
+
+    const rowsHtml = gradeSubjects().map(s => {
+      const avg = subjectAvg(s.key, notesTerm);
+      const count = isYear ? countAllTerms(s.key) : notesOf(s.key, notesTerm).length;
+      const open = !isYear && notesOpen === s.key;
+      const perTerm = isYear
+        ? `<span class="grade-terms">${TERMS.map(t => `${t.short}&nbsp;${fmtAvg(subjectTermAvg(s.key, t.key))}`).join(" · ")}</span>`
+        : "";
+      return `
+        <li class="grade-item ${open ? "open" : ""}" style="--subj-color:${s.color}">
+          <div class="grade-row" data-subject="${s.key}">
+            <span class="grade-icon">${s.icon}</span>
+            <span class="grade-name">
+              <span class="grade-name-text">${esc(s.name)}${s.inApp ? "" : ` <span class="grade-tag">bulletin</span>`}</span>
+              ${perTerm}
+            </span>
+            <span class="grade-coef">
+              <label for="coef-${s.key}">coef.</label>
+              <input type="number" class="coef-input" id="coef-${s.key}" data-coef="${s.key}" value="${coefOf(s.key)}" min="0.5" step="0.5" title="Coefficient de ${esc(s.name)}">
+            </span>
+            <span class="grade-count">${count} note${count > 1 ? "s" : ""}</span>
+            <span class="grade-avg ${avg !== null && avg < 10 ? "low" : ""}">${fmtAvg(avg)}<small>/20</small></span>
+            ${s.custom ? `<button class="subject-delete" data-delsubject="${s.key}" title="Retirer cette matière">✕</button>` : ""}
+            ${isYear ? "" : `<span class="grade-chevron">${open ? "▾" : "▸"}</span>`}
+          </div>
+          ${open ? renderSubjectPanel(s) : ""}
+        </li>`;
     }).join("");
 
-    const rowsHtml = list.length ? list.slice().reverse().map(g => {
-      const t = NOTE_TYPES.find(nt => nt.key === g.type);
-      const coef = g.coef && g.coef > 0 ? g.coef : 1;
-      return `
-        <li class="note-row">
-          <span class="note-type-badge" style="--subj-color:${subj.color}">${t ? t.label : g.type}</span>
-          <span class="note-info">
-            <span class="note-label">${esc(g.label || t.label)}</span>
-            ${g.date ? `<span class="note-date">${esc(g.date)}</span>` : ""}
-          </span>
-          <span class="note-coef">coef. ${coef}</span>
-          <span class="note-score">${g.score}/${g.outOf}</span>
-          <button class="note-delete" data-id="${g.id}" title="Supprimer">✕</button>
-        </li>`;
-    }).join("") : `<p class="empty">Aucune note enregistrée pour l'instant.</p>`;
-
     root.innerHTML = `
-      <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <a href="#/subject/${key}">${esc(subj.name)}</a> <span>/</span> <span>Mes notes</span></div>
-      <div class="subject-header" style="--subj-color:${subj.color}">
-        <span class="sh-icon">📔</span>
-        <h1 style="--subj-color:${subj.color}">Mes notes — ${esc(subj.name)}</h1>
-      </div>
-      <div class="notes-board">
-        <div class="notes-stat notes-stat-main"><span class="num">${overallAvg !== null ? overallAvg.toFixed(1) : "—"}/20</span><span class="label">Moyenne simple</span></div>
-        <div class="notes-stat notes-stat-main"><span class="num">${weightedAvg !== null ? weightedAvg.toFixed(1) : "—"}/20</span><span class="label">Moyenne pondérée (selon tes coefficients)</span></div>
-        ${statsHtml}
+      <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <span>Mes notes</span></div>
+      <div class="subject-header" style="--subj-color:var(--gold)">
+        <span class="sh-icon">📊</span>
+        <h1 style="--subj-color:var(--gold)">Suivi des notes — 4ème</h1>
       </div>
 
-      <div class="note-form" style="--subj-color:${subj.color}">
-        <div class="note-form-row">
-          <select id="note-type" class="auth-input note-select">
-            ${NOTE_TYPES.map(t => `<option value="${t.key}">${t.label}</option>`).join("")}
-          </select>
-          <input type="text" id="note-label" class="auth-input note-label-input" placeholder="Libellé (optionnel, ex : Chapitre fractions)">
+      <div class="term-tabs">${tabsHtml}</div>
+
+      <div class="gen-avg-card ${g.avg !== null && g.avg < 10 ? "low" : ""}">
+        <div class="gen-avg-main">
+          <span class="gen-avg-num">${fmtAvg(g.avg)}<small>/20</small></span>
+          <span class="gen-avg-label">Moyenne générale — ${termLabel(notesTerm)}</span>
         </div>
-        <div class="note-form-row">
-          <input type="number" id="note-score" class="auth-input note-num" placeholder="Note obtenue" min="0" step="0.5">
-          <span class="note-slash">/</span>
-          <input type="number" id="note-outof" class="auth-input note-num" placeholder="Sur" value="20" min="1" step="0.5">
-          <input type="number" id="note-coef" class="auth-input note-num" placeholder="Coef." value="1" min="0.5" step="0.5" title="Coefficient de cette note">
-          <input type="date" id="note-date" class="auth-input note-date-input">
+        <div class="gen-avg-meta">
+          <span>${g.noteCount} note${g.noteCount > 1 ? "s" : ""}</span>
+          <span>total coef. ${g.coefSum}</span>
+          ${g.avg !== null ? `<span class="gen-avg-appr">${appreciation(g.avg)}</span>` : ""}
         </div>
-        <button class="btn btn-primary" id="add-note-btn" style="--subj-color:${subj.color}">➕ Ajouter la note</button>
-        <p class="note-error" id="note-error"></p>
       </div>
 
-      <ul class="note-list">${rowsHtml}</ul>
+      <ul class="grade-list">${rowsHtml}</ul>
+
+      <div class="add-subject">
+        <input type="text" class="auth-input" id="new-subject" placeholder="Ajouter une matière (ex : Allemand, Arts plastiques, Musique)">
+        <button class="btn btn-ghost" id="add-subject-btn">➕ Ajouter</button>
+      </div>
+      <p class="note-error" id="subject-error"></p>
+
+      <p class="notes-foot">
+        ${isYear
+          ? "La moyenne annuelle d'une matière est la moyenne de ses trimestres déjà notés."
+          : "Clique sur une matière pour saisir ses notes du trimestre."}
+        Les coefficients sont pré-remplis à titre indicatif (Français&nbsp;4, Maths&nbsp;4, Anglais&nbsp;3 sont les valeurs les plus couramment retenues) :
+        <strong>vérifie-les sur le bulletin</strong> et corrige-les directement dans le tableau si ton établissement en utilise d'autres.
+      </p>
     `;
 
-    document.getElementById("add-note-btn").addEventListener("click", () => {
-      const type = document.getElementById("note-type").value;
-      const label = document.getElementById("note-label").value.trim();
-      const score = parseFloat(document.getElementById("note-score").value);
-      const outOf = parseFloat(document.getElementById("note-outof").value) || 20;
-      const coef = parseFloat(document.getElementById("note-coef").value) || 1;
-      const date = document.getElementById("note-date").value;
-      const errEl = document.getElementById("note-error");
-
-      if (isNaN(score) || score < 0 || outOf <= 0 || score > outOf){
-        errEl.textContent = "Entre une note valide (ex : 14 sur 20).";
-        return;
-      }
-      errEl.textContent = "";
-      addGrade(key, { id: Date.now() + "-" + Math.floor(Math.random()*1000), type, label, score, outOf, coef, date });
-      renderNotes(key);
-    });
-
-    root.querySelectorAll(".note-delete").forEach(btn => {
+    // Changement de trimestre
+    root.querySelectorAll(".term-tab").forEach(btn => {
       btn.addEventListener("click", () => {
-        deleteGrade(key, btn.dataset.id);
-        renderNotes(key);
+        const v = btn.dataset.term;
+        notesTerm = v === "annee" ? "annee" : parseInt(v, 10);
+        renderNotesBoard();
       });
     });
+
+    // Plier / déplier une matière (sans réagir aux clics sur le champ coefficient)
+    root.querySelectorAll(".grade-row").forEach(row => {
+      row.addEventListener("click", e => {
+        if (e.target.closest(".coef-input") || e.target.closest(".subject-delete")) return;
+        if (notesTerm === "annee") return;
+        const key = row.dataset.subject;
+        notesOpen = notesOpen === key ? null : key;
+        renderNotesBoard();
+      });
+    });
+
+    // Modification d'un coefficient de matière
+    root.querySelectorAll(".coef-input").forEach(input => {
+      input.addEventListener("change", () => {
+        const key = input.dataset.coef;
+        const v = parseFloat(input.value);
+        if (!isNaN(v) && v > 0){
+          subjectCoefs[key] = v;
+          saveNotesConfigLocal();
+          saveRemote();
+        }
+        renderNotesBoard();
+      });
+    });
+
+    // Ajout d'une note dans la matière dépliée
+    const addBtn = document.getElementById("nf-add");
+    if (addBtn){
+      addBtn.addEventListener("click", () => {
+        const key = addBtn.dataset.subject;
+        const errEl = document.getElementById("nf-error");
+        const score = parseFloat(document.getElementById("nf-score").value);
+        const outOf = parseFloat(document.getElementById("nf-outof").value) || 20;
+        const coef = parseFloat(document.getElementById("nf-coef").value) || 1;
+        if (isNaN(score) || score < 0 || outOf <= 0 || score > outOf){
+          errEl.textContent = "Entre une note valide (ex : 14 sur 20).";
+          return;
+        }
+        addGrade(key, {
+          id: Date.now() + "-" + Math.floor(Math.random() * 1000),
+          type: document.getElementById("nf-type").value,
+          label: document.getElementById("nf-label").value.trim(),
+          score, outOf, coef,
+          term: notesTerm,
+          date: document.getElementById("nf-date").value
+        });
+        renderNotesBoard();
+      });
+    }
+
+    // Suppression d'une note
+    root.querySelectorAll(".note-delete").forEach(btn => {
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        deleteGrade(btn.dataset.subject, btn.dataset.del);
+        renderNotesBoard();
+      });
+    });
+
+    // Ajout d'une matière personnalisée
+    const addSubjBtn = document.getElementById("add-subject-btn");
+    if (addSubjBtn){
+      const doAdd = () => {
+        const input = document.getElementById("new-subject");
+        const errEl = document.getElementById("subject-error");
+        const name = (input.value || "").trim();
+        if (!name){ errEl.textContent = "Écris le nom de la matière à ajouter."; return; }
+        const exists = gradeSubjects().some(s => s.name.toLowerCase() === name.toLowerCase());
+        if (exists){ errEl.textContent = "Cette matière est déjà dans la liste."; return; }
+        errEl.textContent = "";
+        customSubjects.push({
+          key: "x-" + Date.now().toString(36),
+          name,
+          color: CUSTOM_COLORS[customSubjects.length % CUSTOM_COLORS.length],
+          icon: "📘"
+        });
+        saveNotesConfigLocal();
+        saveRemote();
+        renderNotesBoard();
+      };
+      addSubjBtn.addEventListener("click", doAdd);
+      document.getElementById("new-subject").addEventListener("keydown", e => {
+        if (e.key === "Enter") doAdd();
+      });
+    }
+
+    // Retrait d'une matière personnalisée (refusé si elle contient des notes)
+    root.querySelectorAll(".subject-delete").forEach(btn => {
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        const key = btn.dataset.delsubject;
+        const errEl = document.getElementById("subject-error");
+        if (countAllTerms(key) > 0){
+          errEl.textContent = "Supprime d'abord les notes de cette matière avant de la retirer.";
+          return;
+        }
+        customSubjects = customSubjects.filter(s => s.key !== key);
+        if (notesOpen === key) notesOpen = null;
+        saveNotesConfigLocal();
+        saveRemote();
+        renderNotesBoard();
+      });
+    });
+  }
+
+  // Panneau de saisie des notes d'une matière, pour le trimestre affiché.
+  function renderSubjectPanel(s){
+    const list = notesOf(s.key, notesTerm);
+    const rows = list.length ? list.slice().reverse().map(gr => {
+      const t = NOTE_TYPES.find(nt => nt.key === gr.type);
+      const c = gr.coef > 0 ? gr.coef : 1;
+      return `
+        <li class="note-row">
+          <span class="note-type-badge" style="--subj-color:${s.color}">${t ? t.label : esc(gr.type)}</span>
+          <span class="note-info">
+            <span class="note-label">${esc(gr.label || (t ? t.label : ""))}</span>
+            ${gr.date ? `<span class="note-date">${esc(gr.date)}</span>` : ""}
+          </span>
+          <span class="note-coef">coef. ${c}</span>
+          <span class="note-score">${gr.score}/${gr.outOf}</span>
+          <button class="note-delete" data-del="${gr.id}" data-subject="${s.key}" title="Supprimer">✕</button>
+        </li>`;
+    }).join("") : `<p class="empty">Aucune note pour ce trimestre.</p>`;
+
+    return `
+      <div class="grade-panel">
+        <div class="note-form" style="--subj-color:${s.color}">
+          <div class="note-form-row">
+            <select class="auth-input note-select" id="nf-type">
+              ${NOTE_TYPES.map(t => `<option value="${t.key}">${t.label}</option>`).join("")}
+            </select>
+            <input type="text" class="auth-input note-label-input" id="nf-label" placeholder="Libellé (optionnel, ex : Devoir n°2)">
+          </div>
+          <div class="note-form-row">
+            <input type="number" class="auth-input note-num" id="nf-score" placeholder="Note" min="0" step="0.25">
+            <span class="note-slash">/</span>
+            <input type="number" class="auth-input note-num" id="nf-outof" value="20" min="1" step="0.5" title="Note sur">
+            <span class="note-slash">coef.</span>
+            <input type="number" class="auth-input note-num" id="nf-coef" value="1" min="0.5" step="0.5" title="Coefficient de cette note">
+            <input type="date" class="auth-input note-date-input" id="nf-date">
+          </div>
+          <button class="btn btn-primary" id="nf-add" data-subject="${s.key}" style="--subj-color:${s.color}">➕ Ajouter la note</button>
+          <p class="note-error" id="nf-error"></p>
+        </div>
+        <ul class="note-list">${rows}</ul>
+      </div>`;
   }
 
   /* ---------- Générateur d'exercices IA ---------- */

@@ -284,6 +284,85 @@ button{font-family:inherit;}
 .situations-link{margin-bottom:16px; display:inline-flex;}
 .subject-links{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
 
+/* ============ Suivi des notes — tableau toutes matières ============ */
+.term-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
+.term-tab{
+  font:inherit; cursor:pointer; padding:8px 18px; border-radius:999px;
+  background:transparent; color:var(--ink-muted);
+  border:1.5px dashed var(--line-strong); transition:all .15s ease;
+}
+.term-tab:hover{color:var(--ink-chalk); border-color:var(--gold);}
+.term-tab.active{
+  background:var(--gold); color:#12251F; border-style:solid; border-color:var(--gold); font-weight:600;
+}
+
+.gen-avg-card{
+  display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap;
+  padding:18px 22px; margin-bottom:22px;
+  border-radius:var(--radius); background:var(--bg-panel);
+  border:1.5px solid color-mix(in srgb, var(--gold) 55%, transparent);
+}
+.gen-avg-main{display:flex; flex-direction:column; gap:2px;}
+.gen-avg-num{font-family:'JetBrains Mono', monospace; font-weight:600; font-size:2.1rem; color:var(--gold); line-height:1.1;}
+.gen-avg-num small{font-size:0.95rem; color:var(--ink-muted); font-weight:400;}
+.gen-avg-label{font-size:0.78rem; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.06em;}
+.gen-avg-meta{display:flex; gap:14px; flex-wrap:wrap; align-items:center; font-size:0.85rem; color:var(--ink-muted);}
+.gen-avg-appr{
+  padding:4px 12px; border-radius:999px; font-weight:600; color:#12251F;
+  background:color-mix(in srgb, var(--gold) 80%, transparent);
+}
+.gen-avg-card.low{border-color:color-mix(in srgb, #E8735C 60%, transparent);}
+.gen-avg-card.low .gen-avg-num{color:#E8735C;}
+.gen-avg-card.low .gen-avg-appr{background:color-mix(in srgb, #E8735C 80%, transparent); color:#2A1512;}
+
+.grade-list{list-style:none; margin:0 0 20px; padding:0; display:flex; flex-direction:column; gap:8px;}
+.grade-item{
+  border-radius:var(--radius); background:var(--bg-panel);
+  border:1px solid var(--line); overflow:hidden; transition:border-color .15s ease;
+}
+.grade-item:hover{border-color:color-mix(in srgb, var(--subj-color, var(--gold)) 50%, transparent);}
+.grade-item.open{border-color:var(--subj-color, var(--gold));}
+.grade-row{
+  display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer;
+  border-left:4px solid var(--subj-color, var(--gold));
+}
+.grade-icon{font-size:1.25rem; flex-shrink:0;}
+.grade-name{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;}
+.grade-name-text{color:var(--ink-chalk); font-weight:600;}
+.grade-tag{
+  font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:600;
+  color:var(--ink-muted); border:1px solid var(--line-strong); border-radius:999px; padding:1px 7px; vertical-align:middle;
+}
+.grade-terms{font-family:'JetBrains Mono', monospace; font-size:0.76rem; color:var(--ink-muted);}
+.grade-coef{display:flex; align-items:center; gap:6px; flex-shrink:0;}
+.grade-coef label{font-size:0.75rem; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.05em;}
+.coef-input{
+  width:62px; margin-bottom:0; padding:5px 8px; text-align:center;
+  font-family:'JetBrains Mono', monospace; font-size:0.9rem;
+}
+.grade-count{font-size:0.78rem; color:var(--ink-muted); flex-shrink:0; min-width:64px; text-align:right;}
+.grade-avg{
+  font-family:'JetBrains Mono', monospace; font-weight:600; font-size:1.1rem;
+  color:var(--ink-chalk); flex-shrink:0; min-width:78px; text-align:right;
+}
+.grade-avg small{font-size:0.72rem; color:var(--ink-muted); font-weight:400;}
+.grade-avg.low{color:#E8735C;}
+.grade-chevron{color:var(--ink-muted); flex-shrink:0; width:14px; text-align:center;}
+.subject-delete{
+  background:none; border:none; color:var(--ink-muted); cursor:pointer;
+  font-size:0.95rem; padding:2px 6px; flex-shrink:0;
+}
+.subject-delete:hover{color:#E8735C;}
+.grade-panel{padding:0 16px 16px; border-top:1px dashed var(--line);}
+.grade-panel .note-form{margin:16px 0 16px;}
+
+.add-subject{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:6px;}
+.add-subject .auth-input{flex:1; min-width:220px; margin-bottom:0; text-align:left;}
+.notes-foot{font-size:0.85rem; color:var(--ink-muted); line-height:1.6; margin-top:16px;}
+
+
+}
+
 /* ============ Notes de classe ============ */
 .notes-board{
   display:flex; gap:16px; flex-wrap:wrap; margin-bottom:22px;
@@ -439,3 +518,26 @@ button{font-family:inherit;}
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important; scroll-behavior:auto !important;}
 }
+
+/* Ajustements mobile du suivi des notes — placés en fin de feuille
+   pour passer après les règles de base qu'ils doivent surcharger. */
+@media (max-width:640px){
+  .grade-row{flex-wrap:wrap; gap:8px 10px;}
+  .grade-name{flex:1 1 100%; order:-1;}
+  .grade-count{min-width:0;}
+  .gen-avg-num{font-size:1.7rem;}
+
+  /* Sur mobile, une note passe sur deux lignes : repères en haut,
+     libellé et date en dessous (sinon le texte chevauche la note). */
+  .note-row{flex-wrap:wrap; gap:6px 10px;}
+  .note-type-badge{order:1;}
+  .note-coef{order:2;}
+  .note-score{order:3; margin-left:auto;}
+  .note-delete{order:4;}
+  .note-info{order:5; flex:1 1 100%; min-width:0;}
+  .note-label{overflow-wrap:anywhere;}
+  .note-date{white-space:nowrap;}
+
+  .note-form-row{gap:8px;}
+  .note-select, .note-label-input, .note-date-input{flex:1 1 100%;}
+  .note-num{flex:1 1 72px; min-width:0;}
