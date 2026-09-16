@@ -109,12 +109,12 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
 {"q": "...", "options": ["...","...","...","..."], "correct": 0, "exp": "..."}
 où "correct" est l'index (0 à 3) de la bonne réponse dans "options".`;
     responseSchema = {
-      type: "object",
+      type: "OBJECT",
       properties: {
-        q: { type: "string" },
-        options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
-        correct: { type: "integer" },
-        exp: { type: "string" }
+        q: { type: "STRING" },
+        options: { type: "ARRAY", items: { type: "STRING" }, minItems: 4, maxItems: 4 },
+        correct: { type: "INTEGER" },
+        exp: { type: "STRING" }
       },
       required: ["q", "options", "correct", "exp"]
     };
@@ -131,10 +131,10 @@ IMPORTANT — format du texte : n'utilise JAMAIS de notation LaTeX (pas de \`$..
 Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exact :
 {"statement": "...", "solution": "..."}`;
     responseSchema = {
-      type: "object",
+      type: "OBJECT",
       properties: {
-        statement: { type: "string" },
-        solution: { type: "string" }
+        statement: { type: "STRING" },
+        solution: { type: "STRING" }
       },
       required: ["statement", "solution"]
     };
@@ -155,12 +155,8 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
           generationConfig: {
             maxOutputTokens: 900,
             thinkingConfig: { thinkingLevel: "low" },
-            responseFormat: {
-              text: {
-                mimeType: "application/json",
-                schema: responseSchema
-              }
-            }
+            responseMimeType: "application/json",
+            responseSchema: responseSchema
           }
         })
       }
