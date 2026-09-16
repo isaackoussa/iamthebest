@@ -696,7 +696,7 @@ const LOCAL_GEN = (function(){
            ${math(`B(${bx};${by})`)},
            ${math(`C(${cx};${cy})`)}
            et
-           ${math(`D(${dx};${dy}`)}).
+           ${math(`D(${dx};${dy})`)}).
            Montre que ${math("ABCD")}
            est un parallélogramme.`,
 

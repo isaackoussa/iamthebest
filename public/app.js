@@ -225,20 +225,170 @@
     return text;
   }
 
-  // ==========================================================
+    // ==========================================================
   // MATHJAX
   // ==========================================================
+
+  /*
+    Chargement automatique de MathJax.
+
+    Permet d'afficher correctement :
+
+    $(6 \times 10^{5}) \times (6 \times 10^{3})$
+
+    $\frac{3}{4}$
+
+    $x^2 + y^2 = z^2$
+
+    $H_2O$
+
+    $AB \perp CD$
+
+    ainsi que :
+
+    $$x^2 + y^2 = z^2$$
+
+    \[x^2 + y^2 = z^2\]
+  */
+
+  let mathJaxLoading = null;
+
+  function loadMathJax() {
+
+    // MathJax est déjà chargé
+    if (
+      window.MathJax &&
+      window.MathJax.startup &&
+      window.MathJax.startup.promise
+    ) {
+      return window.MathJax.startup.promise;
+    }
+
+    // Chargement déjà lancé
+    if (mathJaxLoading) {
+      return mathJaxLoading;
+    }
+
+    // Configuration MathJax AVANT le chargement du script
+    window.MathJax = {
+
+      tex: {
+
+        inlineMath: [
+          ["\\(", "\\)"],
+          ["$", "$"]
+        ],
+
+        displayMath: [
+          ["\\[", "\\]"],
+          ["$$", "$$"]
+        ],
+
+        processEscapes: true,
+        processEnvironments: true
+
+      },
+
+      options: {
+
+        skipHtmlTags: [
+          "script",
+          "noscript",
+          "style",
+          "textarea",
+          "pre",
+          "code"
+        ]
+
+      },
+
+      startup: {
+
+        typeset: false
+
+      }
+
+    };
+
+    mathJaxLoading =
+      new Promise(function (resolve, reject) {
+
+        const script =
+          document.createElement("script");
+
+        script.src =
+          "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+
+        script.async = true;
+
+        script.onload = function () {
+
+          if (
+            window.MathJax &&
+            window.MathJax.startup &&
+            window.MathJax.startup.promise
+          ) {
+
+            window.MathJax.startup.promise
+              .then(function () {
+
+                resolve();
+
+              })
+              .catch(function (error) {
+
+                console.warn(
+                  "Erreur lors de l'initialisation de MathJax.",
+                  error
+                );
+
+                reject(error);
+
+              });
+
+          } else {
+
+            resolve();
+
+          }
+
+        };
+
+        script.onerror = function () {
+
+          console.error(
+            "Impossible de charger MathJax."
+          );
+
+          reject(
+            new Error(
+              "MathJax unavailable"
+            )
+          );
+
+        };
+
+        document.head.appendChild(script);
+
+      });
+
+    return mathJaxLoading;
+  }
+
 
   function typesetMath(container) {
 
     if (!container) return;
 
-    function run() {
+    loadMathJax()
+      .then(function () {
 
-      if (
-        window.MathJax &&
-        typeof window.MathJax.typesetPromise === "function"
-      ) {
+        if (
+          !window.MathJax ||
+          typeof window.MathJax.typesetPromise !== "function"
+        ) {
+          return;
+        }
 
         try {
 
@@ -246,12 +396,16 @@
             typeof window.MathJax.typesetClear === "function"
           ) {
 
-            window.MathJax.typesetClear([container]);
+            window.MathJax.typesetClear([
+              container
+            ]);
+
           }
 
-          window.MathJax
-            .typesetPromise([container])
-            .catch(function () {});
+          return window.MathJax
+            .typesetPromise([
+              container
+            ]);
 
         } catch (error) {
 
@@ -261,27 +415,18 @@
           );
 
         }
-      }
-    }
 
-    if (
-      window.MathJax &&
-      window.MathJax.startup &&
-      window.MathJax.startup.promise
-    ) {
+      })
+      .catch(function (error) {
 
-      window.MathJax.startup.promise
-        .then(run)
-        .catch(function () {
-          setTimeout(run, 500);
-        });
+        console.warn(
+          "MathJax indisponible.",
+          error
+        );
 
-    } else {
+      });
 
-      setTimeout(run, 700);
-    }
   }
-
   // ==========================================================
   // AUTHENTIFICATION
   // ==========================================================
