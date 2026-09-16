@@ -1,768 +1,216 @@
-// ============================================================
-// GÉNÉRATEUR D'EXERCICES À LA DEMANDE VIA GEMINI
-// ============================================================
+// Générateur d'exercices à la demande (via l'API Gemini)
 
-const GEMINI_MODEL = "gemini-3.8-flash";
-const GEMINI_URL =
-  `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
-
-
-// ------------------------------------------------------------
-// Pause
-// ------------------------------------------------------------
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+// Nettoie le texte renvoyé par l'IA : supprime toute notation LaTeX (l'appli n'a pas de moteur
+// de rendu LaTeX/MathJax, donc $...$, \(...\), \frac{}{} etc. s'afficheraient tels quels, en
+// caractères bruts, au lieu d'un rendu mathématique) et la convertit en notation texte simple
+// cohérente avec le reste de l'appli (×, ÷, ^8, √(...), 1/2...).
+function stripLatex(s) {
+  if (typeof s !== "string") return s;
+  return s
+    .replace(/\$\$([^$]+)\$\$/g, "$1")
+    .replace(/\$([^$]+)\$/g, "$1")
+    .replace(/\\\(/g, "").replace(/\\\)/g, "")
+    .replace(/\\\[/g, "").replace(/\\\]/g, "")
+    .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, "$1/$2")
+    .replace(/\\sqrt\{([^{}]*)\}/g, "√($1)")
+    .replace(/\\times/g, "×")
+    .replace(/\\div/g, "÷")
+    .replace(/\\cdot/g, "×")
+    .replace(/\\pm/g, "±")
+    .replace(/\\leq/g, "≤")
+    .replace(/\\geq/g, "≥")
+    .replace(/\\neq/g, "≠")
+    .replace(/\\approx/g, "≈")
+    .replace(/\^\{([^{}]*)\}/g, "^$1")
+    .replace(/_\{([^{}]*)\}/g, "_$1")
+    .replace(/\\text\{([^{}]*)\}/g, "$1")
+    .replace(/\\mathrm\{([^{}]*)\}/g, "$1")
+    .replace(/\\([a-zA-Z]+)/g, "$1") // toute autre commande LaTeX oubliée -> on garde juste le mot
+    .replace(/\{([^{}]*)\}/g, "$1")  // accolades LaTeX restantes -> on les retire
+    .trim();
 }
 
+// Retire un préfixe de type "A)", "A.", "A -", "* " que l'IA ajoute parfois devant une option,
+// en plus de la lettre déjà affichée par l'interface (ce qui produisait une double lettre).
+function stripOptionPrefix(s) {
+  if (typeof s !== "string") return s;
+  return s
+    .replace(/^\s*[*\-•]\s*/, "")
+    .replace(/^\s*[A-Da-d]\s*[\)\.\:]\s*/, "")
+    .replace(/^\s*[A-Da-d](?=[0-9(\\$])\s*/, "") // ex : "A\(7..." ou "A7..." collé sans séparateur
+    .trim();
+}
 
-// ------------------------------------------------------------
-// Appel Gemini avec retry automatique
-// ------------------------------------------------------------
+function cleanExercise(type, exercise) {
+  if (type === "qcm") {
+    exercise.q = stripLatex(exercise.q);
+    // on retire un éventuel préfixe de lettre avant ET après avoir nettoyé le LaTeX
+    // (ex : "A\(7 \times 10^{8}\)" -> "A7 × 10^8" après nettoyage LaTeX -> "7 × 10^8")
+    exercise.options = exercise.options.map(o => stripOptionPrefix(stripLatex(stripOptionPrefix(o))));
+    exercise.exp = stripLatex(exercise.exp);
+  } else {
+    exercise.statement = stripLatex(exercise.statement);
+    exercise.solution = stripLatex(exercise.solution);
+  }
+  return exercise;
+}
 
-async function callGeminiWithRetry(apiKey, payload) {
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method not allowed" };
+  }
 
-  const maxAttempts = 3;
+  let body = {};
+  try { body = JSON.parse(event.body || "{}"); } catch (e) { /* ignore */ }
 
-  let lastResponse = null;
-  let lastDetails = "";
+  const subjectName = (body.subjectName || "").trim();
+  const lessonTitle = (body.lessonTitle || "").trim();
+  const lessonText = (body.lessonText || "").trim().slice(0, 4000);
+  const topic = (body.topic || "").trim().slice(0, 200);
+  const type = body.type === "open" ? "open" : "qcm";
+  const difficulty = ["facile", "moyen", "difficile"].includes(body.difficulty) ? body.difficulty : "moyen";
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+  if (!subjectName || (!lessonTitle && !topic)) {
+    return { statusCode: 400, body: JSON.stringify({ error: "Matière et leçon (ou thème) requis" }) };
+  }
 
-    try {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Générateur non configuré (GEMINI_API_KEY manquante)" })
+    };
+  }
 
-      const response = await fetch(GEMINI_URL, {
+  const subjectTopic = lessonTitle ? `la leçon "${lessonTitle}"` : `le thème "${topic}"`;
+  const contextBlock = lessonText
+    ? `Voici le contenu de la leçon pour te servir de référence :\n---\n${lessonText}\n---\n`
+    : "";
+
+  const difficultyHint = {
+    facile: "facile (vérifie une notion de base, sans piège)",
+    moyen: "moyenne (demande de combiner deux idées de la leçon)",
+    difficile: "difficile (demande un raisonnement plus poussé ou un cas particulier)"
+  }[difficulty];
+
+  let systemInstruction, responseSchema;
+
+  if (type === "qcm") {
+    systemInstruction = `Tu es un professeur de collège en Côte d'Ivoire qui prépare une question à choix multiples (QCM)
+pour un(e) élève de 4ème (13-14 ans), en ${subjectName}, sur ${subjectTopic}.
+${contextBlock}
+Génère UNE SEULE question de difficulté ${difficultyHint}, originale (pas une question déjà classique et trop connue),
+avec exactement 4 propositions de réponse dont une seule est correcte, et une explication courte et claire de la bonne réponse.
+Si la matière est l'anglais, rédige la question et les options en anglais (l'explication peut être en français).
+IMPORTANT — format du texte : n'utilise JAMAIS de notation LaTeX (pas de \`$...$\`, \`\\(...\\)\`, \`\\frac{}{}\`, \`\\times\`, accolades \`{}\`, etc.) car le texte est affiché tel quel, sans moteur de rendu mathématique.
+Écris les maths en texte brut simple : × pour la multiplication, ÷ pour la division, ^ pour une puissance (ex : 10^8), √(...) pour une racine, des fractions écrites "a/b".
+Chaque élément de "options" doit être UNIQUEMENT le texte de la réponse, SANS lettre ni préfixe devant (pas de "A)", pas de "A.", pas de "* ") : les lettres A/B/C/D sont déjà affichées par l'application.
+Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exact :
+{"q": "...", "options": ["...","...","...","..."], "correct": 0, "exp": "..."}
+où "correct" est l'index (0 à 3) de la bonne réponse dans "options".`;
+    responseSchema = {
+      type: "object",
+      properties: {
+        q: { type: "string" },
+        options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+        correct: { type: "integer" },
+        exp: { type: "string" }
+      },
+      required: ["q", "options", "correct", "exp"]
+    };
+  } else {
+    systemInstruction = `Tu es un professeur de collège en Côte d'Ivoire qui prépare un exercice de pratique ouvert
+pour un(e) élève de 4ème (13-14 ans), en ${subjectName}, sur ${subjectTopic}.
+${contextBlock}
+Génère UN SEUL exercice ouvert (énoncé + corrigé détaillé étape par étape) de difficulté ${difficultyHint},
+original (pas un exercice déjà classique et trop connu).
+Si la matière est l'anglais, rédige l'énoncé en anglais si c'est pertinent (le corrigé peut être bilingue).
+Le corrigé doit être rédigé en HTML simple (des balises <p>, <strong>, <br> autorisées, pas de <script>).
+IMPORTANT — format du texte : n'utilise JAMAIS de notation LaTeX (pas de \`$...$\`, \`\\(...\\)\`, \`\\frac{}{}\`, \`\\times\`, accolades \`{}\`, etc.) car le texte est affiché tel quel, sans moteur de rendu mathématique.
+Écris les maths en texte brut simple : × pour la multiplication, ÷ pour la division, ^ pour une puissance (ex : 10^8), √(...) pour une racine, des fractions écrites "a/b".
+Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exact :
+{"statement": "...", "solution": "..."}`;
+    responseSchema = {
+      type: "object",
+      properties: {
+        statement: { type: "string" },
+        solution: { type: "string" }
+      },
+      required: ["statement", "solution"]
+    };
+  }
+
+  try {
+    const resp = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
+      {
         method: "POST",
-
         headers: {
           "x-goog-api-key": apiKey,
           "Content-Type": "application/json"
         },
-
-        body: JSON.stringify(payload)
-      });
-
-      lastResponse = response;
-
-      if (response.ok) {
-        return response;
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: systemInstruction }] },
+          contents: [{ role: "user", parts: [{ text: `Génère l'exercice demandé (matière : ${subjectName}, ${subjectTopic}, difficulté : ${difficulty}). Varie le sujet à chaque fois pour ne jamais répéter un exercice précédent.` }] }],
+          generationConfig: {
+            maxOutputTokens: 900,
+            thinkingConfig: { thinkingLevel: "low" },
+            responseFormat: {
+              text: {
+                mimeType: "application/json",
+                schema: responseSchema
+              }
+            }
+          }
+        })
       }
-
-      lastDetails = await response.text();
-
-      const retryableStatuses = [
-        429,
-        500,
-        502,
-        503,
-        504
-      ];
-
-      const shouldRetry =
-        retryableStatuses.includes(response.status) &&
-        attempt < maxAttempts;
-
-      if (!shouldRetry) {
-        return response;
-      }
-
-      const retryAfterHeader =
-        response.headers.get("retry-after");
-
-      let waitMs;
-
-      if (retryAfterHeader) {
-
-        const retryAfter =
-          Number(retryAfterHeader);
-
-        waitMs = Number.isFinite(retryAfter)
-          ? retryAfter * 1000
-          : 1000 * Math.pow(2, attempt - 1);
-
-      } else {
-
-        waitMs =
-          1000 * Math.pow(2, attempt - 1);
-      }
-
-      await sleep(Math.min(waitMs, 5000));
-
-    } catch (error) {
-
-      lastDetails = String(error);
-
-      if (attempt >= maxAttempts) {
-        throw error;
-      }
-
-      await sleep(
-        1000 * Math.pow(2, attempt - 1)
-      );
-    }
-  }
-
-  return lastResponse;
-}
-
-
-// ------------------------------------------------------------
-// Extraction du texte Gemini
-// ------------------------------------------------------------
-
-function extractGeminiText(data) {
-
-  const parts =
-    data?.candidates?.[0]?.content?.parts || [];
-
-  return parts
-    .filter(part =>
-      typeof part?.text === "string" &&
-      !part?.thought
-    )
-    .map(part => part.text)
-    .join("")
-    .trim();
-}
-
-
-// ------------------------------------------------------------
-// Nettoyage JSON
-// ------------------------------------------------------------
-
-function cleanJson(text) {
-
-  return String(text || "")
-    .trim()
-    .replace(/^```json\s*/i, "")
-    .replace(/^```\s*/i, "")
-    .replace(/```\s*$/i, "")
-    .trim();
-}
-
-
-// ------------------------------------------------------------
-// Fonction Netlify
-// ------------------------------------------------------------
-
-exports.handler = async (event) => {
-
-  if (event.httpMethod !== "POST") {
-
-    return {
-      statusCode: 405,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        error: "Method not allowed"
-      })
-    };
-  }
-
-
-  let body = {};
-
-  try {
-
-    body = JSON.parse(
-      event.body || "{}"
     );
 
-  } catch (error) {
-
-    return {
-      statusCode: 400,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        error: "JSON invalide"
-      })
-    };
-  }
-
-
-  const subjectName =
-    String(body.subjectName || "").trim();
-
-  const lessonTitle =
-    String(body.lessonTitle || "").trim();
-
-  const lessonText =
-    String(body.lessonText || "")
-      .trim()
-      .slice(0, 4000);
-
-  const topic =
-    String(body.topic || "")
-      .trim()
-      .slice(0, 200);
-
-  const type =
-    body.type === "open"
-      ? "open"
-      : "qcm";
-
-  const difficulty =
-    ["facile", "moyen", "difficile"]
-      .includes(body.difficulty)
-      ? body.difficulty
-      : "moyen";
-
-
-  if (
-    !subjectName ||
-    (!lessonTitle && !topic)
-  ) {
-
-    return {
-      statusCode: 400,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        error: "Matière et leçon (ou thème) requis"
-      })
-    };
-  }
-
-
-  const apiKey =
-    process.env.GEMINI_API_KEY;
-
-
-  if (!apiKey) {
-
-    return {
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        error:
-          "Générateur non configuré (GEMINI_API_KEY manquante)"
-      })
-    };
-  }
-
-
-  const subjectTopic =
-    lessonTitle
-      ? `la leçon "${lessonTitle}"`
-      : `le thème "${topic}"`;
-
-
-  const contextBlock = lessonText
-    ? `
-Voici le contenu de la leçon à utiliser comme référence :
-
----
-${lessonText}
----
-
-`
-    : "";
-
-
-  const difficultyHint = {
-
-    facile:
-      "facile : vérifie une notion de base, sans piège",
-
-    moyen:
-      "moyenne : demande de combiner deux idées de la leçon",
-
-    difficile:
-      "difficile : demande un raisonnement plus poussé"
-
-  }[difficulty];
-
-
-  let systemInstruction;
-  let responseSchema;
-
-
-  // ==========================================================
-  // QCM
-  // ==========================================================
-
-  if (type === "qcm") {
-
-    systemInstruction = `
-
-Tu es un professeur de collège en Côte d'Ivoire.
-
-Tu prépares une question à choix multiples pour un élève de 4ème
-(environ 13-14 ans).
-
-Matière : ${subjectName}
-Sujet : ${subjectTopic}
-
-${contextBlock}
-
-Difficulté :
-${difficultyHint}
-
-Génère UNE SEULE question.
-
-La question doit être originale.
-
-Il doit y avoir exactement 4 propositions.
-
-Une seule proposition doit être correcte.
-
-Donne une explication courte et claire.
-
-Si la matière est l'anglais, écris la question et les propositions
-en anglais.
-
-IMPORTANT — FORMAT DES MATHÉMATIQUES :
-
-Toutes les expressions mathématiques doivent être écrites en LaTeX.
-
-Pour les mathématiques dans une phrase, utilise :
-
-\\( ... \\)
-
-Exemple :
-
-\\(x^2 + 3x - 4\\)
-
-Pour une formule affichée sur une ligne séparée, utilise :
-
-\\[ ... \\]
-
-Exemple :
-
-\\[
-\\frac{3}{4} + \\frac{1}{2}
-\\]
-
-N'utilise JAMAIS :
-$...$
-
-ou :
-
-$$...$$
-
-N'utilise aucune balise HTML.
-
-N'utilise pas de Markdown.
-
-Exemples corrects :
-
-\\(x^2\\)
-
-\\(\\sqrt{25}\\)
-
-\\(\\frac{3}{5}\\)
-
-\\(2x+3=7\\)
-
-\\[
-A = \\pi r^2
-\\]
-
-Réponds UNIQUEMENT avec l'objet JSON demandé.
-
-Format :
-
-{
-  "q": "...",
-  "options": ["...", "...", "...", "..."],
-  "correct": 0,
-  "exp": "..."
-}
-
-"correct" doit être l'index de la bonne réponse :
-0, 1, 2 ou 3.
-`;
-
-
-    responseSchema = {
-
-      type: "OBJECT",
-
-      properties: {
-
-        q: {
-          type: "STRING"
-        },
-
-        options: {
-          type: "ARRAY",
-
-          items: {
-            type: "STRING"
-          }
-        },
-
-        correct: {
-          type: "INTEGER"
-        },
-
-        exp: {
-          type: "STRING"
-        }
-
-      },
-
-      required: [
-        "q",
-        "options",
-        "correct",
-        "exp"
-      ]
-    };
-
-
-  // ==========================================================
-  // EXERCICE OUVERT
-  // ==========================================================
-
-  } else {
-
-    systemInstruction = `
-
-Tu es un professeur de collège en Côte d'Ivoire.
-
-Tu prépares un exercice ouvert pour un élève de 4ème
-(environ 13-14 ans).
-
-Matière : ${subjectName}
-Sujet : ${subjectTopic}
-
-${contextBlock}
-
-Difficulté :
-${difficultyHint}
-
-Génère UN SEUL exercice.
-
-L'exercice doit contenir :
-
-1. Un énoncé clair.
-2. Un corrigé détaillé étape par étape.
-
-L'exercice doit être original.
-
-Si la matière est l'anglais, rédige l'énoncé en anglais si nécessaire.
-
-IMPORTANT — FORMAT DES MATHÉMATIQUES :
-
-Toutes les expressions mathématiques doivent être écrites en LaTeX.
-
-Math dans une phrase :
-
-\\( ... \\)
-
-Math affichée :
-
-\\[ ... \\]
-
-Exemple :
-
-\\[
-\\frac{2x+4}{3}=6
-\\]
-
-N'utilise JAMAIS :
-
-$...$
-
-ou :
-
-$$...$$
-
-N'utilise aucune balise HTML.
-
-N'utilise pas de Markdown.
-
-Exemples :
-
-\\(x^2\\)
-
-\\(\\sqrt{x}\\)
-
-\\(\\frac{a}{b}\\)
-
-\\[
-x = \\frac{-b}{2a}
-\\]
-
-Réponds UNIQUEMENT avec un objet JSON valide.
-
-Format :
-
-{
-  "statement": "...",
-  "solution": "..."
-}
-`;
-
-
-    responseSchema = {
-
-      type: "OBJECT",
-
-      properties: {
-
-        statement: {
-          type: "STRING"
-        },
-
-        solution: {
-          type: "STRING"
-        }
-
-      },
-
-      required: [
-        "statement",
-        "solution"
-      ]
-    };
-  }
-
-
-  try {
-
-    const payload = {
-
-      system_instruction: {
-        parts: [
-          {
-            text: systemInstruction
-          }
-        ]
-      },
-
-      contents: [
-        {
-          role: "user",
-
-          parts: [
-            {
-              text:
-                `Génère l'exercice demandé.
-
-Matière : ${subjectName}
-
-${subjectTopic}
-
-Difficulté : ${difficulty}
-
-Varie le contenu pour éviter de répéter exactement le même exercice.`
-            }
-          ]
-        }
-      ],
-
-      generationConfig: {
-
-        maxOutputTokens: 1200,
-
-        thinkingConfig: {
-          thinkingLevel: "low"
-        },
-
-        responseMimeType:
-          "application/json",
-
-        responseSchema
-      }
-    };
-
-
-    const resp =
-      await callGeminiWithRetry(
-        apiKey,
-        payload
-      );
-
-
     if (!resp.ok) {
-
-      const details =
-        await resp.text();
-
-      const status =
-        resp.status === 503
-          ? 503
-          : 502;
-
-
-      return {
-        statusCode: status,
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          error:
-            resp.status === 503
-              ? "Le service Gemini est temporairement très sollicité. Réessaie dans quelques secondes."
-              : "Échec de la requête au générateur",
-
-          details
-        })
-      };
+      const details = await resp.text();
+      return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête au générateur", details }) };
     }
 
-
-    const data =
-      await resp.json();
-
-
-    const raw =
-      extractGeminiText(data);
-
+    const data = await resp.json();
+    const raw = data &&
+      data.candidates &&
+      data.candidates[0] &&
+      data.candidates[0].content &&
+      data.candidates[0].content.parts &&
+      data.candidates[0].content.parts[0] &&
+      data.candidates[0].content.parts[0].text;
 
     if (!raw) {
-
-      return {
-        statusCode: 502,
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          error:
-            "Réponse vide du générateur"
-        })
-      };
+      return { statusCode: 502, body: JSON.stringify({ error: "Réponse vide du générateur" }) };
     }
-
 
     let exercise;
-
-
     try {
-
-      exercise =
-        JSON.parse(
-          cleanJson(raw)
-        );
-
-    } catch (error) {
-
-      return {
-        statusCode: 502,
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          error:
-            "Réponse du générateur illisible",
-
-          details: raw
-        })
-      };
+      const cleaned = raw.trim().replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "");
+      exercise = JSON.parse(cleaned);
+    } catch (e) {
+      return { statusCode: 502, body: JSON.stringify({ error: "Réponse du générateur illisible", details: raw }) };
     }
-
-
-    // --------------------------------------------------------
-    // Vérification QCM
-    // --------------------------------------------------------
 
     if (type === "qcm") {
-
-      if (
-        !exercise.q ||
-        !Array.isArray(exercise.options) ||
-        exercise.options.length !== 4 ||
-        typeof exercise.correct !== "number" ||
-        exercise.correct < 0 ||
-        exercise.correct > 3 ||
-        !exercise.exp
-      ) {
-
-        return {
-          statusCode: 502,
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-          body: JSON.stringify({
-            error:
-              "Format de question invalide"
-          })
-        };
+      if (!exercise.q || !Array.isArray(exercise.options) || exercise.options.length !== 4 ||
+          typeof exercise.correct !== "number" || exercise.correct < 0 || exercise.correct > 3 || !exercise.exp) {
+        return { statusCode: 502, body: JSON.stringify({ error: "Format de question invalide", details: raw }) };
+      }
+    } else {
+      if (!exercise.statement || !exercise.solution) {
+        return { statusCode: 502, body: JSON.stringify({ error: "Format d'exercice invalide", details: raw }) };
       }
     }
 
-
-    // --------------------------------------------------------
-    // Vérification exercice ouvert
-    // --------------------------------------------------------
-
-    else {
-
-      if (
-        !exercise.statement ||
-        !exercise.solution
-      ) {
-
-        return {
-          statusCode: 502,
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-          body: JSON.stringify({
-            error:
-              "Format d'exercice invalide"
-          })
-        };
-      }
-    }
-
+    exercise = cleanExercise(type, exercise);
 
     return {
-
       statusCode: 200,
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
-
-        type,
-
-        exercise
-
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type, exercise })
     };
-
-
-  } catch (error) {
-
-    return {
-
-      statusCode: 502,
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
-
-        error:
-          "Échec de la requête au générateur",
-
-        details:
-          String(error)
-      })
-    };
+  } catch (e) {
+    return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête au générateur", details: String(e) }) };
   }
 };
