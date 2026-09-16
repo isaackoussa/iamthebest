@@ -1,4 +1,5 @@
 // Traducteur FR <-> EN (via l'API Gemini)
+const { callGemini } = require("./lib/gemini.js");
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method not allowed" };
@@ -36,63 +37,43 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
 où "note" contient la nature grammaticale et/ou un exemple si pertinent (chaîne vide "" sinon).`;
 
   try {
-    const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "x-goog-api-key": apiKey,
-          "Content-Type": "application/json"
+    const call = await callGemini({
+      apiKey,
+      systemInstruction,
+      userText: text,
+      maxOutputTokens: 350,
+      thinkingLevel: "low",
+      responseSchema: {
+        type: "OBJECT",
+        properties: {
+          sourceLang: { type: "STRING" },
+          translation: { type: "STRING" },
+          note: { type: "STRING" }
         },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: systemInstruction }] },
-          contents: [{ role: "user", parts: [{ text }] }],
-          generationConfig: {
-            maxOutputTokens: 350,
-            thinkingConfig: { thinkingLevel: "low" },
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: "OBJECT",
-              properties: {
-                sourceLang: { type: "STRING" },
-                translation: { type: "STRING" },
-                note: { type: "STRING" }
-              },
-              required: ["sourceLang", "translation", "note"]
-            }
-          }
-        })
+        required: ["sourceLang", "translation", "note"]
       }
-    );
+    });
 
-    if (!resp.ok) {
-      const details = await resp.text();
-      return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête au traducteur", details }) };
+    if (!call.ok) {
+      return {
+        statusCode: 502,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: call.message, retryable: true })
+      };
     }
 
-    const data = await resp.json();
-    const raw = data &&
-      data.candidates &&
-      data.candidates[0] &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts[0] &&
-      data.candidates[0].content.parts[0].text;
-
-    if (!raw) {
-      return { statusCode: 502, body: JSON.stringify({ error: "Réponse vide du traducteur" }) };
-    }
+    const raw = call.text;
 
     let result;
     try {
       const cleaned = raw.trim().replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "");
       result = JSON.parse(cleaned);
     } catch (e) {
-      return { statusCode: 502, body: JSON.stringify({ error: "Réponse du traducteur illisible", details: raw }) };
+      return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "Le traducteur a renvoyé une réponse illisible. Réessaie.", retryable: true }) };
     }
 
     if (!result.translation) {
-      return { statusCode: 502, body: JSON.stringify({ error: "Traduction vide", details: raw }) };
+      return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "Le traducteur n'a rien renvoyé. Réessaie.", retryable: true }) };
     }
 
     return {
@@ -101,6 +82,6 @@ où "note" contient la nature grammaticale et/ou un exemple si pertinent (chaîn
       body: JSON.stringify(result)
     };
   } catch (e) {
-    return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête au traducteur", details: String(e) }) };
+    return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "Le traducteur est injoignable pour le moment. Réessaie dans un instant.", retryable: true }) };
   }
 };

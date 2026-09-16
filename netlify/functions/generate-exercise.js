@@ -1,4 +1,5 @@
 // Générateur d'exercices à la demande (via l'API Gemini)
+const { callGemini } = require("./lib/gemini.js");
 
 // Nettoie le texte renvoyé par l'IA : supprime toute notation LaTeX (l'appli n'a pas de moteur
 // de rendu LaTeX/MathJax, donc $...$, \(...\), \frac{}{} etc. s'afficheraient tels quels, en
@@ -141,61 +142,41 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
   }
 
   try {
-    const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "x-goog-api-key": apiKey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: systemInstruction }] },
-          contents: [{ role: "user", parts: [{ text: `Génère l'exercice demandé (matière : ${subjectName}, ${subjectTopic}, difficulté : ${difficulty}). Varie le sujet à chaque fois pour ne jamais répéter un exercice précédent.` }] }],
-          generationConfig: {
-            maxOutputTokens: 900,
-            thinkingConfig: { thinkingLevel: "low" },
-            responseMimeType: "application/json",
-            responseSchema: responseSchema
-          }
-        })
-      }
-    );
+    const call = await callGemini({
+      apiKey,
+      systemInstruction,
+      userText: `Génère l'exercice demandé (matière : ${subjectName}, ${subjectTopic}, difficulté : ${difficulty}). Varie le sujet à chaque fois pour ne jamais répéter un exercice précédent.`,
+      maxOutputTokens: 900,
+      thinkingLevel: "low",
+      responseSchema
+    });
 
-    if (!resp.ok) {
-      const details = await resp.text();
-      return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête au générateur", details }) };
+    if (!call.ok) {
+      return {
+        statusCode: 502,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: call.message, retryable: true })
+      };
     }
 
-    const data = await resp.json();
-    const raw = data &&
-      data.candidates &&
-      data.candidates[0] &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts[0] &&
-      data.candidates[0].content.parts[0].text;
-
-    if (!raw) {
-      return { statusCode: 502, body: JSON.stringify({ error: "Réponse vide du générateur" }) };
-    }
+    const raw = call.text;
 
     let exercise;
     try {
       const cleaned = raw.trim().replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "");
       exercise = JSON.parse(cleaned);
     } catch (e) {
-      return { statusCode: 502, body: JSON.stringify({ error: "Réponse du générateur illisible", details: raw }) };
+      return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "L'IA a renvoyé une réponse illisible. Réessaie.", retryable: true }) };
     }
 
     if (type === "qcm") {
       if (!exercise.q || !Array.isArray(exercise.options) || exercise.options.length !== 4 ||
           typeof exercise.correct !== "number" || exercise.correct < 0 || exercise.correct > 3 || !exercise.exp) {
-        return { statusCode: 502, body: JSON.stringify({ error: "Format de question invalide", details: raw }) };
+        return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "L'IA a renvoyé une question mal formée. Réessaie.", retryable: true }) };
       }
     } else {
       if (!exercise.statement || !exercise.solution) {
-        return { statusCode: 502, body: JSON.stringify({ error: "Format d'exercice invalide", details: raw }) };
+        return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "L'IA a renvoyé un exercice mal formé. Réessaie.", retryable: true }) };
       }
     }
 
@@ -207,6 +188,6 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
       body: JSON.stringify({ type, exercise })
     };
   } catch (e) {
-    return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête au générateur", details: String(e) }) };
+    return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "Le générateur IA est injoignable pour le moment. Réessaie dans un instant.", retryable: true }) };
   }
 };

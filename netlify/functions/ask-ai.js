@@ -1,3 +1,5 @@
+const { callGemini } = require("./lib/gemini.js");
+
 // Nettoie le texte renvoyé par l'IA : supprime toute notation LaTeX (l'appli n'a pas de moteur
 // de rendu LaTeX/MathJax, donc $...$, \(...\), \frac{}{} etc. s'afficheraient tels quels, en
 // caractères bruts, au lieu d'un rendu mathématique).
@@ -66,39 +68,23 @@ IMPORTANT — format du texte : n'utilise JAMAIS de notation LaTeX (pas de \`$..
 Écris les maths en texte brut simple : × pour la multiplication, ÷ pour la division, ^ pour une puissance (ex : 10^8), √(...) pour une racine, des fractions écrites "a/b".`;
 
   try {
-    const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "x-goog-api-key": apiKey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: systemInstruction }] },
-          contents: [{ role: "user", parts: [{ text: question }] }],
-          generationConfig: { maxOutputTokens: 400, thinkingConfig: { thinkingLevel: "low" } }
-        })
-      }
-    );
+    const call = await callGemini({
+      apiKey,
+      systemInstruction,
+      userText: question,
+      maxOutputTokens: 400,
+      thinkingLevel: "low"
+    });
 
-    if (!resp.ok) {
-      const details = await resp.text();
-      return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête à l'assistant IA", details }) };
+    if (!call.ok) {
+      return {
+        statusCode: 502,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: call.message, retryable: true })
+      };
     }
 
-    const data = await resp.json();
-    const answer = data &&
-      data.candidates &&
-      data.candidates[0] &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts[0] &&
-      data.candidates[0].content.parts[0].text;
-
-    if (!answer) {
-      return { statusCode: 502, body: JSON.stringify({ error: "Réponse vide de l'assistant IA" }) };
-    }
+    const answer = call.text;
 
     return {
       statusCode: 200,
@@ -106,6 +92,6 @@ IMPORTANT — format du texte : n'utilise JAMAIS de notation LaTeX (pas de \`$..
       body: JSON.stringify({ answer: stripLatex(answer.trim()) })
     };
   } catch (e) {
-    return { statusCode: 502, body: JSON.stringify({ error: "Échec de la requête à l'assistant IA", details: String(e) }) };
+    return { statusCode: 502, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ error: "L'assistant IA est injoignable pour le moment. Réessaie dans un instant.", retryable: true }) };
   }
 };
