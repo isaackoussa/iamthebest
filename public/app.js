@@ -324,7 +324,7 @@
       }).then(r => r.json().then(data => ({ok:r.ok, data}))).then(({ok, data}) => {
         aiBtn.disabled = false; aiBtn.textContent = "Demander";
         aiAnswer.className = "ai-answer show";
-        aiAnswer.innerHTML = ok ? esc(data.answer) : `⚠️ ${esc((data && data.error) || "Erreur inconnue")}`;
+        aiAnswer.innerHTML = ok ? esc(data.answer) : `⚠️ ${esc((data && data.error) || "Erreur inconnue")}` + ((data && data.details) ? `<br><span style="opacity:.65;font-size:.82rem;">${esc(String(data.details).slice(0,500))}</span>` : "");
       }).catch(() => {
         aiBtn.disabled = false; aiBtn.textContent = "Demander";
         aiAnswer.className = "ai-answer show";
@@ -519,7 +519,7 @@
     root.innerHTML = `
       <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <span>Générateur d'exercices</span></div>
       <div class="tool-header"><span class="sh-icon">🧠</span><h1>Générateur d'exercices</h1></div>
-      <p class="tool-sub">Choisis une matière et une leçon (ou un thème libre), et l'IA te génère un nouvel exercice à chaque fois — jamais le même deux fois.</p>
+      <p class="tool-sub">Choisis une matière et une leçon (ou un thème libre). Le générateur local crée un exercice instantanément, sans IA, à partir des cours de l'appli (illimité, fonctionne même hors-ligne) ; le générateur IA peut traiter un thème libre mais dépend d'une connexion et d'une clé API. Jamais le même exercice deux fois.</p>
 
       <div class="tool-form">
         <div class="tool-form-row">
@@ -541,7 +541,10 @@
             <option value="moyen" selected>Moyen</option>
             <option value="difficile">Difficile</option>
           </select>
-          <button class="btn btn-primary" id="gen-btn">🎲 Générer un exercice</button>
+        </div>
+        <div class="tool-form-row">
+          <button class="btn btn-primary" id="gen-local-btn">⚡ Générer localement (instantané, sans IA)</button>
+          <button class="btn btn-ghost" id="gen-btn">🧠 Générer avec l'IA</button>
         </div>
         <p class="tool-error" id="gen-error"></p>
       </div>
@@ -556,6 +559,7 @@
     const errEl = document.getElementById("gen-error");
     const resultEl = document.getElementById("gen-result");
     const genBtn = document.getElementById("gen-btn");
+    const localBtn = document.getElementById("gen-local-btn");
 
     subjectSel.addEventListener("change", () => {
       selKey = subjectSel.value;
@@ -598,7 +602,8 @@
       }).then(r => r.json().then(data => ({ok:r.ok, data}))).then(({ok, data}) => {
         genBtn.disabled = false; genBtn.textContent = "🎲 Générer un exercice";
         if (!ok){
-          resultEl.innerHTML = `<p class="tool-error">⚠️ ${esc((data && data.error) || "Erreur inconnue")}</p>`;
+          resultEl.innerHTML = `<p class="tool-error">⚠️ ${esc((data && data.error) || "Erreur inconnue")}</p>` +
+            ((data && data.details) ? `<p class="tool-error" style="opacity:.65;font-size:.82rem;">${esc(String(data.details).slice(0,500))}</p>` : "");
           return;
         }
         renderGenResult(subj, data.type, data.exercise, askAgain);
@@ -606,6 +611,31 @@
         genBtn.disabled = false; genBtn.textContent = "🎲 Générer un exercice";
         resultEl.innerHTML = `<p class="tool-error">⚠️ Générateur indisponible ici (fonctionne une fois l'app déployée sur Netlify avec une clé API configurée).</p>`;
       });
+    }
+
+    function askLocal(){
+      const key = subjectSel.value;
+      const subj = COURSES[key];
+      const lessonId = lessonSel.value;
+      const isCustom = lessonId === "__custom__";
+      const type = document.getElementById("gen-type").value;
+      const difficulty = document.getElementById("gen-difficulty").value;
+
+      if (isCustom){
+        errEl.textContent = "Le générateur local fonctionne sur une leçon de l'appli : choisis une leçon dans la liste (pas un thème libre — pour un thème libre, utilise le générateur IA).";
+        return;
+      }
+      if (typeof LOCAL_GEN === "undefined" || !LOCAL_GEN.hasContent(key, lessonId)){
+        errEl.textContent = "Pas encore de contenu local pour cette leçon.";
+        return;
+      }
+      errEl.textContent = "";
+      const result = LOCAL_GEN.generate(key, lessonId, type, difficulty);
+      if (!result){
+        errEl.textContent = "Impossible de générer un exercice local pour cette leçon.";
+        return;
+      }
+      renderGenResult(subj, result.type, result.exercise, askLocal);
     }
 
     function renderGenResult(subj, type, exercise, onAgain){
@@ -667,6 +697,7 @@
     }
 
     genBtn.addEventListener("click", askAgain);
+    localBtn.addEventListener("click", askLocal);
   }
 
   /* ---------- Traducteur FR / EN ---------- */
@@ -682,7 +713,8 @@
     }).then(r => r.json().then(data => ({ok:r.ok, data}))).then(({ok, data}) => {
       btnEl.disabled = false; btnEl.textContent = btnLabel;
       if (!ok){
-        targetEl.innerHTML = `<p class="tool-error">⚠️ ${esc((data && data.error) || "Erreur inconnue")}</p>`;
+        targetEl.innerHTML = `<p class="tool-error">⚠️ ${esc((data && data.error) || "Erreur inconnue")}</p>` +
+          ((data && data.details) ? `<p class="tool-error" style="opacity:.65;font-size:.82rem;">${esc(String(data.details).slice(0,500))}</p>` : "");
         return;
       }
       const langLabel = data.sourceLang === "en" ? "Anglais → Français" : "Français → Anglais";
