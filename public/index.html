@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>I'm The Best — Cours & Évaluations 4ème</title>
 
@@ -16,6 +21,7 @@
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>"
   >
 
+  <!-- Polices -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -24,13 +30,15 @@
     rel="stylesheet"
   >
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- =========================================================
+
+  <!-- =====================================================
        MATHJAX
-       Permet d'afficher correctement :
-       fractions, puissances, racines, équations, etc.
-       ========================================================= -->
+       Permet d'afficher correctement les mathématiques
+       ===================================================== -->
+
   <script>
     window.MathJax = {
       tex: {
@@ -63,28 +71,63 @@
 
 </head>
 
+
 <body>
 
-  <div class="chalk-dust" aria-hidden="true"></div>
+  <!-- Poussière de craie -->
+  <div
+    class="chalk-dust"
+    aria-hidden="true">
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
 
   <header class="topbar">
 
-    <a href="#/" class="brand">
-      <span class="brand-badge">🏆</span>
-      <span class="brand-text">I'm The Best</span>
+    <a
+      href="#/"
+      class="brand"
+    >
+
+      <span class="brand-badge">
+        🏆
+      </span>
+
+      <span class="brand-text">
+        I'm The Best
+      </span>
+
     </a>
+
 
     <div class="topbar-sub">
       Cahier de cours & évaluations — 4ème
     </div>
 
-    <div class="topbar-user" id="topbar-user"></div>
+
+    <div
+      class="topbar-user"
+      id="topbar-user">
+    </div>
 
   </header>
 
-  <nav class="topnav" id="topnav">
 
-    <a href="#/">🏠 Accueil</a>
+  <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+
+  <nav
+    class="topnav"
+    id="topnav"
+  >
+
+    <a href="#/">
+      🏠 Accueil
+    </a>
 
     <a href="#/generator">
       🧠 Générateur d'exercices
@@ -96,82 +139,42 @@
 
   </nav>
 
-  <main id="app" class="app"></main>
+
+  <!-- =====================================================
+       APPLICATION
+       ===================================================== -->
+
+  <main
+    id="app"
+    class="app">
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
 
   <footer class="footer">
-    <span>Fait avec 🖍️ pour réussir la 4ème</span>
+
+    <span>
+      Fait avec 🖍️ pour réussir la 4ème
+    </span>
+
   </footer>
 
-  <script src="data.js"></script>
-  <script src="practice.js"></script>
-  <script src="local-gen.js"></script>
-  <script src="app.js"></script>
 
-</body>
-</html>
-      options: {
-        skipHtmlTags: [
-          'script',
-          'noscript',
-          'style',
-          'textarea',
-          'pre',
-          'code'
-        ]
-      }
-    };
-  </script>
-
-  <script
-    defer
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
-</head>
-
-<body>
-
-  <div class="chalk-dust" aria-hidden="true"></div>
-
-  <header class="topbar">
-
-    <a href="#/" class="brand">
-      <span class="brand-badge">🏆</span>
-      <span class="brand-text">I'm The Best</span>
-    </a>
-
-    <div class="topbar-sub">
-      Cahier de cours & évaluations — 4ème
-    </div>
-
-    <div class="topbar-user" id="topbar-user"></div>
-
-  </header>
-
-  <nav class="topnav" id="topnav">
-
-    <a href="#/">🏠 Accueil</a>
-
-    <a href="#/generator">
-      🧠 Générateur d'exercices
-    </a>
-
-    <a href="#/translate">
-      🔤 Traducteur
-    </a>
-
-  </nav>
-
-  <main id="app" class="app"></main>
-
-  <footer class="footer">
-    <span>Fait avec 🖍️ pour réussir la 4ème</span>
-  </footer>
+  <!-- =====================================================
+       JAVASCRIPT DE L'APPLICATION
+       ===================================================== -->
 
   <script src="data.js"></script>
+
   <script src="practice.js"></script>
+
   <script src="local-gen.js"></script>
+
   <script src="app.js"></script>
+
 
 </body>
 </html>
