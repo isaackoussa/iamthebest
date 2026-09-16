@@ -1,124 +1,413 @@
-// Générateur d'exercices à la demande (via l'API Gemini)
+// ============================================================
+// GÉNÉRATEUR D'EXERCICES À LA DEMANDE VIA GEMINI
+// ============================================================
+
+const GEMINI_MODEL = "gemini-3.8-flash";
+const GEMINI_URL =
+  `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+
+// ------------------------------------------------------------
+// Pause
+// ------------------------------------------------------------
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+// ------------------------------------------------------------
+// Appel Gemini avec retry automatique
+// ------------------------------------------------------------
+
+async function callGeminiWithRetry(apiKey, payload) {
+
+  const maxAttempts = 3;
+
+  let lastResponse = null;
+  let lastDetails = "";
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+
+    try {
+
+      const response = await fetch(GEMINI_URL, {
+        method: "POST",
+
+        headers: {
+          "x-goog-api-key": apiKey,
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(payload)
+      });
+
+      lastResponse = response;
+
+      if (response.ok) {
+        return response;
+      }
+
+      lastDetails = await response.text();
+
+      const retryableStatuses = [
+        429,
+        500,
+        502,
+        503,
+        504
+      ];
+
+      const shouldRetry =
+        retryableStatuses.includes(response.status) &&
+        attempt < maxAttempts;
+
+      if (!shouldRetry) {
+        return response;
+      }
+
+      const retryAfterHeader =
+        response.headers.get("retry-after");
+
+      let waitMs;
+
+      if (retryAfterHeader) {
+
+        const retryAfter =
+          Number(retryAfterHeader);
+
+        waitMs = Number.isFinite(retryAfter)
+          ? retryAfter * 1000
+          : 1000 * Math.pow(2, attempt - 1);
+
+      } else {
+
+        waitMs =
+          1000 * Math.pow(2, attempt - 1);
+      }
+
+      await sleep(Math.min(waitMs, 5000));
+
+    } catch (error) {
+
+      lastDetails = String(error);
+
+      if (attempt >= maxAttempts) {
+        throw error;
+      }
+
+      await sleep(
+        1000 * Math.pow(2, attempt - 1)
+      );
+    }
+  }
+
+  return lastResponse;
+}
+
+
+// ------------------------------------------------------------
+// Extraction du texte Gemini
+// ------------------------------------------------------------
+
+function extractGeminiText(data) {
+
+  const parts =
+    data?.candidates?.[0]?.content?.parts || [];
+
+  return parts
+    .filter(part =>
+      typeof part?.text === "string" &&
+      !part?.thought
+    )
+    .map(part => part.text)
+    .join("")
+    .trim();
+}
+
+
+// ------------------------------------------------------------
+// Nettoyage JSON
+// ------------------------------------------------------------
+
+function cleanJson(text) {
+
+  return String(text || "")
+    .trim()
+    .replace(/^```json\s*/i, "")
+    .replace(/^```\s*/i, "")
+    .replace(/```\s*$/i, "")
+    .trim();
+}
+
+
+// ------------------------------------------------------------
+// Fonction Netlify
+// ------------------------------------------------------------
 
 exports.handler = async (event) => {
+
   if (event.httpMethod !== "POST") {
+
     return {
       statusCode: 405,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Method not allowed" })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        error: "Method not allowed"
+      })
     };
   }
+
 
   let body = {};
 
   try {
-    body = JSON.parse(event.body || "{}");
-  } catch (e) {
+
+    body = JSON.parse(
+      event.body || "{}"
+    );
+
+  } catch (error) {
+
     return {
       statusCode: 400,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "JSON invalide" })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        error: "JSON invalide"
+      })
     };
   }
 
-  const subjectName = String(body.subjectName || "").trim();
-  const lessonTitle = String(body.lessonTitle || "").trim();
 
-  const lessonText = String(body.lessonText || "")
-    .trim()
-    .slice(0, 4000);
+  const subjectName =
+    String(body.subjectName || "").trim();
 
-  const topic = String(body.topic || "")
-    .trim()
-    .slice(0, 200);
+  const lessonTitle =
+    String(body.lessonTitle || "").trim();
 
-  const type = body.type === "open" ? "open" : "qcm";
+  const lessonText =
+    String(body.lessonText || "")
+      .trim()
+      .slice(0, 4000);
 
-  const difficulty = [
-    "facile",
-    "moyen",
-    "difficile"
-  ].includes(body.difficulty)
-    ? body.difficulty
-    : "moyen";
+  const topic =
+    String(body.topic || "")
+      .trim()
+      .slice(0, 200);
 
-  if (!subjectName || (!lessonTitle && !topic)) {
+  const type =
+    body.type === "open"
+      ? "open"
+      : "qcm";
+
+  const difficulty =
+    ["facile", "moyen", "difficile"]
+      .includes(body.difficulty)
+      ? body.difficulty
+      : "moyen";
+
+
+  if (
+    !subjectName ||
+    (!lessonTitle && !topic)
+  ) {
+
     return {
       statusCode: 400,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         error: "Matière et leçon (ou thème) requis"
       })
     };
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+
+  const apiKey =
+    process.env.GEMINI_API_KEY;
+
 
   if (!apiKey) {
+
     return {
       statusCode: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
-        error: "Générateur non configuré (GEMINI_API_KEY manquante)"
+        error:
+          "Générateur non configuré (GEMINI_API_KEY manquante)"
       })
     };
   }
 
-  const subjectTopic = lessonTitle
-    ? `la leçon "${lessonTitle}"`
-    : `le thème "${topic}"`;
+
+  const subjectTopic =
+    lessonTitle
+      ? `la leçon "${lessonTitle}"`
+      : `le thème "${topic}"`;
+
 
   const contextBlock = lessonText
-    ? `Voici le contenu de la leçon pour te servir de référence :
+    ? `
+Voici le contenu de la leçon à utiliser comme référence :
+
 ---
 ${lessonText}
 ---
+
 `
     : "";
 
+
   const difficultyHint = {
-    facile: "facile (vérifie une notion de base, sans piège)",
-    moyen: "moyenne (demande de combiner deux idées de la leçon)",
+
+    facile:
+      "facile : vérifie une notion de base, sans piège",
+
+    moyen:
+      "moyenne : demande de combiner deux idées de la leçon",
+
     difficile:
-      "difficile (demande un raisonnement plus poussé ou un cas particulier)"
+      "difficile : demande un raisonnement plus poussé"
+
   }[difficulty];
+
 
   let systemInstruction;
   let responseSchema;
 
+
+  // ==========================================================
+  // QCM
+  // ==========================================================
+
   if (type === "qcm") {
-    systemInstruction = `Tu es un professeur de collège en Côte d'Ivoire qui prépare une question à choix multiples (QCM) pour un(e) élève de 4ème (13-14 ans), en ${subjectName}, sur ${subjectTopic}.
+
+    systemInstruction = `
+
+Tu es un professeur de collège en Côte d'Ivoire.
+
+Tu prépares une question à choix multiples pour un élève de 4ème
+(environ 13-14 ans).
+
+Matière : ${subjectName}
+Sujet : ${subjectTopic}
 
 ${contextBlock}
 
-Génère UNE SEULE question de difficulté ${difficultyHint}, originale (pas une question déjà classique et trop connue), avec exactement 4 propositions de réponse dont une seule est correcte, et une explication courte et claire de la bonne réponse.
+Difficulté :
+${difficultyHint}
 
-Si la matière est l'anglais, rédige la question et les options en anglais (l'explication peut être en français).
+Génère UNE SEULE question.
 
-Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exact :
-{"q": "...", "options": ["...","...","...","..."], "correct": 0, "exp": "..."}
+La question doit être originale.
 
-où "correct" est l'index (0 à 3) de la bonne réponse dans "options".`;
+Il doit y avoir exactement 4 propositions.
+
+Une seule proposition doit être correcte.
+
+Donne une explication courte et claire.
+
+Si la matière est l'anglais, écris la question et les propositions
+en anglais.
+
+IMPORTANT — FORMAT DES MATHÉMATIQUES :
+
+Toutes les expressions mathématiques doivent être écrites en LaTeX.
+
+Pour les mathématiques dans une phrase, utilise :
+
+\\( ... \\)
+
+Exemple :
+
+\\(x^2 + 3x - 4\\)
+
+Pour une formule affichée sur une ligne séparée, utilise :
+
+\\[ ... \\]
+
+Exemple :
+
+\\[
+\\frac{3}{4} + \\frac{1}{2}
+\\]
+
+N'utilise JAMAIS :
+$...$
+
+ou :
+
+$$...$$
+
+N'utilise aucune balise HTML.
+
+N'utilise pas de Markdown.
+
+Exemples corrects :
+
+\\(x^2\\)
+
+\\(\\sqrt{25}\\)
+
+\\(\\frac{3}{5}\\)
+
+\\(2x+3=7\\)
+
+\\[
+A = \\pi r^2
+\\]
+
+Réponds UNIQUEMENT avec l'objet JSON demandé.
+
+Format :
+
+{
+  "q": "...",
+  "options": ["...", "...", "...", "..."],
+  "correct": 0,
+  "exp": "..."
+}
+
+"correct" doit être l'index de la bonne réponse :
+0, 1, 2 ou 3.
+`;
+
 
     responseSchema = {
+
       type: "OBJECT",
+
       properties: {
+
         q: {
           type: "STRING"
         },
+
         options: {
           type: "ARRAY",
+
           items: {
             type: "STRING"
           }
         },
+
         correct: {
           type: "INTEGER"
         },
+
         exp: {
           type: "STRING"
         }
+
       },
+
       required: [
         "q",
         "options",
@@ -126,30 +415,109 @@ où "correct" est l'index (0 à 3) de la bonne réponse dans "options".`;
         "exp"
       ]
     };
+
+
+  // ==========================================================
+  // EXERCICE OUVERT
+  // ==========================================================
+
   } else {
-    systemInstruction = `Tu es un professeur de collège en Côte d'Ivoire qui prépare un exercice de pratique ouvert pour un(e) élève de 4ème (13-14 ans), en ${subjectName}, sur ${subjectTopic}.
+
+    systemInstruction = `
+
+Tu es un professeur de collège en Côte d'Ivoire.
+
+Tu prépares un exercice ouvert pour un élève de 4ème
+(environ 13-14 ans).
+
+Matière : ${subjectName}
+Sujet : ${subjectTopic}
 
 ${contextBlock}
 
-Génère UN SEUL exercice ouvert (énoncé + corrigé détaillé étape par étape) de difficulté ${difficultyHint}, original (pas un exercice déjà classique et trop connu).
+Difficulté :
+${difficultyHint}
 
-Si la matière est l'anglais, rédige l'énoncé en anglais si c'est pertinent (le corrigé peut être bilingue).
+Génère UN SEUL exercice.
 
-Le corrigé doit être rédigé en HTML simple (des balises <p>, <strong>, <br> autorisées, pas de <script>).
+L'exercice doit contenir :
 
-Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exact :
-{"statement": "...", "solution": "..."}`;
+1. Un énoncé clair.
+2. Un corrigé détaillé étape par étape.
+
+L'exercice doit être original.
+
+Si la matière est l'anglais, rédige l'énoncé en anglais si nécessaire.
+
+IMPORTANT — FORMAT DES MATHÉMATIQUES :
+
+Toutes les expressions mathématiques doivent être écrites en LaTeX.
+
+Math dans une phrase :
+
+\\( ... \\)
+
+Math affichée :
+
+\\[ ... \\]
+
+Exemple :
+
+\\[
+\\frac{2x+4}{3}=6
+\\]
+
+N'utilise JAMAIS :
+
+$...$
+
+ou :
+
+$$...$$
+
+N'utilise aucune balise HTML.
+
+N'utilise pas de Markdown.
+
+Exemples :
+
+\\(x^2\\)
+
+\\(\\sqrt{x}\\)
+
+\\(\\frac{a}{b}\\)
+
+\\[
+x = \\frac{-b}{2a}
+\\]
+
+Réponds UNIQUEMENT avec un objet JSON valide.
+
+Format :
+
+{
+  "statement": "...",
+  "solution": "..."
+}
+`;
+
 
     responseSchema = {
+
       type: "OBJECT",
+
       properties: {
+
         statement: {
           type: "STRING"
         },
+
         solution: {
           type: "STRING"
         }
+
       },
+
       required: [
         "statement",
         "solution"
@@ -157,172 +525,243 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, au format exac
     };
   }
 
+
   try {
-    const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "x-goog-api-key": apiKey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          system_instruction: {
-            parts: [
-              {
-                text: systemInstruction
-              }
-            ]
-          },
 
-          contents: [
-            {
-              role: "user",
-              parts: [
-                {
-                  text: `Génère l'exercice demandé (matière : ${subjectName}, ${subjectTopic}, difficulté : ${difficulty}). Varie le sujet à chaque fois pour ne jamais répéter un exercice précédent.`
-                }
-              ]
-            }
-          ],
+    const payload = {
 
-          generationConfig: {
-            maxOutputTokens: 900,
-
-            thinkingConfig: {
-              thinkingLevel: "low"
-            },
-
-            // CORRECTION IMPORTANTE :
-            // responseFormat.text.mimeType est supprimé.
-            responseMimeType: "application/json",
-            responseSchema: responseSchema
+      system_instruction: {
+        parts: [
+          {
+            text: systemInstruction
           }
-        })
+        ]
+      },
+
+      contents: [
+        {
+          role: "user",
+
+          parts: [
+            {
+              text:
+                `Génère l'exercice demandé.
+
+Matière : ${subjectName}
+
+${subjectTopic}
+
+Difficulté : ${difficulty}
+
+Varie le contenu pour éviter de répéter exactement le même exercice.`
+            }
+          ]
+        }
+      ],
+
+      generationConfig: {
+
+        maxOutputTokens: 1200,
+
+        thinkingConfig: {
+          thinkingLevel: "low"
+        },
+
+        responseMimeType:
+          "application/json",
+
+        responseSchema
       }
-    );
+    };
+
+
+    const resp =
+      await callGeminiWithRetry(
+        apiKey,
+        payload
+      );
+
 
     if (!resp.ok) {
-      const details = await resp.text();
+
+      const details =
+        await resp.text();
+
+      const status =
+        resp.status === 503
+          ? 503
+          : 502;
+
 
       return {
-        statusCode: 502,
-        headers: { "Content-Type": "application/json" },
+        statusCode: status,
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
         body: JSON.stringify({
-          error: "Échec de la requête au générateur",
+
+          error:
+            resp.status === 503
+              ? "Le service Gemini est temporairement très sollicité. Réessaie dans quelques secondes."
+              : "Échec de la requête au générateur",
+
           details
         })
       };
     }
 
-    const data = await resp.json();
 
-    const parts =
-      data?.candidates?.[0]?.content?.parts || [];
+    const data =
+      await resp.json();
 
-    const raw = parts
-      .filter(
-        (part) =>
-          typeof part?.text === "string" &&
-          !part?.thought
-      )
-      .map((part) => part.text)
-      .join("")
-      .trim();
+
+    const raw =
+      extractGeminiText(data);
+
 
     if (!raw) {
+
       return {
         statusCode: 502,
-        headers: { "Content-Type": "application/json" },
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
         body: JSON.stringify({
-          error: "Réponse vide du générateur"
+          error:
+            "Réponse vide du générateur"
         })
       };
     }
 
+
     let exercise;
 
-    try {
-      const cleaned = raw
-        .replace(/^```json\s*/i, "")
-        .replace(/^```\s*/, "")
-        .replace(/```\s*$/, "")
-        .trim();
 
-      exercise = JSON.parse(cleaned);
-    } catch (e) {
+    try {
+
+      exercise =
+        JSON.parse(
+          cleanJson(raw)
+        );
+
+    } catch (error) {
+
       return {
         statusCode: 502,
-        headers: { "Content-Type": "application/json" },
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
         body: JSON.stringify({
-          error: "Réponse du générateur illisible",
+
+          error:
+            "Réponse du générateur illisible",
+
           details: raw
         })
       };
     }
 
+
+    // --------------------------------------------------------
+    // Vérification QCM
+    // --------------------------------------------------------
+
     if (type === "qcm") {
+
       if (
-        typeof exercise.q !== "string" ||
-        !exercise.q.trim() ||
+        !exercise.q ||
         !Array.isArray(exercise.options) ||
         exercise.options.length !== 4 ||
-        exercise.options.some(
-          (option) =>
-            typeof option !== "string" ||
-            !option.trim()
-        ) ||
         typeof exercise.correct !== "number" ||
-        !Number.isInteger(exercise.correct) ||
         exercise.correct < 0 ||
         exercise.correct > 3 ||
-        typeof exercise.exp !== "string" ||
-        !exercise.exp.trim()
+        !exercise.exp
       ) {
+
         return {
           statusCode: 502,
-          headers: { "Content-Type": "application/json" },
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
           body: JSON.stringify({
-            error: "Format de question invalide",
-            details: raw
-          })
-        };
-      }
-    } else {
-      if (
-        typeof exercise.statement !== "string" ||
-        !exercise.statement.trim() ||
-        typeof exercise.solution !== "string" ||
-        !exercise.solution.trim()
-      ) {
-        return {
-          statusCode: 502,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            error: "Format d'exercice invalide",
-            details: raw
+            error:
+              "Format de question invalide"
           })
         };
       }
     }
 
+
+    // --------------------------------------------------------
+    // Vérification exercice ouvert
+    // --------------------------------------------------------
+
+    else {
+
+      if (
+        !exercise.statement ||
+        !exercise.solution
+      ) {
+
+        return {
+          statusCode: 502,
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            error:
+              "Format d'exercice invalide"
+          })
+        };
+      }
+    }
+
+
     return {
+
       statusCode: 200,
+
       headers: {
         "Content-Type": "application/json"
       },
+
       body: JSON.stringify({
+
         type,
+
         exercise
+
       })
     };
-  } catch (e) {
+
+
+  } catch (error) {
+
     return {
+
       statusCode: 502,
-      headers: { "Content-Type": "application/json" },
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
       body: JSON.stringify({
-        error: "Échec de la requête au générateur",
-        details: String(e)
+
+        error:
+          "Échec de la requête au générateur",
+
+        details:
+          String(error)
       })
     };
   }
