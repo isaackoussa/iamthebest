@@ -77,6 +77,15 @@
     }).catch(()=>{ /* offline: ok, local storage keeps it */ });
   }
   function loadRemoteThenRender(){
+    // On applique d'abord les corrections de contenu de la console admin,
+    // puis on synchronise la progression.
+    loadContentOverrides().then(() => {
+      if (!currentEmail){ render(); return; }
+      syncRemoteThenRender();
+    });
+  }
+
+  function syncRemoteThenRender(){
     if (!currentEmail){ render(); return; }
     fetch(`/api/progress?email=${encodeURIComponent(currentEmail)}`).then(r => r.ok ? r.json() : null).then(remote => {
       if (remote && typeof remote === "object"){
@@ -166,6 +175,9 @@
 
   function render(){
     updateTopbarUser();
+    // La console admin a sa propre porte (code vérifié côté serveur) : elle
+    // n'exige pas d'être connecté comme élève.
+    if (currentRoute()[0] === "admin") return renderAdmin();
     if (!currentEmail){ return renderAuthGate(); }
     const parts = currentRoute();
     window.scrollTo(0,0);
@@ -182,6 +194,7 @@
     }
     if (parts[0] === "generator") return renderGenerator(parts[1], parts[2]);
     if (parts[0] === "translate") return renderTranslate();
+    if (parts[0] === "admin") return renderAdmin();
     return renderHome();
   }
 
@@ -994,6 +1007,503 @@
     localBtn.addEventListener("click", askLocal);
   }
 
+  /* ---------- Console d'administration ---------- */
+
+  // Le code admin ne reste qu'en mémoire (jamais dans localStorage) : fermer
+  // l'onglet suffit à se déconnecter.
+  let adminCode = "";
+  let adminTab = "students";
+  let adminStudents = null;
+  let adminStats = null;
+  let adminContent = null;
+  let adminDetail = null;      // { email, data }
+  let adminMsg = "";
+  let adminErr = "";
+  let adminBusy = false;
+  let adminPending = null;     // action destructrice en attente de confirmation
+  let adminContentLesson = ""; // leçon sélectionnée dans l'onglet Contenu
+
+  function adminPost(payload){
+    return fetch("/api/admin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.assign({ code: adminCode }, payload))
+    }).then(r => r.json().then(data => ({ ok: r.ok, data })))
+      .catch(() => ({ ok: false, data: { error: "Serveur injoignable. La console admin ne fonctionne qu'une fois l'appli déployée sur Netlify." } }));
+  }
+
+  function adminRun(payload, onOk){
+    adminBusy = true; adminErr = ""; renderAdmin();
+    adminPost(payload).then(({ ok, data }) => {
+      adminBusy = false;
+      if (!ok){ adminErr = (data && data.error) || "Erreur inconnue."; renderAdmin(); return; }
+      onOk(data);
+      renderAdmin();
+    });
+  }
+
+  function lessonInfo(lessonId){
+    for (const key of Object.keys(COURSES)){
+      const l = COURSES[key].lessons.find(x => x.id === lessonId);
+      if (l) return { subjectKey: key, subject: COURSES[key], lesson: l };
+    }
+    return null;
+  }
+  function fmtDate(ts){
+    if (!ts) return "—";
+    const d = new Date(ts);
+    return d.toLocaleDateString("fr-FR") + " " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function renderAdmin(){
+    if (!adminStudents){
+      root.innerHTML = `
+        <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <span>Console admin</span></div>
+        <div class="auth-card">
+          <div class="auth-badge">🔐</div>
+          <h1 class="auth-title">Console d'administration</h1>
+          <p class="auth-sub">Entre le code administrateur. Il est vérifié sur le serveur : aucune donnée n'est envoyée sans un code valide.</p>
+          <input type="password" id="admin-code" class="auth-input" placeholder="Code administrateur" autocomplete="current-password">
+          ${adminErr ? `<p class="auth-error">${esc(adminErr)}</p>` : ""}
+          <button class="btn btn-primary auth-btn" id="admin-login-btn" ${adminBusy ? "disabled" : ""}>${adminBusy ? "Vérification..." : "Entrer"}</button>
+          <a class="btn-link auth-back" href="#/">Retour à l'accueil</a>
+        </div>`;
+      const input = document.getElementById("admin-code");
+      if (input){
+        input.focus();
+        input.addEventListener("keydown", e => { if (e.key === "Enter") doAdminLogin(); });
+      }
+      const btn = document.getElementById("admin-login-btn");
+      if (btn) btn.addEventListener("click", doAdminLogin);
+      return;
+    }
+
+    const tabs = [
+      { k:"students", label:"👥 Élèves" },
+      { k:"stats", label:"📉 Points faibles" },
+      { k:"content", label:"✏️ Contenu" }
+    ];
+    const tabsHtml = tabs.map(t =>
+      `<button class="term-tab ${adminTab === t.k ? "active" : ""}" data-atab="${t.k}">${t.label}</button>`
+    ).join("");
+
+    let paneHtml = "";
+    if (adminTab === "students") paneHtml = adminStudentsPane();
+    else if (adminTab === "stats") paneHtml = adminStatsPane();
+    else paneHtml = adminContentPane();
+
+    root.innerHTML = `
+      <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <span>Console admin</span></div>
+      <div class="subject-header" style="--subj-color:var(--gold)">
+        <span class="sh-icon">🔐</span>
+        <h1 style="--subj-color:var(--gold)">Console d'administration</h1>
+      </div>
+      <div class="term-tabs">${tabsHtml}<button class="term-tab" id="admin-logout">Quitter</button></div>
+      ${adminBusy ? `<p class="empty">Chargement...</p>` : ""}
+      ${adminErr ? `<p class="tool-error">⚠️ ${esc(adminErr)}</p>` : ""}
+      ${adminMsg ? `<p class="admin-ok">✅ ${esc(adminMsg)}</p>` : ""}
+      ${paneHtml}`;
+
+    root.querySelectorAll("[data-atab]").forEach(b => b.addEventListener("click", () => {
+      adminTab = b.dataset.atab; adminMsg = ""; adminErr = ""; adminPending = null; adminDetail = null;
+      if (adminTab === "stats" && !adminStats) adminRun({ action:"stats" }, d => { adminStats = d; });
+      else if (adminTab === "content" && !adminContent) adminRun({ action:"getContent" }, d => { adminContent = d.content || {}; });
+      else renderAdmin();
+    }));
+    const lo = document.getElementById("admin-logout");
+    if (lo) lo.addEventListener("click", () => {
+      adminCode = ""; adminStudents = null; adminStats = null; adminContent = null;
+      adminDetail = null; adminMsg = ""; adminErr = ""; adminPending = null;
+      location.hash = "#/";
+    });
+
+    if (adminTab === "students") wireStudentsPane();
+    else if (adminTab === "content") wireContentPane();
+  }
+
+  function doAdminLogin(){
+    const input = document.getElementById("admin-code");
+    adminCode = (input && input.value) || "";
+    if (!adminCode){ adminErr = "Entre le code administrateur."; renderAdmin(); return; }
+    adminBusy = true; adminErr = ""; renderAdmin();
+    adminPost({ action:"login" }).then(({ ok, data }) => {
+      adminBusy = false;
+      if (!ok){ adminCode = ""; adminErr = (data && data.error) || "Connexion impossible."; renderAdmin(); return; }
+      adminStudents = data.students || [];
+      renderAdmin();
+    });
+  }
+
+  /* ----- Onglet Élèves ----- */
+  function adminStudentsPane(){
+    if (adminDetail) return adminDetailPane();
+    if (!adminStudents.length) return `<p class="empty">Aucun élève enregistré pour l'instant.</p>`;
+    const rows = adminStudents.map(s => `
+      <li class="grade-item" style="--subj-color:var(--gold)">
+        <div class="grade-row" data-student="${esc(s.email)}">
+          <span class="grade-icon">👤</span>
+          <span class="grade-name">
+            <span class="grade-name-text">${esc(s.email)}</span>
+            <span class="grade-terms">${s.lessonsDone} leçon${s.lessonsDone > 1 ? "s" : ""} terminée${s.lessonsDone > 1 ? "s" : ""} · ${s.noteCount} note${s.noteCount > 1 ? "s" : ""} · dernière activité ${fmtDate(s.lastActivity)}</span>
+          </span>
+          <span class="grade-count">quiz ${s.quizAvgPct === null ? "—" : s.quizAvgPct + " %"}</span>
+          <span class="grade-avg ${s.gradeAvg !== null && s.gradeAvg < 10 ? "low" : ""}">${s.gradeAvg === null ? "—" : s.gradeAvg.toFixed(2).replace(".", ",")}<small>/20</small></span>
+          <span class="grade-chevron">▸</span>
+        </div>
+      </li>`).join("");
+    return `
+      <p class="notes-foot">${adminStudents.length} compte${adminStudents.length > 1 ? "s" : ""} enregistré${adminStudents.length > 1 ? "s" : ""}. Clique sur un élève pour voir le détail et agir dessus.</p>
+      <ul class="grade-list">${rows}</ul>`;
+  }
+
+  function adminDetailPane(){
+    const { email, data } = adminDetail;
+    const progress = data.progress || {};
+    const grades = data.grades || {};
+
+    const bySubject = Object.keys(COURSES).map(key => {
+      const subj = COURSES[key];
+      let done = 0, sum = 0, tot = 0;
+      subj.lessons.forEach(l => {
+        const p = progress[l.id];
+        if (p && p.done){ done++; sum += Number(p.score) || 0; tot += Number(p.total) || 0; }
+      });
+      const notes = grades[key] || [];
+      return { key, subj, done, total: subj.lessons.length, pct: tot ? Math.round((sum / tot) * 1000) / 10 : null, notes: notes.length };
+    });
+
+    const subjRows = bySubject.map(s => `
+      <li class="grade-item" style="--subj-color:${s.subj.color}">
+        <div class="grade-row" style="cursor:default">
+          <span class="grade-icon">${s.subj.icon}</span>
+          <span class="grade-name"><span class="grade-name-text">${esc(s.subj.name)}</span></span>
+          <span class="grade-count">${s.done}/${s.total} leçons</span>
+          <span class="grade-count">${s.notes} note${s.notes > 1 ? "s" : ""}</span>
+          <span class="grade-avg ${s.pct !== null && s.pct < 50 ? "low" : ""}">${s.pct === null ? "—" : s.pct + " %"}</span>
+        </div>
+      </li>`).join("");
+
+    // Notes détaillées, groupées par trimestre
+    const termBlocks = [1, 2, 3].map(t => {
+      const lines = [];
+      Object.keys(grades).forEach(sk => {
+        (grades[sk] || []).filter(g => (Number(g.term) || 1) === t).forEach(g => {
+          const name = COURSES[sk] ? COURSES[sk].name : sk;
+          lines.push(`<li class="note-row"><span class="note-type-badge" style="--subj-color:var(--gold)">${esc(name)}</span><span class="note-info"><span class="note-label">${esc(g.label || g.type || "")}</span>${g.date ? `<span class="note-date">${esc(g.date)}</span>` : ""}</span><span class="note-coef">coef. ${Number(g.coef) > 0 ? g.coef : 1}</span><span class="note-score">${esc(String(g.score))}/${esc(String(g.outOf))}</span></li>`);
+        });
+      });
+      return `
+        <h3 class="admin-h3">Trimestre ${t} ${lines.length ? `<button class="btn-link" data-reset-term="${t}">réinitialiser ce trimestre</button>` : ""}</h3>
+        ${lines.length ? `<ul class="note-list">${lines.join("")}</ul>` : `<p class="empty">Aucune note.</p>`}`;
+    }).join("");
+
+    const confirmBtn = (act, label, danger) => {
+      const isPending = adminPending && adminPending.action === act;
+      return `<button class="btn ${isPending ? "btn-primary" : "btn-ghost"}" data-act="${act}" style="${isPending || danger ? "--subj-color:#E8735C;" : ""}">${isPending ? "⚠️ Confirmer : " + label : label}</button>`;
+    };
+
+    return `
+      <p class="crumb"><button class="btn-link" id="admin-back">← Retour à la liste</button></p>
+      <div class="gen-avg-card">
+        <div class="gen-avg-main">
+          <span class="gen-avg-num" style="font-size:1.2rem;">${esc(email)}</span>
+          <span class="gen-avg-label">Fiche élève</span>
+        </div>
+      </div>
+      <h3 class="admin-h3">Progression et notes par matière</h3>
+      <ul class="grade-list">${subjRows}</ul>
+      ${termBlocks}
+      <h3 class="admin-h3">Actions</h3>
+      <div class="admin-actions">
+        ${confirmBtn("resetProgress", "Réinitialiser la progression")}
+        ${confirmBtn("resetGrades", "Effacer toutes les notes")}
+        ${confirmBtn("deleteStudent", "Supprimer ce compte", true)}
+      </div>
+      <p class="notes-foot">Ces actions sont définitives : un premier clic demande confirmation, le second exécute.</p>`;
+  }
+
+  function wireStudentsPane(){
+    root.querySelectorAll("[data-student]").forEach(row => row.addEventListener("click", () => {
+      const email = row.dataset.student;
+      adminMsg = ""; adminPending = null;
+      adminRun({ action:"student", email }, d => { adminDetail = { email: d.email, data: d.data }; });
+    }));
+    const back = document.getElementById("admin-back");
+    if (back) back.addEventListener("click", () => { adminDetail = null; adminPending = null; adminMsg = ""; renderAdmin(); });
+
+    root.querySelectorAll("[data-act]").forEach(btn => btn.addEventListener("click", () => {
+      const act = btn.dataset.act;
+      if (!adminPending || adminPending.action !== act){
+        adminPending = { action: act }; adminMsg = ""; renderAdmin(); return;
+      }
+      const email = adminDetail.email;
+      adminPending = null;
+      adminRun({ action: act, email }, () => {
+        if (act === "deleteStudent"){
+          adminStudents = adminStudents.filter(s => s.email !== email);
+          adminDetail = null;
+          adminMsg = "Compte " + email + " supprimé.";
+        } else {
+          adminMsg = act === "resetProgress" ? "Progression réinitialisée." : "Notes effacées.";
+          adminRun({ action:"student", email }, d => { adminDetail = { email: d.email, data: d.data }; });
+        }
+      });
+    }));
+
+    root.querySelectorAll("[data-reset-term]").forEach(btn => btn.addEventListener("click", () => {
+      const term = Number(btn.dataset.resetTerm);
+      const act = "resetTerm" + term;
+      if (!adminPending || adminPending.action !== act){
+        adminPending = { action: act }; adminMsg = "";
+        btn.textContent = "⚠️ cliquer à nouveau pour confirmer";
+        return;
+      }
+      const email = adminDetail.email;
+      adminPending = null;
+      adminRun({ action:"resetTerm", email, term }, () => {
+        adminMsg = "Trimestre " + term + " réinitialisé.";
+        adminRun({ action:"student", email }, d => { adminDetail = { email: d.email, data: d.data }; });
+      });
+    }));
+  }
+
+  /* ----- Onglet Points faibles ----- */
+  function adminStatsPane(){
+    if (!adminStats) return `<p class="empty">Chargement des statistiques...</p>`;
+    const lessons = (adminStats.lessons || []).map(l => {
+      const info = lessonInfo(l.id);
+      return Object.assign({}, l, {
+        title: info ? info.lesson.title : l.id,
+        subjectName: info ? info.subject.name : "—",
+        color: info ? info.subject.color : "#999",
+        icon: info ? info.subject.icon : "📘",
+        subjectKey: info ? info.subjectKey : null
+      });
+    });
+
+    if (!lessons.length) return `<p class="empty">Aucune leçon terminée pour l'instant : il n'y a pas encore de statistiques à afficher.</p>`;
+
+    const scored = lessons.filter(l => l.avgPct !== null).sort((a, b) => a.avgPct - b.avgPct);
+    const weakest = scored.slice(0, 12);
+
+    // Agrégat par matière
+    const bySubj = {};
+    lessons.forEach(l => {
+      if (!l.subjectKey || l.avgPct === null) return;
+      if (!bySubj[l.subjectKey]) bySubj[l.subjectKey] = { sum:0, n:0, done:0 };
+      bySubj[l.subjectKey].sum += l.avgPct;
+      bySubj[l.subjectKey].n++;
+      bySubj[l.subjectKey].done += l.done;
+    });
+    const subjRows = Object.keys(bySubj).map(k => {
+      const s = bySubj[k], subj = COURSES[k];
+      const avg = Math.round((s.sum / s.n) * 10) / 10;
+      return `
+        <li class="grade-item" style="--subj-color:${subj.color}">
+          <div class="grade-row" style="cursor:default">
+            <span class="grade-icon">${subj.icon}</span>
+            <span class="grade-name"><span class="grade-name-text">${esc(subj.name)}</span><span class="grade-terms">${s.n} leçon${s.n > 1 ? "s" : ""} évaluée${s.n > 1 ? "s" : ""}</span></span>
+            <span class="grade-count">${s.done} passage${s.done > 1 ? "s" : ""}</span>
+            <span class="grade-avg ${avg < 50 ? "low" : ""}">${avg} <small>%</small></span>
+          </div>
+        </li>`;
+    }).join("");
+
+    const weakRows = weakest.map((l, i) => `
+      <li class="grade-item" style="--subj-color:${l.color}">
+        <div class="grade-row" style="cursor:default">
+          <span class="grade-icon">${i < 3 ? "🔴" : l.icon}</span>
+          <span class="grade-name">
+            <span class="grade-name-text">${esc(l.title)}</span>
+            <span class="grade-terms">${esc(l.subjectName)} · ${l.done} passage${l.done > 1 ? "s" : ""}</span>
+          </span>
+          <span class="grade-avg ${l.avgPct < 50 ? "low" : ""}">${l.avgPct} <small>%</small></span>
+          ${l.subjectKey ? `<a class="btn btn-ghost admin-mini" href="#/generator/${l.subjectKey}/${l.id}">s'entraîner</a>` : ""}
+        </div>
+      </li>`).join("");
+
+    return `
+      <div class="gen-avg-card">
+        <div class="gen-avg-main">
+          <span class="gen-avg-num">${adminStats.studentCount}<small> élève${adminStats.studentCount > 1 ? "s" : ""}</small></span>
+          <span class="gen-avg-label">Comptes suivis</span>
+        </div>
+        <div class="gen-avg-meta">
+          <span>${adminStats.totalDone} leçon${adminStats.totalDone > 1 ? "s" : ""} terminée${adminStats.totalDone > 1 ? "s" : ""}</span>
+          <span>${scored.length} leçon${scored.length > 1 ? "s" : ""} avec un score</span>
+        </div>
+      </div>
+      <h3 class="admin-h3">Leçons les moins réussies</h3>
+      <ul class="grade-list">${weakRows}</ul>
+      <h3 class="admin-h3">Moyenne des quiz par matière</h3>
+      <ul class="grade-list">${subjRows}</ul>
+      <p class="notes-foot">Le pourcentage est la moyenne des scores obtenus aux quiz de fin de leçon, tous élèves confondus. Les leçons jamais terminées n'apparaissent pas.</p>`;
+  }
+
+  /* ----- Onglet Contenu ----- */
+  function adminContentPane(){
+    if (!adminContent) return `<p class="empty">Chargement du contenu...</p>`;
+    const c = adminContent;
+    const allLessons = [];
+    Object.keys(COURSES).forEach(k => COURSES[k].lessons.forEach(l =>
+      allLessons.push({ id: l.id, label: COURSES[k].name + " — " + l.title })));
+
+    const sel = adminContentLesson || allLessons[0].id;
+    const info = lessonInfo(sel);
+    const over = (c.lessons && c.lessons[sel]) || {};
+
+    const existing = [];
+    Object.keys(c.lessons || {}).forEach(id => {
+      const inf = lessonInfo(id);
+      existing.push(`<li class="note-row"><span class="note-type-badge" style="--subj-color:var(--gold)">Leçon modifiée</span><span class="note-info"><span class="note-label">${esc(inf ? inf.lesson.title : id)}</span><span class="note-date">${esc(id)}${c.lessons[id].title ? " · titre remplacé" : ""}${c.lessons[id].content ? " · texte remplacé" : ""}</span></span><button class="note-delete" data-del-kind="lesson" data-del-lesson="${esc(id)}" title="Annuler cette modification">✕</button></li>`);
+    });
+    Object.keys(c.extraQuiz || {}).forEach(id => (c.extraQuiz[id] || []).forEach(q => {
+      const inf = lessonInfo(id);
+      existing.push(`<li class="note-row"><span class="note-type-badge" style="--subj-color:#5CA9E8">Question ajoutée</span><span class="note-info"><span class="note-label">${esc(q.q)}</span><span class="note-date">${esc(inf ? inf.lesson.title : id)}</span></span><button class="note-delete" data-del-kind="quiz" data-del-lesson="${esc(id)}" data-del-qid="${esc(q.qid)}" title="Supprimer">✕</button></li>`);
+    }));
+    Object.keys(c.extraPractice || {}).forEach(id => (c.extraPractice[id] || []).forEach(p => {
+      const inf = lessonInfo(id);
+      existing.push(`<li class="note-row"><span class="note-type-badge" style="--subj-color:#8FCB4B">Exercice ajouté</span><span class="note-info"><span class="note-label">${esc(p.statement.slice(0, 120))}</span><span class="note-date">${esc(inf ? inf.lesson.title : id)}</span></span><button class="note-delete" data-del-kind="practice" data-del-lesson="${esc(id)}" data-del-qid="${esc(p.qid)}" title="Supprimer">✕</button></li>`);
+    }));
+
+    return `
+      <div class="note-form" style="--subj-color:var(--gold)">
+        <div class="note-form-row">
+          <select id="ac-lesson" class="auth-input" style="flex:1;min-width:240px;margin-bottom:0;text-align:left;">
+            ${allLessons.map(l => `<option value="${l.id}" ${l.id === sel ? "selected" : ""}>${esc(l.label)}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+
+      <h3 class="admin-h3">Corriger la leçon</h3>
+      <div class="note-form" style="--subj-color:var(--gold)">
+        <div class="note-form-row">
+          <input type="text" id="ac-title" class="auth-input" style="flex:1;min-width:240px;margin-bottom:0;text-align:left;"
+                 placeholder="Titre (laisse vide pour garder l'original)" value="${esc(over.title || "")}">
+        </div>
+        <div class="note-form-row">
+          <textarea id="ac-text" class="auth-input admin-textarea" placeholder="Texte de la leçon en HTML simple (laisse vide pour garder l'original)">${esc(over.content || "")}</textarea>
+        </div>
+        <p class="notes-foot" style="margin-top:0">Original : « ${esc(info ? info.lesson.title : sel)} ». Remplacer le texte n'efface rien dans le code : la correction est enregistrée à part et peut être annulée à tout moment.</p>
+        <button class="btn btn-primary" id="ac-save-lesson" style="--subj-color:var(--gold)">💾 Enregistrer la correction</button>
+      </div>
+
+      <h3 class="admin-h3">Ajouter une question de quiz</h3>
+      <div class="note-form" style="--subj-color:#5CA9E8">
+        <div class="note-form-row"><input type="text" id="aq-q" class="auth-input" style="flex:1;min-width:240px;margin-bottom:0;text-align:left;" placeholder="Question"></div>
+        <div class="note-form-row">
+          ${[0,1,2,3].map(i => `<input type="text" id="aq-o${i}" class="auth-input" style="flex:1;min-width:150px;margin-bottom:0;text-align:left;" placeholder="Proposition ${["A","B","C","D"][i]}">`).join("")}
+        </div>
+        <div class="note-form-row">
+          <select id="aq-correct" class="auth-input note-select" style="margin-bottom:0;">
+            ${["A","B","C","D"].map((L, i) => `<option value="${i}">Bonne réponse : ${L}</option>`).join("")}
+          </select>
+          <input type="text" id="aq-exp" class="auth-input" style="flex:1;min-width:200px;margin-bottom:0;text-align:left;" placeholder="Explication de la bonne réponse">
+        </div>
+        <button class="btn btn-primary" id="aq-add" style="--subj-color:#5CA9E8">➕ Ajouter la question</button>
+      </div>
+
+      <h3 class="admin-h3">Ajouter un exercice de pratique</h3>
+      <div class="note-form" style="--subj-color:#8FCB4B">
+        <div class="note-form-row"><textarea id="ap-statement" class="auth-input admin-textarea" placeholder="Énoncé de l'exercice"></textarea></div>
+        <div class="note-form-row"><textarea id="ap-solution" class="auth-input admin-textarea" placeholder="Corrigé détaillé (HTML simple autorisé : <p>, <strong>, <br>)"></textarea></div>
+        <button class="btn btn-primary" id="ap-add" style="--subj-color:#8FCB4B">➕ Ajouter l'exercice</button>
+      </div>
+
+      <h3 class="admin-h3">Modifications en vigueur</h3>
+      ${existing.length ? `<ul class="note-list">${existing.join("")}</ul>` : `<p class="empty">Aucune modification enregistrée : l'appli utilise le contenu d'origine.</p>`}
+      <p class="notes-foot">Les modifications sont appliquées à tous les élèves au prochain chargement de l'appli, sans redéploiement.</p>`;
+  }
+
+  function wireContentPane(){
+    const selEl = document.getElementById("ac-lesson");
+    if (selEl) selEl.addEventListener("change", () => { adminContentLesson = selEl.value; adminMsg = ""; renderAdmin(); });
+    const cur = () => (selEl ? selEl.value : adminContentLesson);
+
+    const saveLesson = document.getElementById("ac-save-lesson");
+    if (saveLesson) saveLesson.addEventListener("click", () => {
+      adminRun({ action:"saveLesson", lessonId: cur(),
+                 title: document.getElementById("ac-title").value,
+                 text: document.getElementById("ac-text").value },
+        d => { adminContent = d.content || {}; adminMsg = "Correction enregistrée."; });
+    });
+
+    const addQ = document.getElementById("aq-add");
+    if (addQ) addQ.addEventListener("click", () => {
+      adminRun({ action:"addQuiz", lessonId: cur(),
+                 q: document.getElementById("aq-q").value,
+                 options: [0,1,2,3].map(i => document.getElementById("aq-o" + i).value),
+                 correct: Number(document.getElementById("aq-correct").value),
+                 exp: document.getElementById("aq-exp").value },
+        d => { adminContent = d.content || {}; adminMsg = "Question ajoutée."; });
+    });
+
+    const addP = document.getElementById("ap-add");
+    if (addP) addP.addEventListener("click", () => {
+      adminRun({ action:"addPractice", lessonId: cur(),
+                 statement: document.getElementById("ap-statement").value,
+                 solution: document.getElementById("ap-solution").value },
+        d => { adminContent = d.content || {}; adminMsg = "Exercice ajouté."; });
+    });
+
+    root.querySelectorAll("[data-del-kind]").forEach(btn => btn.addEventListener("click", () => {
+      adminRun({ action:"deleteContentItem", kind: btn.dataset.delKind,
+                 lessonId: btn.dataset.delLesson, qid: btn.dataset.delQid || "" },
+        d => { adminContent = d.content || {}; adminMsg = "Élément supprimé."; });
+    }));
+  }
+
+  /* ---------- Corrections de contenu venues de la console admin ---------- */
+  // Appliquées avant le premier affichage : l'admin peut corriger une leçon ou
+  // ajouter des questions sans toucher au code ni redéployer.
+  function applyContentOverrides(c){
+    if (!c || typeof c !== "object") return;
+    const lessons = c.lessons || {};
+    Object.keys(lessons).forEach(id => {
+      const info = lessonInfo(id);
+      if (!info) return;
+      if (lessons[id].title) info.lesson.title = lessons[id].title;
+      if (lessons[id].content) info.lesson.content = lessons[id].content;
+    });
+    // L'ajout se fait par identifiant (qid) : si cette fonction est appelée
+    // plusieurs fois (double évènement de chargement, nouvelle synchronisation),
+    // les questions déjà présentes ne sont pas ajoutées une seconde fois.
+    const eq = c.extraQuiz || {};
+    Object.keys(eq).forEach(id => {
+      const info = lessonInfo(id);
+      if (!info) return;
+      info.lesson.quiz = info.lesson.quiz || [];
+      const already = {};
+      info.lesson.quiz.forEach(q => { if (q && q.qid) already[q.qid] = true; });
+      (eq[id] || []).forEach(q => {
+        if (!q || !q.q || !Array.isArray(q.options) || q.options.length !== 4) return;
+        if (q.qid && already[q.qid]) return;
+        if (q.qid) already[q.qid] = true;
+        info.lesson.quiz.push(q);
+      });
+    });
+    const ep = c.extraPractice || {};
+    Object.keys(ep).forEach(id => {
+      if (typeof PRACTICE === "undefined") return;
+      PRACTICE[id] = PRACTICE[id] || [];
+      const already = {};
+      PRACTICE[id].forEach(p => { if (p && p.qid) already[p.qid] = true; });
+      (ep[id] || []).forEach(p => {
+        if (!p || !p.statement || !p.solution) return;
+        if (p.qid && already[p.qid]) return;
+        if (p.qid) already[p.qid] = true;
+        PRACTICE[id].push(p);
+      });
+    });
+  }
+
+  function loadContentOverrides(){
+    return fetch("/api/admin")
+      .then(r => r.ok ? r.json() : null)
+      .then(c => { applyContentOverrides(c); })
+      .catch(() => { /* hors ligne ou non déployé : on garde le contenu d'origine */ });
+  }
+
   /* ---------- Traducteur FR / EN ---------- */
   function runTranslate(text, direction, targetEl, btnEl, btnLabel){
     if (!text) return;
@@ -1220,6 +1730,9 @@
 
     renderQuestion();
   }
+
+  // Exposé pour les tests automatisés (sans effet sur l'usage normal).
+  window.__imthebest_test = { loadContentOverrides, applyContentOverrides };
 
   // First paint before remote sync completes
   render();

@@ -541,3 +541,18 @@ button{font-family:inherit;}
   .note-form-row{gap:8px;}
   .note-select, .note-label-input, .note-date-input{flex:1 1 100%;}
   .note-num{flex:1 1 72px; min-width:0;}
+
+/* ============ Console admin ============ */
+.footer-admin{margin-left:14px; color:var(--ink-muted); font-size:0.78rem; opacity:0.55;}
+.footer-admin:hover{opacity:1; color:var(--gold);}
+.admin-h3{
+  font-family:'Kalam', cursive; font-size:1.15rem; color:var(--ink-chalk);
+  margin:26px 0 12px; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+}
+.admin-ok{color:#8FCB4B; font-size:0.9rem; margin:0 0 14px;}
+.admin-actions{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
+.admin-mini{padding:5px 12px; font-size:0.8rem; flex-shrink:0;}
+.admin-textarea{
+  flex:1 1 100%; min-height:110px; text-align:left; margin-bottom:0;
+  font-family:'JetBrains Mono', monospace; font-size:0.85rem; line-height:1.5; resize:vertical;
+}
