@@ -369,7 +369,7 @@
       }).then(r => r.json().then(data => ({ok:r.ok, data}))).then(({ok, data}) => {
         aiBtn.disabled = false; aiBtn.textContent = "Demander";
         aiAnswer.className = "ai-answer show";
-        aiAnswer.innerHTML = ok ? esc(data.answer) : `⚠️ ${esc((data && data.error) || "L'assistant IA n'a pas pu répondre. Réessaie dans un instant.")}`;
+        aiAnswer.innerHTML = ok ? esc(data.answer) : `⚠️ ${esc(apiError(data, "L'assistant IA n'a pas pu répondre. Réessaie dans un instant."))}`;
       }).catch(() => {
         aiBtn.disabled = false; aiBtn.textContent = "Demander";
         aiAnswer.className = "ai-answer show";
@@ -880,7 +880,7 @@
           // L'IA a échoué (surcharge côté Google, quota, réseau...) : plutôt que de
           // laisser l'élève sans rien, on bascule automatiquement sur le générateur
           // local, qui fonctionne hors ligne.
-          genFallbackToLocal((data && data.error) || "L'IA n'a pas pu répondre.");
+          genFallbackToLocal(apiError(data, "L'IA n'a pas pu répondre."));
           return;
         }
         renderGenResult(subj, data.type, data.exercise, askAgain);
@@ -1022,6 +1022,15 @@
   let adminBusy = false;
   let adminPending = null;     // action destructrice en attente de confirmation
   let adminContentLesson = ""; // leçon sélectionnée dans l'onglet Contenu
+  let adminDiag = null;        // résultat du diagnostic de configuration
+
+  // Quand une fonction Netlify plante, Netlify renvoie un 502 dont le corps est
+  // {errorType, errorMessage} : sans ça, l'appli affichait « Connexion
+  // impossible » et cachait la véritable cause.
+  function apiError(data, fallback){
+    if (!data) return fallback;
+    return data.error || data.errorMessage || data.errorType || fallback;
+  }
 
   function adminPost(payload){
     return fetch("/api/admin", {
@@ -1036,7 +1045,7 @@
     adminBusy = true; adminErr = ""; renderAdmin();
     adminPost(payload).then(({ ok, data }) => {
       adminBusy = false;
-      if (!ok){ adminErr = (data && data.error) || "Erreur inconnue."; renderAdmin(); return; }
+      if (!ok){ adminErr = apiError(data, "Erreur inconnue."); renderAdmin(); return; }
       onOk(data);
       renderAdmin();
     });
@@ -1066,6 +1075,8 @@
           <input type="password" id="admin-code" class="auth-input" placeholder="Code administrateur" autocomplete="current-password">
           ${adminErr ? `<p class="auth-error">${esc(adminErr)}</p>` : ""}
           <button class="btn btn-primary auth-btn" id="admin-login-btn" ${adminBusy ? "disabled" : ""}>${adminBusy ? "Vérification..." : "Entrer"}</button>
+          ${adminDiag ? `<div class="admin-diag">${adminDiagHtml(adminDiag)}</div>` : ""}
+          <button class="btn-link auth-back" id="admin-diag-btn" style="margin-bottom:10px;">🔍 Diagnostiquer le problème</button>
           <a class="btn-link auth-back" href="#/">Retour à l'accueil</a>
         </div>`;
       const input = document.getElementById("admin-code");
@@ -1075,6 +1086,8 @@
       }
       const btn = document.getElementById("admin-login-btn");
       if (btn) btn.addEventListener("click", doAdminLogin);
+      const dbtn = document.getElementById("admin-diag-btn");
+      if (dbtn) dbtn.addEventListener("click", doAdminDiag);
       return;
     }
 
@@ -1113,12 +1126,47 @@
     const lo = document.getElementById("admin-logout");
     if (lo) lo.addEventListener("click", () => {
       adminCode = ""; adminStudents = null; adminStats = null; adminContent = null;
-      adminDetail = null; adminMsg = ""; adminErr = ""; adminPending = null;
+      adminDetail = null; adminMsg = ""; adminErr = ""; adminPending = null; adminDiag = null;
       location.hash = "#/";
     });
 
     if (adminTab === "students") wireStudentsPane();
     else if (adminTab === "content") wireContentPane();
+  }
+
+  // Interroge le serveur sur l'état de sa configuration (aucun secret renvoyé).
+  function doAdminDiag(){
+    const input = document.getElementById("admin-code");
+    adminCode = (input && input.value) || "";
+    if (!adminCode){
+      adminErr = "Entre d'abord le code administrateur : le diagnostic est lui aussi protégé.";
+      renderAdmin(); return;
+    }
+    adminBusy = true; adminErr = ""; adminDiag = null; renderAdmin();
+    adminPost({ action: "diag" }).then(({ ok, data }) => {
+      adminBusy = false;
+      if (ok && data && data.diag){ adminDiag = data.diag; }
+      else { adminDiag = { erreur: apiError(data, "Le serveur n'a pas répondu au diagnostic.") }; }
+      renderAdmin();
+    });
+  }
+
+  function adminDiagHtml(d){
+    const yn = v => v === true ? "✅ oui" : v === false ? "❌ non" : esc(String(v));
+    const rows = [
+      ["Code ADMIN_CODE configuré", d.adminCodeConfigured],
+      ["Paquet @netlify/blobs chargé", d.blobsModuleLoaded],
+      ["Stockage Blobs accessible", d.blobsStoreOpens],
+      ["Variable NETLIFY_SITE_ID définie", d.netlifySiteIdDefined],
+      ["Variable NETLIFY_BLOBS_TOKEN définie", d.netlifyBlobsTokenDefined],
+      ["Contexte Blobs injecté par Netlify", d.blobsAutoContextPresent],
+      ["Version de Node", d.nodeVersion]
+    ].filter(r => r[1] !== undefined);
+    let html = "<p class=\"admin-diag-title\">Diagnostic de la configuration</p><ul>" +
+      rows.map(r => `<li>${esc(r[0])} : ${yn(r[1])}</li>`).join("") + "</ul>";
+    const detail = d.blobsStoreError || d.blobsModuleError || d.erreur;
+    if (detail) html += `<p class="admin-diag-detail">${esc(String(detail))}</p>`;
+    return html;
   }
 
   function doAdminLogin(){
@@ -1128,7 +1176,7 @@
     adminBusy = true; adminErr = ""; renderAdmin();
     adminPost({ action:"login" }).then(({ ok, data }) => {
       adminBusy = false;
-      if (!ok){ adminCode = ""; adminErr = (data && data.error) || "Connexion impossible."; renderAdmin(); return; }
+      if (!ok){ adminCode = ""; adminErr = apiError(data, "Connexion impossible."); renderAdmin(); return; }
       adminStudents = data.students || [];
       renderAdmin();
     });
@@ -1517,7 +1565,7 @@
     }).then(r => r.json().then(data => ({ok:r.ok, data}))).then(({ok, data}) => {
       btnEl.disabled = false; btnEl.textContent = btnLabel;
       if (!ok){
-        targetEl.innerHTML = `<p class="tool-error">⚠️ ${esc((data && data.error) || "Erreur inconnue")}</p>` +
+        targetEl.innerHTML = `<p class="tool-error">⚠️ ${esc(apiError(data, "Erreur inconnue"))}</p>` +
           "";
         return;
       }

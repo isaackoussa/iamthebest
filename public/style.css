@@ -556,3 +556,14 @@ button{font-family:inherit;}
   flex:1 1 100%; min-height:110px; text-align:left; margin-bottom:0;
   font-family:'JetBrains Mono', monospace; font-size:0.85rem; line-height:1.5; resize:vertical;
 }
+
+.admin-diag{
+  text-align:left; background:rgba(255,255,255,0.04); border:1px dashed var(--line-strong);
+  border-radius:10px; padding:12px 14px; margin:4px 0 14px; font-size:0.84rem; line-height:1.6;
+}
+.admin-diag-title{margin:0 0 6px; font-weight:600; color:var(--ink-chalk);}
+.admin-diag ul{margin:0; padding-left:18px; color:var(--ink-muted);}
+.admin-diag-detail{
+  margin:10px 0 0; color:#E8A94B; font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem; overflow-wrap:anywhere;
+}

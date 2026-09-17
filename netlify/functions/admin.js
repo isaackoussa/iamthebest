@@ -11,19 +11,10 @@
 // POST /api/admin { code, action, ... } -> toutes les autres actions.
 
 const crypto = require("crypto");
-const { getStore } = require("@netlify/blobs");
+const { openStore, storeStatus } = require("./lib/store.js");
 
 // Clé réservée dans le store : ne peut pas entrer en conflit avec un email.
 const CONTENT_KEY = "__content_overrides__";
-
-function openStore() {
-  const siteID = process.env.NETLIFY_SITE_ID;
-  const token = process.env.NETLIFY_BLOBS_TOKEN;
-  if (siteID && token) {
-    return getStore({ name: "imthebest-progress", siteID, token });
-  }
-  return getStore("imthebest-progress");
-}
 
 function json(statusCode, body) {
   return { statusCode, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
@@ -113,12 +104,14 @@ function summarize(email, data) {
 }
 
 exports.handler = async (event) => {
-  const store = openStore();
-
   // ---- Lecture publique des corrections de contenu (aucune donnée d'élève) ----
+  // Si le stockage est indisponible, on renvoie un document vide : l'appli
+  // utilise alors le contenu d'origine et reste parfaitement utilisable.
   if (event.httpMethod === "GET") {
+    const opened = openStore();
+    if (!opened.ok) return json(200, {});
     try {
-      const content = (await store.get(CONTENT_KEY, { type: "json" })) || {};
+      const content = (await opened.store.get(CONTENT_KEY, { type: "json" })) || {};
       return json(200, content);
     } catch (e) {
       return json(200, {});
@@ -148,6 +141,36 @@ exports.handler = async (event) => {
   }
 
   const action = body.action;
+
+  // ---- Diagnostic : pourquoi la console ne fonctionne-t-elle pas ? ----
+  // Ne renvoie aucune valeur secrète, seulement l'état de la configuration.
+  if (action === "diag") {
+    const st = storeStatus();
+    const opened = openStore();
+    return json(200, {
+      ok: true,
+      diag: {
+        adminCodeConfigured: true,
+        blobsModuleLoaded: st.moduleLoaded,
+        blobsModuleError: st.moduleError,
+        blobsStoreOpens: opened.ok,
+        blobsStoreError: opened.ok ? null : opened.error,
+        netlifySiteIdDefined: st.hasSiteId,
+        netlifyBlobsTokenDefined: st.hasBlobsToken,
+        blobsAutoContextPresent: st.hasAutoContext,
+        nodeVersion: st.nodeVersion
+      }
+    });
+  }
+
+  const opened = openStore();
+  if (!opened.ok) {
+    return json(503, {
+      error: "Le stockage Netlify Blobs est indisponible, donc la console ne peut ni lire ni écrire les données. Détail : " + opened.error,
+      storageUnavailable: true
+    });
+  }
+  const store = opened.store;
 
   try {
     // ---- Liste des élèves ----
