@@ -13,8 +13,12 @@
 const crypto = require("crypto");
 const { openStore, storeStatus } = require("./lib/store.js");
 
-// Clé réservée dans le store : ne peut pas entrer en conflit avec un email.
+// Clés réservées dans le store. Un email ne peut jamais commencer par "__",
+// donc ce préfixe distingue sans ambiguïté les données internes des élèves.
 const CONTENT_KEY = "__content_overrides__";
+const CALENDAR_KEY = "__calendar__";
+const PUSH_KEY = "__push_subscriptions__";
+const isReservedKey = k => String(k).startsWith("__");
 
 function json(statusCode, body) {
   return { statusCode, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
@@ -58,6 +62,22 @@ function pruneContent(content) {
     }
   });
   return content;
+}
+
+// Vérifie qu'une date AAAA-MM-JJ existe vraiment (refuse le 31 février).
+function isRealDate(d) {
+  const [y, m, day] = d.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, day));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === day;
+}
+
+// Rendez-vous triés du plus proche au plus lointain.
+function sortEvents(events) {
+  return (events || []).slice().sort((a, b) => {
+    const ka = String(a.date) + " " + (a.time || "99:99");
+    const kb = String(b.date) + " " + (b.time || "99:99");
+    return ka < kb ? -1 : ka > kb ? 1 : 0;
+  });
 }
 
 // Moyenne sur 20 d'une liste de notes, pondérée par le coefficient de chaque note.
@@ -176,7 +196,7 @@ exports.handler = async (event) => {
     // ---- Liste des élèves ----
     if (action === "login" || action === "students") {
       const listed = await store.list();
-      const keys = (listed.blobs || []).map(b => b.key).filter(k => k !== CONTENT_KEY);
+      const keys = (listed.blobs || []).map(b => b.key).filter(k => !isReservedKey(k));
       const students = [];
       for (const k of keys) {
         const data = (await store.get(k, { type: "json" })) || {};
@@ -198,7 +218,7 @@ exports.handler = async (event) => {
     // ---- Statistiques : où ça bloque ----
     if (action === "stats") {
       const listed = await store.list();
-      const keys = (listed.blobs || []).map(b => b.key).filter(k => k !== CONTENT_KEY);
+      const keys = (listed.blobs || []).map(b => b.key).filter(k => !isReservedKey(k));
       const perLesson = {};   // lessonId -> { done, scoreSum, scoreTotal }
       let studentCount = 0, totalDone = 0;
       for (const k of keys) {
@@ -251,7 +271,7 @@ exports.handler = async (event) => {
     if (action === "deleteStudent") {
       const email = String(body.email || "").trim().toLowerCase();
       if (!email) return json(400, { error: "email manquant" });
-      if (email === CONTENT_KEY) return json(400, { error: "clé réservée" });
+      if (isReservedKey(email)) return json(400, { error: "clé réservée" });
       await store.delete(email);
       return json(200, { ok: true });
     }
@@ -333,6 +353,72 @@ exports.handler = async (event) => {
       }
       await store.setJSON(CONTENT_KEY, pruneContent(content));
       return json(200, { ok: true, content });
+    }
+
+    /* ---------- Calendrier des rendez-vous ---------- */
+
+    if (action === "calendar") {
+      const events = (await store.get(CALENDAR_KEY, { type: "json" })) || [];
+      const subs = (await store.get(PUSH_KEY, { type: "json" })) || [];
+      return json(200, {
+        ok: true,
+        events: sortEvents(events),
+        pushCount: subs.length,
+        vapidPublicKey: process.env.VAPID_PUBLIC_KEY || null
+      });
+    }
+
+    if (action === "addEvent") {
+      const title = sanitizeText(body.title, 160);
+      const date = sanitizeText(body.date, 10);
+      const time = sanitizeText(body.time, 5);
+      const note = sanitizeText(body.note, 500);
+
+      if (!title) return json(400, { error: "Donne un titre au rendez-vous." });
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return json(400, { error: "Date invalide (format attendu : AAAA-MM-JJ)." });
+      if (!isRealDate(date)) return json(400, { error: "Cette date n'existe pas." });
+      if (time && !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) return json(400, { error: "Heure invalide (format attendu : HH:MM)." });
+
+      const events = (await store.get(CALENDAR_KEY, { type: "json" })) || [];
+      if (events.length >= 500) return json(400, { error: "Trop de rendez-vous enregistrés (500 maximum)." });
+      events.push({
+        id: "e" + Date.now().toString(36) + Math.floor(Math.random() * 1000).toString(36),
+        title, date, time, note,
+        createdAt: new Date().toISOString()
+      });
+      await store.setJSON(CALENDAR_KEY, events);
+      return json(200, { ok: true, events: sortEvents(events) });
+    }
+
+    if (action === "deleteEvent") {
+      const id = sanitizeText(body.id, 40);
+      const events = (await store.get(CALENDAR_KEY, { type: "json" })) || [];
+      const kept = events.filter(e => e.id !== id);
+      if (kept.length === events.length) return json(404, { error: "Rendez-vous introuvable." });
+      await store.setJSON(CALENDAR_KEY, kept);
+      return json(200, { ok: true, events: sortEvents(kept) });
+    }
+
+    /* ---------- Abonnement aux rappels push ---------- */
+    // Protégé par le code admin : seul le titulaire du code reçoit ses rendez-vous.
+
+    if (action === "pushSubscribe") {
+      const sub = body.subscription;
+      if (!sub || !sub.endpoint || typeof sub.endpoint !== "string") {
+        return json(400, { error: "Abonnement invalide." });
+      }
+      const subs = (await store.get(PUSH_KEY, { type: "json" })) || [];
+      const already = subs.some(s2 => s2 && s2.endpoint === sub.endpoint);
+      if (!already) {
+        subs.push({ endpoint: sub.endpoint, keys: sub.keys, addedAt: new Date().toISOString() });
+        await store.setJSON(PUSH_KEY, subs);
+      }
+      return json(200, { ok: true, pushCount: subs.length, already });
+    }
+
+    if (action === "pushUnsubscribeAll") {
+      await store.setJSON(PUSH_KEY, []);
+      return json(200, { ok: true, pushCount: 0 });
     }
 
     return json(400, { error: "Action inconnue : " + String(action) });

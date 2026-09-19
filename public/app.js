@@ -1023,6 +1023,9 @@
   let adminPending = null;     // action destructrice en attente de confirmation
   let adminContentLesson = ""; // leçon sélectionnée dans l'onglet Contenu
   let adminDiag = null;        // résultat du diagnostic de configuration
+  let adminCalendar = null;    // rendez-vous chargés depuis le serveur
+  let adminPushCount = 0;      // appareils abonnés aux rappels
+  let adminVapid = null;       // clé publique VAPID fournie par le serveur
 
   // Quand une fonction Netlify plante, Netlify renvoie un 502 dont le corps est
   // {errorType, errorMessage} : sans ça, l'appli affichait « Connexion
@@ -1094,7 +1097,8 @@
     const tabs = [
       { k:"students", label:"👥 Élèves" },
       { k:"stats", label:"📉 Points faibles" },
-      { k:"content", label:"✏️ Contenu" }
+      { k:"content", label:"✏️ Contenu" },
+      { k:"calendar", label:"📅 Calendrier" }
     ];
     const tabsHtml = tabs.map(t =>
       `<button class="term-tab ${adminTab === t.k ? "active" : ""}" data-atab="${t.k}">${t.label}</button>`
@@ -1103,6 +1107,7 @@
     let paneHtml = "";
     if (adminTab === "students") paneHtml = adminStudentsPane();
     else if (adminTab === "stats") paneHtml = adminStatsPane();
+    else if (adminTab === "calendar") paneHtml = adminCalendarPane();
     else paneHtml = adminContentPane();
 
     root.innerHTML = `
@@ -1121,17 +1126,22 @@
       adminTab = b.dataset.atab; adminMsg = ""; adminErr = ""; adminPending = null; adminDetail = null;
       if (adminTab === "stats" && !adminStats) adminRun({ action:"stats" }, d => { adminStats = d; });
       else if (adminTab === "content" && !adminContent) adminRun({ action:"getContent" }, d => { adminContent = d.content || {}; });
+      else if (adminTab === "calendar" && !adminCalendar) adminRun({ action:"calendar" }, d => {
+        adminCalendar = d.events || []; adminPushCount = d.pushCount || 0; adminVapid = d.vapidPublicKey || null;
+      });
       else renderAdmin();
     }));
     const lo = document.getElementById("admin-logout");
     if (lo) lo.addEventListener("click", () => {
       adminCode = ""; adminStudents = null; adminStats = null; adminContent = null;
       adminDetail = null; adminMsg = ""; adminErr = ""; adminPending = null; adminDiag = null;
+      adminCalendar = null; adminPushCount = 0; adminVapid = null;
       location.hash = "#/";
     });
 
     if (adminTab === "students") wireStudentsPane();
     else if (adminTab === "content") wireContentPane();
+    else if (adminTab === "calendar") wireCalendarPane();
   }
 
   // Interroge le serveur sur l'état de sa configuration (aucun secret renvoyé).
@@ -1499,6 +1509,179 @@
                  lessonId: btn.dataset.delLesson, qid: btn.dataset.delQid || "" },
         d => { adminContent = d.content || {}; adminMsg = "Élément supprimé."; });
     }));
+  }
+
+  /* ----- Onglet Calendrier ----- */
+
+  // Clé VAPID : le navigateur l'exige au format binaire.
+  function urlBase64ToUint8Array(base64String){
+    const padding = "=".repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const raw = atob(base64);
+    const out = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+    return out;
+  }
+
+  function isoToday(offset){
+    const d = new Date();
+    d.setDate(d.getDate() + (offset || 0));
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function frDate(iso){
+    const p = String(iso).split("-");
+    return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : iso;
+  }
+  function joursRestants(iso){
+    const a = new Date(isoToday(0) + "T00:00:00");
+    const b = new Date(iso + "T00:00:00");
+    return Math.round((b - a) / 86400000);
+  }
+
+  function adminCalendarPane(){
+    if (!adminCalendar) return `<p class="empty">Chargement du calendrier...</p>`;
+
+    const today = isoToday(0), tomorrow = isoToday(1);
+    const passes = adminCalendar.filter(e => e.date < today);
+    const aVenir = adminCalendar.filter(e => e.date >= today);
+
+    const ligne = e => {
+      const j = joursRestants(e.date);
+      let quand;
+      if (e.date === today) quand = "aujourd'hui";
+      else if (e.date === tomorrow) quand = "demain";
+      else if (j > 1) quand = "dans " + j + " jours";
+      else if (j === -1) quand = "hier";
+      else quand = "il y a " + Math.abs(j) + " jours";
+      const urgent = e.date === today || e.date === tomorrow;
+      return `
+        <li class="note-row cal-row">
+          <span class="note-type-badge" style="--subj-color:${urgent ? "#E8735C" : "var(--gold)"}">${frDate(e.date)}</span>
+          <span class="note-info">
+            <span class="note-label">${esc(e.title)}</span>
+            <span class="note-date">${e.time ? esc(e.time) + " · " : ""}${quand}${e.note ? " · " + esc(e.note) : ""}</span>
+          </span>
+          <button class="note-delete" data-delevent="${esc(e.id)}" title="Supprimer ce rendez-vous">✕</button>
+        </li>`;
+    };
+
+    const pushBloc = !adminVapid
+      ? `<p class="notes-foot">Les rappels par notification ne sont pas encore configurés : ajoute les variables <strong>VAPID_PUBLIC_KEY</strong> et <strong>VAPID_PRIVATE_KEY</strong> dans Netlify (commande <code>npx web-push generate-vapid-keys</code> pour les générer), puis redéploie.</p>`
+      : `<div class="admin-actions">
+           <button class="btn btn-primary" id="cal-push-btn" style="--subj-color:var(--gold)">🔔 Recevoir les rappels sur cet appareil</button>
+           ${adminPushCount ? `<button class="btn btn-ghost" id="cal-push-off">Désactiver sur tous les appareils</button>` : ""}
+         </div>
+         <p class="notes-foot">${adminPushCount ? adminPushCount + " appareil(s) abonné(s)." : "Aucun appareil abonné pour l'instant."}
+         Rappel à <strong>10h</strong> pour les rendez-vous du jour, et la <strong>veille à 19h</strong> pour ceux du lendemain.</p>`;
+
+    return `
+      <div class="gen-avg-card">
+        <div class="gen-avg-main">
+          <span class="gen-avg-num">${aVenir.length}<small> à venir</small></span>
+          <span class="gen-avg-label">Rendez-vous enregistrés</span>
+        </div>
+        <div class="gen-avg-meta">
+          <span>${adminCalendar.filter(e => e.date === today).length} aujourd'hui</span>
+          <span>${adminCalendar.filter(e => e.date === tomorrow).length} demain</span>
+        </div>
+      </div>
+
+      <h3 class="admin-h3">Ajouter un rendez-vous</h3>
+      <div class="note-form" style="--subj-color:var(--gold)">
+        <div class="note-form-row">
+          <input type="text" id="cal-title" class="auth-input" style="flex:1;min-width:220px;margin-bottom:0;text-align:left;" placeholder="Intitulé du rendez-vous">
+        </div>
+        <div class="note-form-row">
+          <input type="date" id="cal-date" class="auth-input note-date-input" value="${today}">
+          <input type="time" id="cal-time" class="auth-input note-date-input" placeholder="Heure (facultatif)">
+          <input type="text" id="cal-note" class="auth-input" style="flex:1;min-width:180px;margin-bottom:0;text-align:left;" placeholder="Lieu ou note (facultatif)">
+        </div>
+        <button class="btn btn-primary" id="cal-add" style="--subj-color:var(--gold)">➕ Ajouter</button>
+        <p class="note-error" id="cal-error"></p>
+      </div>
+
+      <h3 class="admin-h3">À venir</h3>
+      ${aVenir.length ? `<ul class="note-list">${aVenir.map(ligne).join("")}</ul>` : `<p class="empty">Aucun rendez-vous à venir.</p>`}
+
+      ${passes.length ? `<h3 class="admin-h3">Passés <span style="font-size:0.8rem;color:var(--ink-muted);font-family:'Work Sans',sans-serif;">(${passes.length})</span></h3>
+        <ul class="note-list">${passes.slice(-10).reverse().map(ligne).join("")}</ul>` : ""}
+
+      <h3 class="admin-h3">Rappels</h3>
+      ${pushBloc}`;
+  }
+
+  function wireCalendarPane(){
+    const add = document.getElementById("cal-add");
+    if (add) add.addEventListener("click", () => {
+      const errEl = document.getElementById("cal-error");
+      const title = document.getElementById("cal-title").value.trim();
+      const date = document.getElementById("cal-date").value;
+      if (!title){ errEl.textContent = "Donne un titre au rendez-vous."; return; }
+      if (!date){ errEl.textContent = "Choisis une date."; return; }
+      errEl.textContent = "";
+      adminRun({ action:"addEvent", title, date,
+                 time: document.getElementById("cal-time").value,
+                 note: document.getElementById("cal-note").value },
+        d => { adminCalendar = d.events || []; adminMsg = "Rendez-vous ajouté."; });
+    });
+
+    root.querySelectorAll("[data-delevent]").forEach(btn => btn.addEventListener("click", () => {
+      const id = btn.dataset.delevent;
+      if (!adminPending || adminPending.action !== "delEvent-" + id){
+        adminPending = { action: "delEvent-" + id };
+        btn.textContent = "confirmer ?";
+        btn.style.color = "#E8735C";
+        return;
+      }
+      adminPending = null;
+      adminRun({ action:"deleteEvent", id }, d => { adminCalendar = d.events || []; adminMsg = "Rendez-vous supprimé."; });
+    }));
+
+    const pushBtn = document.getElementById("cal-push-btn");
+    if (pushBtn) pushBtn.addEventListener("click", activerRappels);
+
+    const pushOff = document.getElementById("cal-push-off");
+    if (pushOff) pushOff.addEventListener("click", () => {
+      adminRun({ action:"pushUnsubscribeAll" }, d => { adminPushCount = 0; adminMsg = "Rappels désactivés sur tous les appareils."; });
+    });
+  }
+
+  // Abonne CET appareil aux rappels : autorisation du navigateur, puis
+  // enregistrement de l'abonnement sur le serveur (protégé par le code admin).
+  function activerRappels(){
+    const err = m => { adminErr = m; renderAdmin(); };
+
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)){
+      return err("Ce navigateur ne gère pas les notifications push. Sur iPhone, il faut d'abord ajouter l'appli à l'écran d'accueil.");
+    }
+    if (!adminVapid) return err("Clé VAPID absente côté serveur.");
+
+    adminBusy = true; adminErr = ""; renderAdmin();
+
+    Notification.requestPermission().then(perm => {
+      if (perm !== "granted"){
+        adminBusy = false;
+        return err("Autorisation refusée. Réactive les notifications pour ce site dans les réglages du navigateur.");
+      }
+      return navigator.serviceWorker.register("service-worker.js")
+        .then(reg => navigator.serviceWorker.ready.then(() => reg))
+        .then(reg => reg.pushManager.getSubscription()
+          .then(existing => existing || reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(adminVapid)
+          })))
+        .then(sub => {
+          adminBusy = false;
+          adminRun({ action:"pushSubscribe", subscription: JSON.parse(JSON.stringify(sub)) },
+            d => {
+              adminPushCount = d.pushCount || 0;
+              adminMsg = d.already ? "Cet appareil était déjà abonné." : "Rappels activés sur cet appareil.";
+            });
+        });
+    }).catch(e => {
+      adminBusy = false;
+      err("Activation impossible : " + (e && e.message ? e.message : String(e)));
+    });
   }
 
   /* ---------- Corrections de contenu venues de la console admin ---------- */

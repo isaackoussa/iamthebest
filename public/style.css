@@ -534,6 +534,9 @@ button{font-family:inherit;}
   .note-coef{order:2;}
   .note-score{order:3; margin-left:auto;}
   .note-delete{order:4;}
+  /* Calendrier : pas de colonne « note », donc rien ne pousse la croix
+     vers la droite — on le fait explicitement. */
+  .cal-row .note-delete{margin-left:auto;}
   .note-info{order:5; flex:1 1 100%; min-width:0;}
   .note-label{overflow-wrap:anywhere;}
   .note-date{white-space:nowrap;}

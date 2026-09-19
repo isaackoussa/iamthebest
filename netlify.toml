@@ -31,3 +31,7 @@
   to = "/.netlify/functions/admin"
   status = 200
   force = true
+
+# Rappels des rendez-vous : 10h (ceux du jour) et 19h (ceux du lendemain).
+[functions."daily-reminder"]
+  schedule = "0 10,19 * * *"
