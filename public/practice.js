@@ -291,105 +291,67 @@ const PRACTICE = {
   ],
 
   // ---------- PHYSIQUE-CHIMIE ----------
-  p1: [
-    { statement:"Cite les trois états de la matière.", solution:"<p>Solide, liquide, gazeux.</p>" },
-    { statement:"Dans quel état les molécules sont-elles les plus espacées ?", solution:"<p>À l'état gazeux.</p>" }
+  pc1: [
+    { statement:"Range dans un tableau (sources primaires / sources secondaires) : soleil, luciole, nuage, étoile, lune, arbre éclairé.", solution:"<p>Sources primaires : <strong>soleil, luciole, étoile</strong>. Sources secondaires : <strong>lune, arbre éclairé, nuage</strong>.</p>" },
+    { statement:"Complète : le chlorure d'argent est ……… dans l'obscurité et devient ……… à la lumière ; c'est un récepteur ………. La LDR éclairée se comporte comme un ………, dans l'obscurité comme un ……… ; c'est un récepteur ……….", solution:"<p>Blanc ; noir ; <strong>photochimique</strong>. Conducteur électrique ; isolant électrique ; <strong>photoélectrique</strong>.</p>" },
+    { statement:"On dispose d'une LDR, d'une sonnerie, de fils et d'une pile. Propose un montage qui déclenche la sonnerie dès qu'une lumière apparaît la nuit dans une salle, et explique son fonctionnement.", solution:"<p>On branche <strong>en série</strong> la pile, la sonnerie et la LDR. Dans l'obscurité, la LDR est isolante (interrupteur ouvert) : la sonnerie ne retentit pas. Si quelqu'un allume une lampe, la LDR devient conductrice (interrupteur fermé) : le courant passe et la sonnerie retentit.</p>" }
   ],
-  p2: [
-    { statement:"Convertis 4,7 kg en grammes.", solution:"<p>4,7 × 1000 = 4700 g.</p>" },
-    { statement:"Avec quel instrument mesure-t-on une masse ?", solution:"<p>Une balance.</p>" }
+  pc2: [
+    { statement:"Calcule le temps mis par la lumière du soleil pour arriver sur la Terre (distance Soleil-Terre : 150 000 000 km ; vitesse de la lumière : 300 000 km/s).", solution:"<p>t = d / v = 150 000 000 / 300 000 = <strong>500 s</strong>, soit <strong>8 min 20 s</strong>.</p>" },
+    { statement:"Pendant un orage, on voit l'éclair avant d'entendre le tonnerre. Explique pourquoi (vitesse du son : 330 m/s).", solution:"<p>Les deux phénomènes sont simultanés, mais la lumière (300 000 000 m/s) va environ <strong>un million de fois plus vite</strong> que le son (330 m/s) : elle nous parvient avant le son.</p>" },
+    { statement:"Dans une chambre noire, quelle est l'image de la lettre « p » ? Justifie.", solution:"<p>L'image est la lettre <strong>« d »</strong> : l'image est renversée et inversée, à cause de la <strong>propagation rectiligne</strong> de la lumière à travers le sténopé.</p>" }
   ],
-  p3: [
-    { statement:"Un objet fait monter le niveau d'eau de 80 mL à 125 mL. Quel est son volume ?", solution:"<p>125−80 = 45 mL = 45 cm³.</p>" },
-    { statement:"Convertis 3,4 L en cm³.", solution:"<p>3,4 × 1000 = 3400 cm³.</p>" }
+  pc3: [
+    { statement:"Définis l'ombre propre, l'ombre portée et le cône d'ombre.", solution:"<p><strong>Ombre propre</strong> : partie de l'objet qui ne reçoit pas la lumière. <strong>Ombre portée</strong> : ombre de l'objet sur l'écran. <strong>Cône d'ombre</strong> : zone non éclairée entre l'ombre propre et l'ombre portée.</p>" },
+    { statement:"Cite dans l'ordre les phases de la Lune en partant de la nouvelle Lune.", solution:"<p>Nouvelle Lune → premier croissant → premier quartier → première gibbeuse → pleine Lune → dernière gibbeuse → dernier quartier → dernier croissant.</p>" },
+    { statement:"Compare l'éclipse de Soleil et l'éclipse de Lune (phase, ordre d'alignement, quel astre est dans l'ombre de l'autre).", solution:"<p><strong>Éclipse de Soleil</strong> : à la nouvelle Lune, alignement Soleil-Lune-Terre, la Terre est dans le cône d'ombre de la Lune. <strong>Éclipse de Lune</strong> : à la pleine Lune, alignement Soleil-Terre-Lune, la Lune est dans le cône d'ombre de la Terre.</p>" }
   ],
-  p4: [
-    { statement:"Un objet a une masse de 340 g pour un volume de 200 cm³. Calcule sa masse volumique.", solution:"<p>ρ = 340/200 = 1,7 g/cm³.</p>" },
-    { statement:"Un corps de densité 0,9 flotte-t-il ou coule-t-il dans l'eau ?", solution:"<p>Il flotte, car sa densité est inférieure à 1 (celle de l'eau).</p>" }
+  pc4: [
+    { statement:"Cite dans l'ordre les sept couleurs de la lumière blanche.", solution:"<p>Violet, indigo, bleu, vert, jaune, orange, rouge.</p>" },
+    { statement:"Donne la couleur obtenue : rouge + vert ; bleu + rouge ; bleu + vert ; jaune + bleu.", solution:"<p>Rouge + vert = <strong>jaune</strong> ; bleu + rouge = <strong>magenta</strong> ; bleu + vert = <strong>cyan</strong> ; jaune + bleu = <strong>blanc</strong>.</p>" },
+    { statement:"La voiture bleue de papa paraît noire sous un lampadaire jaune. Explique.", solution:"<p>En lumière blanche, la voiture absorbe toutes les couleurs sauf le bleu. La lumière jaune est composée de rouge et de vert, que la voiture <strong>absorbe totalement</strong> : elle ne renvoie rien et paraît <strong>noire</strong>.</p>" }
   ],
-  p5: [
-    { statement:"À quelle température l'eau bout-elle sous pression normale ?", solution:"<p>100°C.</p>" },
-    { statement:"Quel phénomène physique explique le fonctionnement d'un thermomètre à liquide ?", solution:"<p>La dilatation thermique du liquide quand la température augmente.</p>" }
+  pc5: [
+    { statement:"Trois aimants AB, CD et EF : A attire C, D repousse E, F est un pôle sud. Trouve la nature des pôles A, B, C, D et E.", solution:"<p>F sud donc <strong>E nord</strong>. D repousse E donc <strong>D nord</strong> et <strong>C sud</strong>. A attire C donc <strong>A nord</strong> et <strong>B sud</strong>.</p>" },
+    { statement:"Décris un électroaimant et cite deux de ses applications.", solution:"<p>Un électroaimant est une <strong>bobine parcourue par un courant</strong> à l'intérieur de laquelle se trouve un <strong>noyau de fer</strong> (doux). Applications : le <strong>relais</strong> et le <strong>télérupteur</strong>.</p>" },
+    { statement:"Que se passe-t-il pour les faces d'une bobine si l'on inverse les bornes de la pile ?", solution:"<p>Le sens du courant change, donc les faces <strong>s'inversent</strong> : la face nord devient face sud et inversement.</p>" }
   ],
-  p6: [
-    { statement:"Cite les trois modes de propagation de la chaleur.", solution:"<p>Conduction, convection, rayonnement.</p>" },
-    { statement:"Par quel mode la chaleur du Soleil nous parvient-elle ?", solution:"<p>Par rayonnement (peut traverser le vide).</p>" }
+  pc6: [
+    { statement:"Explique le principe de fonctionnement d'une génératrice de bicyclette.", solution:"<p>La roue entraîne le <strong>galet</strong>, qui fait tourner l'<strong>aimant</strong> (rotor) devant la <strong>bobine</strong> (stator). Ce mouvement produit une <strong>tension alternative</strong> aux bornes de la bobine, qui allume le phare.</p>" },
+    { statement:"Distingue la tension produite par un aimant et une bobine de celle d'une pile.", solution:"<p>Aimant + bobine : tension <strong>alternative</strong>, variable, qui change de signe au cours du temps. Pile : tension <strong>continue</strong>, qui ne change pas de signe (droite horizontale à l'oscilloscope).</p>" }
   ],
-  p7: [
-    { statement:"Comment s'appelle le passage de l'état liquide à l'état gazeux ?", solution:"<p>La vaporisation.</p>" },
-    { statement:"Que se passe-t-il pour la température pendant un changement d'état ?", solution:"<p>Elle reste constante tant que le changement d'état n'est pas terminé.</p>" }
+  pc7: [
+    { statement:"Réglages de l'oscilloscope : 5 V/div et 5 ms/div. La tension monte de 3 divisions et une période occupe 4 divisions. Calcule Umax, T, N et Ueff.", solution:"<p>Umax = 3 × 5 = <strong>15 V</strong> ; T = 4 × 5 = 20 ms = <strong>0,02 s</strong> ; N = 1/0,02 = <strong>50 Hz</strong> ; Ueff = 15/1,41 ≈ <strong>10,6 V</strong>.</p>" },
+    { statement:"La tension délivrée par la CIE a pour valeur efficace 220 V et pour fréquence 50 Hz. Calcule sa période et sa tension maximale.", solution:"<p>T = 1/N = 1/50 = <strong>0,02 s</strong> ; Umax = 1,41 × 220 ≈ <strong>310 V</strong>.</p>" },
+    { statement:"Complète le tableau : T = 2 ms → N = ? ; T = 10 ms → N = ? ; N = 4 Hz → T = ? ; N = 2000 Hz → T = ?", solution:"<p>500 Hz ; 100 Hz ; 250 ms (0,25 s) ; 0,5 ms.</p>" }
   ],
-  p8: [
-    { statement:"Qu'est-ce qu'une solution saturée ?", solution:"<p>Une solution dans laquelle on ne peut plus dissoudre de soluté supplémentaire.</p>" },
-    { statement:"Quelle technique sépare un solide non dissous d'un liquide ?", solution:"<p>La filtration.</p>" }
+  pc8: [
+    { statement:"Une prise a trois bornes A, B, C. On mesure 230 V entre A et B, 0 V entre B et C, 230 V entre A et C. Quelle borne est reliée à la phase ?", solution:"<p>La <strong>borne A</strong> : c'est la seule qui donne une tension non nulle avec chacune des deux autres.</p>" },
+    { statement:"Cite deux dispositifs de protection des personnes et deux dispositifs de protection des installations, avec leur rôle.", solution:"<p>Personnes : la <strong>prise de terre</strong> (le courant de fuite passe par la terre plutôt que par le corps) ; le <strong>disjoncteur différentiel</strong> (coupe dès 30 mA de différence entre phase et neutre). Installations : le <strong>fusible</strong> (fond en cas de surintensité) ; le <strong>disjoncteur général</strong> (coupe quand l'intensité dépasse la valeur souscrite).</p>" },
+    { statement:"Donne trois règles de sécurité à respecter avec le courant du secteur.", solution:"<p>Ne jamais toucher un fil dénudé ; débrancher un appareil avant toute réparation ; éviter de brancher trop d'appareils sur une même prise ; ne jamais manipuler un appareil branché avec les mains mouillées.</p>" }
   ],
-  p9: [
-    { statement:"Quelle est la différence entre un circuit en série et un circuit en dérivation ?", solution:"<p>En série, retirer un composant coupe tout le circuit ; en dérivation, les autres composants continuent de fonctionner.</p>" },
-    { statement:"Quel est le sens conventionnel du courant électrique ?", solution:"<p>De la borne + vers la borne − à l'extérieur du générateur.</p>" }
+  pc9: [
+    { statement:"Quelles opérations faut-il effectuer pour passer de la tension du secteur (220 V alternative) à une tension continue de 6 V ? Indique le composant utilisé à chaque étape.", solution:"<p>1) <strong>Abaisser</strong> la tension : transformateur abaisseur. 2) <strong>Redresser</strong> : pont de diodes. 3) <strong>Lisser</strong> : condensateur. L'ensemble forme un <strong>adaptateur</strong>.</p>" },
+    { statement:"Vrai ou faux : (1) la diode laisse passer le courant dans un seul sens ; (2) la tension lissée comporte des alternances ; (3) la sortie d'un transformateur est continue ; (4) un transformateur a 6 bornes.", solution:"<p>(1) <strong>Vrai</strong> ; (2) <strong>Faux</strong> ; (3) <strong>Faux</strong> (elle reste alternative) ; (4) <strong>Faux</strong> (4 bornes).</p>" }
   ],
-  p10: [
-    { statement:"Comment se branche un voltmètre ?", solution:"<p>En dérivation, aux bornes du composant à mesurer.</p>" },
-    { statement:"Un générateur de 9V alimente 3 lampes identiques en série. Quelle tension reçoit chaque lampe ?", solution:"<p>9/3 = 3 V (loi d'additivité des tensions).</p>" }
+  pc10: [
+    { statement:"L'or perd 3 électrons, l'argent en perd 1, le chlore en gagne 1, le cuivre en perd 2. Écris la formule de chaque ion et dis s'il s'agit d'un cation ou d'un anion.", solution:"<p>Au³⁺ (cation) ; Ag⁺ (cation) ; Cl⁻ (anion) ; Cu²⁺ (cation).</p>" },
+    { statement:"Donne les ions contenus dans le sulfate de cuivre, le sulfate de fer (II) et le chlorure de fer (III), puis le réactif de chacun.", solution:"<p>Sulfate de cuivre : Cu²⁺ (soude) et SO₄²⁻ (chlorure de baryum). Sulfate de fer II : Fe²⁺ (soude) et SO₄²⁻ (chlorure de baryum). Chlorure de fer III : Fe³⁺ (soude) et Cl⁻ (nitrate d'argent).</p>" },
+    { statement:"Un flacon A donne un précipité vert pâle avec la soude ; un flacon B donne un précipité rouille. Identifie les ions.", solution:"<p>A contient l'ion <strong>Fe²⁺</strong> (précipité d'hydroxyde de fer II) ; B contient l'ion <strong>Fe³⁺</strong> (précipité d'hydroxyde de fer III).</p>" }
   ],
-  p11: [
-    { statement:"Deux piles de 1,5V sont associées en série dans le même sens. Quelle est la tension totale ?", solution:"<p>1,5+1,5 = 3 V.</p>" },
-    { statement:"Que se passe-t-il si les deux piles sont branchées en opposition ?", solution:"<p>Les tensions s'annulent, la tension totale est 0V.</p>" }
+  pc11: [
+    { statement:"Une lame de fer plongée dans du sulfate de cuivre se recouvre d'un dépôt rouge et la solution devient verte. Écris les deux demi-équations puis l'équation-bilan.", solution:"<p>Cu²⁺ + 2e⁻ → Cu ; Fe → Fe²⁺ + 2e⁻. Bilan : <strong>Fe + Cu²⁺ → Cu + Fe²⁺</strong>.</p>" },
+    { statement:"Électrolyse du sulfate de cuivre avec une anode en cuivre et une cathode en graphite : décris les observations et écris les équations aux électrodes.", solution:"<p>Dépôt rouge de cuivre sur la cathode, l'anode s'amincit, la solution garde sa couleur. Anode : <strong>Cu → Cu²⁺ + 2e⁻</strong>. Cathode : <strong>Cu²⁺ + 2e⁻ → Cu</strong>.</p>" }
   ],
-  p12: [
-    { statement:"Quel dispositif de sécurité doit être remplacé après avoir coupé un circuit ?", solution:"<p>Le fusible.</p>" },
-    { statement:"Que faut-il faire en premier face à une personne électrisée ?", solution:"<p>Couper le courant avant de la toucher.</p>" }
+  pc12: [
+    { statement:"Range dans l'ordre les étapes du traitement de l'eau : neutralisation, décantation, filtration, désinfection, floculation.", solution:"<p>Floculation → décantation → filtration → désinfection → neutralisation.</p>" },
+    { statement:"Ancien index : 1 337 m³ ; nouvel index : 1 452 m³. Calcule le cubage consommé.", solution:"<p>Cubage consommé = nouvel index − ancien index = 1 452 − 1 337 = <strong>115 m³</strong>.</p>" },
+    { statement:"Propose une méthode simple pour rendre potable l'eau d'un marigot au village.", solution:"<p>Laisser reposer l'eau (<strong>décantation</strong>), la <strong>filtrer</strong> sur un tissu propre et blanc, puis la <strong>désinfecter</strong> en la faisant bouillir ou avec quelques gouttes d'eau de Javel.</p>" }
   ],
-  p13: [
-    { statement:"Cite les 4 caractéristiques d'une force.", solution:"<p>Point d'application, direction, sens, intensité.</p>" },
-    { statement:"Avec quel instrument mesure-t-on l'intensité d'une force ?", solution:"<p>Un dynamomètre.</p>" }
-  ],
-  p14: [
-    { statement:"Calcule le poids d'une masse de 40 kg sur Terre (g=10N/kg).", solution:"<p>P = m×g = 40×10 = 400 N.</p>" },
-    { statement:"La masse d'un objet change-t-elle sur la Lune ?", solution:"<p>Non, la masse reste la même ; seul le poids change (car g est différent).</p>" }
-  ],
-  p15: [
-    { statement:"À quoi est égale la poussée d'Archimède ?", solution:"<p>Au poids du volume de fluide déplacé par le corps immergé.</p>" },
-    { statement:"Pourquoi un bateau en acier peut-il flotter ?", solution:"<p>Sa forme creuse déplace un grand volume d'eau, générant une poussée suffisante pour équilibrer son poids.</p>" }
-  ],
-  p16: [
-    { statement:"Quelle différence entre une source primaire et une source secondaire de lumière ?", solution:"<p>La source primaire produit sa propre lumière, la source secondaire ne fait que la réfléchir.</p>" },
-    { statement:"La Lune est-elle une source primaire ou secondaire ?", solution:"<p>Secondaire : elle réfléchit la lumière du Soleil.</p>" }
-  ],
-  p17: [
-    { statement:"À quelle vitesse la lumière se propage-t-elle dans le vide ?", solution:"<p>Environ 300 000 km/s.</p>" },
-    { statement:"Combien de temps met la lumière du Soleil pour atteindre la Terre ?", solution:"<p>Environ 8 minutes.</p>" }
-  ],
-  p18: [
-    { statement:"Quelle différence entre ombre propre et ombre portée ?", solution:"<p>L'ombre propre est la partie non éclairée de l'objet lui-même ; l'ombre portée est projetée sur un écran derrière l'objet.</p>" },
-    { statement:"Une éclipse de Soleil illustre quel phénomène ?", solution:"<p>Une ombre portée à l'échelle astronomique : celle de la Lune sur la Terre.</p>" }
-  ],
-  p19: [
-    { statement:"Quels sont les trois éléments du triangle du feu ?", solution:"<p>Combustible, comburant, source de chaleur.</p>" },
-    { statement:"Que faut-il faire pour éteindre un feu ?", solution:"<p>Supprimer un seul des trois éléments du triangle du feu.</p>" }
-  ],
-  p20: [
-    { statement:"Quelle différence entre combustion complète et incomplète ?", solution:"<p>La complète produit CO2+eau, l'incomplète produit en plus du CO (toxique) et de la suie, par manque de dioxygène.</p>" },
-    { statement:"Comment détecte-t-on le CO2 produit par une combustion ?", solution:"<p>Avec l'eau de chaux, qui se trouble en sa présence.</p>" }
-  ],
-  p21: [
-    { statement:"Pourquoi le gaz domestique est-il odorisé ?", solution:"<p>Pour permettre de détecter une fuite par l'odorat.</p>" },
-    { statement:"Que faire en cas de suspicion de fuite de gaz ?", solution:"<p>Couper l'arrivée de gaz, aérer, ne pas actionner d'interrupteur électrique.</p>" }
-  ],
-  p22: [
-    { statement:"Combien d'atomes contient une molécule de CO2 ?", solution:"<p>3 atomes : 1 de carbone et 2 d'oxygène.</p>" },
-    { statement:"Un atome est-il chargé électriquement ?", solution:"<p>Non, il est neutre (autant de protons que d'électrons).</p>" }
-  ],
-  p23: [
-    { statement:"Que contient le noyau d'un atome ?", solution:"<p>Des protons et des neutrons.</p>" },
-    { statement:"L'oxygène a pour numéro atomique Z=8. Combien de protons possède-t-il ?", solution:"<p>8 protons (et 8 électrons, l'atome étant neutre).</p>" }
-  ],
-  p24: [
-    { statement:"Écris l'équation de la combustion du carbone.", solution:"<p>C + O2 → CO2.</p>" },
-    { statement:"Cette équation est-elle équilibrée ? Justifie.", solution:"<p>Oui : 1 atome de C et 2 atomes de O de chaque côté.</p>" }
-  ],
-  p25: [
-    { statement:"Écris l'équation de la combustion du dihydrogène.", solution:"<p>2H2 + O2 → 2H2O.</p>" },
-    { statement:"Comment reconnaît-on le dihydrogène par un test à la flamme ?", solution:"<p>Il produit une détonation caractéristique (« pop »).</p>" }
+  pc13: [
+    { statement:"Classe ces paramètres : saveur, odeur, pH, température, transparence, minéraux, dureté, couleur.", solution:"<p>Organoleptiques : saveur, odeur, transparence, couleur. Physico-chimiques : pH, température, minéraux, dureté.</p>" },
+    { statement:"Complète le tableau d'identification : ion calcium, ion sulfate, ion chlorure (réactif et observation).", solution:"<p>Ca²⁺ : oxalate d'ammonium → précipité blanc. SO₄²⁻ : chlorure de baryum → précipité blanc de sulfate de baryum. Cl⁻ : nitrate d'argent → précipité blanc qui noircit à la lumière.</p>" },
+    { statement:"Indique le rôle dans l'organisme des ions Ca²⁺, Na⁺ et Cl⁻, et Fe²⁺.", solution:"<p>Ca²⁺ (avec Mg²⁺) : construction des <strong>os</strong>. Na⁺ et Cl⁻ : <strong>contraction des muscles</strong> et rétention d'eau. Fe²⁺ : constitution de l'<strong>hémoglobine</strong> (son manque provoque l'anémie).</p>" }
   ],
 
   // ---------- SVT ----------
@@ -537,23 +499,33 @@ const SITUATIONS = {
 
   pc: [
     {
-      title:"Le radeau de fortune",
-      context:"Des élèves construisent un petit radeau avec un bloc de bois de volume 4000 cm³ et de masse 3,2 kg, pour vérifier s'il peut flotter sur la rivière avec du matériel dessus.",
+      title:"Le compteur et le chargeur",
+      context:"Un soir, les lampes de la maison de Koffi éclairent faiblement. Il mesure au voltmètre la tension d'une prise et lit 220 V ; l'étiquette du compteur indique 50 Hz. Il veut aussi recharger son téléphone, dont le chargeur porte l'inscription « Input 220 V ~ 50 Hz — Output 5 V ».",
       tasks:[
-        {prompt:"1) Calcule la masse volumique du bois utilisé.", solution:"ρ = m/V = 3200/4000 = <strong>0,8 g/cm³</strong>"},
-        {prompt:"2) Ce bois va-t-il flotter sur l'eau ? Justifie.", solution:"Oui, car sa masse volumique (0,8 g/cm³) est <strong>inférieure à celle de l'eau</strong> (1 g/cm³)."},
-        {prompt:"3) Calcule le poids du bloc de bois sur Terre (g=10 N/kg).", solution:"P = m×g = 3,2×10 = <strong>32 N</strong>"},
-        {prompt:"4) Explique avec la poussée d'Archimède pourquoi le radeau peut soutenir un poids supplémentaire avant de couler.", solution:"Tant que la poussée d'Archimède (poids du volume d'eau déplacé) reste <strong>supérieure au poids total</strong> (radeau + charge), l'ensemble continue de flotter."}
+        {prompt:"1) Donne la nature de la tension du secteur et ses quatre caractéristiques.", solution:"Tension <strong>alternative sinusoïdale</strong> : Ueff = 220 V, Umax = 1,41 × 220 ≈ <strong>310 V</strong>, N = <strong>50 Hz</strong>, T = 1/50 = <strong>0,02 s</strong>."},
+        {prompt:"2) Le chargeur fournit une tension continue de 5 V. Cite, dans l'ordre, les trois composants qu'il contient et le rôle de chacun.", solution:"<strong>Transformateur abaisseur</strong> (abaisse 220 V), <strong>pont de diodes</strong> (redresse, double alternance), <strong>condensateur</strong> (lisse la tension)."},
+        {prompt:"3) Koffi veut ouvrir le chargeur branché pour voir l'intérieur. Que lui dis-tu ?", solution:"C'est dangereux : à partir de 25 V le courant est dangereux pour le corps. Il faut <strong>débrancher</strong> l'appareil avant toute intervention et ne jamais toucher un fil dénudé (risque d'électrisation ou d'électrocution)."},
+        {prompt:"4) Quel dispositif protège les personnes si la carcasse métallique d'un appareil est mise sous tension ?", solution:"La <strong>prise de terre</strong>, associée au <strong>disjoncteur différentiel</strong> qui coupe le courant dès 30 mA de fuite."}
       ]
     },
     {
-      title:"La cuisine à gaz de la cantine",
-      context:"La cantine de l'école utilise une bouteille de gaz butane pour cuisiner. Un jour, une légère odeur de gaz est détectée près de la cuisinière.",
+      title:"L'eau du marigot",
+      context:"Pendant les vacances au village, Awa remarque que la population boit l'eau du marigot. Son grand-père a eu une forte diarrhée. Au laboratoire, on a testé un échantillon : avec le nitrate d'argent, un précipité blanc noircit à la lumière ; avec l'oxalate d'ammonium, un précipité blanc se forme.",
       tasks:[
-        {prompt:"1) Pourquoi une odeur de gaz peut-elle être sentie alors que le butane est naturellement inodore ?", solution:"Le gaz domestique est <strong>volontairement odorisé</strong> par le fournisseur pour permettre de détecter une fuite."},
-        {prompt:"2) Que faut-il faire immédiatement en cas de doute sur une fuite de gaz ?", solution:"<strong>Couper l'arrivée de gaz, aérer la pièce</strong>, et ne surtout pas actionner d'interrupteur électrique."},
-        {prompt:"3) Écris l'équation de la combustion complète du carbone contenu dans ce type de gaz.", solution:"<strong>C + O₂ → CO₂</strong>"},
-        {prompt:"4) Quel test simple permet de vérifier la présence de CO₂ dans les fumées de cuisson ?", solution:"Le test à <strong>l'eau de chaux</strong>, qui se trouble en présence de CO₂."}
+        {prompt:"1) Définis une eau potable.", solution:"Une eau que l'on peut boire <strong>sans danger</strong> et qui respecte les <strong>normes de l'OMS</strong>."},
+        {prompt:"2) Quels ions les deux tests ont-ils mis en évidence ?", solution:"Nitrate d'argent → ion <strong>chlorure Cl⁻</strong> ; oxalate d'ammonium → ion <strong>calcium Ca²⁺</strong>."},
+        {prompt:"3) Cite dans l'ordre les étapes du traitement de l'eau à la SODECI.", solution:"Floculation (sulfate d'alumine) → décantation → filtration → désinfection → neutralisation (pH = 7)."},
+        {prompt:"4) Propose à Awa une méthode simple pour rendre l'eau du marigot buvable.", solution:"La laisser <strong>reposer</strong> (décantation), la <strong>filtrer</strong> sur un tissu propre, puis la <strong>faire bouillir</strong> ou y ajouter quelques gouttes d'eau de Javel (désinfection)."}
+      ]
+    },
+    {
+      title:"L'éclipse de Tanguelan",
+      context:"Un jour ensoleillé, à Tanguelan, le ciel s'assombrit brusquement et le Soleil prend la forme d'un anneau, puis réapparaît. Le soir même, les élèves remarquent qu'on ne voit pas la Lune dans le ciel.",
+      tasks:[
+        {prompt:"1) Nomme le phénomène observé.", solution:"Une <strong>éclipse de Soleil</strong>."},
+        {prompt:"2) Donne l'ordre d'alignement des trois astres et la phase de la Lune à ce moment.", solution:"Soleil – <strong>Lune</strong> – Terre (la Lune au milieu) ; c'est la <strong>nouvelle Lune</strong>, ce qui explique qu'on ne la voie pas."},
+        {prompt:"3) Quel principe de l'optique explique la formation de l'ombre de la Lune sur la Terre ?", solution:"La <strong>propagation rectiligne de la lumière</strong> : la Lune, opaque, arrête les rayons du Soleil et la Terre se trouve dans son cône d'ombre."},
+        {prompt:"4) Combien de temps faudra-t-il attendre environ pour la prochaine nouvelle Lune ?", solution:"Une lunaison, soit environ <strong>29,5 jours</strong> (29 jours et 13 heures)."}
       ]
     }
   ]

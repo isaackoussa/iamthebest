@@ -1359,481 +1359,455 @@ pc: {
   name: "Physique-Chimie",
   color: "#9B7FE8",
   icon: "🧪",
+  // Programme officiel 4ème Côte d'Ivoire (APC), aligné sur le cours complet
+  // "PC 4ième — Côte d'Ivoire École numérique" : 13 leçons, 4 thèmes.
   lessons: [
     {
-      id: "p1",
-      title: "États de la matière",
-      content: `<p>La matière existe sous trois <strong>états physiques</strong> principaux : l'état <strong>solide</strong> (forme propre, volume propre), l'état <strong>liquide</strong> (pas de forme propre, volume propre) et l'état <strong>gazeux</strong> (ni forme propre, ni volume propre : il occupe tout l'espace disponible).</p>
-      <p>Au niveau microscopique, ces trois états se distinguent par l'agitation et l'espacement des molécules : très proches et peu mobiles dans un solide, proches mais mobiles dans un liquide, très espacées et libres dans un gaz.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Cette agitation croissante des molécules (solide → liquide → gaz) explique pourquoi un gaz occupe tout le volume de son récipient, alors qu'un solide ou un liquide gardent un volume propre.</p>
+      id: "pc1",
+      title: "Optique — Sources et récepteurs de lumière",
+      content: `<p>Une <strong>source de lumière</strong> est un corps qui émet de la lumière. Exemples : le soleil, la lune, une flamme, une lampe allumée, une luciole, un mur éclairé, un écran de télévision.</p>
+      <p>On distingue deux types de sources :</p>
+      <ul>
+        <li>Une <strong>source primaire</strong> émet la lumière qu'elle <strong>produit</strong> elle-même. Elle peut être <strong>naturelle</strong> (le soleil, les étoiles, les lucioles) ou <strong>artificielle</strong>, fabriquée par l'homme (lampe à incandescence, lampe au néon, écran de télévision allumé, lampe torche allumée, laser, flamme de bougie).</li>
+        <li>Une <strong>source secondaire</strong> (ou <strong>objet éclairé</strong>) émet ou diffuse la lumière qu'elle <strong>reçoit</strong>. Exemples : la lune, une planète (Terre, Mars, Jupiter), un nuage, un arbre éclairé, un mur, un tableau, un miroir, un écran de cinéma.</li>
+      </ul>
+      <p>Un <strong>récepteur de lumière</strong> est un corps sensible à la lumière ou qui réagit à la lumière. Il en existe deux types : les récepteurs <strong>naturels</strong> (l'œil, la peau, la chlorophylle des plantes) et les récepteurs <strong>artificiels</strong> (la pellicule photographique, la photorésistance ou LDR, les photopiles ou piles solaires, le chlorure d'argent).</p>
+      <h3>Étude de deux récepteurs de lumière</h3>
+      <p><strong>Le chlorure d'argent</strong> : en versant du nitrate d'argent dans de l'eau salée, on obtient un précipité <strong>blanc</strong> de chlorure d'argent. Exposé à la lumière, il <strong>noircit</strong> ; gardé dans l'obscurité (sous un cache), il reste blanc. Le noircissement est provoqué par la lumière : le chlorure d'argent est un <strong>récepteur photochimique</strong>.</p>
+      <p><strong>La photorésistance (LDR)</strong> : c'est un composant électronique. Éclairée, elle se comporte comme un <strong>conducteur</strong> (la lampe du circuit s'allume) ; dans l'obscurité, elle se comporte comme un <strong>isolant</strong>. La LDR est un <strong>récepteur photoélectrique</strong>.</p>
+      <p>Les récepteurs de lumière sont utilisés dans les appareils photographiques, l'éclairage public (allumage automatique à la tombée de la nuit), les panneaux solaires et les calculatrices solaires.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> un même objet peut être à la fois source et récepteur. Une feuille de manguier est visible, donc c'est une source (secondaire) de lumière ; elle contient aussi de la chlorophylle qui capte la lumière, donc c'est un récepteur. En revanche, tout récepteur n'est pas forcément « source primaire » : la lune ne fait que renvoyer la lumière du soleil.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : l'eau existe dans les trois états selon la température — glace (solide) en dessous de 0°C, eau liquide entre 0°C et 100°C, vapeur d'eau (gazeux) au-dessus de 100°C (à pression atmosphérique normale). C'est le même type de molécules (H₂O) dans les trois cas ; seule leur agitation et leur organisation changent.</p>
-      <h3>📌 Point du programme à ne pas manquer : la compressibilité</h3><p>Un critère supplémentaire distingue les trois états : la <strong>compressibilité</strong> (peut-on réduire le volume en comprimant ?). Un solide et un liquide sont pratiquement <strong>incompressibles</strong> : impossible de réduire leur volume en appuyant dessus. Un gaz, au contraire, est <strong>compressible</strong> et <strong>expansible</strong> : on peut l'enfermer dans un petit volume (une bouteille de gaz) ou le laisser occuper un grand volume — c'est justement parce que ses molécules sont très espacées qu'il reste de la place pour les rapprocher ou les éloigner.</p>`,
+      <p>Exemple : range ces objets — soleil, luciole, nuage, étoile, lune, arbre éclairé. Sources primaires : <strong>soleil, luciole, étoile</strong> (elles produisent leur lumière). Sources secondaires : <strong>lune, arbre éclairé, nuage</strong> (ils renvoient la lumière reçue du soleil).</p>
+      <p>Application : pour protéger une salle contre les vols nocturnes, on branche en série une pile, une sonnerie et une LDR. Dans l'obscurité, la LDR est isolante : la sonnerie reste muette. Si un voleur allume une lampe, la LDR devient conductrice et la sonnerie retentit.</p>
+      <h3>📌 Point du programme à ne pas manquer : photochimique ou photoélectrique ?</h3><p>Le programme demande de bien nommer le type de chaque récepteur. Un récepteur <strong>photochimique</strong> subit une <strong>transformation chimique</strong> sous l'effet de la lumière (chlorure d'argent qui noircit, pellicule photo, chlorophylle). Un récepteur <strong>photoélectrique</strong> voit une <strong>propriété électrique</strong> changer avec la lumière (la LDR qui devient conductrice, la photopile qui produit un courant à partir de la lumière du soleil).</p>`,
       quiz: [
-        {q:"Quel état de la matière n'a ni forme propre ni volume propre ?", options:["Solide","Liquide","Gazeux","Aucun"], correct:2, exp:"L'état gazeux n'a ni forme propre ni volume propre : il occupe tout l'espace disponible."},
-        {q:"Dans quel état les molécules sont-elles les plus agitées ?", options:["Solide","Liquide","Gazeux","Elles le sont autant dans les trois états"], correct:2, exp:"Les molécules sont les plus agitées et les plus espacées à l'état gazeux."},
-        {q:"Un liquide a...", options:["une forme propre et un volume propre","pas de forme propre mais un volume propre","ni forme ni volume propres","une forme propre mais pas de volume propre"], correct:1, exp:"Un liquide épouse la forme de son récipient (pas de forme propre) mais garde un volume constant."},
-        {q:"L'eau à −10°C est à l'état...", options:["Liquide","Gazeux","Solide (glace)","Aucun de ces états"], correct:2, exp:"En dessous de 0°C, l'eau est à l'état solide (glace)."},
-        {q:"Un solide a...", options:["une forme propre et un volume propre","pas de forme propre","un volume variable","aucune de ces réponses"], correct:0, exp:"Un solide garde sa forme et son volume, quel que soit son récipient."}
-      ,
-        { q: "Pourquoi peut-on comprimer un gaz dans une bouteille alors qu'on ne peut pas comprimer un solide ou un liquide ?", options: ["Parce que le gaz est plus léger", "Parce que ses molécules sont très espacées, laissant de la place pour les rapprocher", "Parce que le gaz n'a pas de molécules", "Parce que le gaz est toujours chaud"], correct: 1, exp: "Dans un gaz, les molécules sont très espacées et libres : il y a donc de la place pour les rapprocher en comprimant, ce qui n'est pas le cas dans un solide ou un liquide où les molécules sont déjà très proches les unes des autres." }
+        {q:"Une source primaire de lumière est un corps qui...", options:["renvoie la lumière qu'il reçoit","émet la lumière qu'il produit","absorbe toute la lumière","ne peut être vu que la nuit"], correct:1, exp:"Une source primaire émet la lumière qu'elle produit elle-même (soleil, flamme, lampe allumée)."},
+        {q:"La lune est...", options:["une source primaire naturelle","une source primaire artificielle","une source secondaire","un récepteur photoélectrique"], correct:2, exp:"La lune ne produit pas de lumière : elle renvoie celle du soleil. C'est une source secondaire (objet éclairé)."},
+        {q:"Parmi ces sources, laquelle est une source primaire artificielle ?", options:["Le soleil","Une luciole","Un laser","Un miroir"], correct:2, exp:"Le laser est fabriqué par l'homme et produit sa propre lumière : source primaire artificielle."},
+        {q:"Le chlorure d'argent exposé à la lumière...", options:["reste blanc","devient bleu","noircit","devient transparent"], correct:2, exp:"Le précipité blanc de chlorure d'argent noircit à la lumière : c'est un récepteur photochimique."},
+        {q:"Une LDR (photorésistance) éclairée se comporte comme...", options:["un isolant","un conducteur","un générateur","une source de lumière"], correct:1, exp:"Éclairée, la LDR devient conductrice ; dans l'obscurité, elle est isolante."},
+        {q:"Lequel de ces récepteurs de lumière est naturel ?", options:["La photopile","La pellicule photographique","La chlorophylle","La LDR"], correct:2, exp:"L'œil, la peau et la chlorophylle sont des récepteurs naturels ; les autres sont fabriqués par l'homme."},
+        {q:"La LDR est un récepteur de type...", options:["photochimique","photoélectrique","thermique","magnétique"], correct:1, exp:"Une propriété électrique de la LDR varie avec la lumière : c'est un récepteur photoélectrique."}
       ]
     },
     {
-      id: "p2",
-      title: "Masse d'un corps",
-      content: `<p>La <strong>masse</strong> d'un corps mesure la quantité de matière qu'il contient. Elle s'exprime en <strong>kilogramme (kg)</strong>, l'unité légale, avec ses multiples et sous-multiples : tonne (t), gramme (g), milligramme (mg).</p>
-      <p>La masse se mesure avec une <strong>balance</strong>. Contrairement au poids, la masse d'un corps ne change pas selon l'endroit où il se trouve (elle reste la même sur Terre, sur la Lune, dans l'espace).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Conversions utiles : 1 t = 1000 kg, 1 kg = 1000 g, 1 g = 1000 mg. Pour convertir, on multiplie ou divise par 1000 selon le sens (grande unité vers petite : on multiplie ; petite vers grande : on divise).</p>
+      id: "pc2",
+      title: "Optique — Propagation de la lumière",
+      content: `<p>Un milieu <strong>transparent</strong> se laisse traverser par la lumière (l'air, l'eau limpide, le vide, le vinaigre blanc). Un milieu <strong>opaque</strong> ne laisse pas passer la lumière (mur de briques, métal, bois, carton). Un corps qui laisse passer <strong>partiellement</strong> la lumière est <strong>translucide</strong> (papier calque, vitre dépolie).</p>
+      <p>Un milieu <strong>homogène</strong> est un milieu dont les propriétés sont les mêmes en tout point (le vide, l'eau, le verre, l'air).</p>
+      <p><strong>Propagation rectiligne</strong> : avec plusieurs plaques opaques percées, le point lumineux n'apparaît sur l'écran que si tous les trous sont <strong>alignés</strong>. Conclusion : <strong>dans un milieu transparent et homogène, la lumière se propage en ligne droite.</strong></p>
+      <p>Un <strong>rayon lumineux</strong> est une ligne droite fléchée qui représente la marche de la lumière ; la flèche indique le sens de propagation. Un <strong>faisceau lumineux</strong> est un ensemble de rayons lumineux issus d'une même source (on le rend visible avec de la poussière de craie dans une salle sombre). Un faisceau peut être divergent, convergent ou parallèle.</p>
+      <h3>La chambre noire</h3>
+      <p>Une chambre noire est une boîte opaque percée d'un petit trou, le <strong>sténopé</strong>, avec un <strong>écran</strong> translucide sur la face opposée. L'image d'une bougie s'y forme <strong>renversée</strong> (haut et bas inversés) et inversée (gauche et droite échangées). Cette inversion s'explique par la <strong>propagation rectiligne de la lumière</strong> : le rayon issu du haut de la flamme passe par le sténopé et arrive en bas de l'écran. Ainsi l'image de la lettre « p » est un « d », et celle de « q » est un « b ». Plus on rapproche la bougie du sténopé, plus l'image est grande.</p>
+      <h3>Vitesse de la lumière et année-lumière</h3>
+      <p>Dans le vide, la lumière se propage à <strong>300 000 km/s</strong> (soit 300 000 000 m/s). L'<strong>année-lumière (a.l)</strong> est la <strong>distance</strong> parcourue par la lumière en une année : 1 a.l = 365 × 24 × 3600 × 300 000 ≈ <strong>9,46 × 10¹² km</strong>.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> l'année-lumière n'est pas une durée mais une <strong>distance</strong>. Si la lumière d'une étoile met 4,2 ans pour nous parvenir, cette étoile est à 4,2 a.l de la Terre.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de conversion : convertis 2,5 kg en grammes. Comme 1 kg = 1000 g, on multiplie : 2,5 × 1000 = 2500 g. Autre exemple : convertis 350 g en kg. On divise par 1000 : 350 ÷ 1000 = 0,350 kg. La masse d'un objet reste identique même transportée sur la Lune, alors que son poids (la force exercée par la gravité) y serait environ 6 fois plus faible que sur Terre.</p>
-      <h3>📌 Point du programme à ne pas manquer : les types de balances</h3><p>Il existe plusieurs types de balances pour mesurer une masse. La <strong>balance Roberval</strong> (à deux plateaux) : on place l'objet sur un plateau et des masses marquées connues sur l'autre, jusqu'à l'équilibre — la masse de l'objet est alors la somme des masses marquées utilisées. La <strong>balance romaine</strong> (à un seul plateau et un curseur mobile sur une tige graduée). La <strong>balance électronique</strong>, la plus utilisée aujourd'hui, qui affiche directement la masse sur un écran. Exemple de pesée avec une balance Roberval : pour équilibrer un objet, il a fallu poser les masses marquées 200 g + 100 g + 20 g + 5 g + 2 g sur l'autre plateau ; la masse de l'objet est donc 200+100+20+5+2 = 327 g.</p>`,
+      <p>Calcule le temps mis par la lumière du soleil pour arriver sur Terre (distance Soleil-Terre : 150 000 000 km).<br>v = d / t, donc t = d / v = 150 000 000 / 300 000 = <strong>500 s</strong>, soit <strong>8 min 20 s</strong>.</p>
+      <p>Orage : on voit l'éclair (source primaire naturelle) avant d'entendre le tonnerre car la lumière (300 000 000 m/s) va environ un million de fois plus vite que le son (330 m/s), alors que les deux phénomènes se produisent en même temps.</p>
+      <h3>📌 Point du programme à ne pas manquer : voir un objet</h3><p>Pour voir un objet, l'œil doit <strong>recevoir</strong> de la lumière venant de cet objet (l'œil n'envoie pas de lumière). Si un objet opaque s'intercale entre l'œil et l'objet, la lumière, qui va en ligne droite, est arrêtée : on ne voit plus l'objet. C'est aussi ce qui explique les taches lumineuses rondes sur le sol d'une maison dont le toit est percé.</p>`,
       quiz: [
-        {q:"L'unité légale de la masse est...", options:["le gramme","le kilogramme","la tonne","le newton"], correct:1, exp:"Le kilogramme (kg) est l'unité légale (unité du Système International) de la masse."},
-        {q:"Convertis 3,2 kg en grammes.", options:["32 g","320 g","3200 g","0,32 g"], correct:2, exp:"3,2 × 1000 = 3200 g."},
-        {q:"La masse d'un objet change-t-elle selon l'endroit (Terre, Lune) ?", options:["Oui, fortement","Non, elle reste la même","Oui, mais très légèrement","Cela dépend de l'objet"], correct:1, exp:"La masse est une propriété intrinsèque de la matière, indépendante du lieu."},
-        {q:"Avec quel instrument mesure-t-on une masse ?", options:["Un thermomètre","Une balance","Un dynamomètre","Un voltmètre"], correct:1, exp:"La balance est l'instrument utilisé pour mesurer une masse."},
-        {q:"1 tonne équivaut à...", options:["100 kg","1000 kg","10 000 kg","10 kg"], correct:1, exp:"1 t = 1000 kg."}
-      ,
-        { q: "Avec une balance Roberval, on équilibre un objet en utilisant les masses marquées 500 g + 100 g + 50 g + 10 g. Quelle est la masse de l'objet ?", options: ["550 g", "600 g", "650 g", "660 g"], correct: 3, exp: "La masse de l'objet est égale à la somme des masses marquées utilisées à l'équilibre : 500+100+50+10 = 660 g." }
+        {q:"Dans un milieu transparent et homogène, la lumière se propage...", options:["en zigzag","en ligne droite","en cercle","uniquement vers le haut"], correct:1, exp:"C'est la propagation rectiligne de la lumière."},
+        {q:"Le papier calque est un corps...", options:["transparent","translucide","opaque","homogène et transparent"], correct:1, exp:"Il laisse passer partiellement la lumière : il est translucide."},
+        {q:"Un faisceau lumineux est...", options:["un seul rayon","un ensemble de rayons issus d'une même source","une source de lumière","une ombre"], correct:1, exp:"Un faisceau lumineux est un ensemble de rayons lumineux issus d'une même source."},
+        {q:"L'image d'une bougie dans une chambre noire est...", options:["droite et de même sens","renversée","toujours plus petite","invisible"], correct:1, exp:"L'image est renversée (et inversée) à cause de la propagation rectiligne de la lumière."},
+        {q:"Dans une chambre noire, l'image de la lettre « p » est...", options:["p","q","d","b"], correct:2, exp:"L'image est renversée et inversée : « p » devient « d »."},
+        {q:"La vitesse de la lumière dans le vide vaut...", options:["330 m/s","300 000 km/s","300 km/s","3 000 km/h"], correct:1, exp:"c = 300 000 km/s = 300 000 000 m/s. 330 m/s est la vitesse du son dans l'air."},
+        {q:"L'année-lumière est...", options:["une durée d'un an","la distance parcourue par la lumière en un an","la distance Soleil-Terre","le temps pour parcourir 1 km"], correct:1, exp:"L'année-lumière est une unité de distance : environ 9,46 × 10¹² km."},
+        {q:"Quand on rapproche la bougie du sténopé, la taille de l'image...", options:["diminue","augmente","ne varie pas","devient nulle"], correct:1, exp:"Plus l'objet est proche du sténopé, plus son image sur l'écran est grande."}
       ]
     },
     {
-      id: "p3",
-      title: "Volume d'un corps",
-      content: `<p>Le <strong>volume</strong> d'un corps mesure l'espace qu'il occupe. L'unité légale est le <strong>mètre cube (m³)</strong>, mais on utilise très souvent le <strong>litre (L)</strong> pour les liquides. Rappel important : 1 dm³ = 1 L = 1000 cm³, et 1 m³ = 1000 L.</p>
-      <p>Pour un solide de forme géométrique simple (cube, pavé droit, cylindre...), on calcule le volume avec une formule. Pour un solide de forme irrégulière, on peut mesurer son volume par <strong>déplacement d'eau</strong> : on plonge l'objet dans un récipient gradué, et la différence de niveau d'eau donne son volume.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Astuce pratique pour convertir un volume : retiens que 1 dm³ = 1 litre = 1000 cm³, et 1 m³ = 1000 litres. Cela permet de vérifier si un résultat est réaliste : un réservoir de 2 m³ contient donc 2000 litres d'eau.</p>
+      id: "pc3",
+      title: "Optique — Les phases de la Lune et les éclipses",
+      content: `<p>Un objet opaque éclairé par une source présente trois zones d'ombre :</p>
+      <ul>
+        <li>l'<strong>ombre propre</strong> : la partie de l'objet qui ne reçoit pas la lumière ;</li>
+        <li>l'<strong>ombre portée</strong> : l'ombre de l'objet projetée sur l'écran (ou le sol) ;</li>
+        <li>le <strong>cône d'ombre</strong> : la zone non éclairée située entre l'ombre propre et l'ombre portée.</li>
+      </ul>
+      <p>Avec une source étendue, il existe aussi une <strong>pénombre</strong> : zone partiellement éclairée autour de l'ombre.</p>
+      <h3>Les phases de la Lune</h3>
+      <p>La Lune est éclairée en permanence par le Soleil (une moitié éclairée, une moitié dans l'ombre propre). Selon sa position autour de la Terre, l'observateur terrestre voit une partie plus ou moins grande de sa face éclairée : ce sont les <strong>phases de la Lune</strong>. Dans l'ordre :</p>
+      <p><strong>Nouvelle Lune</strong> (on ne la voit pas : Soleil, Lune, Terre alignés dans cet ordre) → <strong>premier croissant</strong> (visible à l'ouest, après le coucher du soleil) → <strong>premier quartier</strong> → <strong>première lune gibbeuse</strong> → <strong>pleine Lune</strong> (Soleil, Terre, Lune alignés ; elle se lève à l'est) → <strong>deuxième (dernière) lune gibbeuse</strong> → <strong>dernier quartier</strong> → <strong>dernier croissant</strong> (visible à l'est avant le lever du jour).</p>
+      <p>Une <strong>lunaison</strong> (cycle complet) dure en moyenne <strong>29 jours et 13 heures</strong> (environ 29,5 jours).</p>
+      <h3>Les éclipses</h3>
+      <p><strong>Éclipse de Soleil</strong> : elle se produit à la <strong>nouvelle Lune</strong>. Soleil, Lune et Terre sont alignés <strong>dans cet ordre</strong> ; la Terre est dans le <strong>cône d'ombre de la Lune</strong>. Dans l'ombre pure, le Soleil est entièrement caché : <strong>éclipse totale</strong> (il fait nuit en plein jour). Dans la pénombre, on ne voit qu'une partie du Soleil : <strong>éclipse partielle</strong>.</p>
+      <p><strong>Éclipse de Lune</strong> : elle se produit à la <strong>pleine Lune</strong>. Soleil, Terre et Lune sont alignés <strong>dans cet ordre</strong> ; la Lune entre dans le <strong>cône d'ombre de la Terre</strong>. Totale si la Lune y entre entièrement, partielle sinon.</p>
+      <p><strong>Points communs</strong> : les centres des astres sont alignés, la source de lumière est le Soleil, un astre se trouve dans le cône d'ombre de l'autre.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> il n'y a pas d'éclipse à chaque nouvelle ou pleine Lune, car l'orbite de la Lune est inclinée d'environ 5° par rapport à celle de la Terre : les trois astres ne sont pas toujours parfaitement alignés. Une éclipse de Lune peut s'observer sans danger à l'œil nu, contrairement à une éclipse de Soleil.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de mesure par déplacement d'eau : un objet est plongé dans un cylindre gradué contenant initialement 150 mL d'eau. Après avoir plongé l'objet, le niveau monte à 210 mL. Le volume de l'objet est donc 210 − 150 = 60 mL, soit 60 cm³. Cette méthode fonctionne pour n'importe quel solide, même de forme irrégulière, tant qu'il ne flotte pas et n'absorbe pas l'eau.</p>
-      <h3>📌 Point du programme à ne pas manquer : la capacité d'un récipient</h3><p>La <strong>capacité</strong> (ou contenance) d'un récipient est le volume maximal de liquide qu'il peut contenir. Pour un solide de forme géométrique simple, on utilise une formule : par exemple, le volume d'un pavé droit est V = longueur × largeur × hauteur. Rappel de conversion essentiel : <strong>1 cm³ = 1 mL</strong> et <strong>1 dm³ = 1 L</strong> (utile pour passer d'un volume calculé en cm³ à une quantité de liquide en mL, et inversement).</p>`,
+      <p>Complète : on observe une éclipse de Soleil à la <strong>nouvelle Lune</strong> ; une éclipse de Lune pendant la <strong>pleine Lune</strong> ; pendant l'éclipse de Soleil, la Terre est dans le cône d'ombre de <strong>la Lune</strong> ; pendant l'éclipse de Lune, la Lune est dans <strong>le cône d'ombre</strong> de la Terre.</p>
+      <p>Prévision : si la nouvelle Lune a lieu le 2 février, la suivante aura lieu environ 29,5 jours plus tard, soit vers le <strong>3 mars</strong>.</p>
+      <h3>📌 Point du programme à ne pas manquer : l'ordre d'alignement</h3><p>C'est le piège le plus fréquent. <strong>S – L – T</strong> (la Lune au milieu) : nouvelle Lune et éventuelle <strong>éclipse de Soleil</strong>. <strong>S – T – L</strong> (la Terre au milieu) : pleine Lune et éventuelle <strong>éclipse de Lune</strong>. Retenir : l'astre « caché » est celui qui se trouve au bout de l'alignement, derrière l'astre qui fait de l'ombre.</p>`,
       quiz: [
-        {q:"L'unité légale du volume est...", options:["le litre","le mètre cube","le centimètre","le gramme"], correct:1, exp:"Le mètre cube (m³) est l'unité légale du volume, même si le litre est très utilisé au quotidien."},
-        {q:"1 litre équivaut à...", options:["100 cm³","1000 cm³","10 cm³","1 cm³"], correct:1, exp:"1 L = 1 dm³ = 1000 cm³."},
-        {q:"Comment mesure-t-on le volume d'un objet de forme irrégulière ?", options:["Avec une formule mathématique","Par déplacement d'eau dans un récipient gradué","Avec une balance","On ne peut pas le mesurer"], correct:1, exp:"On utilise la méthode du déplacement d'eau (vases communicants) pour un solide de forme irrégulière."},
-        {q:"Un objet plongé dans l'eau fait monter le niveau de 150 mL à 195 mL. Quel est son volume ?", options:["195 cm³","150 cm³","45 cm³","345 cm³"], correct:2, exp:"195 − 150 = 45 mL = 45 cm³."},
-        {q:"1 m³ équivaut à combien de litres ?", options:["10 L","100 L","1000 L","10 000 L"], correct:2, exp:"1 m³ = 1000 L."}
-      ,
-        { q: "Un pavé droit mesure 5 cm de longueur, 4 cm de largeur et 3 cm de hauteur. Quel volume de liquide (en mL) pourrait-il contenir ?", options: ["12 mL", "60 mL", "600 mL", "6 mL"], correct: 1, exp: "V = L × l × h = 5 × 4 × 3 = 60 cm³, et comme 1 cm³ = 1 mL, cela correspond à 60 mL." }
+        {q:"L'ombre propre est...", options:["l'ombre de l'objet sur l'écran","la partie de l'objet qui ne reçoit pas la lumière","la zone entre l'objet et l'écran","une source de lumière"], correct:1, exp:"L'ombre propre est la partie non éclairée de l'objet lui-même."},
+        {q:"L'ombre portée est...", options:["l'ombre de l'objet projetée sur l'écran","la partie sombre de l'objet","la pénombre","le cône d'ombre"], correct:0, exp:"L'ombre portée est la tache d'ombre de l'objet sur l'écran ou le sol."},
+        {q:"Une éclipse de Soleil se produit lors de la...", options:["pleine Lune","nouvelle Lune","premier quartier","dernière gibbeuse"], correct:1, exp:"À la nouvelle Lune, la Lune est entre le Soleil et la Terre et peut projeter son ombre sur la Terre."},
+        {q:"Pendant une éclipse de Lune, les astres sont alignés dans l'ordre...", options:["Soleil – Lune – Terre","Soleil – Terre – Lune","Lune – Soleil – Terre","Terre – Soleil – Lune"], correct:1, exp:"La Terre est au milieu : la Lune entre dans le cône d'ombre de la Terre."},
+        {q:"Pendant une éclipse de Soleil...", options:["la Lune est dans le cône d'ombre de la Terre","la Terre est dans le cône d'ombre de la Lune","le Soleil est dans l'ombre de la Terre","aucun astre n'est aligné"], correct:1, exp:"C'est l'ombre de la Lune qui atteint la Terre."},
+        {q:"Quelle phase vient juste après le premier quartier ?", options:["Premier croissant","Pleine Lune","Première lune gibbeuse","Dernier quartier"], correct:2, exp:"Ordre : nouvelle Lune, premier croissant, premier quartier, première gibbeuse, pleine Lune..."},
+        {q:"La durée moyenne d'une lunaison est d'environ...", options:["7 jours","24 heures","29 jours et 13 heures","365 jours"], correct:2, exp:"Une lunaison dure en moyenne environ 29,5 jours (29 j 13 h)."}
       ]
     },
     {
-      id: "p4",
-      title: "La masse volumique et la densité d'un corps",
-      content: `<p>La <strong>masse volumique</strong> d'un corps homogène est le quotient de sa masse par son volume : ρ = m / V. Elle s'exprime en kg/m³ (unité légale) ou en g/cm³ (unité souvent utilisée en pratique). La masse volumique de l'eau est 1000 kg/m³, soit 1 g/cm³.</p>
-      <p>La <strong>densité</strong> d'un corps est le rapport entre sa masse volumique et celle de l'eau (pour un solide ou un liquide) : elle n'a pas d'unité (c'est un nombre sans dimension).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Pour savoir si un objet flotte sur l'eau, compare sa masse volumique à celle de l'eau : si elle est inférieure, l'objet flotte ; si elle est supérieure, il coule. C'est pourquoi le bois (moins dense) flotte alors que le fer (plus dense) coule.</p>
+      id: "pc4",
+      title: "Optique — Analyse et synthèse de la lumière blanche",
+      content: `<p><strong>Analyse (décomposition)</strong> : un faisceau de lumière blanche qui traverse un <strong>verre d'eau</strong> ou un <strong>prisme</strong> donne une bande colorée. La lumière blanche est donc constituée de plusieurs couleurs. Les <strong>sept couleurs</strong> visibles, dans l'ordre, sont : <strong>violet, indigo, bleu, vert, jaune, orange, rouge</strong>. On peut aussi décomposer la lumière blanche avec un réseau ou un disque compact (CD).</p>
+      <p><strong>L'arc-en-ciel</strong> présente les mêmes sept couleurs. Il est dû à la décomposition de la lumière blanche du soleil par les <strong>gouttelettes d'eau</strong> en suspension dans l'air. Pour l'observer, il faut avoir <strong>le dos tourné au soleil</strong>.</p>
+      <h3>Synthèse de la lumière blanche</h3>
+      <p>Le <strong>disque de Newton</strong> (disque peint des sept couleurs) paraît <strong>blanc</strong> quand il tourne vite. Avec trois projecteurs, la superposition des trois <strong>couleurs primaires</strong> (rouge, vert, bleu) donne du <strong>blanc</strong> :</p>
+      <ul>
+        <li>rouge + vert + bleu = <strong>blanc</strong> ;</li>
+        <li>rouge + bleu = <strong>magenta</strong> ;</li>
+        <li>rouge + vert = <strong>jaune</strong> ;</li>
+        <li>bleu + vert = <strong>cyan</strong>.</li>
+      </ul>
+      <p>Reconstituer la lumière blanche en superposant ses couleurs s'appelle la <strong>synthèse</strong> de la lumière blanche.</p>
+      <h3>Filtres et couleur des objets</h3>
+      <p>Un <strong>filtre</strong> absorbe certaines couleurs de la lumière blanche et laisse passer les autres, qui lui donnent sa couleur : il permet d'obtenir une lumière colorée.</p>
+      <p>La couleur d'un objet dépend de la <strong>lumière qui l'éclaire</strong> et des couleurs qu'il <strong>diffuse</strong> (renvoie) ou <strong>absorbe</strong>. Un objet vert absorbe toutes les couleurs sauf le vert, qu'il diffuse. Un objet <strong>blanc</strong> diffuse toutes les couleurs ; un objet <strong>noir</strong> les absorbe toutes. La <strong>couleur propre</strong> d'un objet est celle qu'il a en lumière blanche.</p>
+      <p>Éclairé par une lumière colorée : si cette lumière ne contient que des couleurs que l'objet absorbe, il paraît <strong>noir</strong> (objet rouge en lumière bleue → noir). S'il diffuse la couleur reçue, il la garde (objet rouge en lumière rouge → rouge ; objet blanc en lumière bleue → bleu).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> la lumière jaune d'un lampadaire contient du rouge et du vert. Une voiture bleue absorbe le rouge et le vert et ne renvoie que le bleu : sous ce lampadaire, elle n'a rien à renvoyer et paraît <strong>noire</strong>.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de calcul : un objet a une masse de 270 g et un volume de 100 cm³. Sa masse volumique est ρ = m/V = 270/100 = 2,7 g/cm³ (c'est justement la masse volumique de l'aluminium). Sa densité est d = 2,7/1 = 2,7 (car la masse volumique de l'eau est 1 g/cm³). Comme cette densité est supérieure à 1, cet objet coule dans l'eau.</p>
-      <h3>📌 Point du programme à ne pas manquer : masse volumique et densité d'un gaz</h3>
-      <p>La masse volumique d'un gaz se calcule avec la même relation ρ = m/V, mais elle dépend fortement de la pression et de la température (contrairement à un solide ou un liquide). Dans les conditions habituelles, l'air a une masse volumique d'environ 1,29 kg/m³. La <strong>densité d'un gaz</strong> ne se compare PAS à l'eau mais à l'AIR : d = ρ_gaz / ρ_air. Exemple : le dioxygène a une masse volumique d'environ 1,3 g/L, donc sa densité par rapport à l'air est d = 1,3/1,29 ≈ 1,01 (le dioxygène est donc à peine plus dense que l'air).</p>`,
+      <table><tr><th>Surface</th><th>Lumière blanche</th><th>Lumière bleue</th><th>Lumière rouge</th></tr>
+      <tr><td>Blanche</td><td>blanche</td><td>bleue</td><td>rouge</td></tr>
+      <tr><td>Verte</td><td>verte</td><td>noire</td><td>noire</td></tr>
+      <tr><td>Rouge</td><td>rouge</td><td>noire</td><td>rouge</td></tr>
+      <tr><td>Noire</td><td>noire</td><td>noire</td><td>noire</td></tr></table>
+      <p>Exemple : sous une veilleuse rouge, une chemisette blanche paraît rouge (elle renvoie le rouge) et une jupe bleue paraît noire (elle absorbe le rouge).</p>
+      <h3>📌 Point du programme à ne pas manquer : couleurs complémentaires</h3><p>Deux lumières colorées qui, superposées, donnent du blanc sont dites <strong>complémentaires</strong>. Comme jaune = rouge + vert, on a <strong>jaune + bleu = blanc</strong>. De même cyan + rouge = blanc et magenta + vert = blanc. Attention : ceci vaut pour les <strong>lumières</strong> qui s'ajoutent, pas pour le mélange de peintures.</p>`,
       quiz: [
-        {q:"La formule de la masse volumique est...", options:["ρ = m × V","ρ = m / V","ρ = V / m","ρ = m + V"], correct:1, exp:"La masse volumique est le quotient de la masse par le volume : ρ = m/V."},
-        {q:"La masse volumique de l'eau est...", options:["100 kg/m³","1000 kg/m³","10 000 kg/m³","1 kg/m³"], correct:1, exp:"La masse volumique de l'eau est 1000 kg/m³, soit 1 g/cm³."},
-        {q:"Un corps de masse 500 g et de volume 250 cm³ a pour masse volumique...", options:["2 g/cm³","0,5 g/cm³","125 g/cm³","750 g/cm³"], correct:0, exp:"ρ = 500/250 = 2 g/cm³."},
-        {q:"La densité d'un corps est...", options:["sa masse volumique en kg/m³","le rapport entre sa masse volumique et celle de l'eau","son volume divisé par sa masse","toujours égale à 1"], correct:1, exp:"La densité est un rapport sans unité entre la masse volumique du corps et celle de l'eau."},
-        {q:"Un objet de densité 0,8 dans l'eau va...", options:["couler","flotter","rester exactement au milieu","exploser"], correct:1, exp:"Une densité inférieure à 1 (masse volumique inférieure à celle de l'eau) signifie que l'objet flotte."},
-        {q:"La densité d'un gaz se compare à...", options:["l'eau","l'air","le mercure","rien, elle n'existe pas pour les gaz"], correct:1, exp:"Contrairement à un solide ou un liquide (comparé à l'eau), la densité d'un gaz se compare à l'air."}
+        {q:"Combien de couleurs visibles compte la lumière blanche décomposée ?", options:["3","5","7","12"], correct:2, exp:"Violet, indigo, bleu, vert, jaune, orange, rouge : 7 couleurs."},
+        {q:"L'arc-en-ciel est dû à la décomposition de la lumière du soleil par...", options:["les nuages noirs","les gouttelettes d'eau","la Lune","le vent"], correct:1, exp:"Les gouttelettes d'eau en suspension décomposent la lumière blanche comme un prisme."},
+        {q:"Rouge + vert donnent...", options:["du cyan","du magenta","du jaune","du blanc"], correct:2, exp:"La superposition des lumières rouge et verte donne du jaune."},
+        {q:"Rouge + vert + bleu donnent...", options:["du noir","du blanc","du marron","du violet"], correct:1, exp:"Les trois couleurs primaires superposées reconstituent la lumière blanche."},
+        {q:"Un objet rouge éclairé en lumière bleue paraît...", options:["rouge","bleu","noir","violet"], correct:2, exp:"Il absorbe le bleu et n'a pas de rouge à renvoyer : il paraît noir."},
+        {q:"Un objet blanc éclairé en lumière rouge paraît...", options:["blanc","rouge","noir","vert"], correct:1, exp:"Un objet blanc renvoie toutes les couleurs qu'il reçoit : ici, seulement du rouge."},
+        {q:"Le disque de Newton en rotation rapide paraît...", options:["noir","multicolore","blanc","rouge"], correct:2, exp:"La superposition rapide des couleurs donne une impression de blanc : c'est une synthèse."},
+        {q:"Un filtre vert éclairé en lumière blanche...", options:["laisse passer toutes les couleurs","absorbe le vert","laisse passer le vert et absorbe les autres couleurs","produit de la lumière blanche"], correct:2, exp:"Un filtre absorbe certaines couleurs et laisse passer celle qui lui donne sa couleur."}
       ]
     },
     {
-      id: "p5",
-      title: "Thermomètre",
-      content: `<p>Le <strong>thermomètre</strong> est l'instrument qui permet de mesurer la <strong>température</strong> d'un corps. L'unité légale de température est le <strong>degré Celsius (°C)</strong>, avec deux points de repère importants : 0°C (température de fusion de la glace) et 100°C (température d'ébullition de l'eau, à pression atmosphérique normale).</p>
-      <p>Il existe plusieurs types de thermomètres : à liquide (mercure ou alcool coloré qui se dilate avec la chaleur), électronique (à sonde), ou infrarouge (sans contact).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Le principe physique d'un thermomètre à liquide repose sur la <strong>dilatation thermique</strong> : quand la température augmente, le liquide à l'intérieur du tube se dilate (prend plus de volume) et monte dans le tube fin, ce qui permet de lire la température sur une échelle graduée.</p>
+      id: "pc5",
+      title: "Courants et tensions alternatifs — Aimant et bobine",
+      content: `<p>Un <strong>aimant</strong> (droit, en U, cylindrique) est un corps qui attire le <strong>fer</strong>, le <strong>nickel</strong>, le <strong>cobalt</strong> et les objets faits à partir de ces métaux : il a une propriété <strong>magnétique</strong>. L'attraction est la plus forte à ses extrémités, appelées les <strong>pôles</strong>.</p>
+      <p>Un aimant possède <strong>deux pôles</strong> : un <strong>pôle nord (N)</strong> et un <strong>pôle sud (S)</strong>. Suspendu librement (comme l'aiguille d'une boussole), son pôle nord s'oriente vers le nord géographique. On identifie les pôles d'un aimant avec une aiguille aimantée.</p>
+      <p><strong>Interactions entre deux aimants</strong> : deux pôles de <strong>même nom se repoussent</strong> ; deux pôles de <strong>noms différents s'attirent</strong>.</p>
+      <h3>La bobine</h3>
+      <p>Une <strong>bobine</strong> est un long fil conducteur en cuivre isolé (gainé), enroulé généralement sur un support cylindrique. Parcourue par un courant électrique, elle <strong>se comporte comme un aimant</strong> : elle possède une <strong>face nord</strong> et une <strong>face sud</strong>, et attire ou repousse les aiguilles aimantées. La nature des faces <strong>dépend du sens du courant</strong> : si on inverse les bornes de la pile, les faces s'échangent. Circuit ouvert : aucun effet.</p>
+      <h3>L'électroaimant</h3>
+      <p>Un <strong>électroaimant</strong> est une bobine parcourue par un courant, à l'intérieur de laquelle passe une tige en fer appelée <strong>noyau</strong>. Avec un noyau de <strong>fer doux</strong>, la bobine attire davantage. Son aimantation disparaît dès qu'on coupe le courant.</p>
+      <p>Applications : le <strong>relais</strong> (interrupteur actionné par un électroaimant, utilisé par exemple dans l'éclairage public), le <strong>télérupteur</strong> (fonctionne comme un relais), les sonnettes, les grues de ferraille.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> pour reconnaître un pôle à coup sûr, il faut une <strong>répulsion</strong>. Une attraction ne prouve rien, car un pôle attire aussi un simple morceau de fer non aimanté.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple d'utilisation : pour mesurer la température du corps humain, on utilise un thermomètre médical, généralement placé sous l'aisselle, dans la bouche ou à l'oreille. La température normale du corps humain est d'environ 37°C ; au-delà de 38°C, on parle de fièvre. Pour lire correctement un thermomètre, on positionne son œil bien en face de l'échelle graduée (pour éviter une erreur de lecture due à l'angle de vue, appelée erreur de parallaxe).</p>
-      <h3>📌 Point du programme à ne pas manquer : l'échelle Kelvin</h3><p>En plus du degré Celsius, il existe une autre unité légale de température, utilisée en sciences : le <strong>kelvin (K)</strong>, l'échelle dite « absolue ». La relation entre les deux échelles est : <strong>T(K) = t(°C) + 273</strong>. Exemple : 35°C correspond à 35 + 273 = 308 K. À l'inverse, 520 K correspond à 520 − 273 = 247°C. Contrairement au degré Celsius (qui peut être négatif), le kelvin ne descend jamais en dessous de 0 K (le « zéro absolu », température la plus basse théoriquement possible).</p>`,
+      <p>Trois aimants droits AB, CD et EF : A attire C, D repousse E, F est un pôle sud.</p>
+      <p>F est sud, donc E (l'autre extrémité du même aimant) est <strong>nord</strong>. D repousse E : même nom, donc D est <strong>nord</strong> et C est <strong>sud</strong>. A attire C (sud) : noms différents, donc A est <strong>nord</strong> et B est <strong>sud</strong>.</p>
+      <p>Interactions : A (N) et E (N) → <strong>répulsion</strong> ; E (N) et B (S) → <strong>attraction</strong> ; A (N) et F (S) → <strong>attraction</strong>.</p>
+      <h3>📌 Point du programme à ne pas manquer : aimant permanent ou électroaimant ?</h3><p>Un aimant ordinaire est <strong>permanent</strong> : il garde ses pôles. Un électroaimant est un aimant <strong>commandé</strong> : il n'agit que lorsque le courant passe, et l'on peut inverser ses faces en inversant le sens du courant. C'est cette possibilité d'allumer et d'éteindre l'aimantation qui le rend utile dans les relais et télérupteurs.</p>`,
       quiz: [
-        {q:"Quelle est l'unité légale de température ?", options:["Le kelvin","Le degré Celsius","Le degré Fahrenheit","Le newton"], correct:1, exp:"Le degré Celsius (°C) est l'unité couramment utilisée pour la température."},
-        {q:"À quelle température la glace fond-elle (pression normale) ?", options:["0°C","100°C","−10°C","37°C"], correct:0, exp:"La glace fond à 0°C sous pression atmosphérique normale."},
-        {q:"À quelle température l'eau bout-elle (pression normale) ?", options:["0°C","50°C","100°C","150°C"], correct:2, exp:"L'eau bout à 100°C sous pression atmosphérique normale."},
-        {q:"Le principe d'un thermomètre à liquide repose sur...", options:["la conductivité électrique","la dilatation thermique du liquide","la réflexion de la lumière","le magnétisme"], correct:1, exp:"Un thermomètre à liquide utilise la dilatation (augmentation de volume) du liquide quand la température monte."},
-        {q:"La température normale du corps humain est d'environ...", options:["30°C","37°C","42°C","25°C"], correct:1, exp:"La température corporelle normale est d'environ 37°C."}
-      ,
-        { q: "Convertis 27°C en kelvin.", options: ["27 K", "246 K", "300 K", "273 K"], correct: 2, exp: "T(K) = t(°C) + 273 = 27 + 273 = 300 K." }
+        {q:"Un aimant attire...", options:["tous les métaux","le fer, le nickel et le cobalt","le bois et le plastique","uniquement le cuivre"], correct:1, exp:"Un aimant attire le fer, le nickel, le cobalt et les objets faits de ces métaux, pas le cuivre ni l'aluminium."},
+        {q:"Combien de pôles possède un aimant ?", options:["Un seul","Deux : nord et sud","Trois","Quatre"], correct:1, exp:"Tout aimant possède un pôle nord et un pôle sud."},
+        {q:"Deux pôles de même nom...", options:["s'attirent","se repoussent","n'interagissent pas","s'annulent"], correct:1, exp:"Deux pôles de même nom se repoussent ; deux pôles de noms différents s'attirent."},
+        {q:"Une bobine parcourue par un courant se comporte comme...", options:["un isolant","un aimant","une lampe","une pile"], correct:1, exp:"Elle possède alors une face nord et une face sud, comme un aimant."},
+        {q:"La nature des faces d'une bobine dépend...", options:["de sa couleur","du sens du courant","de sa masse","de la température"], correct:1, exp:"Si on inverse le sens du courant, la face nord devient face sud et inversement."},
+        {q:"Un électroaimant est formé...", options:["d'un aimant et d'une lampe","d'une bobine parcourue par un courant avec un noyau de fer","de deux aimants collés","d'une pile seule"], correct:1, exp:"Électroaimant = bobine + courant + noyau de fer (doux)."},
+        {q:"Laquelle est une application de l'électroaimant ?", options:["La loupe","Le relais","Le thermomètre","Le prisme"], correct:1, exp:"Le relais et le télérupteur sont des interrupteurs actionnés par un électroaimant."}
       ]
     },
     {
-      id: "p6",
-      title: "Propagation de la chaleur",
-      content: `<p>La chaleur se propage de trois façons : la <strong>conduction</strong> (transfert de proche en proche à travers la matière, sans déplacement de matière — ex : une cuillère qui chauffe dans une casserole), la <strong>convection</strong> (transfert par déplacement de matière dans un fluide, liquide ou gaz — ex : l'air chaud qui monte), et le <strong>rayonnement</strong> (transfert sans support matériel, même dans le vide — ex : la chaleur du Soleil).</p>
-      <p>La chaleur se propage toujours du corps <strong>le plus chaud</strong> vers le corps <strong>le plus froid</strong>, jusqu'à ce que les deux corps atteignent la même température (équilibre thermique).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Les bons conducteurs de chaleur sont généralement les métaux (fer, cuivre, aluminium), tandis que le bois, le plastique, l'air ou la laine sont de bons isolants — c'est pourquoi les poignées de casseroles sont souvent en plastique ou en bois : elles limitent la conduction de la chaleur vers la main.</p>
+      id: "pc6",
+      title: "Courants et tensions alternatifs — Production d'une tension alternative",
+      content: `<p><strong>Expérience</strong> : on relie une bobine à un galvanomètre et on fait tourner un aimant devant une de ses faces. L'aiguille du galvanomètre dévie <strong>dans un sens puis dans l'autre</strong>.</p>
+      <p><strong>Conclusion</strong> : le déplacement d'un aimant au voisinage de la face d'une bobine fait apparaître une <strong>tension</strong> (et un courant) dans le circuit de celle-ci. Un aimant <strong>fixe</strong> devant une bobine fixe ne produit <strong>aucune</strong> tension.</p>
+      <p>Avec deux DEL montées tête-bêche, elles s'allument <strong>l'une après l'autre</strong> : le courant change de sens. La tension produite n'a pas un seul sens : c'est une <strong>tension alternative</strong> (comme celle d'un générateur très basse fréquence, GTBF).</p>
+      <h3>Visualisation à l'oscilloscope</h3>
+      <p>L'<strong>oscilloscope</strong> est un appareil électronique qui permet de visualiser une tension sur son écran (le spot trace une courbe).</p>
+      <ul>
+        <li>Aux bornes d'une <strong>pile</strong> : on observe une <strong>droite horizontale</strong>, au-dessus ou en dessous de zéro. La tension ne varie pas : c'est une <strong>tension continue</strong>.</li>
+        <li>Aux bornes de la bobine devant laquelle tourne l'aimant : on observe une <strong>courbe qui varie et change de signe</strong>, tantôt positive, tantôt négative : c'est une <strong>tension alternative</strong>.</li>
+      </ul>
+      <h3>Production industrielle : l'alternateur</h3>
+      <p>Un <strong>alternateur</strong> est constitué de deux parties : le <strong>rotor</strong>, partie tournante qui comporte un <strong>aimant</strong>, et le <strong>stator</strong>, partie fixe qui comporte une <strong>bobine</strong>.</p>
+      <ul>
+        <li><strong>Génératrice de bicyclette</strong> : la roue fait tourner le <strong>galet</strong>, qui entraîne l'aimant devant la bobine ; une tension alternative alimente le phare. Quand le vélo s'arrête, l'aimant ne tourne plus et le phare s'éteint.</li>
+        <li><strong>Centrale hydroélectrique</strong> (barrages de Kossou, Taabo, Buyo, Soubré, Ayamé) : le mouvement de l'eau fait tourner une turbine reliée à un alternateur.</li>
+        <li><strong>Centrale thermique</strong> (Azito) : on brûle du gaz, du pétrole ou du charbon pour transformer l'eau en vapeur ; les jets de vapeur font tourner une turbine qui entraîne un alternateur.</li>
+      </ul>
+      <p><strong>🔎 Pour aller plus loin :</strong> en Côte d'Ivoire, la majorité de l'électricité (environ 72 %) est produite par des centrales thermiques au gaz naturel, le reste par l'hydroélectricité.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple combinant les trois modes : quand on fait chauffer de l'eau dans une casserole métallique sur une cuisinière, la chaleur passe d'abord par conduction à travers le métal de la casserole, puis se propage dans l'eau par convection (les couches d'eau chaude, moins denses, montent, et les couches froides descendent, créant un mouvement circulaire), tandis que la plaque chauffante elle-même émet aussi un peu de rayonnement infrarouge perceptible à proximité.</p>
-      <h3>📌 Point du programme à ne pas manquer : l'exemple de la bouteille thermos</h3><p>La bouteille thermos (ou bouteille isotherme) est un excellent exemple qui combine les trois modes de propagation de la chaleur pour limiter les échanges thermiques et garder une boisson chaude (ou froide) longtemps : le <strong>verre</strong> (mauvais conducteur) limite la conduction, la paroi <strong>argentée/miroir</strong> limite le rayonnement (elle réfléchit la chaleur au lieu de l'absorber ou de la laisser passer), et le <strong>vide</strong> entre les deux parois empêche la convection (qui nécessite un fluide). En combinant ces trois protections, la thermos ralentit fortement le retour à l'équilibre thermique avec l'extérieur.</p>`,
+      <p>Une génératrice de bicyclette : (1) ses deux parties sont le <strong>stator</strong> (une bobine) et le <strong>rotor</strong> (un aimant) ; (2) la partie mobile est l'aimant, la partie en contact avec la roue est le galet ; (3) à l'oscilloscope, on voit une tension <strong>alternative</strong>, tantôt positive, tantôt négative.</p>
+      <h3>📌 Point du programme à ne pas manquer : continue ou alternative ?</h3><p>Une tension <strong>continue</strong> garde toujours le même signe et la même valeur (pile, batterie) : sur l'oscilloscope, c'est une droite horizontale. Une tension <strong>alternative</strong> est variable et <strong>change de signe</strong> au cours du temps (génératrice, alternateur, secteur). Pour produire une tension alternative, il faut un <strong>mouvement</strong> relatif entre l'aimant et la bobine.</p>`,
       quiz: [
-        {q:"Le transfert de chaleur sans déplacement de matière, de proche en proche, s'appelle...", options:["la convection","la conduction","le rayonnement","l'évaporation"], correct:1, exp:"La conduction est un transfert de chaleur de proche en proche à travers la matière, sans déplacement de matière."},
-        {q:"La chaleur du Soleil nous parvient par...", options:["conduction","convection","rayonnement","aucun de ces modes"], correct:2, exp:"Le rayonnement peut se propager même dans le vide, c'est ainsi que la chaleur du Soleil traverse l'espace."},
-        {q:"La chaleur se propage toujours...", options:["du corps froid vers le corps chaud","du corps chaud vers le corps froid","de façon aléatoire","uniquement vers le haut"], correct:1, exp:"La chaleur se propage naturellement du corps le plus chaud vers le corps le plus froid."},
-        {q:"L'air chaud qui monte dans une pièce est un exemple de...", options:["conduction","convection","rayonnement","aucun de ces modes"], correct:1, exp:"La convection est un transfert de chaleur par déplacement de matière (ici, l'air)."},
-        {q:"Un bon isolant thermique est...", options:["le cuivre","le fer","la laine","l'aluminium"], correct:2, exp:"La laine est un bon isolant thermique, contrairement aux métaux qui sont de bons conducteurs."}
-      ,
-        { q: "Dans une bouteille thermos, à quoi sert précisément le vide entre les deux parois ?", options: ["À limiter la conduction", "À empêcher la convection, qui nécessite un fluide", "À réfléchir le rayonnement", "À refroidir la boisson"], correct: 1, exp: "La convection est un transfert de chaleur par déplacement de matière dans un fluide : sans fluide (le vide), la convection est impossible entre les deux parois de la thermos." }
+        {q:"Que se passe-t-il quand on fait tourner un aimant devant une bobine reliée à un galvanomètre ?", options:["Rien","L'aiguille dévie dans un sens puis dans l'autre","L'aiguille reste bloquée d'un côté","La bobine fond"], correct:1, exp:"Le mouvement de l'aimant produit une tension alternative : l'aiguille dévie dans les deux sens."},
+        {q:"Un aimant fixe devant une bobine fixe produit...", options:["une tension continue","une tension alternative","aucune tension","une tension très forte"], correct:2, exp:"Il faut un mouvement relatif entre l'aimant et la bobine pour produire une tension."},
+        {q:"À l'oscilloscope, la tension d'une pile apparaît comme...", options:["une sinusoïde","une droite horizontale","des créneaux","un point fixe au centre"], correct:1, exp:"La tension d'une pile est continue : une droite horizontale au-dessus (ou en dessous) de zéro."},
+        {q:"Une tension alternative est une tension...", options:["constante","qui change de signe au cours du temps","toujours nulle","toujours positive"], correct:1, exp:"Elle varie et est tantôt positive, tantôt négative."},
+        {q:"Dans un alternateur, le rotor comporte...", options:["une bobine fixe","un aimant qui tourne","une pile","une lampe"], correct:1, exp:"Le rotor (partie tournante) porte l'aimant ; le stator (partie fixe) porte la bobine."},
+        {q:"Dans une centrale thermique, la turbine est entraînée par...", options:["le vent","des jets de vapeur d'eau","la lumière du soleil","une chute d'eau"], correct:1, exp:"On brûle un combustible pour vaporiser l'eau ; la vapeur fait tourner la turbine."},
+        {q:"Quel appareil permet de visualiser une tension ?", options:["Le galvanomètre","L'oscilloscope","Le thermomètre","La balance"], correct:1, exp:"L'oscilloscope affiche la courbe de la tension en fonction du temps."}
       ]
     },
     {
-      id: "p7",
-      title: "Les changements d'état physique",
-      content: `<p>La matière peut passer d'un état physique à un autre : <strong>fusion</strong> (solide → liquide), <strong>solidification</strong> (liquide → solide), <strong>vaporisation</strong> (liquide → gaz), <strong>liquéfaction</strong> (gaz → liquide), <strong>sublimation</strong> (solide → gaz directement) et <strong>condensation solide</strong> (gaz → solide directement).</p>
-      <p>Pendant un changement d'état, la <strong>température reste constante</strong> tant que la transformation n'est pas terminée, même si on continue de chauffer ou de refroidir.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Exemple de sublimation : la neige carbonique (dioxyde de carbone solide, ou « glace sèche ») passe directement de l'état solide à l'état gazeux à température ambiante, sans étape liquide visible, ce qui produit un effet de « fumée » froide très utilisé pour les effets spéciaux.</p>
+      id: "pc7",
+      title: "Courants et tensions alternatifs — Tension alternative sinusoïdale",
+      content: `<p>Certains générateurs donnent, à l'oscilloscope, une courbe régulière en forme d'onde (sinusoïde) qui s'annule et change de sens au cours du temps : c'est une <strong>tension alternative sinusoïdale</strong>.</p>
+      <h3>Les quatre caractéristiques</h3>
+      <ul>
+        <li>La <strong>période T</strong> : durée minimale au bout de laquelle le phénomène se reproduit à l'identique (une alternance positive + une alternance négative). Unité : la <strong>seconde (s)</strong>.</li>
+        <li>La <strong>fréquence N</strong> : nombre de périodes par seconde ; c'est l'inverse de la période : <strong>N = 1 / T</strong>. Unité : le <strong>hertz (Hz)</strong>.</li>
+        <li>La <strong>tension maximale U<sub>max</sub></strong> : la plus grande valeur atteinte par la courbe, en volts (V).</li>
+        <li>La <strong>tension efficace U<sub>eff</sub></strong> : la tension mesurée avec un <strong>voltmètre</strong>, en volts (V).</li>
+      </ul>
+      <p><strong>Relation</strong> : U<sub>max</sub> / U<sub>eff</sub> = 1,41, donc <strong>U<sub>max</sub> = 1,41 × U<sub>eff</sub></strong> et <strong>U<sub>eff</sub> = U<sub>max</sub> / 1,41</strong>.</p>
+      <h3>Lire un oscillogramme</h3>
+      <p>On compte des <strong>divisions</strong> et on multiplie par le réglage (la sensibilité) de l'oscilloscope :</p>
+      <ul>
+        <li>U<sub>max</sub> = (nombre de divisions verticales entre 0 et le sommet) × (volts par division) ;</li>
+        <li>T = (nombre de divisions horizontales pour une période) × (millisecondes par division).</li>
+      </ul>
+      <p><strong>🔎 Pour aller plus loin :</strong> pour calculer N = 1/T, il faut d'abord convertir T en <strong>secondes</strong> : 20 ms = 0,02 s. Oublier la conversion donne une fréquence 1000 fois trop petite.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple avec un graphique de température : si on chauffe un glaçon initialement à −10°C, sa température monte d'abord régulièrement jusqu'à 0°C (état solide qui se réchauffe), puis reste bloquée à 0°C pendant toute la durée de la fusion (le glaçon fond progressivement mais la température ne bouge pas), puis remonte à nouveau une fois tout le solide fondu (l'eau liquide se réchauffe), jusqu'à atteindre 100°C où elle reste bloquée pendant la vaporisation.</p>
-      <h3>📌 Point du programme à ne pas manquer : distinguer chaleur et température</h3><p>Il ne faut pas confondre deux grandeurs proches mais différentes. La <strong>chaleur</strong> est une forme d'énergie, échangée entre deux corps, qui peut provoquer soit une variation de température, soit un changement d'état. La <strong>température</strong> est une grandeur physique qui indique le degré de chaleur d'un corps à un instant donné (elle se mesure en °C avec un thermomètre). Pendant un changement d'état, un corps continue de recevoir de la chaleur (de l'énergie), mais sa température reste bloquée — toute l'énergie reçue sert à transformer l'état de la matière, pas à faire monter la température.</p>`,
+      <p>Réglages : 5 V par division verticalement, 5 ms par division horizontalement. La courbe monte de 3 divisions et une période occupe 4 divisions.</p>
+      <p>U<sub>max</sub> = 3 × 5 = <strong>15 V</strong> ; T = 4 × 5 = 20 ms = <strong>0,02 s</strong> ; N = 1 / 0,02 = <strong>50 Hz</strong> ; U<sub>eff</sub> = 15 / 1,41 ≈ <strong>10,6 V</strong>.</p>
+      <p>Autre exemple : un appareil indique N = 100 Hz et un voltmètre mesure 200 V. La tension est alternative sinusoïdale ; 100 Hz est la fréquence ; U<sub>max</sub> = 1,41 × 200 = <strong>282 V</strong> ; T = 1 / 100 = <strong>0,01 s</strong> (10 ms).</p>
+      <h3>📌 Point du programme à ne pas manquer : période ↔ fréquence</h3><p>Il faut savoir passer de l'une à l'autre dans les deux sens : T = 1/N et N = 1/T. Exemples du cours : T = 2 ms → N = 500 Hz ; T = 10 ms → N = 100 Hz ; N = 4 Hz → T = 250 ms ; N = 2000 Hz → T = 0,5 ms. Plus la période est courte, plus la fréquence est grande.</p>`,
       quiz: [
-        {q:"Le passage de l'état liquide à l'état gazeux s'appelle...", options:["fusion","vaporisation","solidification","sublimation"], correct:1, exp:"La vaporisation est le passage de l'état liquide à l'état gazeux."},
-        {q:"Le passage direct de l'état solide à l'état gazeux s'appelle...", options:["fusion","liquéfaction","sublimation","condensation"], correct:2, exp:"La sublimation est le passage direct du solide au gaz, sans étape liquide."},
-        {q:"Pendant un changement d'état, la température...", options:["augmente rapidement","diminue rapidement","reste constante","varie de façon aléatoire"], correct:2, exp:"La température reste constante pendant toute la durée du changement d'état."},
-        {q:"Le passage de l'état gazeux à l'état liquide s'appelle...", options:["vaporisation","liquéfaction","fusion","sublimation"], correct:1, exp:"La liquéfaction est le passage de l'état gazeux à l'état liquide."},
-        {q:"Comment s'appelle le passage de l'état liquide à l'état solide ?", options:["Fusion","Solidification","Vaporisation","Sublimation"], correct:1, exp:"La solidification est le passage de l'état liquide à l'état solide."}
-      ,
-        { q: "Pendant la fusion complète d'un glaçon à 0°C, on continue de lui apporter de la chaleur. Que se passe-t-il pour sa température ?", options: ["Elle augmente régulièrement", "Elle reste constante à 0°C jusqu'à la fin de la fusion", "Elle diminue", "Elle double instantanément"], correct: 1, exp: "Pendant un changement d'état, la température reste bloquée (constante) : toute la chaleur reçue sert à transformer l'état (ici, faire fondre la glace), pas à augmenter la température." }
+        {q:"La fréquence N et la période T sont liées par...", options:["N = T","N = 1/T","N = 2T","N = T²"], correct:1, exp:"La fréquence est l'inverse de la période : N = 1/T (T en secondes, N en hertz)."},
+        {q:"L'unité de la fréquence est...", options:["le volt","la seconde","le hertz","l'ampère"], correct:2, exp:"La fréquence s'exprime en hertz (Hz)."},
+        {q:"La tension efficace se mesure avec...", options:["un oscilloscope uniquement","un voltmètre","une règle","un ampèremètre"], correct:1, exp:"Le voltmètre (en mode alternatif) affiche la tension efficace."},
+        {q:"La relation entre Umax et Ueff est...", options:["Umax = Ueff","Umax = 1,41 × Ueff","Ueff = 1,41 × Umax","Umax = Ueff / 2"], correct:1, exp:"Umax = 1,41 × Ueff, donc Ueff = Umax / 1,41."},
+        {q:"Une période dure 20 ms. La fréquence vaut...", options:["20 Hz","50 Hz","0,02 Hz","500 Hz"], correct:1, exp:"T = 20 ms = 0,02 s ; N = 1/0,02 = 50 Hz."},
+        {q:"Laquelle n'est PAS une caractéristique d'une tension alternative sinusoïdale ?", options:["La période","La fréquence","La tension maximale","La couleur"], correct:3, exp:"Les quatre caractéristiques sont : période, fréquence, tension maximale et tension efficace."},
+        {q:"Sur l'oscillogramme, la courbe atteint 4 divisions avec un réglage de 5 V/div. Umax vaut...", options:["9 V","20 V","1,25 V","4 V"], correct:1, exp:"Umax = 4 × 5 = 20 V."}
       ]
     },
     {
-      id: "p8",
-      title: "Les mélanges avec l'eau",
-      content: `<p>Quand on mélange une substance avec de l'eau, on obtient soit un <strong>mélange homogène</strong> (on ne distingue plus les constituants à l'œil nu, comme l'eau salée ou l'eau sucrée), soit un <strong>mélange hétérogène</strong> (on distingue plusieurs constituants, comme l'eau et l'huile, ou l'eau boueuse).</p>
-      <p>Dans un mélange homogène, le <strong>soluté</strong> est la substance dissoute et le <strong>solvant</strong> est le liquide qui dissout (ici, l'eau). Une solution est dite <strong>saturée</strong> quand on ne peut plus rien dissoudre de plus : l'excès de soluté reste visible, non dissous, au fond du récipient.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Pour séparer les constituants d'un mélange, on utilise différentes techniques : la <strong>filtration</strong> (pour séparer un solide non dissous d'un liquide, à l'aide d'un filtre), la <strong>décantation</strong> (laisser reposer pour que les phases se séparent naturellement par différence de densité).</p>
+      id: "pc8",
+      title: "Courants et tensions alternatifs — Les dangers du courant du secteur",
+      content: `<p>Le <strong>courant du secteur</strong> est le courant fourni par le réseau de distribution d'électricité ; en Côte d'Ivoire, c'est la <strong>CIE</strong> qui le distribue. C'est une <strong>tension alternative sinusoïdale</strong> de caractéristiques :</p>
+      <ul>
+        <li>tension efficace <strong>U<sub>eff</sub> = 220 V</strong> ;</li>
+        <li>tension maximale <strong>U<sub>max</sub> = 1,41 × 220 ≈ 310 V</strong> ;</li>
+        <li>fréquence <strong>N = 50 Hz</strong> ;</li>
+        <li>période <strong>T = 1/50 = 0,02 s = 20 ms</strong>.</li>
+      </ul>
+      <p><strong>Bornes d'une prise</strong> : une prise du secteur a trois bornes : la <strong>phase (P)</strong> — la seule pour laquelle la lampe témoin s'allume —, le <strong>neutre (N)</strong> et la <strong>terre (T)</strong>. Une prise simple n'a que deux bornes femelles (phase et neutre). Le fil de phase est reconnaissable à sa couleur <strong>rouge ou marron</strong>.</p>
+      <h3>Les dangers</h3>
+      <ul>
+        <li><strong>Électrisation</strong> : dommage causé à un organisme vivant par le passage du courant, entraînant un choc violent (brûlure, tremblement, tétanisation, asphyxie, arrêt cardiaque).</li>
+        <li><strong>Électrocution</strong> : dommage causé par le passage du courant entraînant le <strong>décès</strong>.</li>
+        <li><strong>Court-circuit</strong> : connexion des bornes d'un élément du circuit par un fil de connexion (par exemple le fil de phase qui touche le fil neutre).</li>
+      </ul>
+      <p><strong>Pour les personnes</strong> : le corps humain est conducteur ; à partir de <strong>25 V</strong> le courant qui le traverse devient dangereux. Il y a danger si le corps relie la phase et le neutre, ou la phase et la terre.</p>
+      <p><strong>Pour les installations</strong> : le <strong>court-circuit</strong> (contact direct phase-neutre) et la <strong>surcharge</strong> (trop d'appareils sur une même prise, ce qui provoque une surintensité) font chauffer les fils : détérioration des appareils, destruction des isolants, <strong>incendies</strong>.</p>
+      <h3>Dispositifs de protection</h3>
+      <ul>
+        <li><strong>Fusible</strong> : petit fil qui fond quand l'intensité devient trop élevée, ouvrant le circuit.</li>
+        <li><strong>Disjoncteur général</strong> : coupe l'électricité du bâtiment quand l'intensité totale dépasse la valeur souscrite.</li>
+        <li><strong>Stabilisateur</strong> : délivre une tension stable malgré les variations du secteur.</li>
+        <li><strong>Onduleur</strong> : stabilisateur + accumulateur ; en cas de coupure, il fournit le courant accumulé, le temps d'éteindre l'appareil.</li>
+        <li><strong>Prise de terre</strong> (protège les personnes) : en cas de contact accidentel, le courant passe par le fil de terre plutôt que par le corps.</li>
+        <li><strong>Disjoncteur différentiel</strong> (protège les personnes) : coupe le circuit dès que la différence d'intensité entre phase et neutre atteint <strong>30 mA</strong>.</li>
+      </ul>
+      <h3>Règles de sécurité</h3>
+      <p>Débrancher un appareil avant toute réparation ; couper le courant avant toute intervention, même pour changer une ampoule ; ne pas brancher trop d'appareils sur une même prise ; ne jamais manipuler un appareil branché avec les mains ou les pieds mouillés ; ne jamais toucher un fil dénudé ; ne jamais introduire d'objet métallique dans une prise.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : on ajoute progressivement du sucre dans un verre d'eau en remuant. Au début, tout le sucre se dissout (mélange homogène, on ne le voit plus). Mais à partir d'une certaine quantité, le sucre supplémentaire ne se dissout plus et reste visible au fond du verre : la solution est devenue saturée. Si on avait un mélange d'eau et de sable, on pourrait les séparer par filtration (le sable, non dissous, resterait sur le filtre pendant que l'eau passerait à travers).</p>
-      <h3>📌 Point du programme à ne pas manquer : corps pur et critères de pureté</h3>
-      <p>Un <strong>corps pur</strong> est constitué d'une seule espèce chimique (contrairement à un mélange, qui en contient plusieurs). On vérifie la pureté d'un corps grâce à des <strong>critères physiques</strong> : un corps pur a une <strong>température de fusion</strong> et une <strong>température d'ébullition</strong> fixes et constantes (elles ne varient pas pendant le changement d'état), alors qu'un mélange fond ou bout sur une plage de températures. Exemple : l'eau pure bout toujours exactement à 100°C (à pression atmosphérique normale) ; de l'eau salée (un mélange) bout à une température légèrement supérieure et moins précise.</p>`,
+      <p>Avec un voltmètre, on mesure 230 V entre les bornes A et B, 0 V entre B et C, 230 V entre A et C. Les seules tensions non nulles impliquent A : la <strong>phase est la borne A</strong> (B et C sont le neutre et la terre).</p>
+      <p>Calcul : pour U<sub>eff</sub> = 230 V, U<sub>max</sub> = 1,41 × 230 = <strong>324,3 V</strong>. Une maison où l'on mesure seulement 120 V (U<sub>max</sub> = 169,2 V) a des lampes qui éclairent faiblement : la tension est trop basse (sous-tension).</p>
+      <h3>📌 Point du programme à ne pas manquer : qui protège quoi ?</h3><p>Le <strong>fusible</strong> et le <strong>disjoncteur général</strong> protègent les <strong>installations et les appareils</strong> (surintensité, court-circuit). La <strong>prise de terre</strong> et le <strong>disjoncteur différentiel</strong> protègent les <strong>personnes</strong>. Exemple : une fillette touche la carcasse d'un réfrigérateur et est électrisée : il manquait la <strong>prise de terre</strong>.</p>`,
       quiz: [
-        {q:"Un mélange homogène est un mélange où...", options:["on distingue plusieurs constituants","on ne distingue aucun constituant à l'œil nu","il y a toujours un solide","il n'y a jamais d'eau"], correct:1, exp:"Dans un mélange homogène, les constituants sont indiscernables à l'œil nu."},
-        {q:"Dans une solution d'eau salée, le soluté est...", options:["l'eau","le sel","le récipient","la température"], correct:1, exp:"Le soluté est la substance dissoute, ici le sel ; le solvant est l'eau."},
-        {q:"Une solution saturée est une solution où...", options:["on peut encore dissoudre indéfiniment","on ne peut plus rien dissoudre de plus","il n'y a pas de soluté","le solvant a disparu"], correct:1, exp:"Une solution saturée ne peut plus dissoudre de soluté supplémentaire ; l'excès reste visible."},
-        {q:"Quelle technique sépare un solide non dissous d'un liquide ?", options:["La filtration","La dilution","L'évaporation instantanée","La combustion"], correct:0, exp:"La filtration permet de séparer un solide non dissous du liquide à l'aide d'un filtre."},
-        {q:"L'eau et l'huile forment un mélange...", options:["homogène","hétérogène","saturé uniquement","gazeux"], correct:1, exp:"L'eau et l'huile ne se mélangent pas : on distingue les deux phases, c'est un mélange hétérogène."},
-        {q:"Un corps pur a une température d'ébullition...", options:["variable selon la quantité","fixe et constante","toujours égale à 0°C","impossible à mesurer"], correct:1, exp:"Un corps pur bout à une température fixe et constante, contrairement à un mélange."}
+        {q:"En Côte d'Ivoire, le courant du secteur est distribué par...", options:["la SODECI","la CIE","l'ANADER","la RTI"], correct:1, exp:"La CIE distribue l'électricité ; la SODECI distribue l'eau."},
+        {q:"La tension efficace du secteur vaut...", options:["12 V","110 V","220 V","310 V"], correct:2, exp:"Ueff = 220 V ; sa tension maximale vaut environ 310 V."},
+        {q:"La fréquence du courant du secteur est...", options:["50 Hz","60 Hz","220 Hz","20 Hz"], correct:0, exp:"N = 50 Hz, donc T = 0,02 s = 20 ms."},
+        {q:"Les trois bornes d'une prise du secteur sont...", options:["plus, moins, terre","phase, neutre, terre","entrée, sortie, masse","nord, sud, terre"], correct:1, exp:"Phase (P), neutre (N) et terre (T)."},
+        {q:"L'électrocution est...", options:["un court-circuit","un choc électrique sans gravité","un dommage dû au courant entraînant la mort","une panne de courant"], correct:2, exp:"L'électrocution entraîne le décès ; l'électrisation est un choc sans décès."},
+        {q:"Un court-circuit se produit quand...", options:["on éteint la lumière","le fil de phase touche directement le fil neutre","on branche une seule lampe","on utilise un fusible"], correct:1, exp:"Le contact direct phase-neutre provoque un court-circuit : les fils chauffent, risque d'incendie."},
+        {q:"Quel dispositif protège les personnes en coupant le courant dès 30 mA de fuite ?", options:["Le fusible","Le stabilisateur","Le disjoncteur différentiel","L'onduleur"], correct:2, exp:"Le disjoncteur différentiel coupe dès que la différence phase/neutre atteint 30 mA."},
+        {q:"À partir de quelle tension le courant devient-il dangereux pour le corps humain ?", options:["1,5 V","25 V","1000 V","Jamais"], correct:1, exp:"Le cours retient qu'à partir de 25 V le courant qui traverse le corps devient dangereux."}
       ]
     },
     {
-      id: "p9",
-      title: "Circuit électrique",
-      content: `<p>Un <strong>circuit électrique</strong> est un ensemble de composants (générateur, récepteurs, fils, interrupteur) reliés entre eux, permettant au courant électrique de circuler. Dans un <strong>circuit en série</strong>, les composants sont branchés les uns à la suite des autres : si on en retire un, tout le circuit s'arrête. Dans un <strong>circuit en dérivation</strong> (parallèle), chaque composant est branché sur une boucle indépendante : si on en retire un, les autres continuent de fonctionner.</p>
-      <p>Le <strong>sens conventionnel du courant</strong> va de la borne + vers la borne − à l'extérieur du générateur.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> On représente un circuit électrique par un <strong>schéma normalisé</strong>, utilisant des symboles précis pour chaque composant (générateur, lampe, interrupteur, fil de connexion...), ce qui permet à n'importe qui de comprendre le montage sans ambiguïté, quel que soit le pays.</p>
+      id: "pc9",
+      title: "Courants et tensions alternatifs — Transformation, redressement et lissage d'une tension",
+      content: `<p>Le secteur délivre une tension alternative sinusoïdale de 220 V, mais beaucoup d'appareils (téléphone, ordinateur, jouet) ont besoin d'une petite <strong>tension continue</strong>. On passe de l'une à l'autre en trois étapes : <strong>transformer</strong>, <strong>redresser</strong>, <strong>lisser</strong>.</p>
+      <h3>1. Le transformateur</h3>
+      <p>Un <strong>transformateur</strong> est un <strong>quadripôle</strong> (4 bornes) constitué de <strong>deux bobines</strong> électriquement distinctes, couplées par un <strong>noyau</strong> de fer. Il comprend un <strong>circuit primaire</strong> (entrée) et un <strong>circuit secondaire</strong> (sortie). Il ne fonctionne qu'en <strong>courant alternatif</strong>.</p>
+      <p>Il existe des transformateurs <strong>abaisseurs</strong> et <strong>élévateurs</strong> de tension. Le transformateur <strong>conserve la nature</strong> (alternative sinusoïdale) et la <strong>fréquence</strong> (même période) de la tension, mais <strong>modifie sa valeur maximale</strong>. Exemple : entrée U<sub>max</sub> = 6 V, sortie U<sub>max</sub> = 4 V → abaisseur.</p>
+      <h3>2. Le redressement</h3>
+      <p>Une <strong>diode</strong> est un composant qui ne laisse passer le courant que dans <strong>un seul sens</strong>, appelé <strong>sens passant</strong>.</p>
+      <ul>
+        <li><strong>Redressement simple alternance</strong> (une diode) : l'alternance positive est conservée, l'alternance négative est <strong>supprimée</strong> (la tension est nulle pendant ce temps).</li>
+        <li><strong>Redressement double alternance</strong> (un <strong>pont de diodes</strong>, quadripôle à quatre diodes) : l'alternance positive est conservée et l'alternance négative est <strong>rendue positive</strong>.</li>
+      </ul>
+      <h3>3. Le lissage</h3>
+      <p>Un <strong>condensateur</strong> branché à la sortie du pont de diodes <strong>lisse</strong> la tension redressée : à l'oscilloscope, on obtient une tension presque <strong>continue</strong> (une droite).</p>
+      <h3>L'adaptateur</h3>
+      <p>Un <strong>adaptateur</strong> (chargeur de téléphone, d'ordinateur) est constitué successivement d'un <strong>transformateur abaisseur</strong> (abaisse la tension), d'un <strong>pont de diodes</strong> (redresse) et d'un <strong>condensateur</strong> (lisse). Il transforme la tension alternative sinusoïdale du secteur en tension continue constante.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> sur l'étiquette d'un adaptateur, « Input 220-240 V ~ 50-60 Hz » décrit l'entrée (tension efficace et fréquence du secteur, alternative) et « Output 6 V — 250 mA » décrit la sortie (tension continue et intensité fournie).</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : dans un circuit en série avec une pile et deux lampes, si une lampe grille (son filament casse), le circuit est coupé et la seconde lampe s'éteint aussi, car le courant ne peut plus circuler nulle part dans la boucle. Dans un circuit en dérivation avec les deux mêmes lampes, si une lampe grille, l'autre continue de briller normalement, car elle est sur sa propre boucle indépendante reliée directement au générateur.</p>
-      <h3>📌 Point du programme à ne pas manquer : conducteurs et isolants</h3>
-      <p>Un matériau <strong>conducteur</strong> laisse circuler le courant électrique (métaux comme le cuivre, le fer, l'aluminium ; l'eau salée ou le corps humain mouillé sont aussi conducteurs). Un matériau <strong>isolant</strong> ne laisse pas circuler le courant (plastique, verre, bois sec, air, caoutchouc). C'est pour cela que les fils électriques ont une âme en métal conducteur, entourée d'une gaine en plastique isolant qui protège l'utilisateur.</p>`,
+      <p>Un transformateur branché sur le secteur délivre 12 V (lu au voltmètre). Vrai ou faux ? La tension de sortie est alternative : <strong>vrai</strong>. L'oscillogramme est une droite : <strong>faux</strong> (c'est une sinusoïde). La tension d'entrée est supérieure à celle de sortie : <strong>vrai</strong>. Entrée et sortie ont la même période : <strong>vrai</strong>. La tension maximale de sortie est d'environ 17 V : 1,41 × 12 ≈ 16,9 V, donc environ 17 V.</p>
+      <p>Pour alimenter un jouet à piles (tension continue) à partir du secteur (tension alternative), on utilise un <strong>adaptateur</strong> de la bonne tension, par exemple 6 V.</p>
+      <h3>📌 Point du programme à ne pas manquer : le rôle de chaque composant</h3><p>À retenir dans l'ordre du montage : <strong>transformateur → abaisse</strong> ; <strong>diode ou pont de diodes → redresse</strong> (simple ou double alternance) ; <strong>condensateur → lisse</strong>. Un transformateur seul ne donne jamais une tension continue : sa sortie reste alternative.</p>`,
       quiz: [
-        {q:"Dans un circuit en série, si on retire un composant...", options:["rien ne change","tout le circuit s'arrête","seul ce composant s'arrête","le courant double"], correct:1, exp:"En série, tous les composants dépendent les uns des autres : en retirer un coupe tout le circuit."},
-        {q:"Dans un circuit en dérivation, si on retire un composant...", options:["tout s'arrête","les autres continuent de fonctionner","le circuit explose","rien n'est branché"], correct:1, exp:"En dérivation, chaque branche est indépendante : les autres composants continuent de fonctionner."},
-        {q:"Le sens conventionnel du courant électrique va...", options:["de − vers + à l'extérieur du générateur","de + vers − à l'extérieur du générateur","dans les deux sens en même temps","il n'y a pas de sens conventionnel"], correct:1, exp:"Par convention, le courant va de la borne + vers la borne − à l'extérieur du générateur."},
-        {q:"Un schéma électrique normalisé sert à...", options:["décorer un circuit","représenter un circuit avec des symboles universels","remplacer le générateur","mesurer une tension"], correct:1, exp:"Un schéma normalisé utilise des symboles standards compréhensibles par tous, quel que soit le pays."},
-        {q:"Un circuit électrique a besoin au minimum de...", options:["un générateur et un récepteur reliés par des fils","seulement un générateur","seulement des fils","rien de particulier"], correct:0, exp:"Un circuit fonctionnel nécessite au minimum un générateur et un récepteur reliés en boucle fermée."},
-        {q:"Lequel de ces matériaux est un isolant ?", options:["Le cuivre","Le fer","Le plastique","L'aluminium"], correct:2, exp:"Le plastique est un isolant électrique ; les métaux cités sont tous conducteurs."}
+        {q:"Un transformateur possède...", options:["2 bornes","4 bornes (quadripôle)","6 bornes","une seule bobine"], correct:1, exp:"C'est un quadripôle : deux bornes d'entrée (primaire) et deux de sortie (secondaire)."},
+        {q:"Un transformateur modifie...", options:["la fréquence de la tension","la nature de la tension","la valeur maximale de la tension","rien du tout"], correct:2, exp:"Il conserve la nature et la fréquence, mais modifie la valeur maximale."},
+        {q:"Un transformateur fonctionne...", options:["uniquement en courant continu","uniquement en courant alternatif","avec une pile","sans courant"], correct:1, exp:"Le transformateur ne fonctionne qu'en courant alternatif."},
+        {q:"Une diode laisse passer le courant...", options:["dans les deux sens","dans un seul sens","jamais","seulement la nuit"], correct:1, exp:"Elle ne conduit que dans son sens passant."},
+        {q:"Avec un pont de diodes, l'alternance négative...", options:["est supprimée","devient positive","double de valeur","reste négative"], correct:1, exp:"Le pont de diodes réalise un redressement double alternance."},
+        {q:"Quel composant lisse une tension redressée ?", options:["La diode","Le condensateur","Le transformateur","Le fusible"], correct:1, exp:"Le condensateur lisse la tension redressée, qui devient quasi continue."},
+        {q:"Un adaptateur contient, dans l'ordre...", options:["condensateur, diode, pile","transformateur abaisseur, pont de diodes, condensateur","pont de diodes, transformateur, lampe","fusible, aimant, bobine"], correct:1, exp:"Transformer (abaisser), redresser (pont de diodes), lisser (condensateur)."}
       ]
     },
     {
-      id: "p10",
-      title: "Tension électrique",
-      content: `<p>La <strong>tension électrique</strong> (ou différence de potentiel) entre deux points d'un circuit se mesure avec un <strong>voltmètre</strong>, toujours branché <strong>EN DÉRIVATION</strong> (en parallèle) aux bornes du composant à mesurer, jamais en série. Elle s'exprime en <strong>volts (V)</strong>.</p>
-      <p><strong>Dans un circuit en série</strong>, les tensions aux bornes des différents récepteurs s'additionnent pour donner la tension totale du générateur (loi d'additivité des tensions).</p>
-      <p><strong>Dans un circuit en dérivation</strong>, tous les récepteurs reçoivent la même tension que le générateur.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Erreur fréquente à éviter : brancher un voltmètre EN SÉRIE dans le circuit empêcherait quasiment tout le courant de passer (sa résistance interne est très élevée), ce qui fausserait complètement la mesure et le fonctionnement du circuit.</p>
+      id: "pc10",
+      title: "Les ions — Atomes et ions",
+      content: `<p>L'<strong>atome</strong> est la plus petite particule de la matière (le cours le qualifie d'indivisible). Il est constitué d'un <strong>noyau</strong>, au centre, qui porte des charges électriques <strong>positives</strong>, et d'<strong>électrons</strong> qui gravitent autour du noyau et portent des charges <strong>négatives</strong>. Un atome contient autant de charges positives que de charges négatives : il est <strong>électriquement neutre</strong>.</p>
+      <h3>L'ion</h3>
+      <p>Un <strong>ion</strong> est un atome ou un assemblage d'atomes ayant <strong>gagné ou perdu</strong> un ou plusieurs électrons.</p>
+      <ul>
+        <li>S'il <strong>perd</strong> des électrons, il devient un ion <strong>positif</strong> : un <strong>cation</strong>. Exemples : ion cuivre II Cu²⁺, ion fer II Fe²⁺, ion fer III Fe³⁺, ion zinc Zn²⁺, ion hydrogène H⁺, ion sodium Na⁺, ion aluminium Al³⁺, ion calcium Ca²⁺.</li>
+        <li>S'il <strong>gagne</strong> des électrons, il devient un ion <strong>négatif</strong> : un <strong>anion</strong>. Exemples : ion chlorure Cl⁻, ion hydroxyde OH⁻, ion carbonate CO₃²⁻, ion sulfate SO₄²⁻, ion nitrate NO₃⁻, ion permanganate MnO₄⁻, ion dichromate Cr₂O₇²⁻.</li>
+      </ul>
+      <p>Le nombre en exposant indique le nombre d'électrons gagnés ou perdus : l'atome de cuivre qui perd 2 électrons devient Cu²⁺ ; l'atome de chlore qui gagne 1 électron devient Cl⁻.</p>
+      <h3>Solution aqueuse</h3>
+      <p>Une <strong>solution aqueuse</strong> est obtenue par dissolution d'un corps (le <strong>soluté</strong>) dans l'eau (le <strong>solvant</strong>). Une solution aqueuse <strong>ionique</strong> contient des ions : des cations et des anions. Elle est électriquement neutre, car les charges des anions compensent celles des cations.</p>
+      <h3>Identification des ions</h3>
+      <p><strong>Couleur en solution</strong> : Cu²⁺ <strong>bleu</strong> ; Fe²⁺ <strong>vert pâle</strong> ; Fe³⁺ <strong>rouille (orangé)</strong> ; Zn²⁺, Na⁺, Al³⁺ <strong>incolores</strong>.</p>
+      <table><tr><th>Ion</th><th>Réactif</th><th>Observation</th></tr>
+      <tr><td>Cu²⁺</td><td>soude (Na⁺ + OH⁻)</td><td>précipité <strong>bleu</strong> d'hydroxyde de cuivre</td></tr>
+      <tr><td>Fe²⁺</td><td>soude</td><td>précipité <strong>vert pâle</strong> d'hydroxyde de fer II</td></tr>
+      <tr><td>Fe³⁺</td><td>soude</td><td>précipité <strong>rouille</strong> d'hydroxyde de fer III</td></tr>
+      <tr><td>Zn²⁺</td><td>soude</td><td>précipité <strong>blanc</strong> d'hydroxyde de zinc</td></tr>
+      <tr><td>Cl⁻</td><td>nitrate d'argent (ion Ag⁺)</td><td>précipité <strong>blanc</strong> de chlorure d'argent qui <strong>noircit à la lumière</strong></td></tr>
+      <tr><td>SO₄²⁻</td><td>chlorure de baryum (ion Ba²⁺)</td><td>précipité <strong>blanc</strong> de sulfate de baryum</td></tr></table>
+      <p><strong>🔎 Pour aller plus loin :</strong> le nom d'un produit indique ses ions. Sulfate de cuivre : Cu²⁺ et SO₄²⁻. Sulfate de fer (II) : Fe²⁺ et SO₄²⁻. Chlorure de fer (III) : Fe³⁺ et Cl⁻. Le premier mot désigne l'anion, le second le cation.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : un générateur de 9 V alimente deux lampes identiques en série. D'après la loi d'additivité, chaque lampe reçoit environ 9/2 = 4,5 V. Si on branche les deux mêmes lampes en dérivation sur le même générateur de 9 V, chaque lampe reçoit directement 9 V (la tension du générateur), ce qui explique pourquoi les lampes brillent plus fort en dérivation qu'en série.</p>
-      <h3>📌 Point du programme à ne pas manquer : adaptation, surtension et sous-tension</h3>
-      <p>Chaque récepteur (lampe, moteur...) est conçu pour fonctionner sous une <strong>tension nominale</strong> précise, indiquée par le fabricant. On dit qu'un récepteur est bien <strong>adapté</strong> au générateur quand la tension appliquée est proche de sa tension nominale. En cas de <strong>surtension</strong> (tension appliquée supérieure à la tension nominale), le récepteur peut être endommagé ou détruit (ex : une lampe de 6 V branchée sur 12 V grille immédiatement). En cas de <strong>sous-tension</strong> (tension inférieure à la tension nominale), le récepteur fonctionne mal (ex : une lampe de 12 V branchée sur 6 V brille très faiblement).</p>`,
+      <p>Deux flacons sans étiquette. Flacon A + soude → précipité <strong>vert pâle</strong> : il contient l'ion <strong>Fe²⁺</strong> (précipité d'hydroxyde de fer II). Flacon B + soude → précipité <strong>rouille</strong> : il contient l'ion <strong>Fe³⁺</strong> (précipité d'hydroxyde de fer III).</p>
+      <p>L'or perd 3 électrons → Au³⁺ (cation) ; l'argent perd 1 électron → Ag⁺ (cation) ; le chlore gagne 1 électron → Cl⁻ (anion) ; le cuivre perd 2 électrons → Cu²⁺ (cation).</p>
+      <h3>📌 Point du programme à ne pas manquer : un réactif pour chaque ion</h3><p>Retenir les trois réactifs : la <strong>soude</strong> identifie les ions <strong>métalliques</strong> (Cu²⁺, Fe²⁺, Fe³⁺, Zn²⁺) par la couleur du précipité ; l'ion <strong>argent</strong> (nitrate d'argent) identifie l'ion <strong>chlorure</strong> ; l'ion <strong>baryum</strong> (chlorure de baryum) identifie l'ion <strong>sulfate</strong>. Le chlorure d'argent qui noircit à la lumière est le même récepteur photochimique que dans la leçon sur la lumière.</p>`,
       quiz: [
-        {q:"Un voltmètre se branche toujours...", options:["en série","en dérivation, aux bornes du composant","n'importe où dans le circuit","jamais dans un circuit fermé"], correct:1, exp:"Le voltmètre se branche en dérivation (en parallèle) aux bornes du composant à mesurer."},
-        {q:"Dans un circuit en série, les tensions des récepteurs...", options:["s'additionnent pour donner la tension totale","sont toutes égales à la tension totale","se soustraient","n'ont aucun lien entre elles"], correct:0, exp:"En série, la somme des tensions des récepteurs est égale à la tension du générateur."},
-        {q:"Un générateur de 12 V alimente en dérivation deux lampes identiques. Quelle tension reçoit chaque lampe ?", options:["6 V","12 V","24 V","0 V"], correct:1, exp:"En dérivation, chaque branche reçoit directement la tension du générateur : 12 V."},
-        {q:"Que se passe-t-il si on branche un voltmètre en série dans un circuit ?", options:["Rien de spécial","Cela empêche quasiment le courant de passer, faussant la mesure","Le courant double","Le voltmètre affiche 0 automatiquement, ce qui est correct"], correct:1, exp:"La résistance interne très élevée du voltmètre empêcherait le courant de circuler normalement s'il était en série."},
-        {q:"L'unité de la tension électrique est...", options:["l'ampère","le volt","le watt","l'ohm"], correct:1, exp:"La tension électrique se mesure en volts (V)."},
-        {q:"Une lampe de 6 V branchée sur un générateur de 12 V subit...", options:["une sous-tension","une surtension, risquant de la détruire","aucun effet","une adaptation parfaite"], correct:1, exp:"12 V est bien supérieur à sa tension nominale de 6 V : c'est une surtension, dangereuse pour la lampe."}
+        {q:"Le noyau d'un atome porte des charges...", options:["négatives","positives","nulles","variables"], correct:1, exp:"Le noyau est chargé positivement ; les électrons sont chargés négativement."},
+        {q:"Un atome est électriquement neutre car...", options:["il n'a pas de charges","il a autant de charges positives que négatives","il n'a que des électrons","il n'a pas de noyau"], correct:1, exp:"Les charges positives du noyau compensent exactement celles des électrons."},
+        {q:"Un atome qui perd des électrons devient...", options:["un anion","un cation","une molécule","un atome neutre"], correct:1, exp:"En perdant des électrons (négatifs), il devient positif : un cation."},
+        {q:"La formule de l'ion sulfate est...", options:["SO₄²⁻","SO₄⁺","S²⁻","SO₂"], correct:0, exp:"L'ion sulfate est SO₄²⁻ (un anion)."},
+        {q:"Quel ion donne un précipité bleu avec la soude ?", options:["Fe²⁺","Fe³⁺","Cu²⁺","Zn²⁺"], correct:2, exp:"Cu²⁺ + soude → précipité bleu d'hydroxyde de cuivre."},
+        {q:"Le réactif de l'ion chlorure est...", options:["la soude","le nitrate d'argent","le chlorure de baryum","l'eau"], correct:1, exp:"Le nitrate d'argent (ion Ag⁺) donne un précipité blanc qui noircit à la lumière."},
+        {q:"Une solution contenant l'ion Fe³⁺ est de couleur...", options:["bleue","vert pâle","rouille (orangé)","incolore"], correct:2, exp:"Fe³⁺ est rouille en solution ; Fe²⁺ est vert pâle ; Cu²⁺ est bleu."},
+        {q:"L'atome de chlore gagne un électron. L'ion formé est...", options:["Cl⁺","Cl⁻","Cl²⁻","Cl₂"], correct:1, exp:"Un électron gagné = une charge négative : Cl⁻, un anion."}
       ]
     },
     {
-      id: "p11",
-      title: "Associations de générateurs et associations de récepteurs",
-      content: `<p>On peut associer plusieurs <strong>générateurs</strong> (piles) en série pour additionner leurs tensions : la tension totale est la somme des tensions de chaque générateur (à condition de les brancher dans le même sens). Deux piles de 1,5 V associées en série donnent une tension totale de 3 V.</p>
-      <p>On peut aussi associer plusieurs <strong>récepteurs</strong> (lampes, résistances) en série ou en dérivation, ce qui modifie leur comportement (voir les leçons précédentes sur le circuit et la tension).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Si on associe deux générateurs identiques en série, mais branchés « en opposition » (l'un dans un sens, l'autre dans l'autre), leurs tensions s'annulent au lieu de s'additionner : la tension totale devient nulle (0 V), et aucun courant utile ne circule.</p>
+      id: "pc11",
+      title: "Les ions — Transformation du métal cuivre en ion et inversement",
+      content: `<h3>1. Du cuivre métal à l'ion cuivre II (voie chimique)</h3>
+      <p>On verse de l'<strong>acide nitrique</strong> sur des copeaux de cuivre. On observe : un dégagement de <strong>gaz roux</strong>, la <strong>disparition</strong> des copeaux et l'apparition d'une solution <strong>bleue</strong> (avec la soude, elle donne un précipité bleu). Le métal cuivre s'est transformé en ions cuivre II :</p>
+      <p style="text-align:center"><strong>Cu → Cu²⁺ + 2e⁻</strong></p>
+      <p>Le gaz roux est du <strong>dioxyde d'azote (NO₂)</strong>, très <strong>toxique</strong> : l'expérience se fait sous la hotte ou en plein air.</p>
+      <h3>2. De l'ion cuivre II au cuivre métal (voie chimique)</h3>
+      <p>On plonge un <strong>clou en fer</strong> dans une solution bleue de <strong>sulfate de cuivre</strong>. On observe : un <strong>dépôt rouge de cuivre</strong> sur le clou ; la solution bleue devient <strong>verte</strong> ; avec la soude, elle donne un précipité <strong>vert pâle</strong> (ions Fe²⁺). Les ions cuivre deviennent du cuivre métal et, en même temps, le fer devient des ions fer II :</p>
+      <p style="text-align:center"><strong>Cu²⁺ + 2e⁻ → Cu</strong> &nbsp;et&nbsp; <strong>Fe → Fe²⁺ + 2e⁻</strong></p>
+      <p>Équation-bilan : <strong>Fe + Cu²⁺ → Cu + Fe²⁺</strong></p>
+      <h3>3. Voie électrochimique (électrolyse)</h3>
+      <p>On fait passer un courant continu dans une solution de sulfate de cuivre, avec une <strong>anode en cuivre</strong> (reliée à la borne +) et une <strong>cathode en graphite</strong> (reliée à la borne −). On observe : un <strong>dépôt rouge de cuivre</strong> sur la cathode, une <strong>diminution de l'épaisseur</strong> de l'anode, et la couleur de la solution <strong>ne change pas</strong>.</p>
+      <ul>
+        <li>À l'<strong>anode</strong> : <strong>Cu → Cu²⁺ + 2e⁻</strong> (le cuivre se dissout).</li>
+        <li>À la <strong>cathode</strong> : <strong>Cu²⁺ + 2e⁻ → Cu</strong> (le cuivre se dépose).</li>
+      </ul>
+      <p>Ces réactions ne se produisent que lorsque le courant passe : ce sont des <strong>réactions électrochimiques</strong>.</p>
+      <h3>4. Nature du courant électrique</h3>
+      <p>Dans les <strong>métaux</strong>, le courant est dû à la circulation des <strong>électrons libres</strong>. Dans les <strong>solutions aqueuses</strong>, il est dû à la <strong>double migration des ions</strong> : les cations et les anions se déplacent en sens contraires.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> dans l'électrolyse, autant de cuivre se dépose à la cathode qu'il en disparaît de l'anode : la quantité d'ions Cu²⁺ dans la solution reste la même, c'est pourquoi sa couleur bleue ne change pas. Cette technique sert au <strong>cuivrage</strong> : l'objet à recouvrir est relié à la borne négative.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : une lampe de poche utilise souvent 2 piles de 1,5 V associées en série pour obtenir une tension totale de 3 V, suffisante pour allumer l'ampoule normalement. Si l'une des piles est insérée à l'envers (bornes inversées), les deux tensions s'opposent : 1,5 − 1,5 = 0 V, et la lampe ne s'allume pas du tout, même si les deux piles sont individuellement en bon état.</p>
-      <h3>📌 Point du programme à ne pas manquer : récepteurs en série ou en dérivation</h3><p>La façon d'associer des récepteurs (lampes) change complètement leur comportement. En <strong>série</strong> : la tension du générateur se répartit entre les récepteurs (chacun reçoit une partie seulement), et si un seul récepteur est défectueux (ou une lampe dévissée), tout le circuit s'arrête de fonctionner. En <strong>dérivation</strong> : chaque récepteur reçoit la tension complète du générateur (la même tension aux bornes de chacun), et chacun fonctionne indépendamment des autres — si une lampe grille, les autres continuent de briller normalement. C'est pour cette raison que les installations électriques d'une maison sont câblées en dérivation.</p>`,
+      <p>Une lame de fer plongée dans du sulfate de cuivre se recouvre d'un dépôt rouge et la solution bleue devient verte. L'ion responsable du bleu est l'ion cuivre II <strong>Cu²⁺</strong> ; celui du vert est l'ion fer II <strong>Fe²⁺</strong> ; le dépôt rouge est du <strong>cuivre (Cu)</strong>. Équation-bilan : <strong>Fe + Cu²⁺ → Cu + Fe²⁺</strong>.</p>
+      <h3>📌 Point du programme à ne pas manquer : écrire correctement les équations</h3><p>Les électrons apparaissent du côté des <strong>produits</strong> quand un métal devient ion (il les <strong>perd</strong>) : Cu → Cu²⁺ + 2e⁻. Ils apparaissent du côté des <strong>réactifs</strong> quand un ion devient métal (il les <strong>gagne</strong>) : Cu²⁺ + 2e⁻ → Cu. Dans l'équation-bilan, les électrons échangés s'éliminent : Fe + Cu²⁺ → Fe²⁺ + Cu. Les réponses du type « Fe²⁺ + Cu → Cu²⁺ + Fe » sont fausses.</p>`,
       quiz: [
-        {q:"Deux piles de 1,5 V associées en série (même sens) donnent une tension totale de...", options:["1,5 V","3 V","0,75 V","4,5 V"], correct:1, exp:"En série et dans le même sens, les tensions s'additionnent : 1,5 + 1,5 = 3 V."},
-        {q:"Si deux générateurs identiques sont branchés en opposition, la tension totale est...", options:["doublée","nulle (0 V)","la même qu'un seul générateur","toujours positive"], correct:1, exp:"En opposition, les tensions s'annulent : la tension totale devient nulle."},
-        {q:"Pourquoi associe-t-on plusieurs piles en série dans une lampe de poche ?", options:["Pour réduire la tension","Pour obtenir une tension totale plus élevée","Pour économiser de l'énergie","Cela n'a aucun effet"], correct:1, exp:"L'association en série permet d'additionner les tensions pour atteindre la tension nécessaire au fonctionnement."},
-        {q:"Que se passe-t-il si une pile est insérée à l'envers dans une lampe de poche avec une autre pile normale ?", options:["Rien, cela fonctionne normalement","Les tensions s'annulent, la lampe ne s'allume pas","La lampe brille deux fois plus","La pile normale explose"], correct:1, exp:"Les tensions s'opposent et s'annulent : plus aucun courant utile ne circule."},
-        {q:"Associer des générateurs en série sert principalement à...", options:["diminuer l'intensité","additionner les tensions","créer un court-circuit","mesurer une résistance"], correct:1, exp:"L'association en série de générateurs sert à additionner leurs tensions respectives."}
-      ,
-        { q: "Pourquoi les lampes d'une maison sont-elles câblées en dérivation plutôt qu'en série ?", options: ["Pour économiser du fil électrique", "Pour que chaque lampe fonctionne indépendamment des autres", "Pour que les lampes brillent moins fort", "Pour additionner les tensions"], correct: 1, exp: "En dérivation, chaque récepteur reçoit la même tension et fonctionne indépendamment : si une lampe grille, les autres continuent de fonctionner — contrairement au montage en série où une seule panne arrête tout le circuit." }
+        {q:"Quand on verse de l'acide nitrique sur du cuivre, la solution devient...", options:["incolore","vert pâle","bleue","rouge"], correct:2, exp:"Le cuivre se transforme en ions Cu²⁺, qui colorent la solution en bleu."},
+        {q:"Le gaz roux dégagé par l'action de l'acide nitrique sur le cuivre est...", options:["du dioxygène","du dioxyde d'azote, toxique","de la vapeur d'eau","du dihydrogène"], correct:1, exp:"C'est du dioxyde d'azote NO₂, un gaz très toxique."},
+        {q:"L'équation de la transformation du cuivre métal en ion est...", options:["Cu²⁺ + 2e⁻ → Cu","Cu → Cu²⁺ + 2e⁻","Cu → Cu⁺","Cu + 2e⁻ → Cu²⁺"], correct:1, exp:"L'atome de cuivre perd 2 électrons : Cu → Cu²⁺ + 2e⁻."},
+        {q:"On plonge une lame de fer dans du sulfate de cuivre. La solution devient...", options:["incolore","vert pâle","plus bleue","rouge"], correct:1, exp:"Les ions Fe²⁺ formés donnent une couleur verte (vert pâle)."},
+        {q:"L'équation-bilan de la réaction entre le fer et les ions cuivre II est...", options:["Fe²⁺ + Cu → Cu²⁺ + Fe","Fe + Cu → Fe²⁺ + Cu²⁺","Fe + Cu²⁺ → Fe²⁺ + Cu","Fe²⁺ + Cu²⁺ → Fe + Cu"], correct:2, exp:"Le fer donne ses électrons aux ions cuivre : Fe + Cu²⁺ → Fe²⁺ + Cu."},
+        {q:"Lors de l'électrolyse du sulfate de cuivre, le dépôt de cuivre se forme...", options:["à l'anode","à la cathode","au fond du bécher seulement","nulle part"], correct:1, exp:"À la cathode : Cu²⁺ + 2e⁻ → Cu (dépôt rouge)."},
+        {q:"Dans une solution aqueuse, le courant électrique est dû...", options:["aux électrons libres","à la double migration des ions","aux protons du noyau","à la lumière"], correct:1, exp:"Dans les métaux : électrons libres ; dans les solutions : migration des cations et des anions."},
+        {q:"Pendant l'électrolyse avec anode en cuivre, la couleur de la solution...", options:["devient verte","disparaît","ne change pas","devient rouge"], correct:2, exp:"Le cuivre perdu par l'anode compense celui déposé à la cathode : la concentration en Cu²⁺ reste la même."}
       ]
     },
     {
-      id: "p12",
-      title: "Courant électrique et ses dangers",
-      content: `<p>Le corps humain, surtout mouillé, devient un bon conducteur électrique, ce qui rend l'électricité particulièrement dangereuse près de l'eau (salle de bain, pluie). Une <strong>électrisation</strong> (passage du courant dans le corps) peut provoquer des brûlures, des troubles cardiaques, voire la mort (<strong>électrocution</strong>).</p>
-      <p>Les dispositifs de <strong>protection</strong> comme le <strong>fusible</strong> et le <strong>disjoncteur</strong> coupent automatiquement le courant en cas de surintensité dangereuse, protégeant ainsi les personnes et les installations.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Le fusible doit être remplacé après avoir « sauté », alors que le disjoncteur peut simplement être réenclenché manuellement après avoir coupé le courant, ce qui le rend plus pratique au quotidien. Règle de sécurité essentielle : ne jamais toucher un appareil électrique avec les mains mouillées.</p>
+      id: "pc12",
+      title: "Eau potable — Traitement de l'eau",
+      content: `<p>L'eau est une source de vie, mais elle peut aussi transmettre des maladies : il faut la <strong>traiter</strong> avant de la consommer. En Côte d'Ivoire, c'est le rôle de la <strong>SODECI</strong>, société de distribution d'eau.</p>
+      <p><strong>Agents de pollution de l'eau</strong> : les <strong>bactéries</strong> (et autres microorganismes), les <strong>déchets organiques</strong> et les <strong>produits phytosanitaires</strong> (pesticides, engrais).</p>
+      <h3>Étapes du traitement physico-chimique de l'eau (dans l'ordre)</h3>
+      <ol>
+        <li><strong>Floculation</strong> : on injecte un réactif, le <strong>sulfate d'alumine</strong> (Al₂(SO₄)₃,18H₂O) ; les impuretés s'agglomèrent en <strong>flocons</strong>.</li>
+        <li><strong>Décantation</strong> : on laisse reposer ; les flocons, plus lourds, tombent au fond et sont éliminés. L'eau du dessus devient limpide.</li>
+        <li><strong>Filtration</strong> : l'eau traverse un filtre (sable, tissu) qui retient les fines particules restantes.</li>
+        <li><strong>Désinfection (stérilisation)</strong> : on détruit les microorganismes qui transmettent des maladies, avec de l'<strong>hypochlorite de calcium</strong> (Ca(ClO)₂), de l'<strong>ozone</strong> ou du <strong>dichlore</strong>.</li>
+        <li><strong>Neutralisation</strong> : on ramène l'eau à un <strong>pH neutre (pH = 7)</strong>.</li>
+      </ol>
+      <p><strong>Au village</strong>, on peut rendre l'eau d'un marigot ou d'une rivière consommable : la laisser <strong>reposer</strong> (décantation), la <strong>filtrer</strong> sur un tissu propre et blanc, puis la <strong>désinfecter</strong> en la faisant bouillir ou en ajoutant quelques gouttes d'eau de Javel.</p>
+      <h3>Lire une facture d'eau</h3>
+      <p>L'<strong>ancien index</strong> est le chiffre du compteur lors de la facture précédente ; le <strong>nouvel index</strong> est le chiffre relevé par l'agent de la SODECI cette fois-ci. Le <strong>cubage consommé</strong> (en m³) se calcule ainsi :</p>
+      <p style="text-align:center"><strong>Cubage consommé = nouvel index − ancien index</strong></p>
+      <p>Comme pour l'électricité, la facture est découpée en <strong>tranches</strong> ; le montant dépend du prix du m³ de chaque tranche.</p>
+      <h3>Ne pas gaspiller l'eau</h3>
+      <p>Prendre des douches plutôt que des bains ; ne pas laisser couler l'eau en se brossant les dents ; réparer les fuites et bien fermer les robinets ; laver la voiture à l'éponge plutôt qu'au jet ; arroser le soir ; ne pas jeter d'ordures dans les cours d'eau. Ces gestes réduisent la consommation de 20 à 30 %.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> la décantation ne retient que les particules lourdes, et la filtration les particules fines ; aucune des deux ne tue les microbes. C'est pourquoi la <strong>désinfection</strong> est indispensable : une eau limpide n'est pas forcément potable.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Règles de sécurité essentielles à retenir : ne jamais toucher un fil électrique dénudé, couper le courant (au disjoncteur) avant toute intervention sur une installation électrique, ne jamais surcharger une même prise avec trop d'appareils, et ne jamais utiliser d'appareil électrique près d'une source d'eau (baignoire, évier). En cas d'électrisation d'une personne, il faut d'abord couper le courant avant de la toucher, pour ne pas s'électriser soi-même.</p>
-      <h3>📌 Point du programme à ne pas manquer : le court-circuit</h3>
-      <p>Un <strong>court-circuit</strong> se produit quand deux points d'un circuit reliés directement par un simple fil, avec une résistance quasi nulle (sans passer par un récepteur), se retrouvent connectés — le courant emprunte ce chemin de moindre résistance, avec une intensité brutalement très élevée. Cela peut faire fondre les fils, provoquer un incendie ou détruire le générateur : c'est pourquoi les installations sont protégées par des fusibles ou des disjoncteurs qui coupent immédiatement le courant en cas de court-circuit.</p>`,
+      <p>Facture : ancien index 1 337 m³, nouvel index 1 452 m³. Cubage consommé = 1 452 − 1 337 = <strong>115 m³</strong> pour le trimestre.</p>
+      <p>Range dans l'ordre : neutralisation, décantation, filtration, désinfection, floculation. Réponse : <strong>floculation → décantation → filtration → désinfection → neutralisation</strong>.</p>
+      <h3>📌 Point du programme à ne pas manquer : définition de l'eau potable</h3><p>Une <strong>eau potable</strong> est une eau qui ne contient pas d'agents polluants dangereux et qui est propre à la consommation : on peut la boire sans danger pour la santé. Le traitement de la SODECI sert précisément à transformer une eau de lac ou de rivière, chargée de boues, de déchets et de microbes, en eau potable.</p>`,
       quiz: [
-        {q:"Le corps humain mouillé est...", options:["un mauvais conducteur","un bon conducteur électrique, donc dangereux","totalement isolant","insensible à l'électricité"], correct:1, exp:"L'eau rend le corps humain plus conducteur, augmentant fortement le danger électrique."},
-        {q:"Quel dispositif doit être remplacé après avoir coupé un circuit en surintensité ?", options:["Le disjoncteur","Le fusible","La prise électrique","L'interrupteur"], correct:1, exp:"Un fusible « grillé » doit être remplacé, contrairement au disjoncteur qui se réenclenche."},
-        {q:"Que faut-il faire en premier face à une personne électrisée ?", options:["La toucher immédiatement pour l'aider","Couper le courant avant de la toucher","L'arroser d'eau","Rien, attendre les secours sans agir"], correct:1, exp:"Il faut d'abord couper le courant pour ne pas s'électriser soi-même en portant secours."},
-        {q:"Pourquoi ne faut-il jamais toucher un appareil électrique avec les mains mouillées ?", options:["Cela abîme l'appareil","L'eau augmente le risque d'électrisation","Cela n'a aucun effet","Cela décharge la pile plus vite"], correct:1, exp:"L'eau rend le corps plus conducteur, augmentant fortement le risque d'électrisation."},
-        {q:"Le rôle d'un disjoncteur est de...", options:["augmenter la tension","couper automatiquement le courant en cas de danger","stocker de l'énergie","mesurer l'intensité"], correct:1, exp:"Le disjoncteur protège l'installation en coupant automatiquement le courant en cas de surintensité."},
-        {q:"Un court-circuit se caractérise par...", options:["une intensité très faible","une intensité brutalement très élevée","une absence totale de courant","une tension nulle"], correct:1, exp:"Un court-circuit fait chuter la résistance quasiment à zéro, ce qui provoque une intensité très élevée, dangereuse."}
+        {q:"En Côte d'Ivoire, la société qui traite et distribue l'eau est...", options:["la CIE","la SODECI","la SOTRA","l'ANADER"], correct:1, exp:"La SODECI distribue l'eau potable ; la CIE distribue l'électricité."},
+        {q:"Quelle est la première étape du traitement de l'eau ?", options:["La filtration","La désinfection","La floculation","La neutralisation"], correct:2, exp:"Ordre : floculation, décantation, filtration, désinfection, neutralisation."},
+        {q:"Le réactif utilisé pour la floculation est...", options:["l'eau de Javel","le sulfate d'alumine","le sel de cuisine","la soude"], correct:1, exp:"Le sulfate d'alumine fait s'agglomérer les impuretés en flocons."},
+        {q:"La désinfection de l'eau sert à...", options:["la rendre limpide","détruire les microorganismes","enlever le sable","changer sa couleur"], correct:1, exp:"Elle détruit les microbes susceptibles de transmettre des maladies (chlore, ozone...)."},
+        {q:"La neutralisation ramène l'eau à un pH de...", options:["0","3","7","14"], correct:2, exp:"Elle rend à l'eau un pH neutre, égal à 7."},
+        {q:"Ancien index 1 337 m³, nouvel index 1 452 m³. Le cubage consommé est...", options:["2 789 m³","115 m³","1 452 m³","125 m³"], correct:1, exp:"Cubage = nouvel index − ancien index = 1 452 − 1 337 = 115 m³."},
+        {q:"Lequel de ces comportements est bon pour l'eau ?", options:["Laisser couler le robinet","Jeter les ordures dans le marigot","Réparer les fuites d'eau","Laver la voiture au jet"], correct:2, exp:"Réparer les fuites évite le gaspillage ; jeter les ordures pollue l'eau."}
       ]
     },
     {
-      id: "p13",
-      title: "Notion de force",
-      content: `<p>Une <strong>force</strong> est une action mécanique exercée par un objet (ou un phénomène) sur un autre, capable de modifier son mouvement (le mettre en mouvement, l'arrêter, le dévier) ou de le déformer. Une force est caractérisée par : son <strong>point d'application</strong>, sa <strong>direction</strong>, son <strong>sens</strong>, et son <strong>intensité</strong> (mesurée en newtons, N, avec un dynamomètre).</p>
-      <p>On représente une force par une <strong>flèche</strong> (un vecteur), dont l'origine est le point d'application, la direction et le sens indiqués par la flèche, et la longueur proportionnelle à l'intensité.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> On distingue les forces de <strong>contact</strong> (l'objet qui exerce la force touche directement l'objet qui la subit, comme pousser une porte) des forces <strong>à distance</strong> (pas besoin de contact, comme la force gravitationnelle ou la force magnétique).</p>
+      id: "pc13",
+      title: "Eau potable — Qualité de l'eau",
+      content: `<h3>Les paramètres de qualité de l'eau</h3>
+      <ul>
+        <li><strong>Paramètres organoleptiques</strong> (perçus par nos sens) : la <strong>couleur</strong>, la <strong>transparence</strong>, la <strong>saveur</strong> et l'<strong>odeur</strong>. Ils n'ont pas de valeur sanitaire directe : une eau trouble ou colorée peut être consommable, et une eau limpide peut être dangereuse.</li>
+        <li><strong>Paramètres physico-chimiques</strong> : le <strong>pH</strong>, la température, le taux d'oxygène, le pouvoir de dilution, la <strong>dureté</strong> (minéraux dissous).</li>
+        <li><strong>Substances toxiques</strong> : poisons mortels pour l'homme, par exemple les <strong>métaux lourds</strong> (plomb, chrome).</li>
+      </ul>
+      <p>Une <strong>eau potable</strong> est une eau que l'on peut boire sans danger et qui respecte les <strong>normes de l'OMS</strong>. Quelques normes : pH compris entre 6,5 et 8,5 ; nitrates ≤ 50 mg/L ; nitrites ≤ 0,2 mg/L ; chlorures ≤ 200 mg/L ; sodium ≤ 200 mg/L ; sulfates ≤ 500 mg/L ; magnésium ≤ 50 mg/L ; fer ≤ 0,3 mg/L.</p>
+      <h3>Étiquette d'eau minérale et dureté</h3>
+      <p>L'étiquette d'une eau minérale (par exemple l'eau AWA : calcium 52 mg/L, magnésium 2,82 mg/L, sodium 18,5 mg/L, bicarbonate 264,7 mg/L, sulfate 6,2 mg/L, chlorure 8,5 mg/L...) montre qu'une eau de boisson <strong>contient des ions</strong>.</p>
+      <p>Une eau <strong>dure</strong> contient beaucoup de minéraux dissous. La dureté est surtout due aux ions <strong>calcium Ca²⁺</strong> : de 0 à 28 mg/L, eau très douce ; de 28 à 60 mg/L, eau douce ; de 60 à 120 mg/L, eau plutôt dure ; plus de 160 mg/L, eau très dure.</p>
+      <h3>Identification des ions dans l'eau minérale</h3>
+      <table><tr><th>Ion</th><th>Réactif</th><th>Observation</th></tr>
+      <tr><td>calcium Ca²⁺</td><td>oxalate d'ammonium (ion oxalate C₂O₄²⁻)</td><td>précipité <strong>blanc</strong> (d'oxalate de calcium)</td></tr>
+      <tr><td>sulfate SO₄²⁻</td><td>chlorure de baryum (ion Ba²⁺)</td><td>précipité <strong>blanc</strong> de sulfate de baryum</td></tr>
+      <tr><td>chlorure Cl⁻</td><td>nitrate d'argent (ion Ag⁺)</td><td>précipité <strong>blanc qui noircit à la lumière</strong></td></tr></table>
+      <h3>Importance de quelques ions dans l'alimentation</h3>
+      <ul>
+        <li><strong>Ca²⁺ et Mg²⁺</strong> : construction et solidification des <strong>os</strong> (très importants pour les nourrissons).</li>
+        <li><strong>K⁺ et Na⁺</strong> : production et transmission des <strong>messages nerveux</strong>.</li>
+        <li><strong>Na⁺ et Cl⁻</strong> : <strong>contraction des muscles</strong> et rétention d'eau dans le corps.</li>
+        <li><strong>Fe²⁺</strong> : constitution de l'<strong>hémoglobine</strong> du sang, qui transporte le dioxygène ; un manque provoque l'<strong>anémie</strong>.</li>
+      </ul>
+      <p>Hygiène et assainissement : conserver l'eau dans des récipients propres, assainir les abords des fontaines, des puits et des marigots, éloigner les fosses septiques des points d'eau.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> les eaux riches en calcium (plus de 150 mg/L) aident à prévenir les problèmes osseux ; riches en magnésium (plus de 50 mg/L), elles sont conseillées contre le stress et la fatigue ; les eaux sulfatées (plus de 200 mg/L) sont laxatives ; les eaux riches en bicarbonates facilitent la digestion.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : quand on tire une caisse posée au sol avec une corde, on exerce une force de contact sur la caisse. Cette force a un point d'application (là où la corde est attachée), une direction (celle de la corde), un sens (vers soi), et une intensité qu'on peut mesurer avec un dynamomètre (par exemple 50 N). Si l'intensité de la force est suffisante pour vaincre les frottements, la caisse se met en mouvement dans le sens de la force.</p>
-      <h3>📌 Point du programme à ne pas manquer : catégories de forces et équilibre</h3>
-      <p>On distingue plusieurs <strong>catégories de forces</strong> : les forces de contact (force musculaire, force de frottement, tension d'un fil) et les forces à distance (poids, force magnétique). <strong>Un solide est en équilibre sous l'action de deux forces</strong> si ces deux forces ont : la même droite d'action, des sens opposés, et la même intensité. Exemple : un livre posé immobile sur une table est en équilibre sous l'action de deux forces — son poids (vertical, vers le bas) et la réaction de la table (verticale, vers le haut) — de même intensité et de sens opposés.</p>`,
+      <p>Une eau minérale contient : calcium Ca²⁺ 250 mg/L, chlorure Cl⁻ 100 mg/L, fluor F⁻ 0,5 mg/L, magnésium Mg²⁺ 50 mg/L, nitrates NO₃⁻ 5 mg/L, nitrites NO₂⁻ 3 mg/L, sodium Na⁺ 150 mg/L, sulfates SO₄²⁻ 60 mg/L, potassium K⁺ 12 mg/L.</p>
+      <p>Cations : <strong>Ca²⁺, Mg²⁺, Na⁺, K⁺</strong>. Anions : <strong>Cl⁻, F⁻, NO₃⁻, NO₂⁻, SO₄²⁻</strong>. Ion majoritaire : <strong>le calcium</strong> (250 mg/L), essentiel à la construction des os des bébés.</p>
+      <h3>📌 Point du programme à ne pas manquer : organoleptique ou physico-chimique ?</h3><p>Exercice classique de classement. <strong>Organoleptiques</strong> (ce que l'on voit, sent ou goûte) : saveur, odeur, transparence, couleur. <strong>Physico-chimiques</strong> (ce que l'on mesure) : pH, température, minéraux, dureté. Seuls les paramètres mesurés et les normes de l'OMS permettent de décider si une eau est potable.</p>`,
       quiz: [
-        {q:"Une force est caractérisée par...", options:["seulement son intensité","point d'application, direction, sens et intensité","seulement sa couleur","seulement sa direction"], correct:1, exp:"Une force est entièrement définie par ces 4 caractéristiques : point d'application, direction, sens et intensité."},
-        {q:"L'unité de l'intensité d'une force est...", options:["le kilogramme","le newton","le mètre","le volt"], correct:1, exp:"L'intensité d'une force se mesure en newtons (N)."},
-        {q:"Avec quel instrument mesure-t-on l'intensité d'une force ?", options:["Une balance","Un dynamomètre","Un thermomètre","Un voltmètre"], correct:1, exp:"Le dynamomètre est l'instrument utilisé pour mesurer l'intensité d'une force."},
-        {q:"La force gravitationnelle est une force...", options:["de contact","à distance","qui n'existe pas","uniquement électrique"], correct:1, exp:"La force gravitationnelle agit à distance, sans contact physique nécessaire."},
-        {q:"On représente une force par...", options:["un point","une flèche (vecteur)","un cercle","un simple nombre sans direction"], correct:1, exp:"Une force se représente par une flèche indiquant point d'application, direction, sens et intensité (longueur)."},
-        {q:"Un solide est en équilibre sous l'action de deux forces si elles ont...", options:["des directions différentes","même droite d'action, sens opposés, même intensité","la même direction et le même sens","aucune de ces conditions"], correct:1, exp:"Les trois conditions d'équilibre sous deux forces sont : même droite d'action, sens opposés, et intensités égales."}
-      ]
-    },
-    {
-      id: "p14",
-      title: "Poids d'un corps",
-      content: `<p>Le <strong>poids</strong> d'un corps est la force exercée par l'attraction gravitationnelle (de la Terre, ou d'un autre astre) sur ce corps. Il se mesure en <strong>newtons (N)</strong> avec un dynamomètre, contrairement à la masse qui se mesure en kg avec une balance.</p>
-      <p><strong>Relation entre poids et masse :</strong> P = m × g, où P est le poids (en N), m la masse (en kg), et g l'intensité de la pesanteur (environ 9,8 N/kg, souvent arrondi à 10 N/kg, sur Terre).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Contrairement à la masse, le poids varie selon le lieu : sur la Lune, g vaut environ 1,6 N/kg (6 fois moins que sur Terre), donc un objet y pèse environ 6 fois moins lourd, tout en gardant exactement la même masse.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de calcul : une personne a une masse de 70 kg. Son poids sur Terre est P = m × g = 70 × 10 = 700 N (en prenant g = 10 N/kg). Sur la Lune, avec g ≈ 1,6 N/kg, son poids serait P = 70 × 1,6 = 112 N, soit bien moins lourd, alors que sa masse resterait exactement 70 kg dans les deux cas — c'est ce qui explique pourquoi les astronautes bondissent facilement sur la Lune.</p>
-      <h3>📌 Point du programme à ne pas manquer : les caractéristiques du vecteur poids</h3><p>Le poids est une force, donc représentée par un vecteur possédant quatre caractéristiques précises. <strong>Point d'application</strong> : le centre de gravité G du corps. <strong>Direction</strong> : verticale (la direction du fil à plomb). <strong>Sens</strong> : vers le bas (le poids « tire » toujours vers le centre de la Terre). <strong>Intensité (valeur)</strong> : P = m × g, exprimée en newtons. Ces quatre éléments (point d'application, direction, sens, intensité) sont ceux qu'il faut systématiquement préciser pour décrire n'importe quelle force en physique, pas seulement le poids.</p>`,
-      quiz: [
-        {q:"Le poids se mesure en...", options:["kilogrammes","newtons","litres","degrés Celsius"], correct:1, exp:"Le poids, étant une force, se mesure en newtons (N)."},
-        {q:"La formule reliant poids et masse est...", options:["P = m + g","P = m × g","P = m / g","P = m − g"], correct:1, exp:"Le poids est le produit de la masse par l'intensité de la pesanteur : P = m × g."},
-        {q:"Une masse de 50 kg a un poids sur Terre (g=10 N/kg) de...", options:["50 N","500 N","5 N","5000 N"], correct:1, exp:"P = m × g = 50 × 10 = 500 N."},
-        {q:"Le poids d'un objet sur la Lune, comparé à la Terre, est...", options:["identique","plus élevé","plus faible","impossible à déterminer"], correct:2, exp:"La pesanteur lunaire (g≈1,6 N/kg) est plus faible que sur Terre (g≈10 N/kg), donc le poids y est plus faible."},
-        {q:"La masse d'un objet change-t-elle entre la Terre et la Lune ?", options:["Oui, elle diminue","Oui, elle augmente","Non, elle reste identique","Cela dépend de l'objet"], correct:2, exp:"La masse est une propriété de la matière indépendante du lieu ; seul le poids change."}
-      ,
-        { q: "Quelle est la direction et le sens du vecteur poids d'un objet ?", options: ["Horizontale, vers la droite", "Verticale, vers le haut", "Verticale, vers le bas", "Oblique, selon l'objet"], correct: 2, exp: "Le poids est toujours dirigé verticalement (comme un fil à plomb) et vers le bas, car il représente l'attraction de la Terre qui « tire » les objets vers son centre." }
-      ]
-    },
-    {
-      id: "p15",
-      title: "La poussée d'Archimède",
-      content: `<p>Tout corps plongé (totalement ou partiellement) dans un fluide (liquide ou gaz) subit une force verticale, dirigée vers le haut, appelée <strong>poussée d'Archimède</strong>. Cette poussée est égale au poids du volume de fluide déplacé par le corps.</p>
-      <p>Si la poussée d'Archimède est supérieure au poids du corps, celui-ci <strong>flotte</strong> (ou remonte). Si elle est inférieure, le corps <strong>coule</strong>. Si elle est égale, le corps reste en équilibre (il « flotte entre deux eaux »).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> C'est grâce à ce principe qu'un énorme bateau en acier (plus dense que l'eau) peut flotter : sa forme creuse lui fait déplacer un grand volume d'eau, dont le poids (et donc la poussée d'Archimède) dépasse le poids total du bateau.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : un objet de volume 200 cm³ est entièrement plongé dans l'eau (masse volumique 1 g/cm³ = 1000 kg/m³). Le volume d'eau déplacé est donc 200 cm³ = 0,0002 m³. La poussée d'Archimède vaut : Π = ρ_eau × V_déplacé × g = 1000 × 0,0002 × 10 = 2 N. Si le poids réel de l'objet est inférieur à 2 N, il flottera ; s'il est supérieur, il coulera.</p>
-      <h3>📌 Point du programme à ne pas manquer : caractéristiques de la poussée d'Archimède et flottaison</h3><p>Comme toute force, la poussée d'Archimède possède un point d'application (le centre de poussée, qui correspond au centre de gravité du volume de fluide déplacé), une direction verticale, et un sens vers le <strong>haut</strong> (elle s'oppose au poids, qui est vers le bas). On peut aussi prédire la flottaison en comparant les masses volumiques : un corps flotte si sa masse volumique est <strong>inférieure</strong> à celle du fluide, il coule si elle est <strong>supérieure</strong>, et il reste en équilibre (« entre deux eaux ») si elles sont égales — c'est équivalent à comparer directement le poids du corps et la poussée d'Archimède qu'il subit.</p>`,
-      quiz: [
-        {q:"La poussée d'Archimède est dirigée...", options:["vers le bas","vers le haut","horizontalement","dans un sens aléatoire"], correct:1, exp:"La poussée d'Archimède est toujours verticale, dirigée vers le haut."},
-        {q:"La poussée d'Archimède est égale au...", options:["poids du corps lui-même","poids du volume de fluide déplacé","volume du corps en litres","double du poids du corps"], correct:1, exp:"Elle est égale au poids du volume de fluide déplacé par le corps immergé."},
-        {q:"Un corps flotte si...", options:["la poussée d'Archimède est inférieure à son poids","la poussée d'Archimède est supérieure à son poids","son volume est nul","il n'a pas de masse"], correct:1, exp:"Le corps flotte quand la poussée (vers le haut) l'emporte sur son propre poids (vers le bas)."},
-        {q:"Pourquoi un bateau en acier peut-il flotter ?", options:["L'acier est moins dense que l'eau","Sa forme creuse déplace un grand volume d'eau","Il n'a pas de poids","C'est un mystère non expliqué par la physique"], correct:1, exp:"Grâce à sa forme creuse, le bateau déplace un grand volume d'eau, générant une poussée d'Archimède suffisante."},
-        {q:"Qui a découvert ce principe de la poussée ?", options:["Newton","Pythagore","Archimède","Pascal"], correct:2, exp:"Ce principe porte le nom du savant grec Archimède, qui l'a formulé dans l'Antiquité."}
-      ,
-        { q: "Un morceau de bois (masse volumique environ 0,6 g/cm³) est plongé dans de l'eau (masse volumique 1 g/cm³). Que se passe-t-il ?", options: ["Il coule au fond", "Il reste immobile entre deux eaux", "Il flotte, car sa masse volumique est inférieure à celle de l'eau", "Il se dissout"], correct: 2, exp: "Un corps flotte quand sa masse volumique est inférieure à celle du fluide dans lequel il est plongé : 0,6 g/cm³ < 1 g/cm³, donc le bois flotte." }
-      ]
-    },
-    {
-      id: "p16",
-      title: "Sources et récepteurs de lumière",
-      content: `<p>Une <strong>source de lumière</strong> est un objet qui émet sa propre lumière. On distingue les sources <strong>primaires</strong> (qui produisent elles-mêmes la lumière, comme le Soleil ou une ampoule) des sources <strong>secondaires</strong> (qui ne font que renvoyer la lumière qu'elles reçoivent, comme la Lune ou une page de livre).</p>
-      <p>Un <strong>récepteur de lumière</strong> est un objet capable de détecter la lumière : l'œil humain, une caméra, une cellule photoélectrique.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> La Lune elle-même n'émet aucune lumière propre : elle nous apparaît lumineuse uniquement parce qu'elle réfléchit la lumière du Soleil — c'est donc une source secondaire, tout comme les objets qui nous entourent dans une pièce éclairée.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de classement : le Soleil (source primaire), une bougie allumée (source primaire), un miroir qui reflète la lumière du soleil (source secondaire), la Lune (source secondaire), une page de ce cours éclairée par une lampe (source secondaire). L'œil qui perçoit toute cette lumière est, lui, un récepteur de lumière — c'est grâce à lui (et au cerveau qui interprète le signal) que nous « voyons » les objets éclairés.</p>
-      <h3>📌 Point du programme à ne pas manquer : transparent, opaque, translucide</h3><p>Le programme distingue trois comportements des corps vis-à-vis de la lumière. Un corps <strong>transparent</strong> se laisse traverser par la lumière, et on voit nettement à travers (verre, air, eau claire). Un corps <strong>opaque</strong> ne se laisse pas du tout traverser par la lumière (bois, mur, carton) — c'est ce qui permet la formation d'ombres. Un corps <strong>translucide</strong> laisse passer une partie de la lumière, mais empêche de voir nettement à travers (papier calque, verre dépoli, certains nuages).</p>`,
-      quiz: [
-        {q:"Une source primaire de lumière est un objet qui...", options:["réfléchit la lumière reçue","produit sa propre lumière","absorbe toute la lumière","est toujours invisible"], correct:1, exp:"Une source primaire produit elle-même sa propre lumière (ex : le Soleil, une ampoule)."},
-        {q:"La Lune est une source de lumière...", options:["primaire","secondaire","elle n'émet ni ne reflète de lumière","aucune de ces réponses"], correct:1, exp:"La Lune ne produit pas sa propre lumière : elle réfléchit celle du Soleil, c'est une source secondaire."},
-        {q:"Un récepteur de lumière est un objet qui...", options:["émet de la lumière","détecte la lumière","bloque toute lumière","n'a aucun rapport avec la lumière"], correct:1, exp:"Un récepteur de lumière détecte la lumière reçue, comme l'œil ou une caméra."},
-        {q:"Une page de livre éclairée par une lampe est...", options:["une source primaire","une source secondaire","un récepteur uniquement","invisible"], correct:1, exp:"La page ne produit pas sa propre lumière ; elle réfléchit celle de la lampe, c'est une source secondaire."},
-        {q:"L'œil humain est...", options:["une source primaire de lumière","un récepteur de lumière","une source secondaire","aucune de ces réponses"], correct:1, exp:"L'œil détecte la lumière reçue : c'est un récepteur de lumière."}
-      ,
-        { q: "Un morceau de papier calque laisse passer un peu de lumière, mais on ne voit pas nettement à travers. C'est un corps :", options: ["Transparent", "Opaque", "Translucide", "Réfléchissant"], correct: 2, exp: "Un corps translucide laisse passer une partie de la lumière (contrairement à un corps opaque) sans permettre une vision nette à travers (contrairement à un corps transparent) — c'est exactement le cas du papier calque." }
-      ]
-    },
-    {
-      id: "p17",
-      title: "Propagation rectiligne et vitesse de la lumière",
-      content: `<p>Dans un milieu transparent et homogène, la lumière se propage <strong>en ligne droite</strong> : c'est le principe de <strong>propagation rectiligne</strong>. C'est ce principe qui explique la formation des ombres nettes derrière un objet opaque.</p>
-      <p>La lumière se propage à très grande vitesse : environ <strong>300 000 km/s</strong> dans le vide (et presque aussi vite dans l'air). C'est la vitesse la plus élevée connue dans l'univers.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> À cause de cette vitesse pourtant finie, la lumière du Soleil met environ 8 minutes pour atteindre la Terre : quand on regarde le Soleil, on le voit tel qu'il était il y a 8 minutes, pas tel qu'il est exactement à cet instant !</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de calcul : la distance Terre-Lune est d'environ 384 000 km. Le temps mis par la lumière pour parcourir cette distance est t = distance / vitesse = 384 000 / 300 000 ≈ 1,28 seconde. C'est pourquoi, lors des missions Apollo, il y avait un léger délai perceptible dans les communications radio entre la Terre et les astronautes sur la Lune, car les ondes radio se déplacent aussi à la vitesse de la lumière.</p>
-      <h3>📌 Point du programme à ne pas manquer : les preuves expérimentales de la propagation rectiligne</h3><p>Plusieurs expériences simples confirment que la lumière se propage en ligne droite dans un milieu homogène. La formation d'une <strong>ombre nette</strong> derrière un objet opaque éclairé par une petite source : si la lumière ne se propageait pas en ligne droite, les contours de l'ombre seraient flous ou imprévisibles. Un faisceau de <strong>laser dans le brouillard ou la fumée</strong> : on observe un trait parfaitement rectiligne. Le principe du <strong>sténopé</strong> (petite boîte percée d'un minuscule trou) : l'image obtenue à l'intérieur est inversée, ce qui ne s'explique que si les rayons lumineux traversent le trou en ligne droite (les rayons du haut de l'objet croisent ceux du bas au niveau du trou).</p>`,
-      quiz: [
-        {q:"Dans un milieu transparent homogène, la lumière se propage...", options:["en zigzag","en ligne droite","en cercle","de façon aléatoire"], correct:1, exp:"C'est le principe de propagation rectiligne de la lumière."},
-        {q:"La vitesse de la lumière dans le vide est d'environ...", options:["300 km/s","3000 km/s","300 000 km/s","3 000 000 km/s"], correct:2, exp:"La lumière se propage à environ 300 000 km/s dans le vide."},
-        {q:"Combien de temps met la lumière du Soleil pour atteindre la Terre ?", options:["Environ 8 secondes","Environ 8 minutes","Environ 8 heures","Instantanément"], correct:1, exp:"La lumière du Soleil met environ 8 minutes pour parcourir les 150 millions de km jusqu'à la Terre."},
-        {q:"Le principe de propagation rectiligne explique...", options:["la couleur du ciel","la formation d'ombres nettes derrière un objet opaque","le son du tonnerre","la formation des nuages"], correct:1, exp:"Comme la lumière va en ligne droite, un objet opaque bloque son passage et crée une ombre nette derrière lui."},
-        {q:"La lumière est-elle la chose la plus rapide connue dans l'univers ?", options:["Non, le son est plus rapide","Oui, sa vitesse est la plus élevée connue","Non, rien n'est plus lent","Cela dépend du jour"], correct:1, exp:"À notre connaissance actuelle, rien ne va plus vite que la lumière dans le vide."}
-      ,
-        { q: "Pourquoi l'image formée à l'intérieur d'un sténopé (boîte à trou) est-elle inversée ?", options: ["Parce que la lumière rebondit plusieurs fois à l'intérieur", "Parce que les rayons lumineux se propagent en ligne droite et se croisent au niveau du trou", "Parce que le trou déforme la lumière", "Parce que la boîte est trop sombre"], correct: 1, exp: "Comme la lumière se propage en ligne droite, un rayon venant du haut de l'objet et un rayon venant du bas se croisent exactement au niveau du petit trou, ce qui inverse l'image formée à l'intérieur de la boîte." }
-      ]
-    },
-    {
-      id: "p18",
-      title: "Les ombres",
-      content: `<p>Quand un objet opaque est placé devant une source de lumière, il bloque une partie de la lumière et forme une <strong>ombre</strong>. On distingue l'<strong>ombre propre</strong> (la partie de l'objet lui-même qui n'est pas éclairée) de l'<strong>ombre portée</strong> (la zone sombre projetée sur un écran ou un mur derrière l'objet).</p>
-      <p>La taille de l'ombre portée dépend de la position de la source lumineuse : plus la source est proche de l'objet, plus l'ombre portée est grande ; plus elle est éloignée, plus l'ombre se rapproche de la taille réelle de l'objet.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Une <strong>éclipse de Soleil</strong> est un exemple spectaculaire d'ombre portée à l'échelle astronomique : la Lune, placée entre le Soleil et la Terre, projette son ombre sur une partie de la Terre, plongeant temporairement cette zone dans l'obscurité en plein jour.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de construction géométrique d'une ombre portée : on trace des droites (rayons lumineux) depuis la source ponctuelle de lumière, passant par chaque point du contour de l'objet opaque, et on les prolonge jusqu'à l'écran (le sol ou le mur). Les points d'intersection de ces droites avec l'écran délimitent l'ombre portée. Plus la source est basse et proche de l'objet (comme un lampadaire le soir), plus l'ombre portée s'allonge démesurément.</p>
-      <h3>📌 Point du programme à ne pas manquer : la pénombre</h3><p>En plus de l'ombre propre et de l'ombre portée, on distingue une troisième zone : la <strong>pénombre</strong>, une zone d'ombre partielle qui reçoit un peu de lumière (contrairement à l'ombre, qui n'en reçoit aucune). La pénombre apparaît quand la source de lumière n'est pas ponctuelle (elle a une certaine taille) ou quand il y a plusieurs sources de lumière : certains rayons de la source atteignent la zone, d'autres sont bloqués par l'objet, ce qui donne une zone intermédiaire, moins sombre que l'ombre complète. C'est exactement ce qui se produit lors d'une éclipse partielle de Soleil.</p>`,
-      quiz: [
-        {q:"L'ombre propre est...", options:["l'ombre projetée sur un écran","la partie non éclairée de l'objet lui-même","une ombre qui n'existe pas","toujours plus grande que l'objet"], correct:1, exp:"L'ombre propre est la zone non éclairée de l'objet opaque lui-même."},
-        {q:"L'ombre portée est...", options:["la partie non éclairée de l'objet","la zone sombre projetée sur un écran derrière l'objet","toujours identique à l'objet","impossible à observer"], correct:1, exp:"L'ombre portée est projetée sur un écran ou une surface derrière l'objet opaque."},
-        {q:"Plus une source lumineuse est proche d'un objet, plus son ombre portée est...", options:["petite","grande","inexistante","de couleur différente"], correct:1, exp:"Une source proche projette une ombre portée plus grande qu'une source éloignée."},
-        {q:"Une éclipse de Soleil est un exemple de...", options:["ombre propre géante","ombre portée à l'échelle astronomique (la Lune sur la Terre)","réflexion de la lumière uniquement","dispersion de la lumière"], correct:1, exp:"L'ombre de la Lune se projette sur la Terre, créant une éclipse : c'est une ombre portée."},
-        {q:"Pour qu'une ombre se forme, l'objet doit être...", options:["transparent","opaque","toujours coloré en noir","en mouvement"], correct:1, exp:"Seul un objet opaque (qui bloque la lumière) peut créer une ombre."}
-      ,
-        { q: "Pourquoi une zone de pénombre apparaît-elle derrière un objet éclairé par une source de lumière étendue (non ponctuelle) ?", options: ["Parce que la lumière change de couleur", "Parce que certains rayons de la source atteignent la zone tandis que d'autres sont bloqués", "Parce que l'objet devient transparent", "Parce qu'il n'y a pas assez de lumière"], correct: 1, exp: "Avec une source étendue, différents points de la source envoient des rayons dans des directions légèrement différentes : certains rayons contournent l'objet et atteignent la zone (elle reçoit donc un peu de lumière), d'autres sont bloqués — d'où une zone intermédiaire, la pénombre." }
-      ]
-    },
-    {
-      id: "p19",
-      title: "La combustion avec ou sans flamme",
-      content: `<p>Une <strong>combustion</strong> est une réaction chimique entre un <strong>combustible</strong> (la substance qui brûle) et un <strong>comburant</strong> (généralement le dioxygène de l'air), qui dégage de la chaleur (et souvent de la lumière). On distingue la combustion <strong>avec flamme</strong> (comme une bougie qui brûle) de la combustion <strong>sans flamme</strong> (comme un morceau de charbon incandescent qui rougeoie sans flamme visible, ou la lente rouille du fer).</p>
-      <p>Pour qu'une combustion démarre, il faut réunir trois éléments, appelés le <strong>« triangle du feu »</strong> : un combustible, un comburant, et une source de chaleur suffisante (température d'inflammation).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Supprimer un seul des trois éléments du triangle du feu suffit à éteindre un incendie — c'est le principe utilisé par les extincteurs : l'eau refroidit (supprime la chaleur), la mousse étouffe (supprime le comburant), la poudre interrompt la réaction chimique.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : une bougie qui brûle est une combustion avec flamme — la cire fondue (combustible) réagit avec le dioxygène de l'air (comburant) au niveau de la mèche, produisant chaleur et lumière visible sous forme de flamme. Si on éteint la bougie en soufflant dessus, on refroidit brutalement la mèche en dessous de sa température d'inflammation, supprimant ainsi un des trois éléments du triangle du feu.</p>
-      <h3>📌 Point du programme à ne pas manquer : le triangle du feu</h3><p>Une combustion (avec ou sans flamme) nécessite toujours trois éléments réunis, qu'on représente souvent par le « triangle du feu » : un <strong>combustible</strong> (la matière qui brûle : bois, essence, gaz butane...), un <strong>comburant</strong> (le gaz qui permet la combustion, le plus souvent le dioxygène de l'air), et une <strong>source d'énergie</strong> (une flamme, une étincelle, une forte chaleur qui déclenche la réaction). Si l'un des trois éléments manque, il n'y a pas de combustion — c'est le principe utilisé pour éteindre un incendie : on retire l'un des trois éléments (étouffer le feu pour priver de comburant, refroidir pour retirer la chaleur, ou isoler le combustible).</p>`,
-      quiz: [
-        {q:"Le triangle du feu est composé de...", options:["combustible, eau, air","combustible, comburant, source de chaleur","oxygène, azote, carbone","flamme, fumée, cendre"], correct:1, exp:"Les trois éléments nécessaires à une combustion sont le combustible, le comburant et une source de chaleur suffisante."},
-        {q:"Le comburant le plus courant dans les combustions est...", options:["le dioxyde de carbone","le dioxygène de l'air","l'azote","l'hydrogène"], correct:1, exp:"Le comburant habituel est le dioxygène (O₂) présent dans l'air."},
-        {q:"Pour éteindre un feu, il suffit de...", options:["ajouter du combustible","supprimer un seul des trois éléments du triangle du feu","augmenter la chaleur","rien, un feu ne s'éteint jamais"], correct:1, exp:"Retirer un seul élément (combustible, comburant OU chaleur) suffit à arrêter la combustion."},
-        {q:"Le charbon incandescent qui rougeoie sans flamme est un exemple de...", options:["combustion avec flamme","combustion sans flamme","absence totale de combustion","réaction non chimique"], correct:1, exp:"C'est une combustion sans flamme visible, mais qui dégage bien de la chaleur."},
-        {q:"Un extincteur à mousse agit principalement en...", options:["ajoutant du comburant","étouffant le feu (supprimant le comburant)","augmentant la température","ajoutant du combustible"], correct:1, exp:"La mousse recouvre le feu et le prive de contact avec le dioxygène de l'air (le comburant)."}
-      ,
-        { q: "Pourquoi étouffer un feu avec une couverture permet-il de l'éteindre ?", options: ["Cela retire le combustible", "Cela prive la combustion de comburant (dioxygène)", "Cela refroidit instantanément le feu", "Cela transforme le combustible en comburant"], correct: 1, exp: "Étouffer un feu empêche l'air (donc le dioxygène, comburant) d'atteindre les flammes : sans comburant, l'un des trois éléments du triangle du feu manque, et la combustion s'arrête." }
-      ]
-    },
-    {
-      id: "p20",
-      title: "Les aspects pratiques des combustions",
-      content: `<p>Les combustions ont de nombreuses applications pratiques : production de chaleur (chauffage, cuisson), production d'énergie (moteurs à essence, centrales thermiques), production de lumière. Mais une combustion peut être <strong>complète</strong> (assez de dioxygène disponible) ou <strong>incomplète</strong> (pas assez de dioxygène).</p>
-      <p>Une combustion <strong>complète</strong> produit du dioxyde de carbone (CO₂) et de l'eau, avec une flamme généralement propre. Une combustion <strong>incomplète</strong> produit en plus du <strong>monoxyde de carbone</strong> (CO, gaz toxique et invisible) et de la suie (fumée noire), avec une flamme plus jaune/orangée.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Pour vérifier la présence de dioxyde de carbone (CO₂) produit par une combustion, on utilise l'<strong>eau de chaux</strong> : elle se trouble (devient blanche laiteuse) en présence de CO₂. C'est un test très simple et fiable réalisable en classe.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple pratique : dans un appareil de chauffage au gaz mal réglé ou mal ventilé, la combustion peut devenir incomplète et produire du monoxyde de carbone (CO), un gaz sans odeur, sans couleur, mais extrêmement toxique et potentiellement mortel — c'est pourquoi il est essentiel de toujours bien ventiler une pièce où fonctionne un appareil à combustion, et d'installer un détecteur de monoxyde de carbone dans les logements équipés de tels appareils.</p>
-      <h3>📌 Point du programme à ne pas manquer : combustion complète ou incomplète</h3><p>La qualité d'une combustion dépend de la quantité de dioxygène disponible. Une combustion <strong>complète</strong> (assez de dioxygène) produit une flamme bleue et propre, et dégage uniquement du dioxyde de carbone (CO₂) et de l'eau (pour un combustible à base de carbone et d'hydrogène) : c'est la combustion la plus efficace, avec le meilleur rendement énergétique. Une combustion <strong>incomplète</strong> (pas assez de dioxygène) produit une flamme jaune-orangée, de la suie (dépôt noir de carbone non brûlé), et surtout du <strong>monoxyde de carbone (CO)</strong>, un gaz toxique — d'où l'importance d'une bonne aération pour tout appareil à combustion (cuisinière à gaz, groupe électrogène...).</p>`,
-      quiz: [
-        {q:"Une combustion complète produit principalement...", options:["du monoxyde de carbone et de la suie","du dioxyde de carbone et de l'eau","uniquement de la fumée noire","de l'azote pur"], correct:1, exp:"Une combustion complète (assez de dioxygène) produit du CO₂ et de l'eau."},
-        {q:"Le monoxyde de carbone (CO) est un gaz...", options:["inoffensif","toxique, sans odeur ni couleur","toujours visible sous forme de fumée verte","utilisé pour respirer"], correct:1, exp:"Le CO est particulièrement dangereux car il est invisible, inodore et très toxique."},
-        {q:"Pour détecter la présence de CO₂, on utilise...", options:["l'eau de chaux, qui se trouble","de l'eau salée","un thermomètre","un aimant"], correct:0, exp:"L'eau de chaux se trouble (devient blanche laiteuse) en présence de dioxyde de carbone."},
-        {q:"Une combustion incomplète se produit quand...", options:["il y a trop de dioxygène","il n'y a pas assez de dioxygène disponible","il n'y a pas de combustible","la température est trop basse pour démarrer"], correct:1, exp:"Le manque de dioxygène provoque une combustion incomplète, produisant CO et suie."},
-        {q:"Pourquoi faut-il bien ventiler une pièce avec un appareil à combustion ?", options:["Pour éviter le bruit","Pour éviter l'accumulation de monoxyde de carbone toxique","Pour refroidir la pièce","Ce n'est pas nécessaire"], correct:1, exp:"Une bonne ventilation apporte du dioxygène frais et évacue le CO potentiellement produit, réduisant le danger."}
-      ,
-        { q: "Quel signe visuel indique qu'une combustion est probablement incomplète (manque de dioxygène) ?", options: ["Une flamme bleue et propre", "Une flamme jaune-orangée avec de la suie", "Une absence totale de flamme", "Une flamme qui ne chauffe pas"], correct: 1, exp: "Une flamme jaune-orangée accompagnée de suie (dépôt noir) signale une combustion incomplète, qui produit aussi du monoxyde de carbone (CO), un gaz toxique." }
-      ]
-    },
-    {
-      id: "p21",
-      title: "L'utilisation des combustibles – les dangers",
-      content: `<p>Les <strong>combustibles</strong> courants incluent le bois, le charbon, le gaz naturel, l'essence, le gaz butane/propane (utilisé pour la cuisine). Chacun présente des avantages (disponibilité, coût, pouvoir calorifique) et des risques spécifiques.</p>
-      <p><strong>Dangers principaux</strong> liés aux combustibles : risque d'incendie ou d'explosion (fuite de gaz près d'une flamme), production de gaz toxiques (monoxyde de carbone en cas de combustion incomplète), pollution de l'air (fumées, particules).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Le gaz domestique (butane/propane), naturellement inodore, est volontairement <strong>odorisé</strong> par les fournisseurs (avec une substance à odeur caractéristique) afin qu'une fuite soit détectable par l'odorat avant qu'elle ne devienne dangereuse.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Règles de sécurité essentielles pour l'utilisation des combustibles domestiques : ne jamais approcher une flamme d'une bouteille de gaz, vérifier régulièrement l'état des tuyaux et raccords, aérer la pièce où l'on cuisine au gaz, ne jamais entreposer de combustibles inflammables près d'une source de chaleur, et couper l'arrivée de gaz après chaque utilisation. En cas d'odeur de gaz suspectée, il faut immédiatement couper l'arrivée de gaz, aérer, et ne surtout pas actionner d'interrupteur électrique (qui pourrait provoquer une étincelle).</p>
-      <h3>📌 Point du programme à ne pas manquer : les dangers du monoxyde de carbone</h3><p>Le <strong>monoxyde de carbone (CO)</strong>, produit par une combustion incomplète, est particulièrement dangereux car il est <strong>inodore, incolore et invisible</strong> : impossible de le détecter sans appareil (détecteur de CO). Il empêche le sang de transporter correctement le dioxygène dans l'organisme, ce qui peut provoquer maux de tête, vertiges, perte de connaissance, voire la mort en cas d'exposition prolongée dans un espace mal aéré (intoxication au CO, fréquente avec des groupes électrogènes ou des braseros utilisés dans une pièce fermée). Précautions essentielles : toujours utiliser un appareil à combustion (cuisinière, groupe électrogène, brasero) dans un endroit bien aéré, jamais dans une pièce fermée.</p>`,
-      quiz: [
-        {q:"Pourquoi le gaz domestique est-il volontairement odorisé ?", options:["Pour améliorer son goût","Pour permettre de détecter une fuite par l'odorat","Pour le rendre plus inflammable","Cela n'est pas fait volontairement"], correct:1, exp:"Le gaz naturel est inodore à l'origine ; on lui ajoute une odeur caractéristique pour détecter les fuites."},
-        {q:"Que faut-il faire en cas de suspicion de fuite de gaz ?", options:["Allumer la lumière pour voir","Couper l'arrivée de gaz et aérer, sans actionner d'interrupteur","Approcher une flamme pour vérifier","Ne rien faire"], correct:1, exp:"Il faut couper le gaz, aérer, et éviter toute étincelle (donc pas d'interrupteur électrique)."},
-        {q:"Quel est un danger majeur lié aux combustibles ?", options:["Le risque d'incendie ou d'explosion","La production d'oxygène pur","Le refroidissement excessif","Aucun danger notable"], correct:0, exp:"Les combustibles présentent un risque important d'incendie ou d'explosion en cas de mauvaise utilisation."},
-        {q:"Citez un combustible couramment utilisé pour la cuisine.", options:["L'azote","Le gaz butane/propane","L'eau","Le dioxyde de carbone"], correct:1, exp:"Le gaz butane ou propane est très couramment utilisé pour la cuisson domestique."},
-        {q:"Il est recommandé de stocker des combustibles inflammables...", options:["près d'une source de chaleur","loin de toute source de chaleur ou de flamme","dans la cuisine, sans précaution","peu importe où"], correct:1, exp:"Pour éviter tout risque d'incendie, les combustibles doivent être stockés loin des sources de chaleur."}
-      ,
-        { q: "Pourquoi le monoxyde de carbone (CO) est-il particulièrement dangereux ?", options: ["Il a une odeur très forte qui prévient du danger", "Il est inodore et incolore, donc indétectable sans appareil", "Il est toujours accompagné de fumée visible", "Il ne peut se former qu'en extérieur"], correct: 1, exp: "Le CO est inodore et incolore : on ne peut pas le sentir ni le voir, ce qui le rend très dangereux dans une pièce mal aérée — seul un détecteur spécifique permet de le repérer." }
-      ]
-    },
-    {
-      id: "p22",
-      title: "Les atomes et les molécules",
-      content: `<p>Toute la matière est constituée de particules extrêmement petites appelées <strong>atomes</strong>. Un atome est électriquement <strong>neutre</strong> : il possède autant de protons (charge positive) que d'électrons (charge négative).</p>
-      <p>Une <strong>molécule</strong> est un assemblage de plusieurs atomes liés entre eux. Une <strong>formule chimique</strong> indique la composition d'une molécule : par exemple, H₂O (eau) contient 2 atomes d'hydrogène et 1 atome d'oxygène ; CO₂ (dioxyde de carbone) contient 1 atome de carbone et 2 atomes d'oxygène.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Le petit chiffre en indice après un symbole chimique indique le nombre d'atomes de cet élément présents dans la molécule. Pas d'indice signifie qu'il n'y a qu'un seul atome de cet élément (par exemple, dans H₂O, il n'y a qu'un seul atome d'oxygène, donc pas d'indice après le « O »).</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de lecture de formule : la molécule de méthane, CH₄, contient 1 atome de carbone (C) et 4 atomes d'hydrogène (H), soit 5 atomes au total dans une seule molécule. Autre exemple : la molécule de dioxygène O₂ (celle que l'on respire) contient 2 atomes d'oxygène liés ensemble — c'est un exemple de molécule formée d'un seul type d'atome.</p>
-      <h3>📌 Point du programme à ne pas manquer : exemples de molécules courantes</h3><p>Un <strong>atome</strong> est la plus petite particule de matière qui garde les propriétés chimiques d'un élément (ex : l'atome de carbone C, l'atome d'hydrogène H, l'atome d'oxygène O). Une <strong>molécule</strong> est un groupement de plusieurs atomes liés entre eux. Exemples courants à connaître : le dioxygène O₂ (2 atomes d'oxygène), le dihydrogène H₂ (2 atomes d'hydrogène), l'eau H₂O (2 atomes d'hydrogène + 1 atome d'oxygène), le dioxyde de carbone CO₂ (1 atome de carbone + 2 atomes d'oxygène), le diazote N₂ (2 atomes d'azote, principal gaz de l'air).</p>`,
-      quiz: [
-        {q:"Un atome est électriquement...", options:["toujours positif","toujours négatif","neutre (autant de protons que d'électrons)","aléatoire"], correct:2, exp:"Un atome neutre possède exactement autant de protons que d'électrons."},
-        {q:"Combien d'atomes d'hydrogène contient une molécule d'eau H₂O ?", options:["1","2","3","0"], correct:1, exp:"Le chiffre 2 en indice après H indique 2 atomes d'hydrogène."},
-        {q:"Une molécule est...", options:["un seul atome isolé","un assemblage de plusieurs atomes liés","toujours composée d'un seul élément","une particule chargée"], correct:1, exp:"Une molécule est un assemblage d'au moins deux atomes liés entre eux."},
-        {q:"La formule CH₄ (méthane) contient combien d'atomes au total ?", options:["4","5","1","8"], correct:1, exp:"1 atome de carbone + 4 atomes d'hydrogène = 5 atomes au total."},
-        {q:"Dans une formule chimique, l'absence d'indice après un symbole signifie...", options:["0 atome de cet élément","1 seul atome de cet élément","un nombre inconnu d'atomes","toujours 2 atomes"], correct:1, exp:"Pas d'indice signifie qu'il y a exactement 1 atome de cet élément dans la molécule."}
-      ,
-        { q: "La molécule de dioxyde de carbone CO₂ est composée de :", options: ["1 atome de carbone et 1 atome d'oxygène", "2 atomes de carbone et 1 atome d'oxygène", "1 atome de carbone et 2 atomes d'oxygène", "2 atomes de carbone et 2 atomes d'oxygène"], correct: 2, exp: "La formule CO₂ indique 1 atome de carbone (C) et 2 atomes d'oxygène (les 2 en indice après O)." }
-      ]
-    },
-    {
-      id: "p23",
-      title: "La structure de l'atome",
-      content: `<p>Un atome est constitué d'un <strong>noyau</strong> (au centre, très petit et très dense) contenant des <strong>protons</strong> (charge positive) et des <strong>neutrons</strong> (sans charge électrique), entouré d'<strong>électrons</strong> (charge négative) qui gravitent tout autour à grande distance relative.</p>
-      <p>Le <strong>numéro atomique</strong> (noté Z) indique le nombre de protons (et donc aussi le nombre d'électrons, puisque l'atome est neutre). C'est ce numéro qui caractérise et distingue chaque élément chimique (hydrogène Z=1, carbone Z=6, oxygène Z=8...).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Le noyau, bien que contenant presque toute la masse de l'atome, est extrêmement petit comparé à la taille totale de l'atome : si un atome avait la taille d'un stade de football, son noyau aurait à peu près la taille d'un petit pois placé en son centre — l'atome est donc constitué en très grande majorité de vide !</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : l'atome de carbone a pour numéro atomique Z = 6, ce qui signifie qu'il possède 6 protons dans son noyau et, étant neutre, 6 électrons autour du noyau. Son noyau contient aussi généralement 6 neutrons (pour l'isotope le plus courant, le carbone 12). L'atome d'oxygène (Z=8) possède quant à lui 8 protons et 8 électrons.</p>
-      <h3>📌 Point du programme à ne pas manquer : la structure lacunaire de l'atome</h3><p>Un atome est constitué d'un <strong>noyau</strong> (contenant des protons, de charge électrique positive, et des neutrons, sans charge électrique), autour duquel se déplacent des <strong>électrons</strong> (charge électrique négative). L'atome est électriquement <strong>neutre</strong> : il possède toujours autant de protons que d'électrons, dont les charges opposées s'annulent. Fait essentiel à retenir : l'atome est presque entièrement <strong>vide</strong> — le noyau est extrêmement petit par rapport à la taille totale de l'atome (comme une bille au centre d'un stade), les électrons évoluant à grande distance autour de lui : on parle de <strong>structure lacunaire</strong> de l'atome.</p>`,
-      quiz: [
-        {q:"Le noyau d'un atome contient...", options:["protons et électrons","protons et neutrons","seulement des électrons","seulement des neutrons"], correct:1, exp:"Le noyau contient les protons et les neutrons ; les électrons gravitent autour."},
-        {q:"Le numéro atomique Z correspond au nombre de...", options:["neutrons","protons","molécules","liaisons chimiques"], correct:1, exp:"Le numéro atomique Z est le nombre de protons dans le noyau."},
-        {q:"Les électrons ont une charge électrique...", options:["positive","négative","nulle","variable"], correct:1, exp:"Les électrons portent une charge électrique négative."},
-        {q:"Comparé à la taille totale de l'atome, le noyau est...", options:["très grand, presque toute la taille de l'atome","extrêmement petit","de taille égale à l'atome entier","invisible et sans dimension"], correct:1, exp:"Le noyau est extrêmement petit comparé à la taille totale de l'atome, qui est surtout composé de vide."},
-        {q:"Le carbone a pour numéro atomique Z=6. Combien d'électrons possède-t-il ?", options:["6","12","3","0"], correct:0, exp:"Un atome neutre a autant d'électrons que de protons, donc 6 électrons pour le carbone."}
-      ,
-        { q: "Pourquoi dit-on que l'atome a une structure « lacunaire » ?", options: ["Parce qu'il n'a pas de noyau", "Parce que le noyau est minuscule par rapport à la taille totale de l'atome, qui est donc presque vide", "Parce que les électrons remplissent tout l'espace", "Parce qu'il manque des protons"], correct: 1, exp: "Le noyau, où se concentre presque toute la masse de l'atome, est extrêmement petit par rapport à l'espace occupé par le mouvement des électrons autour de lui : l'atome est donc presque entièrement constitué de vide." }
-      ]
-    },
-    {
-      id: "p24",
-      title: "La combustion du carbone",
-      content: `<p>Le <strong>carbone</strong> (présent par exemple dans le charbon) brûle dans le <strong>dioxygène</strong> de l'air selon la réaction : <strong>carbone + dioxygène → dioxyde de carbone</strong>, notée C + O₂ → CO₂.</p>
-      <p>Cette équation chimique est déjà <strong>équilibrée</strong> : on retrouve 1 atome de carbone et 2 atomes d'oxygène de chaque côté de la flèche, conformément à la loi de conservation de la matière (loi de Lavoisier) : rien ne se perd, rien ne se crée, tout se transforme.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Le produit de cette combustion, le dioxyde de carbone (CO₂), peut être détecté grâce au test à l'eau de chaux, qui se trouble en sa présence — c'est le même test utilisé pour toutes les combustions produisant du CO₂.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Vérification de l'équilibre de l'équation C + O₂ → CO₂ : à gauche, on compte 1 atome de C et 2 atomes de O (dans la molécule O₂) ; à droite, dans la molécule CO₂, on compte aussi 1 atome de C et 2 atomes de O. Les deux côtés contiennent bien le même nombre de chaque type d'atome : l'équation est équilibrée, conformément à la loi de conservation de la matière lors d'une transformation chimique.</p>
-      <h3>📌 Point du programme à ne pas manquer : le test du dioxyde de carbone</h3><p>La combustion du carbone dans le dioxygène produit du dioxyde de carbone, selon l'équation bilan : <strong>carbone + dioxygène → dioxyde de carbone</strong> (C + O₂ → CO₂). Pour vérifier expérimentalement la présence de dioxyde de carbone, on utilise le <strong>test à l'eau de chaux</strong> : on fait buller le gaz produit dans de l'eau de chaux limpide (incolore) ; si le gaz contient du CO₂, l'eau de chaux se <strong>trouble</strong> (devient blanchâtre/laiteuse). C'est le test caractéristique du dioxyde de carbone à connaître par cœur.</p>`,
-      quiz: [
-        {q:"L'équation de la combustion du carbone s'écrit...", options:["C + O₂ → CO₂","2C + O₂ → 2CO","C + 2O → CO₂","C₂ + O → CO₂"], correct:0, exp:"La combustion complète du carbone dans le dioxygène produit du dioxyde de carbone : C + O₂ → CO₂."},
-        {q:"Le produit de la combustion du carbone est...", options:["le monoxyde de carbone uniquement","le dioxyde de carbone (CO₂)","de l'eau uniquement","de l'azote"], correct:1, exp:"La combustion complète du carbone produit du dioxyde de carbone, CO₂."},
-        {q:"Dans l'équation C + O₂ → CO₂, combien d'atomes d'oxygène y a-t-il de chaque côté ?", options:["1 de chaque côté","2 de chaque côté","1 à gauche, 2 à droite","2 à gauche, 1 à droite"], correct:1, exp:"On compte 2 atomes d'oxygène à gauche (dans O₂) et 2 à droite (dans CO₂) : l'équation est équilibrée."},
-        {q:"La loi de conservation de la matière énonce que...", options:["la matière peut disparaître","rien ne se perd, rien ne se crée, tout se transforme","la masse double toujours","seuls les atomes de carbone se conservent"], correct:1, exp:"C'est la formulation classique de la loi de Lavoisier sur la conservation de la matière."},
-        {q:"Comment détecter la présence de CO₂ produit par cette combustion ?", options:["Avec un thermomètre","Avec de l'eau de chaux, qui se trouble","Avec un aimant","Avec une balance"], correct:1, exp:"L'eau de chaux se trouble (devient blanche laiteuse) en présence de dioxyde de carbone."}
-      ,
-        { q: "Comment vérifie-t-on expérimentalement que le gaz produit par la combustion du carbone est bien du dioxyde de carbone ?", options: ["On approche une allumette enflammée", "On le fait buller dans de l'eau de chaux, qui se trouble si c'est du CO₂", "On mesure sa température", "On observe sa couleur directement"], correct: 1, exp: "Le test caractéristique du dioxyde de carbone est le trouble de l'eau de chaux : limpide au départ, elle devient blanchâtre/laiteuse au contact du CO₂." }
-      ]
-    },
-    {
-      id: "p25",
-      title: "La combustion de l'hydrogène",
-      content: `<p>Le <strong>dihydrogène</strong> (H₂) brûle dans le <strong>dioxygène</strong> de l'air selon la réaction : <strong>dihydrogène + dioxygène → eau</strong>, notée 2H₂ + O₂ → 2H₂O.</p>
-      <p>Cette combustion est spectaculaire : elle produit une petite détonation (le fameux « test d'aboiement » qui permet de reconnaître le dihydrogène) et le seul produit formé est de l'<strong>eau</strong> (H₂O), qu'on peut observer se condenser sous forme de buée sur une paroi froide.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Vérifions l'équilibre de l'équation 2H₂ + O₂ → 2H₂O : à gauche, 4 atomes de H (dans 2 molécules H₂) et 2 atomes de O ; à droite, dans 2 molécules d'eau, on compte aussi 4 atomes de H et 2 atomes de O. L'équation est bien équilibrée.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Le test caractéristique du dihydrogène : on approche une flamme (allumette) de l'ouverture d'un tube à essai contenant du dihydrogène — on entend une petite détonation sèche (un « pop » caractéristique), ce qui permet d'identifier ce gaz avec certitude. Ce test est très différent de celui du dioxygène, qui ravive au contraire une flamme (bûchette incandescente qui se rallume), ou de celui du dioxyde de carbone, qui trouble l'eau de chaux.</p>
-      <h3>📌 Point du programme à ne pas manquer : le test de l'eau</h3><p>La combustion du dihydrogène dans le dioxygène produit de l'eau, selon l'équation bilan : <strong>dihydrogène + dioxygène → eau</strong> (2 H₂ + O₂ → 2 H₂O). Cette combustion est parfois appelée « explosion » lorsqu'elle est brutale (mélange détonant). Pour vérifier expérimentalement la présence d'eau produite, on utilise le <strong>test au sulfate de cuivre anhydre</strong> : cette poudre blanche devient <strong>bleue</strong> au contact de l'eau (on peut aussi observer simplement de la buée se déposer sur une paroi froide).</p>`,
-      quiz: [
-        {q:"L'équation de la combustion de l'hydrogène s'écrit...", options:["H₂ + O₂ → H₂O","2H₂ + O₂ → 2H₂O","H₂ + O → H₂O","4H + 2O → 2H₂O₂"], correct:1, exp:"La combustion équilibrée du dihydrogène s'écrit 2H₂ + O₂ → 2H₂O."},
-        {q:"Le produit de la combustion du dihydrogène est...", options:["du dioxyde de carbone","de l'eau (H₂O)","du monoxyde de carbone","de l'azote"], correct:1, exp:"La combustion du dihydrogène dans le dioxygène produit uniquement de l'eau."},
-        {q:"Comment reconnaît-on le dihydrogène lors d'un test à la flamme ?", options:["Il ravive la flamme","Il produit une détonation caractéristique (« pop »)","Il trouble l'eau de chaux","Il n'a aucune réaction"], correct:1, exp:"Le dihydrogène produit une petite détonation caractéristique au contact d'une flamme, c'est son test de reconnaissance."},
-        {q:"Dans 2H₂ + O₂ → 2H₂O, combien d'atomes d'hydrogène y a-t-il de chaque côté ?", options:["2 de chaque côté","4 de chaque côté","2 à gauche, 4 à droite","4 à gauche, 2 à droite"], correct:1, exp:"À gauche : 2 molécules H₂ = 4 atomes H. À droite : 2 molécules H₂O = 4 atomes H. L'équation est équilibrée."},
-        {q:"Quel test permet de reconnaître le dioxygène (différent de celui de l'hydrogène) ?", options:["Il produit une détonation","Il ravive une bûchette incandescente","Il trouble l'eau de chaux","Il n'a pas de test spécifique"], correct:1, exp:"Le dioxygène ravive une flamme ou une bûchette incandescente, contrairement au dihydrogène qui détone."}
-      ,
-        { q: "Comment vérifie-t-on expérimentalement que la combustion du dihydrogène produit bien de l'eau ?", options: ["Le sulfate de cuivre anhydre (blanc) devient bleu au contact du produit", "L'eau de chaux se trouble", "Le produit prend feu à nouveau", "Le produit devient un gaz coloré"], correct: 0, exp: "Le sulfate de cuivre anhydre est un test caractéristique de l'eau : cette poudre blanche vire au bleu dès qu'elle entre en contact avec de l'eau, même en petite quantité." }
+        {q:"Lequel est un paramètre organoleptique de l'eau ?", options:["Le pH","La dureté","L'odeur","Le taux d'oxygène"], correct:2, exp:"Les paramètres organoleptiques sont perçus par les sens : couleur, transparence, saveur, odeur."},
+        {q:"Une eau potable est une eau...", options:["boueuse","toujours gazeuse","que l'on peut boire sans danger et qui respecte les normes de l'OMS","sans aucun ion"], correct:2, exp:"Une eau potable respecte les normes de l'OMS et peut être bue sans danger."},
+        {q:"La dureté de l'eau est surtout due à l'ion...", options:["sodium Na⁺","calcium Ca²⁺","chlorure Cl⁻","fer Fe²⁺"], correct:1, exp:"Les ions calcium Ca²⁺ sont les principaux responsables de la dureté."},
+        {q:"Le réactif de l'ion calcium est...", options:["la soude","l'oxalate d'ammonium","le nitrate d'argent","le chlorure de baryum"], correct:1, exp:"L'oxalate d'ammonium (ion oxalate) donne un précipité blanc avec Ca²⁺."},
+        {q:"Les ions essentiels à la construction des os sont...", options:["Na⁺ et Cl⁻","K⁺ et Na⁺","Ca²⁺ et Mg²⁺","Fe²⁺ et Cl⁻"], correct:2, exp:"Le calcium et le magnésium construisent et solidifient les os."},
+        {q:"Un manque d'ions fer II (Fe²⁺) provoque...", options:["l'anémie","des caries","la fièvre","des crampes uniquement"], correct:0, exp:"Fe²⁺ entre dans la constitution de l'hémoglobine ; son insuffisance provoque l'anémie."},
+        {q:"Selon l'OMS, le pH d'une eau potable doit être compris entre...", options:["0 et 3","6,5 et 8,5","9 et 12","1 et 14"], correct:1, exp:"La norme OMS citée dans le cours est 6,5 < pH < 8,5."},
+        {q:"Les métaux lourds comme le plomb sont...", options:["des paramètres organoleptiques","des substances toxiques","indispensables à la santé","des ions du sang"], correct:1, exp:"Les métaux lourds (plomb, chrome) sont des substances toxiques, de véritables poisons."}
       ]
     }
   ]

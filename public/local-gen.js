@@ -1,11 +1,11 @@
 // I'm The Best — Générateur LOCAL d'exercices (sans IA, fonctionne toujours, même hors-ligne)
 // Deux mécanismes combinés :
-//  1) TEMPLATES : générateurs paramétrés (maths + physique-chimie) qui tirent des valeurs
+//  1) TEMPLATES : générateurs paramétrés (toutes matières) qui tirent des valeurs
 //     aléatoires et recalculent la bonne réponse à chaque fois -> variété quasi infinie.
 //  2) Pool de secours : pour toute leçon (y compris celles sans template), on pioche parmi
 //     le quiz de la leçon + ses exercices de pratique, on mélange l'ordre des options d'un
 //     QCM (en recalculant l'index de la bonne réponse), et on évite de répéter deux fois de
-//     suite le même item -> chaque clic donne un rendu différent, pour les 103 leçons.
+//     suite le même item -> chaque clic donne un rendu différent, pour les 91 leçons.
 const LOCAL_GEN = (function(){
 
   /* ---------- Utilitaires ---------- */
@@ -360,84 +360,198 @@ const LOCAL_GEN = (function(){
   };
 
   /* ================= PHYSIQUE-CHIMIE ================= */
+  // Programme 4ème Côte d'Ivoire : optique (pc1-pc4), courants et tensions
+  // alternatifs (pc5-pc9), les ions (pc10-pc11), eau potable (pc12-pc13).
+  // Générateurs calculatoires : la bonne réponse est recalculée à chaque tirage.
   const PC = {
-    p2: [ () => {
-      const kg = randInt(1, 40) + pick([0, 0.2, 0.5, 0.25]);
-      const g = kg * 1000;
-      const { options, correctIndex } = numericOptions(g, [v=>v/10, v=>v*10, v=>v+100]);
-      return qcm(`Convertis ${fmt(kg)} kg en grammes.`, options.map(o=>o+" g"), correctIndex, `${fmt(kg)} × 1000 = ${fmt(g)} g.`);
-    }],
-    p3: [ () => {
-      const L = randInt(1, 20);
-      const cm3 = L * 1000;
-      const { options, correctIndex } = numericOptions(cm3, [v=>v/10, v=>v*10, v=>v+500]);
-      return qcm(`Convertis ${L} L en cm³.`, options.map(o=>o+" cm³"), correctIndex, `1 L = 1000 cm³, donc ${L} L = ${cm3} cm³.`);
-    }],
-    p4: [ () => {
-      const m = randInt(20, 900), V = randInt(5, 300);
-      const rho = Math.round((m/V)*100)/100;
-      const { options, correctIndex } = numericOptions(rho, [v=>Math.round(v*10)/10+1, v=>Math.round((V/m)*100)/100, v=>v+1]);
-      return qcm(`Un corps a une masse de ${m} g et un volume de ${V} cm³. Quelle est sa masse volumique ?`, options.map(o=>o+" g/cm³"), correctIndex,
-        `ρ = m/V = ${m}/${V} ≈ ${fmt(rho)} g/cm³.`);
-    }],
-    p10: [ () => {
-      const V = randInt(6, 24) * 2, n = pick([2,3,4]);
-      const each = Math.round((V/n)*100)/100;
-      const { options, correctIndex } = numericOptions(each, [v=>V, v=>v+1, v=>v-1]);
-      return qcm(`Un générateur de ${V} V alimente ${n} lampes identiques en SÉRIE. Quelle tension reçoit chaque lampe (loi d'additivité) ?`,
-        options.map(o=>o+" V"), correctIndex, `En série, les tensions s'additionnent : chaque lampe reçoit ${V}/${n} ≈ ${fmt(each)} V.`);
-    }, () => {
-      const V = randInt(3, 24);
-      const { options, correctIndex } = numericOptions(V, [v=>Math.round((v/3)*100)/100, v=>v*3, v=>v+3]);
-      return qcm(`Un générateur de ${V} V alimente 3 lampes identiques en DÉRIVATION. Quelle tension reçoit chaque lampe ?`,
-        options.map(o=>o+" V"), correctIndex,
-        `En dérivation, chaque branche est soumise à la même tension que le générateur : chaque lampe reçoit ${V} V (la tension ne se divise pas entre les branches, contrairement au montage en série).`);
-    }],
-    p11: [ () => {
-      const v1 = pick([1.5, 4.5, 9]), n = randInt(2,4);
-      const total = Math.round(v1*n*100)/100;
-      const { options, correctIndex } = numericOptions(total, [v=>v1, v=>v-v1, v=>v+v1]);
-      return qcm(`On associe ${n} piles identiques de ${fmt(v1)} V en série, dans le même sens. Quelle est la tension totale ?`, options.map(o=>o+" V"), correctIndex,
-        `En série et dans le même sens, les tensions s'additionnent : ${fmt(v1)} × ${n} = ${fmt(total)} V.`);
-    }],
-    p14: [ () => {
-      const m = randInt(2, 120), g = pick([9.8, 10]);
-      const P = Math.round(m*g*100)/100;
-      const { options, correctIndex } = numericOptions(P, [v=>v/g, v=>v+g, v=>v-m]);
-      return qcm(`Une masse de ${m} kg est soumise à la pesanteur (g = ${g} N/kg). Quel est son poids ?`, options.map(o=>o+" N"), correctIndex,
-        `P = m × g = ${m} × ${g} = ${fmt(P)} N.`);
-    }],
-    p15: [ () => {
-      const V = randInt(50, 900), rho = pick([1000, 800, 1.29]);
-      const g = 10;
-      const Vm3 = V/1e6; // cm3 -> m3
-      const push = Math.round(rho*Vm3*g*1000)/1000;
-      const { options, correctIndex } = numericOptions(push, [v=>v*2, v=>Math.round(v/2*1000)/1000, v=>v+1]);
-      return qcm(`Un corps de volume ${V} cm³ est plongé entièrement dans un fluide de masse volumique ${rho} kg/m³ (g=10 N/kg). Quelle est l'intensité de la poussée d'Archimède ?`,
-        options.map(o=>o+" N"), correctIndex,
-        `Π = ρ_fluide × V_déplacé(m³) × g = ${rho} × ${Vm3} × 10 ≈ ${fmt(push)} N.`);
-    }],
-    p17: [ () => {
-      const d = randInt(300000, 5000000);
+    pc2: [ () => {
+      const d = randInt(3, 500) * 100000;
       const t = Math.round((d/300000)*1000)/1000;
-      const { options, correctIndex } = numericOptions(t, [v=>v*2, v=>Math.round(v/2*1000)/1000, v=>v+1]);
-      return qcm(`Une distance de ${d.toLocaleString("fr-FR")} km sépare deux objets. Combien de temps (en secondes) met la lumière pour la parcourir (vitesse ≈ 300 000 km/s) ?`,
-        options.map(o=>o+" s"), correctIndex, `t = distance / vitesse = ${d} / 300000 ≈ ${fmt(t)} s.`);
+      const { options, correctIndex } = numericOptions(t, [v=>Math.round(v*300000)/1000, v=>Math.round(v/2*1000)/1000, v=>v*10]);
+      return qcm(`La lumière parcourt ${d.toLocaleString("fr-FR")} km dans le vide (vitesse : 300 000 km/s). Combien de temps met-elle ?`,
+        options.map(o=>o+" s"), correctIndex, `t = d / v = ${d.toLocaleString("fr-FR")} / 300 000 = ${fmt(t)} s.`);
+    }, () => {
+      const n = pick([2, 3, 4, 4.2, 5, 8, 10, 12]);
+      const val = Math.round(n*9.46*100)/100;
+      const { options, correctIndex } = numericOptions(val, [v=>n, v=>Math.round(n*3*100)/100, v=>Math.round(v*10*100)/100]);
+      return qcm(`Une étoile est située à ${fmt(n)} années-lumière de la Terre. Quelle est cette distance (1 a.l ≈ 9,46 × 10¹² km) ?`,
+        options.map(o=>o+" × 10¹² km"), correctIndex,
+        `L'année-lumière est une distance : ${fmt(n)} × 9,46 × 10¹² = ${fmt(val)} × 10¹² km. Sa lumière met ${fmt(n)} ans pour nous parvenir.`);
+    }, () => {
+      const t = randInt(2, 15);
+      const d = t * 330;
+      const { options, correctIndex } = numericOptions(d, [v=>t*300, v=>Math.round(330/t), v=>v*2]);
+      return qcm(`On entend le tonnerre ${t} s après avoir vu l'éclair. La lumière arrive presque instantanément ; le son va à 330 m/s. À quelle distance est tombé l'éclair ?`,
+        options.map(o=>o+" m"), correctIndex,
+        `La lumière arrive quasi instantanément (300 000 km/s) ; le retard est celui du son : d = 330 × ${t} = ${d} m.`);
     }],
-    p22: [ () => {
-      const mol = pick([
-        {f:"H₂O", atoms:3}, {f:"CO₂", atoms:3}, {f:"CH₄", atoms:5}, {f:"O₂", atoms:2}, {f:"H₂", atoms:2}, {f:"NH₃", atoms:4}
-      ]);
-      const { options, correctIndex } = numericOptions(mol.atoms, [v=>v+1, v=>v-1, v=>v+2]);
-      return qcm(`Combien d'atomes au total contient une molécule de ${mol.f} ?`, options, correctIndex, `${mol.f} contient ${mol.atoms} atomes au total.`);
+    pc4: [ () => {
+      // Couleur perçue = couleurs (parmi R, V, B) à la fois présentes dans la lumière et diffusées par l'objet.
+      const SETS = { "blanc":"RVB", "rouge":"R", "vert":"V", "bleu":"B", "jaune":"RV", "cyan":"VB", "magenta":"RB", "noir":"" };
+      const NAME = s => Object.keys(SETS).find(k => SETS[k] === s);
+      const obj = pick(["blanc","rouge","vert","bleu","jaune","noir"]);
+      const light = pick(["blanc","rouge","vert","bleu","jaune"]);
+      const seen = "RVB".split("").filter(c => SETS[obj].includes(c) && SETS[light].includes(c)).join("");
+      const ans = NAME(seen);
+      const decoys = ["noir", obj, light, "blanc", "rouge", "vert", "bleu"].filter(c => c !== ans);
+      const opts = shuffle([ans, ...Array.from(new Set(decoys)).slice(0, 3)]);
+      const lumTxt = light === "blanc" ? "une lumière blanche" : `une lumière ${light === "vert" ? "verte" : light === "bleu" ? "bleue" : light === "jaune" ? "jaune" : "rouge"}`;
+      return qcm(`Un objet de couleur ${obj} (en lumière blanche) est éclairé par ${lumTxt}. Quelle couleur paraît-il avoir ?`,
+        opts, opts.indexOf(ans),
+        ans === "noir"
+          ? `L'objet ne renvoie aucune des couleurs contenues dans la lumière qui l'éclaire : il les absorbe toutes et paraît noir.`
+          : `L'objet ne renvoie que les couleurs qu'il diffuse ET qui sont présentes dans la lumière reçue : il paraît ${ans}.`);
+    }, () => bankQcm([
+        { p:"rouge + vert", a:"jaune" }, { p:"rouge + bleu", a:"magenta" }, { p:"bleu + vert", a:"cyan" },
+        { p:"rouge + vert + bleu", a:"blanc" }, { p:"jaune + bleu", a:"blanc" }
+      ], i => `Quelle couleur obtient-on en superposant les lumières ${i.p} ?`, i => `${i.p.charAt(0).toUpperCase()+i.p.slice(1)} = ${i.a}.`,
+      ["jaune","magenta","cyan","blanc","noir","vert"])
+    ],
+    pc5: [ () => {
+      // Deux aimants droits AB et CD : on connaît A, on observe l'interaction A/C, on demande D.
+      const a = pick(["nord","sud"]);
+      const inter = pick(["attire","repousse"]);
+      const other = p => p === "nord" ? "sud" : "nord";
+      const c = inter === "repousse" ? a : other(a);
+      const d = other(c);
+      const ask = pick(["B","C","D"]);
+      const ans = ask === "B" ? other(a) : ask === "C" ? c : d;
+      const opts = shuffle(["pôle " + ans, "pôle " + other(ans), "on ne peut pas savoir", "il n'a pas de pôle"]);
+      return qcm(`Deux aimants droits AB et CD. Le pôle A est un pôle ${a}, et le pôle A ${inter} le pôle C. Quelle est la nature du pôle ${ask} ?`,
+        opts, opts.indexOf("pôle " + ans),
+        `Deux pôles de même nom se repoussent, de noms différents s'attirent : C est ${c}, donc D est ${d} ; B, à l'autre bout de A, est ${other(a)}.`);
     }],
-    p23: [ () => {
+    pc7: [ () => {
+      const Tms = pick([2, 4, 5, 8, 10, 20, 25, 40, 50, 100, 250, 500]);
+      const N = 1000 / Tms;
+      const { options, correctIndex } = numericOptions(N, [v=>Tms, v=>v*10, v=>v/10]);
+      return qcm(`Une tension alternative sinusoïdale a une période T = ${Tms} ms. Quelle est sa fréquence ?`,
+        options.map(o=>o+" Hz"), correctIndex, `T = ${Tms} ms = ${fmt(Tms/1000)} s ; N = 1/T = 1/${fmt(Tms/1000)} = ${fmt(N)} Hz.`);
+    }, () => {
+      const Ueff = pick([6, 9, 12, 24, 100, 120, 200, 220, 230]);
+      const Umax = Math.round(Ueff*1.41*100)/100;
+      const { options, correctIndex } = numericOptions(Umax, [v=>Ueff, v=>Math.round(Ueff/1.41*100)/100, v=>Ueff*2]);
+      return qcm(`Un voltmètre indique ${Ueff} V aux bornes d'un générateur alternatif sinusoïdal. Quelle est la tension maximale ?`,
+        options.map(o=>o+" V"), correctIndex, `Le voltmètre mesure la tension efficace : Umax = 1,41 × Ueff = 1,41 × ${Ueff} = ${fmt(Umax)} V.`);
+    }, () => {
+      const sv = pick([1, 2, 5, 10]), divV = randInt(2, 4);
+      const sh = pick([1, 2, 5, 10]), divH = randInt(2, 8);
+      const Umax = sv*divV, Tms = sh*divH;
+      const ask = pick(["U", "T"]);
+      if (ask === "U"){
+        const { options, correctIndex } = numericOptions(Umax, [v=>sv+divV, v=>divV, v=>Math.round(Umax/1.41*100)/100]);
+        return qcm(`Réglage vertical : ${sv} V/div ; horizontal : ${sh} ms/div. Le sommet de la sinusoïde est à ${divV} divisions au-dessus de zéro et une période occupe ${divH} divisions. Quelle est la tension maximale ?`,
+          options.map(o=>o+" V"), correctIndex, `Umax = ${divV} div × ${sv} V/div = ${Umax} V.`);
+      }
+      const { options, correctIndex } = numericOptions(Tms, [v=>sh+divH, v=>divH, v=>Math.round(1000/Tms*100)/100]);
+      return qcm(`Réglage horizontal : ${sh} ms/div. Une période de la sinusoïde occupe ${divH} divisions. Quelle est la période ?`,
+        options.map(o=>o+" ms"), correctIndex, `T = ${divH} div × ${sh} ms/div = ${Tms} ms.`);
+    }],
+    pc8: [ () => {
+      const Ueff = pick([110, 120, 200, 220, 230, 240]);
+      const Umax = Math.round(Ueff*1.41*10)/10;
+      const { options, correctIndex } = numericOptions(Umax, [v=>Ueff, v=>Math.round(Ueff/1.41*10)/10, v=>Ueff*2]);
+      return qcm(`Dans une maison, le voltmètre mesure ${Ueff} V sur une prise du secteur. Quelle est la tension maximale ?`,
+        options.map(o=>o+" V"), correctIndex, `Umax = 1,41 × Ueff = 1,41 × ${Ueff} = ${fmt(Umax)} V. (Pour le secteur ivoirien normal : 1,41 × 220 ≈ 310 V.)`);
+    }, () => {
+      const names = ["A","B","C"];
+      const phase = pick(names);
+      const others = names.filter(x => x !== phase);
+      const U = pick([220, 230]);
+      const opts = shuffle(["la borne " + phase, "la borne " + others[0], "la borne " + others[1], "on ne peut pas savoir"]);
+      return qcm(`Une prise a trois bornes A, B, C. Le voltmètre indique ${U} V entre ${phase} et ${others[0]}, ${U} V entre ${phase} et ${others[1]}, et 0 V entre ${others[0]} et ${others[1]}. Quelle borne est la phase ?`,
+        opts, opts.indexOf("la borne " + phase),
+        `La phase est la seule borne qui donne une tension avec chacune des deux autres : ${phase}. ${others[0]} et ${others[1]} sont le neutre et la terre (0 V entre elles).`);
+    }, () => bankQcm([
+        { s:"un petit fil qui fond quand l'intensité devient trop élevée", a:"le fusible" },
+        { s:"couper l'électricité du bâtiment quand l'intensité totale dépasse la valeur souscrite", a:"le disjoncteur général" },
+        { s:"délivrer une tension stable malgré les variations du secteur", a:"le stabilisateur" },
+        { s:"fournir le courant accumulé lors d'une coupure brutale", a:"l'onduleur" },
+        { s:"faire passer le courant de fuite par le sol plutôt que par le corps", a:"la prise de terre" },
+        { s:"couper le circuit dès 30 mA de différence entre phase et neutre", a:"le disjoncteur différentiel" }
+      ], i => `Quel dispositif a pour rôle de ${i.s} ?`, i => `C'est ${i.a}.`)
+    ],
+    pc9: [ () => {
+      const Ueff = pick([6, 9, 12, 24]);
+      const Umax = Math.round(Ueff*1.41*100)/100;
+      const { options, correctIndex } = numericOptions(Umax, [v=>Ueff, v=>220, v=>Math.round(Ueff/1.41*100)/100]);
+      return qcm(`Un transformateur branché sur le secteur délivre ${Ueff} V (lu au voltmètre). Quelle est la tension maximale de sortie ?`,
+        options.map(o=>o+" V"), correctIndex, `La sortie reste alternative sinusoïdale : Umax = 1,41 × ${Ueff} ≈ ${fmt(Umax)} V.`);
+    }, () => bankQcm([
+        { s:"abaisser la valeur de la tension alternative", a:"le transformateur" },
+        { s:"laisser passer le courant dans un seul sens (redressement simple alternance)", a:"la diode" },
+        { s:"rendre positives les alternances négatives (redressement double alternance)", a:"le pont de diodes" },
+        { s:"lisser la tension redressée", a:"le condensateur" },
+        { s:"transformer la tension du secteur en tension continue pour un téléphone", a:"l'adaptateur" }
+      ], i => `Quel composant ou appareil permet de ${i.s} ?`, i => `C'est ${i.a}.`)
+    ],
+    pc10: [ () => {
       const el = pick([
-        {name:"hydrogène", Z:1}, {name:"carbone", Z:6}, {name:"oxygène", Z:8}, {name:"azote", Z:7}, {name:"sodium", Z:11}, {name:"chlore", Z:17}
+        { n:"sodium", s:"Na", k:-1 }, { n:"argent", s:"Ag", k:-1 }, { n:"cuivre", s:"Cu", k:-2 }, { n:"zinc", s:"Zn", k:-2 },
+        { n:"calcium", s:"Ca", k:-2 }, { n:"aluminium", s:"Al", k:-3 }, { n:"or", s:"Au", k:-3 }, { n:"magnésium", s:"Mg", k:-2 },
+        { n:"chlore", s:"Cl", k:1 }, { n:"fluor", s:"F", k:1 }, { n:"potassium", s:"K", k:-1 }
       ]);
-      const { options, correctIndex } = numericOptions(el.Z, [v=>v+1, v=>v-1, v=>v*2]);
-      return qcm(`Un atome de ${el.name} a pour numéro atomique Z=${el.Z}. Combien d'électrons possède-t-il ?`, options, correctIndex,
-        `Un atome neutre a autant d'électrons que de protons, donc ${el.Z} électrons pour Z=${el.Z}.`);
+      const sup = ["", "", "²", "³"];
+      const ion = q => el.s + (Math.abs(q) > 1 ? sup[Math.abs(q)] : "") + (q > 0 ? "⁺" : "⁻");
+      const charge = -el.k;                  // perdre des électrons -> charge positive
+      const n = Math.abs(el.k);
+      const verbe = el.k < 0 ? "perd" : "gagne";
+      const ans = ion(charge);
+      // leurres : charge de signe opposé, autre nombre d'électrons (1 à 3), atome neutre
+      const sign = charge > 0 ? 1 : -1;
+      const autre = [1, 2, 3].filter(m => m !== n).map(m => ion(sign * m));
+      const decoys = [ion(-charge), pick(autre), el.s];
+      const opts = shuffle([ans, ...decoys]);
+      const de = /^[aeiouéèêh]/i.test(el.n) ? "d'" : "de ";
+      return qcm(`L'atome ${de}${el.n} (${el.s}) ${verbe} ${n} électron${n > 1 ? "s" : ""}. Quelle est la formule de l'ion formé ?`,
+        opts, opts.indexOf(ans),
+        `En ${verbe === "perd" ? "perdant" : "gagnant"} ${n} électron${n > 1 ? "s" : ""} (charges négatives), il devient ${ans}, un ${charge > 0 ? "cation" : "anion"}.`);
+    }, () => bankQcm([
+        { t:"un précipité bleu avec la soude", a:"l'ion cuivre II Cu²⁺" },
+        { t:"un précipité vert pâle avec la soude", a:"l'ion fer II Fe²⁺" },
+        { t:"un précipité rouille avec la soude", a:"l'ion fer III Fe³⁺" },
+        { t:"un précipité blanc avec la soude", a:"l'ion zinc Zn²⁺" },
+        { t:"un précipité blanc qui noircit à la lumière avec le nitrate d'argent", a:"l'ion chlorure Cl⁻" },
+        { t:"un précipité blanc avec le chlorure de baryum", a:"l'ion sulfate SO₄²⁻" }
+      ], i => `Une solution donne ${i.t}. Quel ion contient-elle ?`, i => `${i.t.charAt(0).toUpperCase()+i.t.slice(1)} : c'est le test de ${i.a}.`),
+      () => bankQcm([
+        { f:"Cu²⁺", a:"cation" }, { f:"Fe³⁺", a:"cation" }, { f:"Na⁺", a:"cation" }, { f:"Al³⁺", a:"cation" },
+        { f:"Cl⁻", a:"anion" }, { f:"SO₄²⁻", a:"anion" }, { f:"OH⁻", a:"anion" }, { f:"NO₃⁻", a:"anion" }
+      ], i => `L'ion ${i.f} est...`, i => i.a === "cation" ? `${i.f} porte une charge positive (électrons perdus) : c'est un cation.` : `${i.f} porte une charge négative (électrons gagnés) : c'est un anion.`,
+      ["cation","anion","atome neutre","molécule neutre"])
+    ],
+    pc12: [ () => {
+      const old = randInt(100, 4000), cons = randInt(8, 180);
+      const neu = old + cons;
+      const { options, correctIndex } = numericOptions(cons, [v=>old+neu, v=>neu, v=>v+10]);
+      return qcm(`Sur une facture SODECI : ancien index ${old} m³, nouvel index ${neu} m³. Quel est le cubage consommé ?`,
+        options.map(o=>o+" m³"), correctIndex, `Cubage consommé = nouvel index − ancien index = ${neu} − ${old} = ${cons} m³.`);
+    }, () => {
+      const ETAPES = ["la floculation", "la décantation", "la filtration", "la désinfection", "la neutralisation"];
+      const k = randInt(0, 3);
+      const ans = ETAPES[k + 1];
+      const opts = shuffle([ans, ...ETAPES.filter(e => e !== ans && e !== ETAPES[k]).slice(0, 3)]);
+      return qcm(`Dans le traitement de l'eau, quelle étape vient juste après ${ETAPES[k]} ?`,
+        opts, opts.indexOf(ans), `Ordre : floculation → décantation → filtration → désinfection → neutralisation. Après ${ETAPES[k]} vient ${ans}.`);
+    }],
+    pc13: [ () => {
+      // le tableau du cours ne couvre pas 120-160 mg/L : on tire hors de cette zone
+      const ca = pick([randInt(5, 28), randInt(29, 60), randInt(61, 120), randInt(161, 250)]);
+      const ans = ca <= 28 ? "très douce" : ca <= 60 ? "douce" : ca <= 120 ? "plutôt dure" : "très dure";
+      const opts = shuffle(["très douce","douce","plutôt dure","très dure"]);
+      return qcm(`Une eau minérale contient ${ca} mg/L d'ions calcium. D'après le tableau de dureté du cours, cette eau est...`,
+        opts, opts.indexOf(ans), `0-28 mg/L : très douce ; 28-60 : douce ; 60-120 : plutôt dure ; plus de 160 : très dure. Avec ${ca} mg/L, l'eau est ${ans}.`);
+    }, () => {
+      const N = [
+        { p:"nitrates", max:50 }, { p:"chlorures", max:200 }, { p:"sodium", max:200 }, { p:"magnésium", max:50 }, { p:"sulfates", max:500 }
+      ];
+      const x = pick(N);
+      const ok = Math.random() < 0.5;
+      const val = ok ? randInt(Math.round(x.max*0.1), x.max) : randInt(x.max + 1, x.max*2);
+      const ans = ok ? "oui, elle respecte la norme OMS" : "non, elle dépasse la norme OMS";
+      const opts = shuffle(["oui, elle respecte la norme OMS","non, elle dépasse la norme OMS","on ne peut jamais savoir","seule la couleur compte"]);
+      return qcm(`Une eau contient ${val} mg/L de ${x.p}. La norme OMS est de ${x.max} mg/L au maximum. Cette eau respecte-t-elle la norme pour ce paramètre ?`,
+        opts, opts.indexOf(ans), `${val} mg/L ${ok ? "≤" : ">"} ${x.max} mg/L : ${ans}.`);
     }]
   };
 
@@ -462,355 +576,142 @@ const LOCAL_GEN = (function(){
 
   /* ================= PHYSIQUE-CHIMIE (compléments) ================= */
 
-  const ETATS = ["solide", "liquide", "gazeux"];
-  const CORPS_ETATS = [
-    { n:"le fer", a:"solide" }, { n:"l'eau", a:"liquide" }, { n:"le dioxygène", a:"gazeux" },
-    { n:"le mercure", a:"liquide" }, { n:"le bois", a:"solide" }, { n:"le dioxyde de carbone", a:"gazeux" },
-    { n:"l'huile", a:"liquide" }, { n:"le cuivre", a:"solide" }, { n:"le diazote", a:"gazeux" },
-    { n:"le sel", a:"solide" }, { n:"l'alcool", a:"liquide" }, { n:"la vapeur d'eau", a:"gazeux" }
+  const SOURCES_LUMIERE = [
+    { n:"le soleil", a:"source primaire naturelle" }, { n:"une luciole", a:"source primaire naturelle" },
+    { n:"une étoile", a:"source primaire naturelle" }, { n:"une lampe torche allumée", a:"source primaire artificielle" },
+    { n:"un laser", a:"source primaire artificielle" }, { n:"la flamme d'une bougie", a:"source primaire artificielle" },
+    { n:"un écran de télévision allumé", a:"source primaire artificielle" }, { n:"la lune", a:"source secondaire" },
+    { n:"un nuage", a:"source secondaire" }, { n:"un arbre éclairé", a:"source secondaire" },
+    { n:"la planète Jupiter", a:"source secondaire" }, { n:"un écran blanc de cinéma", a:"source secondaire" }
   ];
-  const PROP_ETATS = [
-    { p:"a une forme propre et un volume propre", a:"solide" },
-    { p:"a un volume propre mais prend la forme de son récipient", a:"liquide" },
-    { p:"n'a ni forme propre ni volume propre : il occupe tout le récipient", a:"gazeux" },
-    { p:"est facilement compressible", a:"gazeux" },
-    { p:"présente une surface libre plane et horizontale au repos", a:"liquide" },
-    { p:"est pratiquement incompressible et garde sa forme sans récipient", a:"solide" }
+  const RECEPTEURS = [
+    { n:"l'œil", a:"récepteur naturel" }, { n:"la peau", a:"récepteur naturel" }, { n:"la chlorophylle", a:"récepteur naturel" },
+    { n:"la photorésistance (LDR)", a:"récepteur artificiel photoélectrique" }, { n:"la photopile", a:"récepteur artificiel photoélectrique" },
+    { n:"le chlorure d'argent", a:"récepteur artificiel photochimique" }, { n:"la pellicule photographique", a:"récepteur artificiel photochimique" }
   ];
-  const CHANGEMENTS = [
-    { de:"solide", vers:"liquide", a:"la fusion", ex:"la glace qui fond" },
-    { de:"liquide", vers:"solide", a:"la solidification", ex:"l'eau qui devient glace au congélateur" },
-    { de:"liquide", vers:"gazeux", a:"la vaporisation", ex:"l'eau qui bout dans une casserole" },
-    { de:"gazeux", vers:"liquide", a:"la liquéfaction", ex:"la buée sur une vitre froide" },
-    { de:"solide", vers:"gazeux", a:"la sublimation", ex:"la naphtaline qui disparaît" },
-    { de:"gazeux", vers:"solide", a:"la condensation solide", ex:"le givre sur une vitre" }
+  const MILIEUX = [
+    { n:"l'air", a:"transparent" }, { n:"l'eau limpide", a:"transparent" }, { n:"le vinaigre blanc", a:"transparent" },
+    { n:"le papier calque", a:"translucide" }, { n:"une vitre dépolie", a:"translucide" },
+    { n:"un morceau de bois", a:"opaque" }, { n:"un mur de briques", a:"opaque" }, { n:"un morceau de carton", a:"opaque" }
   ];
-  const MODES_CHALEUR = ["la conduction", "la convection", "le rayonnement"];
-  const SITUATIONS_CHALEUR = [
-    { s:"la cuillère en métal qui chauffe dans un bol de soupe chaude", a:"la conduction" },
-    { s:"la chaleur du Soleil qui nous parvient à travers le vide", a:"le rayonnement" },
-    { s:"l'air chaud qui monte au-dessus d'un radiateur", a:"la convection" },
-    { s:"le manche d'une casserole qui devient brûlant", a:"la conduction" },
-    { s:"la chaleur ressentie devant un feu de bois, sans le toucher", a:"le rayonnement" },
-    { s:"l'eau qui se met en mouvement dans une casserole qu'on chauffe", a:"la convection" },
-    { s:"la barre de fer chauffée à une extrémité qui devient chaude à l'autre", a:"la conduction" }
-  ];
-  const MELANGES_EAU = [
-    { n:"le sel", a:"homogène", mis:"soluble" }, { n:"le sucre", a:"homogène", mis:"soluble" },
-    { n:"l'alcool", a:"homogène", mis:"miscible" }, { n:"le sirop", a:"homogène", mis:"miscible" },
-    { n:"le vinaigre", a:"homogène", mis:"miscible" },
-    { n:"l'huile", a:"hétérogène", mis:"non miscible" }, { n:"le sable", a:"hétérogène", mis:"insoluble" },
-    { n:"la craie en poudre", a:"hétérogène", mis:"insoluble" }, { n:"l'essence", a:"hétérogène", mis:"non miscible" }
-  ];
-  const MATERIAUX_COND = [
-    { n:"le cuivre", a:"conducteur" }, { n:"l'aluminium", a:"conducteur" }, { n:"le fer", a:"conducteur" },
-    { n:"l'eau salée", a:"conducteur" }, { n:"le graphite", a:"conducteur" },
-    { n:"le verre", a:"isolant" }, { n:"le plastique", a:"isolant" }, { n:"le bois sec", a:"isolant" },
-    { n:"le caoutchouc", a:"isolant" }, { n:"la porcelaine", a:"isolant" }, { n:"l'air sec", a:"isolant" }
-  ];
-  const LUMIERE_OBJETS = [
-    { n:"le Soleil", a:"une source primaire de lumière" },
-    { n:"une lampe allumée", a:"une source primaire de lumière" },
-    { n:"une bougie allumée", a:"une source primaire de lumière" },
-    { n:"une étoile", a:"une source primaire de lumière" },
-    { n:"la Lune", a:"un objet diffusant (source secondaire)" },
-    { n:"un mur blanc éclairé", a:"un objet diffusant (source secondaire)" },
-    { n:"une planète comme Mars", a:"un objet diffusant (source secondaire)" },
-    { n:"l'œil", a:"un récepteur de lumière" },
-    { n:"une plaque photographique", a:"un récepteur de lumière" },
-    { n:"une cellule photoélectrique", a:"un récepteur de lumière" }
-  ];
-  const COMBUSTIONS_TYPE = [
-    { s:"le gaz butane qui brûle sur une gazinière", a:"une combustion avec flamme" },
-    { s:"une bougie allumée", a:"une combustion avec flamme" },
-    { s:"l'alcool à brûler enflammé", a:"une combustion avec flamme" },
-    { s:"la braise rouge d'un barbecue", a:"une combustion sans flamme (incandescence)" },
-    { s:"une cigarette qui se consume", a:"une combustion sans flamme (incandescence)" },
-    { s:"un morceau de charbon de bois rougeoyant", a:"une combustion sans flamme (incandescence)" },
-    { s:"le bois qui flambe dans un feu de cheminée", a:"une combustion avec flamme" }
-  ];
-  const FORCES_TYPE = [
-    { s:"un joueur qui frappe un ballon", a:"une force de contact" },
-    { s:"une main qui pousse une table", a:"une force de contact" },
-    { s:"la tension d'une corde qui tire une charge", a:"une force de contact" },
-    { s:"le frottement du sol sur une caisse qu'on traîne", a:"une force de contact" },
-    { s:"le poids d'un fruit qui tombe de l'arbre", a:"une force à distance" },
-    { s:"un aimant qui attire un clou sans le toucher", a:"une force à distance" },
-    { s:"l'attraction de la Terre sur la Lune", a:"une force à distance" },
-    { s:"une règle frottée qui attire des petits papiers", a:"une force à distance" }
-  ];
-  const DANGERS_ELEC = [
-    { s:"une intensité trop grande qui risque de faire fondre les fils", a:"le fusible ou le disjoncteur" },
-    { s:"un appareil métallique dont la carcasse pourrait devenir sous tension", a:"la prise de terre" },
-    { s:"une fuite de courant vers une personne qui touche un appareil défectueux", a:"le disjoncteur différentiel" },
-    { s:"le contact direct des doigts avec un fil dénudé", a:"l'isolation des conducteurs" },
-    { s:"deux fils nus qui se touchent et provoquent un court-circuit", a:"le fusible ou le disjoncteur" },
-    { s:"l'humidité qui rend le corps beaucoup plus conducteur", a:"ne jamais manipuler l'électricité avec les mains mouillées" }
-  ];
+  const PHASES = ["la nouvelle Lune", "le premier croissant", "le premier quartier", "la première lune gibbeuse",
+                  "la pleine Lune", "la dernière lune gibbeuse", "le dernier quartier", "le dernier croissant"];
 
   const PC_EXTRA = {
-    p1: [
-      () => bankQcm(CORPS_ETATS, i => `À température ordinaire, sous quel état physique se trouve ${i.n} ?`,
-            i => `À température ordinaire, ${i.n} est à l'état ${i.a}.`, ETATS.concat(["plasma"])),
-      () => bankQcm(PROP_ETATS, i => `Quel état physique ${i.p} ?`,
-            i => `C'est une propriété de l'état ${i.a}.`, ETATS.concat(["plasma"]))
+    pc1: [
+      () => bankQcm(SOURCES_LUMIERE, i => `Comment classe-t-on ${i.n} ?`, i => `${i.n.charAt(0).toUpperCase()+i.n.slice(1)} : ${i.a}.`,
+            ["source primaire naturelle","source primaire artificielle","source secondaire","récepteur de lumière uniquement"]),
+      () => bankQcm(RECEPTEURS, i => `Quel type de récepteur de lumière est ${i.n} ?`, i => `${i.n.charAt(0).toUpperCase()+i.n.slice(1)} : ${i.a}.`)
     ],
-    p5: [
+    pc2: [
+      () => bankQcm(MILIEUX, i => `${i.n.charAt(0).toUpperCase()+i.n.slice(1)} est un milieu...`, i => `${i.n.charAt(0).toUpperCase()+i.n.slice(1)} est ${i.a}.`,
+            ["transparent","translucide","opaque","lumineux"]),
+      () => bankQcm([
+          { l:"p", a:"d" }, { l:"q", a:"b" }, { l:"b", a:"q" }, { l:"d", a:"p" }
+        ], i => `Dans une chambre noire, quelle est l'image de la lettre « ${i.l} » ?`,
+        i => `L'image est renversée et inversée (propagation rectiligne de la lumière) : « ${i.l} » donne « ${i.a} ».`)
+    ],
+    pc3: [
       () => {
-        const c = randInt(-20, 120);
-        const k = c + 273;
-        const { options, correctIndex } = numericOptions(k, [v=>v-273-273, v=>c-273, v=>v+100]);
-        return qcm(`Convertis ${c} °C en kelvins (K).`, options.map(o=>o+" K"), correctIndex,
-          `T(K) = θ(°C) + 273, donc ${c} + 273 = ${k} K.`);
-      },
-      () => {
-        const k = randInt(260, 400);
-        const c = k - 273;
-        const { options, correctIndex } = numericOptions(c, [v=>k+273, v=>v+273, v=>v-10]);
-        return qcm(`Une température vaut ${k} K. Combien fait-elle en degrés Celsius ?`, options.map(o=>o+" °C"), correctIndex,
-          `θ(°C) = T(K) − 273, donc ${k} − 273 = ${c} °C.`);
-      },
-      () => bankQcm([
-          { p:"la fusion de la glace sous pression normale", a:"0 °C, soit 273 K" },
-          { p:"l'ébullition de l'eau pure sous pression normale", a:"100 °C, soit 373 K" },
-          { p:"le zéro absolu", a:"−273 °C, soit 0 K" },
-          { p:"la température normale du corps humain", a:"environ 37 °C, soit 310 K" }
-        ], i => `Quelle est la température de ${i.p} ?`, i => `${i.p} correspond à ${i.a}.`)
-    ],
-    p6: [
-      () => bankQcm(SITUATIONS_CHALEUR, i => `Quel mode de propagation de la chaleur explique ${i.s} ?`,
-            i => `Il s'agit de ${i.a}.`, MODES_CHALEUR.concat(["la dilatation"])),
-      () => bankQcm([
-          { p:"se propage de proche en proche dans un solide, sans déplacement de matière", a:"la conduction" },
-          { p:"se propage grâce au déplacement d'un fluide (liquide ou gaz) qui transporte la chaleur", a:"la convection" },
-          { p:"se propage même dans le vide, sans aucun support matériel", a:"le rayonnement" },
-          { p:"est le seul mode possible entre le Soleil et la Terre", a:"le rayonnement" }
-        ], i => `Quel mode de propagation de la chaleur ${i.p} ?`, i => `C'est ${i.a}.`, MODES_CHALEUR.concat(["la dilatation"]))
-    ],
-    p7: [
-      () => bankQcm(CHANGEMENTS, i => `Comment s'appelle le passage de l'état ${i.de} à l'état ${i.vers} ?`,
-            i => `Le passage ${i.de} → ${i.vers} s'appelle ${i.a} (exemple : ${i.ex}).`),
-      () => bankQcm(CHANGEMENTS, i => `Quel changement d'état se produit dans le cas suivant : ${i.ex} ?`,
-            i => `${i.ex} : c'est ${i.a} (passage ${i.de} → ${i.vers}).`),
-      () => open(
-        (() => { const c = pick(CHANGEMENTS); return `Un élève observe le phénomène suivant : ${c.ex}. Nomme le changement d'état, précise les états de départ et d'arrivée, et indique si le corps reçoit ou cède de la chaleur.`; })(),
-        `<p><strong>Méthode.</strong> On identifie l'état initial puis l'état final, on nomme le changement, puis on raisonne sur la chaleur.</p>
-         <p><strong>Rappel des six changements d'état :</strong><br>
-         solide → liquide : la fusion (le corps <strong>reçoit</strong> de la chaleur)<br>
-         liquide → solide : la solidification (le corps <strong>cède</strong> de la chaleur)<br>
-         liquide → gazeux : la vaporisation (le corps <strong>reçoit</strong> de la chaleur)<br>
-         gazeux → liquide : la liquéfaction (le corps <strong>cède</strong> de la chaleur)<br>
-         solide → gazeux : la sublimation (le corps <strong>reçoit</strong> de la chaleur)<br>
-         gazeux → solide : la condensation solide (le corps <strong>cède</strong> de la chaleur)</p>
-         <p><strong>Règle simple.</strong> Aller vers un état plus désordonné (solide → liquide → gaz) demande de la chaleur ; revenir en arrière en libère. Pendant tout le changement d'état d'un corps pur, la température reste constante.</p>`)
-    ],
-    p8: [
-      () => bankQcm(MELANGES_EAU, i => `On mélange ${i.n} avec de l'eau. Le mélange obtenu est-il homogène ou hétérogène ?`,
-            i => `${i.n} + eau donne un mélange ${i.a} : ${i.n} est ${i.mis} dans l'eau.`,
-            ["homogène", "hétérogène", "homogène puis hétérogène après repos", "toujours hétérogène quelle que soit la quantité"]),
-      () => bankQcm([
-          { p:"séparer l'eau et le sable d'un mélange hétérogène", a:"la filtration" },
-          { p:"séparer deux liquides non miscibles comme l'eau et l'huile", a:"la décantation puis l'ampoule à décanter" },
-          { p:"récupérer l'eau pure d'une eau salée", a:"la distillation" },
-          { p:"laisser les particules les plus lourdes tomber au fond avant de verser", a:"la décantation" }
-        ], i => `Quelle technique permet de ${i.p} ?`, i => `Pour ${i.p}, on utilise ${i.a}.`)
-    ],
-    p9: [
-      () => bankQcm(MATERIAUX_COND, i => `${i.n.charAt(0).toUpperCase() + i.n.slice(1)} est-il conducteur ou isolant du courant électrique ?`,
-            i => `${i.n.charAt(0).toUpperCase() + i.n.slice(1)} est ${i.a}.`,
-            ["conducteur", "isolant", "conducteur seulement à chaud", "isolant seulement à froid"]),
-      () => {
-        const n = randInt(2, 4);
-        const serie = Math.random() < 0.5;
-        const correct = serie ? "toutes les lampes s'éteignent" : "les autres lampes restent allumées";
-        const opts = shuffle([correct,
-          serie ? "les autres lampes restent allumées" : "toutes les lampes s'éteignent",
-          "les autres lampes brillent deux fois plus",
-          "le générateur est mis en court-circuit"]);
-        return qcm(`Un circuit comporte ${n} lampes montées en ${serie ? "série" : "dérivation"} avec une pile. On dévisse une lampe. Que se passe-t-il ?`,
-          opts, opts.indexOf(correct),
-          serie
-            ? `En série, il n'y a qu'une seule boucle : dévisser une lampe ouvre le circuit, donc toutes les lampes s'éteignent.`
-            : `En dérivation, chaque lampe est sur sa propre branche : dévisser l'une n'ouvre pas les autres branches, les autres lampes restent allumées.`);
-      }
-    ],
-    p12: [
-      () => bankQcm(DANGERS_ELEC, i => `Contre quel risque protège-t-on en priorité dans cette situation : ${i.s} ? Quel est le dispositif ou le geste adapté ?`,
-            i => `Face à ${i.s}, la protection adaptée est ${i.a}.`),
-      () => bankQcm([
-          { p:"le passage du courant à travers le corps humain", a:"l'électrisation (ou l'électrocution si elle est mortelle)" },
-          { p:"un contact accidentel entre deux fils qui fait circuler une intensité très élevée", a:"le court-circuit" },
-          { p:"un échauffement des fils qui peut déclencher un incendie", a:"la surintensité" },
-          { p:"une tension d'alimentation supérieure à celle prévue par l'appareil", a:"la surtension" }
-        ], i => `Comment nomme-t-on ${i.p} ?`, i => `${i.p} correspond à ${i.a}.`)
-    ],
-    p13: [
-      () => bankQcm(FORCES_TYPE, i => `S'agit-il d'une force de contact ou d'une force à distance : ${i.s} ?`,
-            i => `${i.s} : c'est ${i.a}.`,
-            ["une force de contact", "une force à distance", "une force sans point d'application", "une force sans direction"]),
-      () => bankQcm([
-          { p:"le point du corps où la force s'exerce", a:"le point d'application" },
-          { p:"la droite le long de laquelle la force agit", a:"la direction" },
-          { p:"l'orientation de la force sur cette droite (vers le haut ou vers le bas, par exemple)", a:"le sens" },
-          { p:"l'intensité de la force, mesurée en newtons avec un dynamomètre", a:"la valeur" }
-        ], i => `Parmi les caractéristiques d'une force, laquelle désigne ${i.p} ?`,
-           i => `${i.p} : c'est ${i.a}.`),
-      () => {
-        const n = randInt(2, 40) * 5;
-        const correct = "le newton (N)";
-        const opts = shuffle([correct, "le kilogramme (kg)", "le joule (J)", "le pascal (Pa)"]);
-        return qcm(`Un dynamomètre indique ${n} pour la valeur d'une force. Dans quelle unité cette valeur s'exprime-t-elle ?`,
-          opts, opts.indexOf(correct),
-          `La valeur d'une force se mesure en newtons (N) à l'aide d'un dynamomètre. Le kilogramme mesure une masse, pas une force.`);
-      }
-    ],
-    p16: [
-      () => bankQcm(LUMIERE_OBJETS, i => `Comment classe-t-on ${i.n} du point de vue de la lumière ?`,
-            i => `${i.n.charAt(0).toUpperCase() + i.n.slice(1)} est ${i.a}.`,
-            ["une source primaire de lumière", "un objet diffusant (source secondaire)", "un récepteur de lumière", "un milieu opaque"]),
-      () => bankQcm([
-          { n:"le verre transparent", a:"transparent" }, { n:"l'eau claire", a:"transparent" },
-          { n:"le papier calque", a:"translucide" }, { n:"le verre dépoli", a:"translucide" },
-          { n:"une planche de bois", a:"opaque" }, { n:"une plaque de métal", a:"opaque" },
-          { n:"un carton épais", a:"opaque" }
-        ], i => `Comment qualifie-t-on ${i.n} pour le passage de la lumière ?`,
-           i => `${i.n.charAt(0).toUpperCase() + i.n.slice(1)} est ${i.a}.`,
-           ["transparent", "translucide", "opaque", "réfléchissant total"])
-    ],
-    p18: [
-      () => {
-        // Agrandissement de l'ombre par une source ponctuelle (théorème de Thalès)
-        const h = randInt(2, 12);
-        const d = randInt(1, 5);
-        const k = randInt(2, 5);
-        const D = d * k;
-        const H = h * k;
-        const { options, correctIndex } = numericOptions(H, [v=>h*(k+1), v=>h+k, v=>Math.round(h/k*10)/10]);
-        return qcm(`Une source ponctuelle éclaire un objet de ${h} cm de haut placé à ${d} m de la source. L'écran est à ${D} m de la source. Quelle est la hauteur de l'ombre portée sur l'écran ?`,
-          options.map(o=>o+" cm"), correctIndex,
-          `Les triangles sont semblables : H/h = D/d, donc H = h × D/d = ${h} × ${D}/${d} = ${H} cm.`);
+        const k = randInt(0, 7);
+        const ans = PHASES[(k + 1) % 8];
+        const opts = shuffle([ans, ...shuffle(PHASES.filter(p => p !== ans && p !== PHASES[k])).slice(0, 3)]);
+        return qcm(`Quelle phase de la Lune vient juste après ${PHASES[k]} ?`, opts, opts.indexOf(ans),
+          `Ordre : nouvelle Lune, premier croissant, premier quartier, première gibbeuse, pleine Lune, dernière gibbeuse, dernier quartier, dernier croissant. Après ${PHASES[k]} vient ${ans}.`);
       },
       () => bankQcm([
-          { p:"la partie non éclairée de l'objet lui-même", a:"l'ombre propre" },
-          { p:"la zone sombre projetée par l'objet sur un écran", a:"l'ombre portée" },
-          { p:"la zone partiellement éclairée qui apparaît autour de l'ombre avec une source étendue", a:"la pénombre" },
-          { p:"la zone de l'espace située derrière l'objet et privée de lumière", a:"le cône d'ombre" }
-        ], i => `Comment nomme-t-on ${i.p} ?`, i => `${i.p} s'appelle ${i.a}.`),
-      () => {
-        const ponct = Math.random() < 0.5;
-        const correct = ponct ? "une ombre nette, sans pénombre" : "une ombre entourée d'une pénombre";
-        const opts = shuffle([correct,
-          ponct ? "une ombre entourée d'une pénombre" : "une ombre nette, sans pénombre",
-          "aucune ombre du tout",
-          "une ombre plus petite que l'objet quelle que soit la distance"]);
-        return qcm(`Un objet opaque est éclairé par ${ponct ? "une source ponctuelle" : "une source étendue"}. Qu'observe-t-on sur l'écran ?`,
-          opts, opts.indexOf(correct),
-          ponct
-            ? `Une source ponctuelle n'envoie la lumière que d'un seul point : la limite de l'ombre est franche, il n'y a pas de pénombre.`
-            : `Une source étendue est faite d'une infinité de points : certaines zones ne reçoivent qu'une partie de la lumière, ce qui crée une pénombre autour de l'ombre.`);
-      }
+          { p:"la Terre se trouve dans le cône d'ombre de la Lune", a:"une éclipse de Soleil" },
+          { p:"la Lune entre dans le cône d'ombre de la Terre", a:"une éclipse de Lune" },
+          { p:"Soleil, Lune et Terre sont alignés dans cet ordre", a:"une éclipse de Soleil" },
+          { p:"Soleil, Terre et Lune sont alignés dans cet ordre", a:"une éclipse de Lune" },
+          { p:"il fait nuit en plein jour pour les personnes dans l'ombre pure", a:"une éclipse de Soleil" },
+          { p:"la Lune devient invisible pendant la pleine Lune", a:"une éclipse de Lune" }
+        ], i => `Quel phénomène se produit quand ${i.p} ?`, i => `Quand ${i.p}, on observe ${i.a}.`,
+        ["une éclipse de Soleil","une éclipse de Lune","une nouvelle Lune ordinaire","un arc-en-ciel"]),
+      () => bankQcm([
+          { p:"la partie de l'objet qui ne reçoit pas la lumière", a:"l'ombre propre" },
+          { p:"la tache d'ombre de l'objet sur l'écran", a:"l'ombre portée" },
+          { p:"la zone non éclairée entre l'objet et l'écran", a:"le cône d'ombre" },
+          { p:"la zone partiellement éclairée autour de l'ombre", a:"la pénombre" }
+        ], i => `Comment appelle-t-on ${i.p} ?`, i => `C'est ${i.a}.`)
     ],
-    p19: [
-      () => bankQcm(COMBUSTIONS_TYPE, i => `S'agit-il d'une combustion avec ou sans flamme : ${i.s} ?`,
-            i => `${i.s} : c'est ${i.a}.`,
-            ["une combustion avec flamme", "une combustion sans flamme (incandescence)", "une combustion sans combustible", "une combustion sans comburant"]),
+    pc5: [
       () => bankQcm([
-          { p:"la substance qui brûle", a:"le combustible" },
-          { p:"le gaz qui entretient la combustion, le plus souvent le dioxygène de l'air", a:"le comburant" },
-          { p:"l'apport de chaleur qui déclenche la réaction", a:"l'énergie d'activation" },
-          { p:"l'ensemble des trois conditions nécessaires à toute combustion", a:"le triangle du feu" }
-        ], i => `Dans le triangle du feu, comment nomme-t-on ${i.p} ?`, i => `${i.p} : c'est ${i.a}.`),
+          { s:"Deux pôles nord placés face à face", a:"répulsion" }, { s:"Deux pôles sud placés face à face", a:"répulsion" },
+          { s:"Un pôle nord face à un pôle sud", a:"attraction" }, { s:"La face nord d'une bobine face au pôle sud d'un aimant", a:"attraction" },
+          { s:"La face sud d'une bobine face au pôle sud d'un aimant", a:"répulsion" }, { s:"Un pôle d'aimant face à un clou en fer", a:"attraction" }
+        ], i => `${i.s} : que se passe-t-il ?`, i => `${i.s} : ${i.a}. (Même nom : répulsion ; noms différents ou fer non aimanté : attraction.)`,
+        ["attraction","répulsion","aucune interaction","l'aimant perd ses pôles"]),
       () => bankQcm([
-          { m:"on jette du sable sur des braises", a:"on supprime le comburant : le dioxygène n'atteint plus le combustible" },
-          { m:"on ferme le robinet de gaz d'un brûleur enflammé", a:"on supprime le combustible" },
-          { m:"on arrose un feu de bois avec de l'eau", a:"on abaisse la température sous le seuil nécessaire" },
-          { m:"on étouffe une casserole en feu avec un couvercle", a:"on supprime le comburant : le dioxygène n'atteint plus le combustible" },
-          { m:"on creuse une tranchée coupe-feu devant un feu de brousse", a:"on supprime le combustible" }
-        ],
-        i => `Pour éteindre un feu, ${i.m}. Sur quel côté du triangle du feu agit-on ?`,
-        i => `Quand ${i.m}, ${i.a}. Supprimer un seul des trois côtés du triangle du feu suffit à arrêter la combustion.`,
-        ["on supprime le comburant : le dioxygène n'atteint plus le combustible",
-         "on supprime le combustible",
-         "on abaisse la température sous le seuil nécessaire",
-         "on augmente l'énergie d'activation"])
+          { o:"un clou en fer", a:"oui" }, { o:"une pièce en nickel", a:"oui" }, { o:"un objet en cobalt", a:"oui" },
+          { o:"une canette en aluminium", a:"non" }, { o:"un fil de cuivre", a:"non" }, { o:"une gomme", a:"non" }
+        ], i => `Un aimant attire-t-il ${i.o} ?`, i => `Un aimant n'attire que le fer, le nickel, le cobalt et leurs alliages : ${i.a}.`,
+        ["oui","non","seulement si on le chauffe","seulement la nuit"])
     ],
-    p20: [
+    pc6: [
       () => bankQcm([
-          { p:"les seuls produits d'une combustion complète d'un hydrocarbure", a:"du dioxyde de carbone et de l'eau" },
-          { p:"le gaz toxique formé lors d'une combustion incomplète", a:"du monoxyde de carbone" },
-          { p:"le dépôt noir observé sur un récipient lors d'une combustion incomplète", a:"du carbone (suie)" },
-          { p:"ce qui manque pour qu'une combustion soit complète", a:"une quantité suffisante de dioxygène" }
-        ], i => `Qu'est-ce qui correspond à ${i.p} ?`, i => `${i.p} : ${i.a}.`),
-      () => {
-        const complete = Math.random() < 0.5;
-        const correct = complete ? "bleue, sans fumée ni suie" : "jaune et fumeuse, avec dépôt de suie";
-        const opts = shuffle([correct,
-          complete ? "jaune et fumeuse, avec dépôt de suie" : "bleue, sans fumée ni suie",
-          "verte et sans chaleur",
-          "invisible et sans dégagement de chaleur"]);
-        return qcm(`Comment se présente la flamme d'une combustion ${complete ? "complète" : "incomplète"} d'un hydrocarbure ?`,
-          opts, opts.indexOf(correct),
-          complete
-            ? `Avec assez de dioxygène, la combustion est complète : la flamme est bleue et ne produit que du dioxyde de carbone et de l'eau.`
-            : `Avec trop peu de dioxygène, la combustion est incomplète : la flamme devient jaune et fumeuse, et il se forme du carbone (suie) ainsi que du monoxyde de carbone toxique.`);
-      }
+          { p:"la partie tournante de l'alternateur, qui porte l'aimant", a:"le rotor" },
+          { p:"la partie fixe de l'alternateur, qui porte la bobine", a:"le stator" },
+          { p:"la pièce de la génératrice de vélo en contact avec la roue", a:"le galet" },
+          { p:"l'appareil qui permet de visualiser une tension", a:"l'oscilloscope" },
+          { p:"la machine qui, dans une centrale, est mise en rotation par l'eau ou la vapeur", a:"la turbine" }
+        ], i => `Comment appelle-t-on ${i.p} ?`, i => `C'est ${i.a}.`),
+      () => bankQcm([
+          { s:"une pile", a:"une tension continue" }, { s:"une batterie de voiture", a:"une tension continue" },
+          { s:"une génératrice de bicyclette", a:"une tension alternative" }, { s:"un alternateur de centrale", a:"une tension alternative" },
+          { s:"un aimant qui tourne devant une bobine", a:"une tension alternative" }, { s:"un aimant immobile devant une bobine immobile", a:"aucune tension" }
+        ], i => `Quelle tension produit ${i.s} ?`, i => `${i.s.charAt(0).toUpperCase()+i.s.slice(1)} produit ${i.a}.`,
+        ["une tension continue","une tension alternative","aucune tension","une tension qui fait fondre les fils"])
     ],
-    p21: [
+    pc8: [
       () => bankQcm([
-          { p:"il est inodore, incolore et invisible, donc indétectable sans appareil", a:"le monoxyde de carbone" },
-          { p:"il se fixe sur le sang à la place du dioxygène et peut tuer", a:"le monoxyde de carbone" },
-          { p:"il trouble l'eau de chaux et participe à l'effet de serre", a:"le dioxyde de carbone" },
-          { p:"il se dépose en couche noire sur les ustensiles", a:"le carbone (suie)" }
-        ], i => `Quel produit de combustion correspond à cette description : ${i.p} ?`, i => `${i.p} : c'est ${i.a}.`),
-      () => bankQcm([
-          { p:"utiliser un appareil à gaz dans une pièce fermée", a:"aérer la pièce et ventiler en permanence" },
-          { p:"une bouteille de gaz qui fuit", a:"fermer le robinet, ne pas faire d'étincelle et aérer" },
-          { p:"un feu de friture dans une casserole", a:"couvrir la casserole, ne jamais verser d'eau" },
-          { p:"un appareil de chauffage jamais entretenu", a:"faire vérifier et entretenir l'appareil régulièrement" }
-        ], i => `Quelle précaution faut-il prendre dans ce cas : ${i.p} ?`, i => `Dans ce cas, il faut ${i.a}.`)
+          { s:"Toucher un fil dénudé", a:"dangereux" }, { s:"Brancher dix appareils sur une même prise", a:"dangereux" },
+          { s:"Manipuler un appareil branché avec les mains mouillées", a:"dangereux" }, { s:"Introduire un objet métallique dans une prise", a:"dangereux" },
+          { s:"Couper le courant avant de changer une ampoule", a:"une bonne règle de sécurité" }, { s:"Débrancher un appareil avant de le réparer", a:"une bonne règle de sécurité" },
+          { s:"Relier les appareils à carcasse métallique à la prise de terre", a:"une bonne règle de sécurité" }
+        ], i => `${i.s} : est-ce dangereux ou une bonne règle de sécurité ?`, i => `${i.s} : ${i.a}.`,
+        ["dangereux","une bonne règle de sécurité","sans aucune importance","interdit seulement la nuit"])
     ],
-    p24: [
-      () => {
-        const mC = randInt(1, 15) * 3;          // multiple de 3 -> masses entières
-        const mCO2 = mC * 44 / 12;
-        const { options, correctIndex } = numericOptions(mCO2, [v=>mC*44, v=>v/2, v=>mC+44]);
-        return qcm(`On brûle complètement ${mC} g de carbone dans un excès de dioxygène. Quelle masse de dioxyde de carbone obtient-on ? (masses molaires : C = 12 g/mol, O = 16 g/mol)`,
-          options.map(o=>o+" g"), correctIndex,
-          `L'équation est C + O₂ → CO₂. 12 g de carbone donnent 44 g de CO₂, donc ${mC} g donnent ${mC} × 44/12 = ${fmt(mCO2)} g.`);
-      },
+    pc11: [
       () => bankQcm([
-          { p:"l'équation de la combustion complète du carbone", a:"C + O₂ → CO₂" },
-          { p:"le test qui met en évidence le dioxyde de carbone formé", a:"l'eau de chaux se trouble" },
-          { p:"ce que l'on observe du carbone pendant la combustion", a:"il rougit et brûle sans flamme (incandescence)" },
-          { p:"le gaz consommé pendant la combustion", a:"le dioxygène de l'air" }
-        ], i => `Concernant la combustion du carbone, qu'est-ce qui correspond à ${i.p} ?`, i => `${i.p} : ${i.a}.`),
-      () => open(
-        `On réalise la combustion complète du carbone dans un flacon de dioxygène. Écris l'équation-bilan de la réaction, nomme le produit formé, décris le test qui permet de l'identifier, puis calcule la masse de produit obtenue à partir de 6 g de carbone (C = 12 g/mol, O = 16 g/mol).`,
-        `<p><strong>1. Équation-bilan.</strong> C + O₂ → CO₂<br>
-         L'équation est déjà équilibrée : 1 atome de carbone et 2 atomes d'oxygène de chaque côté.</p>
-         <p><strong>2. Produit formé.</strong> Le dioxyde de carbone (CO₂), un gaz incolore et inodore.</p>
-         <p><strong>3. Test d'identification.</strong> On verse de l'eau de chaux limpide dans le flacon et on agite : <strong>l'eau de chaux se trouble</strong> (elle devient laiteuse). C'est le test caractéristique du dioxyde de carbone.</p>
-         <p><strong>4. Calcul.</strong> Masse molaire du carbone : M(C) = 12 g/mol.<br>
-         Masse molaire du dioxyde de carbone : M(CO₂) = 12 + 2 × 16 = 44 g/mol.<br>
-         D'après l'équation, 1 mol de carbone donne 1 mol de CO₂, donc 12 g de carbone donnent 44 g de CO₂.<br>
-         Pour 6 g de carbone : m(CO₂) = 6 × 44/12 = <strong>22 g</strong>.</p>
-         <p><strong>Remarque.</strong> On peut vérifier avec la conservation de la masse : 6 g de carbone + 16 g de dioxygène = 22 g de dioxyde de carbone.</p>`)
+          { t:"le cuivre métal se transforme en ions cuivre II", a:"Cu → Cu²⁺ + 2e⁻" },
+          { t:"les ions cuivre II se transforment en cuivre métal", a:"Cu²⁺ + 2e⁻ → Cu" },
+          { t:"le fer métal se transforme en ions fer II", a:"Fe → Fe²⁺ + 2e⁻" },
+          { t:"le fer réagit avec les ions cuivre II (bilan)", a:"Fe + Cu²⁺ → Fe²⁺ + Cu" }
+        ], i => `Quelle équation traduit le fait que ${i.t} ?`, i => `${i.t.charAt(0).toUpperCase()+i.t.slice(1)} : ${i.a}.`,
+        ["Cu → Cu²⁺ + 2e⁻","Cu²⁺ + 2e⁻ → Cu","Fe → Fe²⁺ + 2e⁻","Fe + Cu²⁺ → Fe²⁺ + Cu","Fe²⁺ + Cu → Cu²⁺ + Fe"]),
+      () => bankQcm([
+          { o:"un dégagement de gaz roux et une solution qui devient bleue", a:"cuivre + acide nitrique" },
+          { o:"un dépôt rouge sur un clou et une solution bleue qui devient verte", a:"fer + sulfate de cuivre" },
+          { o:"un dépôt rouge sur la cathode et une anode en cuivre qui s'amincit", a:"électrolyse du sulfate de cuivre" }
+        ], i => `Quelle expérience donne ${i.o} ?`, i => `${i.o.charAt(0).toUpperCase()+i.o.slice(1)} : ${i.a}.`,
+        ["cuivre + acide nitrique","fer + sulfate de cuivre","électrolyse du sulfate de cuivre","eau salée + nitrate d'argent"])
     ],
-    p25: [
-      () => {
-        const mH2 = randInt(1, 12);
-        const mH2O = mH2 * 9;                   // 4 g H2 -> 36 g H2O, soit ×9
-        const { options, correctIndex } = numericOptions(mH2O, [v=>mH2*18, v=>mH2+18, v=>v/2]);
-        return qcm(`On brûle complètement ${mH2} g de dihydrogène dans un excès de dioxygène. Quelle masse d'eau obtient-on ? (masses molaires : H = 1 g/mol, O = 16 g/mol)`,
-          options.map(o=>o+" g"), correctIndex,
-          `L'équation est 2 H₂ + O₂ → 2 H₂O. 4 g de dihydrogène donnent 36 g d'eau, donc ${mH2} g donnent ${mH2} × 36/4 = ${mH2O} g.`);
-      },
+    pc12: [
       () => bankQcm([
-          { p:"l'équation de la combustion du dihydrogène", a:"2 H₂ + O₂ → 2 H₂O" },
-          { p:"le seul produit formé", a:"de l'eau" },
-          { p:"le test qui met en évidence l'eau formée", a:"le sulfate de cuivre anhydre blanc devient bleu" },
-          { p:"le bruit caractéristique d'un mélange dihydrogène-air qui s'enflamme", a:"une détonation (aboiement)" }
-        ], i => `Concernant la combustion du dihydrogène, qu'est-ce qui correspond à ${i.p} ?`, i => `${i.p} : ${i.a}.`)
+          { s:"Injecter du sulfate d'alumine pour former des flocons", a:"la floculation" },
+          { s:"Laisser reposer pour que les flocons tombent au fond", a:"la décantation" },
+          { s:"Faire passer l'eau à travers du sable ou un tissu", a:"la filtration" },
+          { s:"Détruire les microbes avec du chlore ou de l'ozone", a:"la désinfection" },
+          { s:"Ramener l'eau à un pH égal à 7", a:"la neutralisation" }
+        ], i => `${i.s} : quelle étape du traitement de l'eau est-ce ?`, i => `${i.s} : c'est ${i.a}.`)
+    ],
+    pc13: [
+      () => bankQcm([
+          { p:"la couleur", a:"organoleptique" }, { p:"l'odeur", a:"organoleptique" }, { p:"la saveur", a:"organoleptique" }, { p:"la transparence", a:"organoleptique" },
+          { p:"le pH", a:"physico-chimique" }, { p:"la dureté", a:"physico-chimique" }, { p:"le taux d'oxygène", a:"physico-chimique" }, { p:"la température", a:"physico-chimique" }
+        ], i => `${i.p.charAt(0).toUpperCase()+i.p.slice(1)} de l'eau est un paramètre...`, i => `${i.p.charAt(0).toUpperCase()+i.p.slice(1)} : paramètre ${i.a}.`,
+        ["organoleptique","physico-chimique","toxique","électrique"]),
+      () => bankQcm([
+          { r:"construire et solidifier les os", a:"Ca²⁺ et Mg²⁺" },
+          { r:"produire et transmettre les messages nerveux", a:"K⁺ et Na⁺" },
+          { r:"permettre la contraction des muscles et la rétention d'eau", a:"Na⁺ et Cl⁻" },
+          { r:"constituer l'hémoglobine du sang", a:"Fe²⁺" }
+        ], i => `Quels ions servent à ${i.r} ?`, i => `Ce sont les ions ${i.a}.`),
+      () => bankQcm([
+          { i:"l'ion calcium Ca²⁺", a:"l'oxalate d'ammonium" }, { i:"l'ion sulfate SO₄²⁻", a:"le chlorure de baryum" },
+          { i:"l'ion chlorure Cl⁻", a:"le nitrate d'argent" }, { i:"l'ion cuivre II Cu²⁺", a:"la soude" }
+        ], x => `Quel réactif permet d'identifier ${x.i} ?`, x => `${x.i.charAt(0).toUpperCase()+x.i.slice(1)} se met en évidence avec ${x.a}.`)
     ]
   };
 
@@ -2216,9 +2117,17 @@ const LOCAL_GEN = (function(){
     ]
   };
 
+  // PC et PC_EXTRA peuvent couvrir la même leçon : on concatène les générateurs
+  // au lieu de laisser le second écraser le premier.
+  function mergeTemplates(a, b){
+    const out = {};
+    [a, b].forEach(src => Object.keys(src).forEach(k => { out[k] = (out[k] || []).concat(src[k]); }));
+    return out;
+  }
+
   const TEMPLATES = {
     maths: MATHS,
-    pc: Object.assign({}, PC, PC_EXTRA),
+    pc: mergeTemplates(PC, PC_EXTRA),
     svt: SVT,
     hg: HG,
     anglais: EN,
