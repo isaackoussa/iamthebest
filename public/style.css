@@ -574,3 +574,22 @@ button{font-family:inherit;}
   margin:10px 0 0; color:#E8A94B; font-family:'JetBrains Mono', monospace;
   font-size:0.78rem; overflow-wrap:anywhere;
 }
+
+/* ---------- Dictée ---------- */
+.dictee-help{color:var(--ink-muted); font-size:.9rem; line-height:1.5; margin:0 0 12px;}
+.dictee-controls{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 10px;}
+.dictee-controls .btn[disabled]{opacity:.4; cursor:default;}
+.dictee-options{display:flex; flex-wrap:wrap; gap:6px 16px; margin:0 0 12px; color:var(--ink-muted); font-size:.88rem;}
+.dictee-options input{margin-right:4px; vertical-align:middle;}
+.dictee-input{width:100%; box-sizing:border-box; min-height:150px; padding:12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--bg-page); color:var(--ink-page); font-size:1.05rem; line-height:1.6; font-family:inherit; resize:vertical; margin:0 0 10px;}
+.dictee-input[readonly]{opacity:.8;}
+.dictee-score{font-size:1.1rem; margin:0 0 6px;}
+.dictee-score strong{font-size:1.5rem;}
+.dictee-kinds, .dictee-bareme, .dictee-legend{font-size:.85rem; opacity:.85; margin:6px 0;}
+.dictee-correction{line-height:2; font-size:1.02rem; margin:10px 0; padding:10px; border-radius:8px; background:rgba(0,0,0,0.15);}
+.dictee-legend span{margin-right:10px;}
+.d-err{color:#FFB4A3; border-bottom:2px solid #E8735C; padding:0 2px;}
+.d-err s{color:#E8735C; opacity:.85;}
+.d-miss{color:#FFD58A; border-bottom:2px dashed #F2B84B; padding:0 2px;}
+.d-extra s{color:#E8735C; opacity:.7;}
+.dictee-points ul{margin:6px 0 0; padding-left:20px; line-height:1.55;}

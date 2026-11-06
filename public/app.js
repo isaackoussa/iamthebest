@@ -791,6 +791,14 @@
       return opts;
     }
 
+    // La dictée n'a de sens qu'en français ; elle est proposée en premier choix
+    // quand on arrive sur le générateur depuis la page de français.
+    function typeOptions(k, current){
+      let o = `<option value="qcm" ${current==="qcm"?"selected":""}>📝 QCM</option><option value="open" ${current==="open"?"selected":""}>✏️ Exercice ouvert</option>`;
+      if (k === "francais") o += `<option value="dictee" ${current==="dictee"?"selected":""}>🎧 Dictée</option>`;
+      return o;
+    }
+
     root.innerHTML = `
       <div class="crumb"><a href="#/">Accueil</a> <span>/</span> <span>Générateur d'exercices</span></div>
       <div class="tool-header"><span class="sh-icon">🧠</span><h1>Générateur d'exercices</h1></div>
@@ -807,10 +815,7 @@
           <input type="text" id="gen-topic" class="auth-input tool-select" placeholder="Ex : les triangles semblables, le conditionnel, la Révolution française...">
         </div>
         <div class="tool-form-row">
-          <select id="gen-type" class="auth-input tool-select-sm">
-            <option value="qcm">📝 QCM</option>
-            <option value="open">✏️ Exercice ouvert</option>
-          </select>
+          <select id="gen-type" class="auth-input tool-select-sm">${typeOptions(selKey)}</select>
           <select id="gen-difficulty" class="auth-input tool-select-sm">
             <option value="facile">Facile</option>
             <option value="moyen" selected>Moyen</option>
@@ -836,14 +841,25 @@
     const genBtn = document.getElementById("gen-btn");
     const localBtn = document.getElementById("gen-local-btn");
 
+    const typeSel = document.getElementById("gen-type");
+
+    // En mode dictée, la leçon et l'IA ne servent pas : on les masque.
+    function syncDicteeMode(){
+      const dictee = typeSel.value === "dictee";
+      lessonSel.style.display = dictee ? "none" : "";
+      genBtn.style.display = dictee ? "none" : "";
+      topicRow.style.display = !dictee && lessonSel.value === "__custom__" ? "" : "none";
+      localBtn.textContent = dictee ? "🎧 Nouvelle dictée" : "⚡ Générer localement (instantané, sans IA)";
+    }
+
     subjectSel.addEventListener("change", () => {
       selKey = subjectSel.value;
       lessonSel.innerHTML = lessonOptions(selKey);
-      topicRow.style.display = lessonSel.value === "__custom__" ? "" : "none";
+      typeSel.innerHTML = typeOptions(selKey, typeSel.value);
+      syncDicteeMode();
     });
-    lessonSel.addEventListener("change", () => {
-      topicRow.style.display = lessonSel.value === "__custom__" ? "" : "none";
-    });
+    lessonSel.addEventListener("change", syncDicteeMode);
+    typeSel.addEventListener("change", syncDicteeMode);
 
     function askAgain(){
       const key = subjectSel.value;
@@ -928,6 +944,12 @@
       const type = document.getElementById("gen-type").value;
       const difficulty = document.getElementById("gen-difficulty").value;
 
+      if (type === "dictee"){
+        errEl.textContent = "";
+        renderDictee(resultEl, subj, difficulty, askLocal);
+        return;
+      }
+
       if (isCustom){
         errEl.textContent = "Le générateur local fonctionne sur une leçon de l'appli : choisis une leçon dans la liste (pas un thème libre — pour un thème libre, utilise le générateur IA).";
         return;
@@ -1005,6 +1027,154 @@
 
     genBtn.addEventListener("click", askAgain);
     localBtn.addEventListener("click", askLocal);
+    syncDicteeMode();
+  }
+
+  /* ---------- Dictée (générateur d'exercices, français) ---------- */
+
+  const DICTEE_SEEN_KEY = "imthebest_dictees_vues";
+  const DICTEE_NIVEAU = { facile:"facile", moyen:"moyen", difficile:"difficile" };
+
+  // Tire une dictée du niveau demandé, en évitant celles déjà faites
+  // (mémorisé dans le navigateur ; on recommence quand tout a été vu).
+  function pickDictee(niveau){
+    const pool = DICTEES.filter(d => d.niveau === niveau);
+    let seen = [];
+    try{ seen = JSON.parse(localStorage.getItem(DICTEE_SEEN_KEY) || "[]"); }catch(e){ seen = []; }
+    let fresh = pool.filter(d => seen.indexOf(d.id) === -1);
+    if (!fresh.length){
+      seen = seen.filter(id => !pool.some(d => d.id === id));
+      fresh = pool;
+    }
+    const d = fresh[Math.floor(Math.random() * fresh.length)];
+    seen.push(d.id);
+    try{ localStorage.setItem(DICTEE_SEEN_KEY, JSON.stringify(seen)); }catch(e){}
+    return { dictee: d, restantes: fresh.length - 1, total: pool.length };
+  }
+
+  // Synthèse vocale du navigateur, en français
+  function frVoice(){
+    if (!("speechSynthesis" in window)) return null;
+    const voices = window.speechSynthesis.getVoices() || [];
+    return voices.find(v => /^fr(-|_)FR/i.test(v.lang)) || voices.find(v => /^fr/i.test(v.lang)) || null;
+  }
+  function speak(text, rate, onEnd){
+    if (!("speechSynthesis" in window)) return false;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "fr-FR";
+    const v = frVoice();
+    if (v) u.voice = v;
+    u.rate = rate;
+    if (onEnd) u.onend = onEnd;
+    window.speechSynthesis.speak(u);
+    return true;
+  }
+
+  function renderDictee(container, subj, difficulty, onAgain){
+    const niveau = DICTEE_NIVEAU[difficulty] || "moyen";
+    const { dictee, restantes, total } = pickDictee(niveau);
+    const groups = DICTEE_ENGINE.groups(dictee.texte);
+    const hasSpeech = "speechSynthesis" in window;
+    let g = 0;                 // groupe en cours
+    let draft = "";
+    let result = null;
+    let showText = false;
+    let opts = { lent: true, dicterPonct: true, noterPonct: true };
+    const rate = () => opts.lent ? 0.72 : 0.92;
+
+    function readAll(){ speak(DICTEE_ENGINE.spoken(dictee.texte, opts.dicterPonct), rate()); }
+    function readGroup(){ speak(DICTEE_ENGINE.spoken(groups[g], opts.dicterPonct), rate() * 0.92); }
+
+    function resultHtml(){
+      const r = result;
+      // pas d'espace avant un signe de ponctuation ni après une apostrophe (l'eau, qu'il)
+      let words = "", prevApos = false;
+      r.ops.forEach(o => {
+        const tok = o.exp || o.got || "";
+        let html;
+        if (o.op === "ok") html = `<span class="d-ok">${esc(o.exp)}</span>`;
+        else if (o.op === "faute") html = `<span class="d-err" title="${esc(o.kind)}"><s>${esc(o.got)}</s> ${esc(o.exp)}</span>`;
+        else if (o.op === "oubli") html = `<span class="d-miss" title="oublié">${esc(o.exp)}</span>`;
+        else html = `<span class="d-extra" title="en trop"><s>${esc(o.got)}</s></span>`;
+        const glue = !words || prevApos || /^[.,;:!?…]$/.test(tok);
+        words += (glue ? "" : " ") + html;
+        prevApos = /'$/.test(tok) && o.op !== "ajout";
+      });
+      const errs = r.ops.filter(o => o.op !== "ok");
+      const byKind = {};
+      errs.forEach(o => { byKind[o.kind] = (byKind[o.kind] || 0) + 1; });
+      const appre = r.note >= 16 ? "Excellent ! 🎉" : r.note >= 12 ? "Bien, continue ! 👍" : r.note >= 8 ? "Assez bien, relis-toi davantage." : "Il faut t'entraîner encore : refais une dictée du même niveau.";
+      return `
+        <div class="dictee-score"><strong>${r.note} / 20</strong> — ${r.fautes} faute${r.fautes > 1 ? "s" : ""} · ${appre}</div>
+        ${errs.length ? `<p class="dictee-kinds">${Object.keys(byKind).map(k => `${esc(k)} : ${byKind[k]}`).join(" · ")}</p>` : ""}
+        <div class="dictee-correction">${words}</div>
+        <p class="dictee-legend"><span class="d-err"><s>erreur</s> correction</span> <span class="d-miss">mot ou signe oublié</span> <span class="d-extra"><s>en trop</s></span></p>
+        <div class="dictee-points"><strong>📌 Points à retenir dans cette dictée</strong><ul>${dictee.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>
+        <p class="dictee-bareme">Barème : 1 point par faute d'orthographe ou de grammaire, ½ point pour un accent, une majuscule ou un signe de ponctuation.</p>`;
+    }
+
+    function paint(){
+      container.innerHTML = `
+        <div class="quiz-card dictee-card" style="--subj-color:${subj.color}">
+          <div class="quiz-q-label">🎧 Dictée — niveau ${esc(niveau)} · ${total - restantes}/${total}</div>
+          <h2 class="quiz-question">${esc(dictee.titre)}</h2>
+          ${hasSpeech ? `
+          <p class="dictee-help">1) Écoute tout le texte. 2) Écris groupe par groupe. 3) Réécoute tout le texte pour te relire, puis clique sur « Corriger ».</p>
+          <div class="dictee-controls">
+            <button class="btn btn-primary" id="d-all">▶ Tout le texte</button>
+            <button class="btn btn-ghost" id="d-stop">⏹ Stop</button>
+          </div>
+          <div class="dictee-controls">
+            <button class="btn btn-ghost" id="d-prev" ${g === 0 ? "disabled" : ""}>⏮</button>
+            <button class="btn btn-primary" id="d-rep">🔁 Groupe ${g + 1} / ${groups.length}</button>
+            <button class="btn btn-ghost" id="d-next" ${g >= groups.length - 1 ? "disabled" : ""}>Suivant ⏭</button>
+          </div>
+          <div class="dictee-options">
+            <label><input type="checkbox" id="d-lent" ${opts.lent ? "checked" : ""}> Lecture lente</label>
+            <label><input type="checkbox" id="d-dp" ${opts.dicterPonct ? "checked" : ""}> Dicter la ponctuation</label>
+            <label><input type="checkbox" id="d-np" ${opts.noterPonct ? "checked" : ""}> Noter la ponctuation</label>
+          </div>` : `
+          <p class="tool-error">⚠️ Ce navigateur ne sait pas lire le texte à voix haute. Demande à quelqu'un de te dicter le texte (bouton « Afficher le texte » pour la personne qui dicte), puis écris-le ci-dessous.</p>`}
+          <textarea id="d-input" class="dictee-input" rows="7" placeholder="Écris la dictée ici..." autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" ${result ? "readonly" : ""}>${esc(draft)}</textarea>
+          <div class="dictee-controls">
+            ${result ? "" : `<button class="btn btn-primary" id="d-check">✅ Corriger</button>`}
+            <button class="btn btn-ghost" id="d-show">${showText ? "🙈 Masquer le texte" : "👁 Afficher le texte"}</button>
+          </div>
+          ${showText && !result ? `<div class="quiz-explain show">${esc(dictee.texte)}</div>` : ""}
+          ${result ? `<div class="quiz-explain show dictee-result">${resultHtml()}</div>` : ""}
+          <div class="quiz-footer">
+            <span></span>
+            <button class="btn btn-primary" id="d-again" style="--subj-color:${subj.color}">🎲 Autre dictée</button>
+          </div>
+        </div>`;
+
+      const $ = id => document.getElementById(id);
+      const input = $("d-input");
+      input.addEventListener("input", () => { draft = input.value; });
+      if (hasSpeech){
+        $("d-all").addEventListener("click", readAll);
+        $("d-stop").addEventListener("click", () => window.speechSynthesis.cancel());
+        $("d-rep").addEventListener("click", readGroup);
+        $("d-prev").addEventListener("click", () => { if (g > 0){ g--; paint(); readGroup(); } });
+        $("d-next").addEventListener("click", () => { if (g < groups.length - 1){ g++; paint(); readGroup(); } });
+        $("d-lent").addEventListener("change", e => { opts.lent = e.target.checked; });
+        $("d-dp").addEventListener("change", e => { opts.dicterPonct = e.target.checked; });
+        $("d-np").addEventListener("change", e => { opts.noterPonct = e.target.checked; });
+      }
+      if ($("d-check")) $("d-check").addEventListener("click", () => {
+        if (!draft.trim()) { input.focus(); return; }
+        if (hasSpeech) window.speechSynthesis.cancel();
+        result = DICTEE_ENGINE.compare(dictee.texte, draft, { ponctuation: opts.noterPonct });
+        showText = false;
+        paint();
+      });
+      $("d-show").addEventListener("click", () => { showText = !showText; paint(); });
+      $("d-again").addEventListener("click", () => { if (hasSpeech) window.speechSynthesis.cancel(); onAgain(); });
+    }
+    // certaines plateformes chargent les voix en différé
+    if (hasSpeech && !window.speechSynthesis.getVoices().length) window.speechSynthesis.onvoiceschanged = () => {};
+    paint();
   }
 
   /* ---------- Console d'administration ---------- */
