@@ -593,3 +593,14 @@ button{font-family:inherit;}
 .d-miss{color:#FFD58A; border-bottom:2px dashed #F2B84B; padding:0 2px;}
 .d-extra s{color:#E8735C; opacity:.7;}
 .dictee-points ul{margin:6px 0 0; padding-left:20px; line-height:1.55;}
+.dictee-source{color:var(--ink-muted); font-size:.9rem; margin:-4px 0 14px;}
+.dictee-part{font-size:1rem; margin:18px 0 8px; color:var(--ink-chalk);}
+.dictee-part span{font-weight:normal; color:var(--ink-muted); font-size:.85rem;}
+.dictee-texte{background:var(--bg-page); color:var(--ink-page); border-radius:10px; padding:14px; line-height:1.9; font-size:1.08rem; margin:0 0 12px;}
+.dictee-groups{background:var(--bg-page); color:var(--ink-page); border-radius:10px; padding:12px 12px 12px 34px; line-height:1.7; margin:0 0 12px;}
+.dictee-groups li{margin:0 0 4px;}
+.dictee-questions{color:var(--ink-chalk); line-height:1.6; padding-left:22px; margin:0 0 12px;}
+.dictee-questions li{margin:0 0 8px;}
+.dictee-points ol{margin:6px 0 0; padding-left:20px; line-height:1.55;}
+.dictee-points ol li{margin:0 0 8px;}
+.dictee-points + .dictee-points{margin-top:12px;}

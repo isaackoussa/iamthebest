@@ -816,6 +816,10 @@
         </div>
         <div class="tool-form-row">
           <select id="gen-type" class="auth-input tool-select-sm">${typeOptions(selKey)}</select>
+          <select id="gen-dmode" class="auth-input tool-select-sm" style="display:none; flex:1 1 230px;">
+            <option value="oeuvre">📖 Je dicte moi-même (textes d'œuvres)</option>
+            <option value="audio">🔊 L'appli dicte (audio)</option>
+          </select>
           <select id="gen-difficulty" class="auth-input tool-select-sm">
             <option value="facile">Facile</option>
             <option value="moyen" selected>Moyen</option>
@@ -847,6 +851,7 @@
     function syncDicteeMode(){
       const dictee = typeSel.value === "dictee";
       lessonSel.style.display = dictee ? "none" : "";
+      document.getElementById("gen-dmode").style.display = dictee ? "" : "none";
       genBtn.style.display = dictee ? "none" : "";
       topicRow.style.display = !dictee && lessonSel.value === "__custom__" ? "" : "none";
       localBtn.textContent = dictee ? "🎧 Nouvelle dictée" : "⚡ Générer localement (instantané, sans IA)";
@@ -946,7 +951,8 @@
 
       if (type === "dictee"){
         errEl.textContent = "";
-        renderDictee(resultEl, subj, difficulty, askLocal);
+        if (document.getElementById("gen-dmode").value === "audio") renderDictee(resultEl, subj, difficulty, askLocal);
+        else renderDicteeOeuvre(resultEl, subj, difficulty, askLocal);
         return;
       }
 
@@ -1028,6 +1034,104 @@
     genBtn.addEventListener("click", askAgain);
     localBtn.addEventListener("click", askLocal);
     syncDicteeMode();
+  }
+
+  /* ---------- Dictée tirée d'une œuvre, dictée par l'adulte ---------- */
+
+  const OEUVRE_SEEN_KEY = "imthebest_dictees_oeuvres_vues";
+
+  function pickFrom(list, niveau, key){
+    const pool = list.filter(d => d.niveau === niveau);
+    let seen = [];
+    try{ seen = JSON.parse(localStorage.getItem(key) || "[]"); }catch(e){ seen = []; }
+    let fresh = pool.filter(d => seen.indexOf(d.id) === -1);
+    if (!fresh.length){ seen = seen.filter(id => !pool.some(d => d.id === id)); fresh = pool; }
+    const d = fresh[Math.floor(Math.random() * fresh.length)];
+    seen.push(d.id);
+    try{ localStorage.setItem(key, JSON.stringify(seen)); }catch(e){}
+    return { item: d, rang: pool.length - fresh.length + 1, total: pool.length };
+  }
+
+  // Deux fiches imprimables : fiche élève (questions + lignes) et fiche correcteur
+  function printOeuvre(d){
+    const source = `D'après ${esc(d.auteur)}, <em>${esc(d.oeuvre)}</em> (${esc(d.annee)})`;
+    const lignes = Array.from({ length: 12 }, () => `<div class="ligne"></div>`).join("");
+    const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Dictée — ${esc(d.titre)}</title>
+      <style>
+        body{font-family:Georgia,serif; color:#111; margin:24px; line-height:1.5;}
+        h1{font-size:20px; margin:0 0 4px;} h2{font-size:16px; margin:18px 0 6px;}
+        .src{font-size:13px; color:#444; margin:0 0 10px;} .entete{display:flex; justify-content:space-between; font-size:13px; margin-bottom:10px;}
+        .ligne{border-bottom:1px solid #999; height:30px;} ol{padding-left:22px;} li{margin:0 0 10px;}
+        .rep{color:#333;} .texte{font-size:16px; line-height:1.8; border:1px solid #999; padding:10px;}
+        .saut{page-break-before:always;}
+      </style></head><body>
+      <div class="entete"><span>Nom : ................................................</span><span>Classe : 4ème ......</span><span>Date : ............</span></div>
+      <h1>Dictée : ${esc(d.titre)}</h1><p class="src">${source} — niveau ${esc(d.niveau)}</p>
+      <h2>Partie 1 — Dictée</h2>${lignes}
+      <h2>Partie 2 — Questions</h2><ol>${d.questions.map(q => `<li>${esc(q.q)}<div class="ligne"></div><div class="ligne"></div></li>`).join("")}</ol>
+      <div class="saut"></div>
+      <h1>Corrigé — ${esc(d.titre)}</h1><p class="src">${source}</p>
+      <h2>Texte de la dictée</h2><div class="texte">${esc(d.texte)}</div>
+      <h2>Les pièges de la dictée</h2><ul>${d.pieges.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+      <h2>Réponses aux questions</h2><ol>${d.questions.map(q => `<li><strong>${esc(q.q)}</strong><br><span class="rep">${esc(q.r)}</span></li>`).join("")}</ol>
+      <p class="src">Barème conseillé pour la dictée : − 1 point par faute d'orthographe ou de grammaire, − ½ point pour un accent, une majuscule ou une ponctuation.</p>
+      </body></html>`;
+    const frame = document.createElement("iframe");
+    frame.style.cssText = "position:fixed; right:0; bottom:0; width:0; height:0; border:0;";
+    document.body.appendChild(frame);
+    const doc = frame.contentWindow.document;
+    doc.open(); doc.write(html); doc.close();
+    setTimeout(() => { frame.contentWindow.focus(); frame.contentWindow.print(); setTimeout(() => frame.remove(), 1000); }, 250);
+  }
+
+  function renderDicteeOeuvre(container, subj, difficulty, onAgain){
+    const niveau = DICTEE_NIVEAU[difficulty] || "moyen";
+    const { item: d, rang, total } = pickFrom(DICTEES_OEUVRES, niveau, OEUVRE_SEEN_KEY);
+    const groups = DICTEE_ENGINE.groups(d.texte);
+    let showText = true, showGroups = false, showCorrige = false;
+
+    function paint(){
+      container.innerHTML = `
+        <div class="quiz-card dictee-card" style="--subj-color:${subj.color}">
+          <div class="quiz-q-label">📖 Dictée d'œuvre — niveau ${esc(niveau)} · ${rang}/${total}</div>
+          <h2 class="quiz-question">${esc(d.titre)}</h2>
+          <p class="dictee-source">D'après ${esc(d.auteur)}, <em>${esc(d.oeuvre)}</em> (${esc(d.annee)})</p>
+
+          <h3 class="dictee-part">Partie 1 — Texte à dicter <span>(pour l'adulte)</span></h3>
+          <p class="dictee-help">Lisez le texte une fois en entier, puis groupe par groupe (deux fois chacun) en dictant la ponctuation, puis relisez tout le texte pour que l'élève se corrige.</p>
+          <div class="dictee-controls">
+            <button class="btn btn-ghost" id="o-show">${showText ? "🙈 Cacher le texte" : "👁 Afficher le texte"}</button>
+            ${showText ? `<button class="btn btn-ghost" id="o-groups">${showGroups ? "📄 Texte continu" : "✂️ Découper en groupes"}</button>` : ""}
+          </div>
+          ${showText ? (showGroups
+            ? `<ol class="dictee-groups">${groups.map(g => `<li>${esc(g)}</li>`).join("")}</ol>`
+            : `<div class="dictee-texte">${esc(d.texte)}</div>`) : ""}
+
+          <h3 class="dictee-part">Partie 2 — Questions <span>(à recopier par l'élève)</span></h3>
+          <ol class="dictee-questions">${d.questions.map(q => `<li>${esc(q.q)}</li>`).join("")}</ol>
+
+          <div class="dictee-controls">
+            <button class="btn btn-primary" id="o-corrige">${showCorrige ? "Masquer le corrigé" : "✅ Afficher le corrigé"}</button>
+            <button class="btn btn-ghost" id="o-print">🖨 Imprimer les fiches</button>
+          </div>
+          ${showCorrige ? `<div class="quiz-explain show dictee-result">
+            <div class="dictee-points"><strong>📌 Les pièges de la dictée</strong><ul>${d.pieges.map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>
+            <div class="dictee-points"><strong>📝 Réponses aux questions</strong><ol>${d.questions.map(q => `<li><em>${esc(q.q)}</em><br>${esc(q.r)}</li>`).join("")}</ol></div>
+            <p class="dictee-bareme">Barème conseillé : − 1 point par faute d'orthographe ou de grammaire, − ½ point pour un accent, une majuscule ou une ponctuation.</p>
+          </div>` : ""}
+          <div class="quiz-footer">
+            <span></span>
+            <button class="btn btn-primary" id="o-again" style="--subj-color:${subj.color}">🎲 Autre dictée</button>
+          </div>
+        </div>`;
+      const $ = id => document.getElementById(id);
+      $("o-show").addEventListener("click", () => { showText = !showText; paint(); });
+      if ($("o-groups")) $("o-groups").addEventListener("click", () => { showGroups = !showGroups; paint(); });
+      $("o-corrige").addEventListener("click", () => { showCorrige = !showCorrige; paint(); });
+      $("o-print").addEventListener("click", () => printOeuvre(d));
+      $("o-again").addEventListener("click", onAgain);
+    }
+    paint();
   }
 
   /* ---------- Dictée (générateur d'exercices, français) ---------- */
