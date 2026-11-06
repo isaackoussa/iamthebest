@@ -237,6 +237,10 @@ button{font-family:inherit;}
 .page-sheet table{border-collapse:collapse; width:100%; margin:0 0 16px; font-size:0.92rem;}
 .page-sheet table th, .page-sheet table td{border:1px solid rgba(43,42,36,0.18); padding:6px 10px; text-align:left;}
 .page-sheet table th{background:rgba(43,42,36,0.06);}
+@media (max-width:480px){
+  .page-sheet table{font-size:0.8rem;}
+  .page-sheet table th, .page-sheet table td{padding:4px 5px; overflow-wrap:anywhere; hyphens:auto;}
+}
 
 .lesson-actions{display:flex; gap:12px; margin-top:22px; flex-wrap:wrap;}
 

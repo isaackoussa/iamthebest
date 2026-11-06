@@ -5,7 +5,7 @@
 //  2) Pool de secours : pour toute leçon (y compris celles sans template), on pioche parmi
 //     le quiz de la leçon + ses exercices de pratique, on mélange l'ordre des options d'un
 //     QCM (en recalculant l'index de la bonne réponse), et on évite de répéter deux fois de
-//     suite le même item -> chaque clic donne un rendu différent, pour les 85 leçons.
+//     suite le même item -> chaque clic donne un rendu différent, pour les 89 leçons.
 const LOCAL_GEN = (function(){
 
   /* ---------- Utilitaires ---------- */
@@ -917,6 +917,32 @@ const LOCAL_GEN = (function(){
   ];
 
   const HG = {
+    h9: [
+      () => bankQcm([
+          { p:"les Akan (Baoulé, Agni, Abron)", a:"un pouvoir centralisé autour d'un roi" },
+          { p:"les Malinké et le royaume de Kong", a:"un pouvoir centralisé et une société de castes" },
+          { p:"les Krou (Bété, Dida, Wè)", a:"des sociétés lignagères dirigées par les anciens" },
+          { p:"les Mandé du Sud (Dan, Gouro)", a:"des sociétés lignagères dirigées par les anciens" },
+          { p:"les peuples lagunaires (Ébrié, Attié, Adioukrou)", a:"un pouvoir exercé par des classes d'âge" },
+          { p:"les Sénoufo", a:"des lignages autour du chef de terre et du Poro" }
+        ], i => `Quelle organisation politique caractérise ${i.p} ?`, i => `${i.p.charAt(0).toUpperCase()+i.p.slice(1)} : ${i.a}.`),
+      () => bankQcm([
+          { p:"l'héritage et le pouvoir se transmettent par la lignée de la mère", a:"une société matrilinéaire" },
+          { p:"l'héritage et le pouvoir se transmettent par la lignée du père", a:"une société patrilinéaire" },
+          { p:"les hommes d'une même génération exercent le pouvoir à tour de rôle", a:"un système de classes d'âge" },
+          { p:"la société distingue nobles, forgerons, griots et captifs", a:"une société de castes" },
+          { p:"un roi commande à des chefs de province et de village", a:"un État centralisé" }
+        ], i => `Comment appelle-t-on une organisation où ${i.p} ?`, i => `C'est ${i.a}.`)
+    ],
+    h10: [
+      () => bankQcm([
+          { s:"Les communes dépendent des dotations de l'État et les impôts locaux rentrent mal.", a:"un manque de moyens financiers" },
+          { s:"Le préfet et le maire se disputent la gestion d'un marché.", a:"un conflit de compétences" },
+          { s:"Il faut payer pour obtenir plus vite un acte administratif.", a:"la corruption" },
+          { s:"Les hôpitaux et les universités sont surtout installés à Abidjan.", a:"des déséquilibres régionaux" },
+          { s:"Des habitants cassent les lampadaires et refusent de payer les taxes.", a:"l'incivisme des citoyens" }
+        ], i => `« ${i.s} » Quelle insuffisance de l'organisation administrative cette situation illustre-t-elle ?`, i => `Cette situation illustre ${i.a}.`)
+    ],
     h1: [
       () => bankQcm(PEUPLES_CI, i => `À quel grand groupe culturel de Côte d'Ivoire appartiennent ${i.n} ?`,
             i => `${i.n.charAt(0).toUpperCase()+i.n.slice(1)} appartiennent à ${i.a}.`, GROUPES_CULTURELS),
@@ -1135,6 +1161,19 @@ const LOCAL_GEN = (function(){
   ];
 
   const EN = {
+    au8: [
+      () => bankQcm([
+          { w:"the keyboard", a:"le clavier" }, { w:"the mouse", a:"la souris" }, { w:"the screen", a:"l'écran" },
+          { w:"the printer", a:"l'imprimante" }, { w:"a search engine", a:"un moteur de recherche" }, { w:"a password", a:"un mot de passe" },
+          { w:"to download", a:"télécharger" }, { w:"to hang up", a:"raccrocher" }, { w:"a charger", a:"un chargeur" },
+          { w:"an attachment", a:"une pièce jointe" }, { w:"to dial a number", a:"composer un numéro" }, { w:"a website", a:"un site web" }
+        ], i => `What is the French for « ${i.w} »?`, i => `« ${i.w} » = ${i.a}.`),
+      () => bankQcm([
+          { d:"to print documents", a:"a printer" }, { d:"typing texts", a:"a keyboard" }, { d:"clicking on icons", a:"a mouse" },
+          { d:"recharging a phone battery", a:"a charger" }, { d:"finding information on the Internet", a:"a search engine" },
+          { d:"protecting your e-mail account", a:"a password" }
+        ], i => `Which object is used ${i.d.startsWith("to ") ? i.d : "for " + i.d}?`, i => `${i.a.charAt(0).toUpperCase()+i.a.slice(1)} is used ${i.d.startsWith("to ") ? i.d : "for " + i.d}.`)
+    ],
     a1: [
       () => {
         const v = pick(EN_VERBS), sub = pick(EN_SUBJ3);
@@ -1738,6 +1777,17 @@ const LOCAL_GEN = (function(){
   ];
 
   const FR = {
+    f26: [
+      () => bankQcm([
+          { p:"le texte au dos du livre qui résume l'histoire", a:"la quatrième de couverture" },
+          { p:"le grand sujet abordé par l'œuvre (ex. : le mariage forcé)", a:"un thème" },
+          { p:"ce que l'auteur veut faire comprendre ou dénoncer", a:"le message de l'œuvre" },
+          { p:"le personnage qui aide le héros", a:"un adjuvant" },
+          { p:"le personnage qui fait obstacle au héros", a:"un opposant" },
+          { p:"ce que le texte semble montrer, à vérifier par des indices", a:"l'hypothèse de lecture" },
+          { p:"les lieux et l'époque de l'histoire", a:"le cadre spatio-temporel" }
+        ], i => `Dans l'étude d'une œuvre intégrale, comment appelle-t-on ${i.p} ?`, i => `${i.p.charAt(0).toUpperCase()+i.p.slice(1)} : c'est ${i.a}.`)
+    ],
     f1: [
       () => bankQcm([
           { p:"le moment où l'on présente les personnages, le lieu et l'époque, avant tout problème", a:"la situation initiale" },

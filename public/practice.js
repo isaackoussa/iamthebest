@@ -271,6 +271,25 @@ const PRACTICE = {
     { statement:"Make a suggestion using 'Why don't...?': 'Our classroom is dirty.'", solution:"'Our classroom is dirty. <strong>Why don't we clean it?</strong>'" }
   ],
 
+  // ---------- Compléments au programme officiel ----------
+  au8: [
+    { statement:"Name four parts of a computer and say what one of them is used for.", solution:"<p>The screen, the keyboard, the mouse, the printer. Example: <strong>a printer is used to print documents</strong>.</p>" },
+    { statement:"Give the opposite of: to switch on ; to download ; to pick up (the phone) ; online.", solution:"<p>To switch off ; to upload ; to hang up ; offline.</p>" },
+    { statement:"Write two advantages and one danger of the Internet.", solution:"<p>Advantages: <em>we can do research / we can communicate quickly with people far away</em>. Danger: <em>cybercrime, fake news or addiction to social networks</em>.</p>" }
+  ],
+  h9: [
+    { statement:"Distingue une société à pouvoir centralisé d'une société à pouvoir non centralisé, avec un exemple pour chacune.", solution:"<p>Pouvoir <strong>centralisé</strong> : un roi commande un territoire et des chefs qui lui sont soumis (royaume abron du Gyaman, royaume de Kong). Pouvoir <strong>non centralisé</strong> : pas de roi, le village est dirigé par le chef de lignage et le conseil des anciens (Bété) ou par des classes d'âge (Ébrié).</p>" },
+    { statement:"Schématise l'organisation politique d'un royaume akan.", solution:"<p><strong>Roi</strong> (avec ses conseillers) → <strong>chefs de province</strong> → <strong>chefs de village</strong> → <strong>chefs de famille</strong>.</p>" }
+  ],
+  h10: [
+    { statement:"Cite trois obstacles au bon fonctionnement de l'administration en Côte d'Ivoire.", solution:"<p>Le manque de moyens financiers des collectivités ; le manque de personnel qualifié ; la corruption et les lenteurs administratives (ou : les conflits de compétences, la concentration des services à Abidjan).</p>" },
+    { statement:"Propose trois actions d'un citoyen pour améliorer le fonctionnement de sa commune.", solution:"<p>Payer ses impôts et taxes ; respecter et protéger les biens publics ; voter aux élections locales et dénoncer la corruption.</p>" }
+  ],
+  f26: [
+    { statement:"Quelles informations relève-t-on pour présenter une œuvre intégrale ?", solution:"<p>Le titre, l'auteur et sa nationalité, la maison d'édition, l'année de publication, le genre, le nombre de chapitres, la couverture et la quatrième de couverture.</p>" },
+    { statement:"Cite dans l'ordre les quatre étapes d'une lecture méthodique.", solution:"<p>1) Situer l'extrait ; 2) formuler une hypothèse de lecture ; 3) vérifier l'hypothèse à l'aide d'indices du texte ; 4) conclure.</p>" }
+  ],
+
   // ---------- PHYSIQUE-CHIMIE ----------
   pc1: [
     { statement:"Range dans un tableau (sources primaires / sources secondaires) : soleil, luciole, nuage, étoile, lune, arbre éclairé.", solution:"<p>Sources primaires : <strong>soleil, luciole, étoile</strong>. Sources secondaires : <strong>lune, arbre éclairé, nuage</strong>.</p>" },

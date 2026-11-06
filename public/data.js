@@ -676,6 +676,36 @@ francais: {
       ]
     },
     {
+      id: "f26",
+      title: "L'œuvre intégrale : lecture méthodique d'un roman",
+      content: `<p>Le programme de 4ème prévoit l'étude d'une <strong>œuvre intégrale</strong> : un livre entier (souvent un roman ou une nouvelle africaine) lu en dehors de la classe puis étudié en classe. Il ne s'agit pas seulement de raconter l'histoire, mais de <strong>construire le sens</strong> de l'œuvre.</p>
+      <h3>1. La présentation de l'œuvre (le paratexte)</h3>
+      <p>On relève : le <strong>titre</strong>, le nom de l'<strong>auteur</strong> et sa nationalité, la <strong>maison d'édition</strong>, l'<strong>année de publication</strong>, le <strong>genre</strong> (roman, nouvelle, conte, pièce de théâtre), le nombre de chapitres ou de parties, l'illustration de la couverture et la quatrième de couverture (le résumé au dos du livre).</p>
+      <h3>2. L'étude de l'histoire</h3>
+      <ul>
+        <li><strong>Le résumé</strong> : situation initiale, élément perturbateur, péripéties, élément de résolution, situation finale (schéma narratif).</li>
+        <li><strong>Les personnages</strong> : le personnage principal (héros), les personnages secondaires ; leur portrait physique et moral ; leur rôle (adjuvant, opposant).</li>
+        <li><strong>Le cadre</strong> : les <strong>lieux</strong> (village, ville, pays) et le <strong>temps</strong> (époque, durée de l'histoire).</li>
+        <li><strong>Le narrateur</strong> : un narrateur extérieur (récit à la 3ᵉ personne) ou un narrateur personnage (récit à la 1ʳᵉ personne).</li>
+      </ul>
+      <h3>3. Les thèmes et le message</h3>
+      <p>On identifie les <strong>thèmes</strong> (les grands sujets abordés : l'éducation, le mariage forcé, la corruption, l'exode rural, la tradition et la modernité…) et le <strong>message</strong> de l'auteur (ce qu'il veut faire comprendre ou dénoncer). On donne enfin son <strong>appréciation personnelle</strong>, justifiée par des exemples tirés du livre.</p>
+      <h3>4. La lecture méthodique d'un extrait</h3>
+      <p>Pour étudier un passage : 1) <strong>situer</strong> l'extrait dans l'œuvre ; 2) formuler une <strong>hypothèse de lecture</strong> (ce que le texte semble montrer) ; 3) <strong>vérifier</strong> cette hypothèse en relevant des indices (champs lexicaux, figures de style, temps verbaux, ponctuation) ; 4) <strong>conclure</strong> en confirmant ou en corrigeant l'hypothèse.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> pendant la lecture, tiens une <strong>fiche de lecture</strong> : à chaque chapitre, note en deux lignes ce qui se passe, les personnages qui apparaissent et une citation importante (avec la page). Ce sera ta meilleure aide pour l'exposé et les évaluations.</p>
+      <h3>📝 Explication détaillée et exemple corrigé</h3>
+      <p>Hypothèse de lecture pour un extrait où un père annonce à sa fille qu'elle va épouser un homme qu'elle ne connaît pas : « <em>Le texte dénonce le mariage forcé.</em> » Indices à relever : le champ lexical de la contrainte (<em>obéir, ordonner, décider</em>), les pleurs et le silence de la jeune fille (sentiments), les phrases impératives du père. Conclusion : l'hypothèse est confirmée ; l'auteur critique une tradition qui ne tient pas compte de l'avis de la femme.</p>
+      <h3>📌 Point du programme à ne pas manquer : ne pas confondre thème et résumé</h3><p>Le <strong>résumé</strong> raconte ce qui se passe ; le <strong>thème</strong> dit de quoi parle l'œuvre en profondeur. « Une jeune fille fuit son village pour échapper à un mariage » est un élément du résumé ; « le mariage forcé » et « la liberté de la femme » sont des thèmes.</p>`,
+      quiz: [
+        {q:"Une œuvre intégrale est...", options:["un extrait de texte","un livre entier étudié en classe","un poème de deux lignes","un article de journal"], correct:1, exp:"On étudie l'œuvre dans sa totalité, pas seulement un extrait."},
+        {q:"La quatrième de couverture est...", options:["la première page du roman","le texte au dos du livre","le chapitre 4","la liste des personnages"], correct:1, exp:"C'est le dos du livre, qui présente souvent un résumé."},
+        {q:"Le thème d'une œuvre est...", options:["le nom de l'auteur","le grand sujet abordé par l'œuvre","le nombre de pages","la maison d'édition"], correct:1, exp:"Ex. : le mariage forcé, l'éducation, la corruption."},
+        {q:"Dans un récit écrit à la 1ʳᵉ personne, le narrateur est...", options:["extérieur à l'histoire","un personnage de l'histoire","toujours l'éditeur","absent"], correct:1, exp:"« Je » : le narrateur participe à l'histoire."},
+        {q:"La première étape d'une lecture méthodique est de...", options:["conclure","situer l'extrait et formuler une hypothèse de lecture","recopier le texte","compter les mots"], correct:1, exp:"On situe l'extrait, on formule une hypothèse, on la vérifie, puis on conclut."},
+        {q:"Un adjuvant est un personnage qui...", options:["aide le héros","s'oppose au héros","raconte l'histoire","écrit le livre"], correct:0, exp:"L'adjuvant aide le héros ; l'opposant lui fait obstacle."}
+      ]
+    },
+    {
       id: "f13",
       title: "Le texte explicatif",
       content: `<p>Le <strong>texte explicatif</strong> a pour but de faire comprendre un phénomène naturel, scientifique ou socioculturel à un lecteur, en répondant surtout à la question « pourquoi » ou « comment ».</p>
@@ -1390,7 +1420,7 @@ anglais: {
       <h3>1. Donner un conseil : should / shouldn't</h3>
       <p><strong>Should</strong> + base verbale exprime un conseil. <strong>Shouldn't</strong> pour un conseil négatif.</p>
       <p><em>You should go to hospital when you are sick. / You shouldn't drink dirty water.</em></p>
-      <p><strong>Vocabulaire :</strong> a disease (une maladie), sick ≠ healthy, a fever (fièvre), a medicine, a tablet/a pill, a chemistry (pharmacie), a prescription, to recover (guérir), to suffer from, a headache, a stomach ache, to vomit, malaria, a mosquito bite.</p>
+      <p><strong>Vocabulaire :</strong> a disease (une maladie), sick ≠ healthy, a fever (fièvre), a medicine, a tablet/a pill, a chemist's / a pharmacy (pharmacie), a prescription, to recover (guérir), to suffer from, a headache, a stomach ache, to vomit, malaria, a mosquito bite.</p>
 
       <h3>2. La voix passive pour décrire une action en cours</h3>
       <p>Structure : sujet + <strong>be</strong> (conjugué) + <strong>participe passé</strong>, y compris au présent continu (<strong>be being + participe passé</strong>).</p>
@@ -1408,6 +1438,46 @@ anglais: {
         {q:"« The patient's temperature ___ by the doctor right now. » (passif, présent continu)", options:["is taken","is being taken","was taken","takes"], correct:1, exp:"Voix passive au présent continu : is/are being + participe passé."},
         {q:"« ___ you think it is important to keep our school clean? »", options:["Are","Do","Can","Have"], correct:1, exp:"« Do you think... » sert à demander une opinion."},
         {q:"« Our classroom is dirty. ___ we clean it? » (suggestion)", options:["Why don't","Why not to","Should not","Can't"], correct:0, exp:"« Why don't we...? » sert à faire une suggestion."}
+      ]
+    },
+    {
+      id: "au8",
+      title: "Unit 8 – ICTs: the computer, the telephone and the Internet",
+      content: `<p>📘 Programme officiel « Theme 8 – Information and Communication Technologies (ICTs) » : trois leçons de <strong>compréhension écrite</strong> (reading) sur l'ordinateur, le téléphone et Internet. Il faut connaître le vocabulaire, repérer l'idée générale et les idées secondaires d'un texte, et deviner le sens des mots grâce au contexte.</p>
+
+      <h3>1. The computer (l'ordinateur)</h3>
+      <p><strong>Les parties :</strong> the screen / the monitor (l'écran), the keyboard (le clavier), the mouse (la souris), the central unit / the CPU (l'unité centrale), the printer (l'imprimante), the speakers (les haut-parleurs), a USB key / a flash drive (une clé USB), the hard disk (le disque dur).</p>
+      <p><strong>Les actions :</strong> to switch on / to turn on (allumer) ≠ to switch off / to shut down (éteindre), to type (taper), to click (cliquer), to save a file (enregistrer un fichier), to print (imprimer), to delete (supprimer), to copy and paste (copier-coller).</p>
+      <p><strong>Structure pour décrire une fonction :</strong> <em>A … is used to + base verbale</em> / <em>We use a … to / for + V-ing</em>. <em>A printer is used to print documents. — We use a keyboard for typing texts.</em></p>
+
+      <h3>2. The telephone (le téléphone)</h3>
+      <p><strong>Vocabulaire :</strong> a mobile phone / a cell phone (un portable), a smartphone, a landline (un fixe), a SIM card, the battery (la batterie), a charger (un chargeur), a call (un appel), a text message / an SMS, a missed call (un appel manqué), the ringtone (la sonnerie), credit / airtime (le crédit).</p>
+      <p><strong>Actions :</strong> to call / to phone / to ring somebody (appeler), to dial a number (composer), to answer / to pick up (décrocher) ≠ to hang up (raccrocher), to send a text (envoyer un SMS), to charge the battery (recharger), to top up (recharger son crédit).</p>
+      <p><em>Can I speak to Mr Koné, please? — Hold on, please. / Hold the line. — I'll call you back.</em></p>
+
+      <h3>3. The Internet</h3>
+      <p><strong>Vocabulaire :</strong> a website (un site web), a web page, a browser (un navigateur), a search engine (un moteur de recherche), to surf / to browse the Internet (naviguer), to download (télécharger) ≠ to upload (mettre en ligne), an e-mail, an attachment (une pièce jointe), a password (un mot de passe), social networks (les réseaux sociaux), online (en ligne) ≠ offline, a cybercafé.</p>
+      <p><strong>Avantages et dangers :</strong> the Internet helps us to <em>do research, communicate quickly, learn online, buy things</em>. But we must be careful: <em>cybercrime, fake news, addiction, sharing personal information</em>.</p>
+
+      <h3>4. Méthode de lecture (reading techniques)</h3>
+      <ul>
+        <li><strong>Skimming</strong> : lire rapidement pour trouver l'<strong>idée générale</strong> (le titre et la première phrase de chaque paragraphe aident beaucoup).</li>
+        <li><strong>Scanning</strong> : chercher une <strong>information précise</strong> (une date, un nom, un chiffre).</li>
+        <li><strong>Deviner un mot</strong> grâce au contexte, aux mots transparents (computer, Internet, digital) et aux liens logiques : <em>but</em> (opposition), <em>because</em> (cause), <em>so</em> (conséquence), <em>first… then… finally</em> (étapes).</li>
+      </ul>
+
+      <h3>📝 Explication détaillée et exemple corrigé</h3>
+      <p><em>« Today, many students in Abidjan use the Internet to do their homework. They search for information on websites and send their work to their teachers by e-mail. However, some of them spend too much time on social networks. »</em></p>
+      <p>1) Idée générale : <strong>students use the Internet for their studies, but some waste time on social networks</strong>. 2) Deux usages : <strong>to search for information / to send homework by e-mail</strong>. 3) Le mot <em>However</em> introduit une <strong>opposition</strong> (= but).</p>
+      <h3>📌 Point du programme à ne pas manquer : « used to + V » ou « used for + V-ing » ?</h3><p>Pour décrire la fonction d'un appareil, on dit <strong>« A mouse is used to click »</strong> ou <strong>« A mouse is used for clicking »</strong>. Ne pas confondre avec <strong>« I used to play »</strong> (Unit 4), qui exprime une habitude passée.</p>`,
+      quiz: [
+        {q:"Which part of a computer do we use for typing?", options:["the mouse","the keyboard","the screen","the printer"], correct:1, exp:"The keyboard (le clavier) is used for typing."},
+        {q:"« A printer is used to ___ documents. »", options:["print","printing","printed","prints"], correct:0, exp:"« be used to + base verbale » : used to print."},
+        {q:"« To hang up » means...", options:["décrocher","raccrocher","composer un numéro","recharger"], correct:1, exp:"To hang up = raccrocher ; to pick up / to answer = décrocher."},
+        {q:"A program that helps you find information on the Internet is...", options:["a password","a search engine","a SIM card","a charger"], correct:1, exp:"A search engine = un moteur de recherche."},
+        {q:"« To download » is the opposite of...", options:["to upload","to delete","to print","to save"], correct:0, exp:"Download (télécharger) ≠ upload (mettre en ligne)."},
+        {q:"Reading a text quickly to find its general idea is called...", options:["scanning","skimming","typing","dialling"], correct:1, exp:"Skimming = lecture rapide pour l'idée générale ; scanning = recherche d'une information précise."},
+        {q:"« However » expresses...", options:["a cause","an opposition","a consequence","a time"], correct:1, exp:"However = cependant : il introduit une opposition, comme « but »."}
       ]
     }
   ]
@@ -1894,20 +1964,34 @@ hg: {
       ]
     },
     {
-      id: "h2",
-      title: "L'arrivée des Européens et l'évolution des contacts avec la Côte d'Ivoire (XVe-XVIIIe siècle)",
-      content: `<p>Les premiers Européens à atteindre le golfe de Guinée furent les <strong>Portugais</strong> : João de Santarém et Pêro Escobar, vers 1470, qui installèrent un commerce d'épices et d'ivoire le long des côtes Krou. Plusieurs noms de lieux actuels, comme <strong>Sassandra</strong> et <strong>San-Pédro</strong>, gardent la trace de cette époque. Les <strong>Néerlandais</strong> leur succédèrent au XVIe siècle, puis la <strong>France</strong> et l'<strong>Angleterre</strong> dominèrent le commerce côtier à partir du milieu du XVIIe siècle.</p>
-      <p><strong>Motivations européennes :</strong> la recherche de produits tropicaux et d'épices (mil, coton, matières précieuses) ainsi que des objectifs religieux — convertir les populations locales au christianisme, en réaction à l'expansion de l'islam venue du nord.</p>
-      <p>Le littoral fut divisé en trois zones commerciales : la <strong>Côte des Graines</strong> (à l'ouest), la <strong>Côte des Dents</strong> (au centre) et la <strong>Côte des Quaquas</strong> (à l'est). Les échanges se faisaient par <strong>troc</strong> : les Européens offraient des barres de fer, du corail, des parfums et des textiles contre des produits tropicaux et des minéraux, puis, à partir du XVIIIe siècle, contre des esclaves. La France établit un comptoir à <strong>Assinie</strong> dès 1687 et signa des traités avec les royaumes Essouma, Abouré et Sanwi au XIXe siècle.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Ce contact progressif eut des conséquences profondes des deux côtés : pour la Côte d'Ivoire, désorganisation économique, déclin démographique lié à l'esclavage, mais aussi changements culturels (introduction de nouvelles cultures comme le maïs, le manioc, la tomate) et insécurité croissante ; pour l'Europe, émergence d'une bourgeoisie commerciale, développement des ports, enrichissement national et rivalités accrues entre puissances européennes.</p>
+      id: "h9",
+      title: "L'organisation sociopolitique des peuples de Côte d'Ivoire",
+      content: `<p>Du XVIe au XVIIIe siècle, les peuples installés en Côte d'Ivoire ont développé des <strong>organisations sociales</strong> (famille, lignage, classes d'âge, castes) et des <strong>systèmes politiques</strong> (manières d'exercer le pouvoir) très variés. On les regroupe en deux grands types.</p>
+      <h3>1. Les sociétés à pouvoir centralisé (États et royaumes)</h3>
+      <ul>
+        <li><strong>Les Akan</strong> (Baoulé, Agni, Abron…) : le pouvoir est concentré entre les mains d'un <strong>roi</strong>, entouré de <strong>conseillers</strong> et de chefs de province et de village qui lui obéissent. La succession est souvent <strong>matrilinéaire</strong> (l'héritier est pris dans la famille de la mère, par exemple le neveu utérin). Exemples : le royaume abron du <strong>Gyaman</strong> (Bondoukou), le royaume agni du <strong>Sanwi</strong> (Krindjabo), le royaume baoulé fondé selon la tradition par la <strong>reine Abla Pokou</strong>.</li>
+        <li><strong>Les Mandé du Nord</strong> (Malinké) et le royaume de <strong>Kong</strong> (Dioula, fondé par les Ouattara au XVIIIe siècle) : pouvoir centralisé autour d'un chef ou d'un roi, société <strong>patrilinéaire</strong> organisée en <strong>castes</strong> : les nobles, les gens de caste (forgerons, griots, cordonniers…) et les captifs.</li>
+      </ul>
+      <h3>2. Les sociétés à pouvoir non centralisé</h3>
+      <ul>
+        <li><strong>Sociétés lignagères</strong> (Krou : Bété, Dida, Wè, Godié… ; Mandé du Sud : Dan/Yacouba, Gouro, Gban…) : il n'y a pas de roi. L'autorité appartient au <strong>chef de lignage</strong> ou de village, souvent le plus âgé, qui décide avec le <strong>conseil des anciens</strong>. Les villages sont indépendants les uns des autres ; ils peuvent s'allier en cas de guerre.</li>
+        <li><strong>Sociétés à classes d'âge</strong> (peuples lagunaires : Ébrié, Attié, Adioukrou, Abidji…) : les hommes sont regroupés par générations en <strong>classes d'âge</strong>, qui exercent le pouvoir à tour de rôle et assurent la défense et les travaux collectifs. Le passage d'une classe à l'autre est marqué par des cérémonies.</li>
+        <li><strong>Les Gour ou Voltaïques</strong> (Sénoufo, Lobi, Koulango…) : organisation en lignages autour du <strong>chef de terre</strong>, avec chez les Sénoufo une forte <strong>société d'initiation, le Poro</strong>, qui forme les jeunes et transmet les règles de la communauté.</li>
+      </ul>
+      <h3>3. Le fonctionnement des structures sociales</h3>
+      <p>Dans toutes ces sociétés, la <strong>famille élargie</strong> et le <strong>lignage</strong> (tous les descendants d'un même ancêtre) sont la base de l'organisation. Le respect des <strong>aînés</strong>, la solidarité, l'entraide dans les travaux des champs et le règlement des conflits par la palabre assurent la cohésion du groupe.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> « matrilinéaire » signifie que l'héritage et le pouvoir se transmettent par la lignée de la mère ; « patrilinéaire », par celle du père. Les Akan sont surtout matrilinéaires ; les Krou et les Mandé, patrilinéaires.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exercice type : « Explique pourquoi le troc a progressivement laissé place à la traite des esclaves au XVIIIe siècle. » Réponse : au départ, les Européens échangeaient des marchandises manufacturées (fer, textiles, parfums) contre des produits tropicaux et des minéraux locaux. Mais avec le développement des plantations dans les colonies américaines, la demande de main-d'œuvre servile a explosé, transformant progressivement le commerce côtier en un commerce centré sur les êtres humains — la traite négrière, étudiée dans la leçon suivante.</p>`,
+      <p>Exercice type : « Distingue une société à pouvoir centralisé d'une société à pouvoir non centralisé, avec un exemple pour chacune. » Réponse : dans une société <strong>centralisée</strong>, un roi détient l'autorité sur un territoire et sur des chefs qui lui sont soumis (ex. : le royaume abron du Gyaman). Dans une société <strong>non centralisée</strong>, il n'y a pas de roi : chaque village ou lignage est dirigé par ses anciens (ex. : les Bété), ou le pouvoir est exercé à tour de rôle par des classes d'âge (ex. : les Ébrié).</p>
+      <h3>📌 Point du programme à ne pas manquer : schématiser un système politique</h3><p>Le programme demande de savoir <strong>schématiser</strong>. Royaume akan : <strong>Roi</strong> (+ conseillers, porte-canne) → <strong>chefs de province</strong> → <strong>chefs de village</strong> → <strong>chefs de famille</strong>. Société lignagère : <strong>conseil des anciens</strong> + chef de lignage → <strong>familles</strong> du village. Société à classes d'âge : <strong>classe d'âge au pouvoir</strong> ↔ classes qui attendent leur tour.</p>`,
       quiz: [
-        {q:"Quels furent les premiers Européens à atteindre le golfe de Guinée, vers 1470 ?", options:["Les Français","Les Anglais","Les Portugais","Les Néerlandais"], correct:2, exp:"João de Santarém et Pêro Escobar, navigateurs portugais, atteignirent le golfe de Guinée vers 1470."},
-        {q:"La Côte d'Ivoire actuelle était divisée en trois zones commerciales. Laquelle de ces réponses est correcte ?", options:["Côte des Graines, Côte des Dents, Côte des Quaquas","Côte Nord, Côte Sud, Côte Centrale","Côte de l'Or, Côte des Esclaves, Côte du Poivre","Il n'existait qu'une seule zone"], correct:0, exp:"Le littoral était divisé en Côte des Graines (ouest), Côte des Dents (centre) et Côte des Quaquas (est)."},
-        {q:"Quelles étaient les deux principales motivations des Européens ?", options:["La recherche de produits tropicaux/épices et des objectifs religieux","Uniquement la curiosité scientifique","Uniquement la conquête militaire","Le tourisme"], correct:0, exp:"Les Européens recherchaient des produits tropicaux et des épices, et visaient aussi la conversion religieuse des populations locales."},
-        {q:"Le comptoir français d'Assinie fut établi en...", options:["1470","1687","1800","1975"], correct:1, exp:"La France établit un comptoir à Assinie dès 1687."},
-        {q:"Le système d'échange initial entre Européens et populations locales s'appelait...", options:["le troc","la décentralisation","le protectorat","la palabre"], correct:0, exp:"Les échanges se faisaient par troc : marchandises européennes contre produits tropicaux et minéraux locaux."}
+        {q:"Chez les Akan, le pouvoir est surtout...", options:["exercé par des classes d'âge","centralisé autour d'un roi","inexistant","exercé par les forgerons"], correct:1, exp:"Les Akan ont des royaumes : le pouvoir est centralisé autour d'un roi."},
+        {q:"Une société où l'héritage passe par la lignée de la mère est dite...", options:["patrilinéaire","matrilinéaire","centralisée","lignagère"], correct:1, exp:"Matrilinéaire : transmission par la mère (cas fréquent chez les Akan)."},
+        {q:"Les peuples lagunaires (Ébrié, Attié, Adioukrou...) sont connus pour leur organisation en...", options:["royaumes","castes","classes d'âge","empires"], correct:2, exp:"Chez les lagunaires, des classes d'âge exercent le pouvoir à tour de rôle."},
+        {q:"Chez les Krou (Bété, Dida...), l'autorité appartient surtout...", options:["à un empereur","au chef de lignage et au conseil des anciens","aux griots","aux commerçants européens"], correct:1, exp:"Ce sont des sociétés lignagères, sans pouvoir centralisé."},
+        {q:"Le Poro est...", options:["un royaume akan","une société d'initiation sénoufo","une classe d'âge ébrié","un comptoir européen"], correct:1, exp:"Le Poro est la société d'initiation des Sénoufo (Gour)."},
+        {q:"Qui a fondé le royaume de Kong au XVIIIe siècle ?", options:["Les Ouattara","Les Baoulé","Les Bété","Les Portugais"], correct:0, exp:"Le royaume de Kong a été fondé par les Ouattara (Dioula)."},
+        {q:"Les sociétés malinké sont organisées en...", options:["castes (nobles, gens de caste, captifs)","classes d'âge uniquement","villages sans aucun chef","royaumes matrilinéaires"], correct:0, exp:"Les Malinké ont une société patrilinéaire organisée en castes."}
       ]
     },
     {
@@ -1929,6 +2013,23 @@ hg: {
       ]
     },
     {
+      id: "h2",
+      title: "L'arrivée des Européens et l'évolution des contacts avec la Côte d'Ivoire (XVe-XVIIIe siècle)",
+      content: `<p>Les premiers Européens à atteindre le golfe de Guinée furent les <strong>Portugais</strong> : João de Santarém et Pêro Escobar, vers 1470, qui installèrent un commerce d'épices et d'ivoire le long des côtes Krou. Plusieurs noms de lieux actuels, comme <strong>Sassandra</strong> et <strong>San-Pédro</strong>, gardent la trace de cette époque. Les <strong>Néerlandais</strong> leur succédèrent au XVIe siècle, puis la <strong>France</strong> et l'<strong>Angleterre</strong> dominèrent le commerce côtier à partir du milieu du XVIIe siècle.</p>
+      <p><strong>Motivations européennes :</strong> la recherche de produits tropicaux et d'épices (mil, coton, matières précieuses) ainsi que des objectifs religieux — convertir les populations locales au christianisme, en réaction à l'expansion de l'islam venue du nord.</p>
+      <p>Le littoral fut divisé en trois zones commerciales : la <strong>Côte des Graines</strong> (à l'ouest), la <strong>Côte des Dents</strong> (au centre) et la <strong>Côte des Quaquas</strong> (à l'est). Les échanges se faisaient par <strong>troc</strong> : les Européens offraient des barres de fer, du corail, des parfums et des textiles contre des produits tropicaux et des minéraux, puis, à partir du XVIIIe siècle, contre des esclaves. La France établit un comptoir à <strong>Assinie</strong> dès 1687 et signa des traités avec les royaumes Essouma, Abouré et Sanwi au XIXe siècle.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Ce contact progressif eut des conséquences profondes des deux côtés : pour la Côte d'Ivoire, désorganisation économique, déclin démographique lié à l'esclavage, mais aussi changements culturels (introduction de nouvelles cultures comme le maïs, le manioc, la tomate) et insécurité croissante ; pour l'Europe, émergence d'une bourgeoisie commerciale, développement des ports, enrichissement national et rivalités accrues entre puissances européennes.</p>
+      <h3>📝 Explication détaillée et exemple corrigé</h3>
+      <p>Exercice type : « Explique pourquoi le troc a progressivement laissé place à la traite des esclaves au XVIIIe siècle. » Réponse : au départ, les Européens échangeaient des marchandises manufacturées (fer, textiles, parfums) contre des produits tropicaux et des minéraux locaux. Mais avec le développement des plantations dans les colonies américaines, la demande de main-d'œuvre servile a explosé, transformant progressivement le commerce côtier en un commerce centré sur les êtres humains — la traite négrière, étudiée dans la leçon suivante.</p>`,
+      quiz: [
+        {q:"Quels furent les premiers Européens à atteindre le golfe de Guinée, vers 1470 ?", options:["Les Français","Les Anglais","Les Portugais","Les Néerlandais"], correct:2, exp:"João de Santarém et Pêro Escobar, navigateurs portugais, atteignirent le golfe de Guinée vers 1470."},
+        {q:"La Côte d'Ivoire actuelle était divisée en trois zones commerciales. Laquelle de ces réponses est correcte ?", options:["Côte des Graines, Côte des Dents, Côte des Quaquas","Côte Nord, Côte Sud, Côte Centrale","Côte de l'Or, Côte des Esclaves, Côte du Poivre","Il n'existait qu'une seule zone"], correct:0, exp:"Le littoral était divisé en Côte des Graines (ouest), Côte des Dents (centre) et Côte des Quaquas (est)."},
+        {q:"Quelles étaient les deux principales motivations des Européens ?", options:["La recherche de produits tropicaux/épices et des objectifs religieux","Uniquement la curiosité scientifique","Uniquement la conquête militaire","Le tourisme"], correct:0, exp:"Les Européens recherchaient des produits tropicaux et des épices, et visaient aussi la conversion religieuse des populations locales."},
+        {q:"Le comptoir français d'Assinie fut établi en...", options:["1470","1687","1800","1975"], correct:1, exp:"La France établit un comptoir à Assinie dès 1687."},
+        {q:"Le système d'échange initial entre Européens et populations locales s'appelait...", options:["le troc","la décentralisation","le protectorat","la palabre"], correct:0, exp:"Les échanges se faisaient par troc : marchandises européennes contre produits tropicaux et minéraux locaux."}
+      ]
+    },
+    {
       id: "h4",
       title: "La traite négrière et son abolition",
       content: `<p>À partir du XVIe siècle, la demande européenne de main-d'œuvre pour les plantations des Caraïbes donna naissance au <strong>commerce triangulaire</strong> : des navires européens transportaient des marchandises bon marché (« pacotille ») vers l'Afrique, les échangeaient contre des Africains réduits en esclavage, les vendaient ensuite en Amérique, puis revenaient en Europe chargés de produits tropicaux. Ce commerce, qui dura près de quatre siècles, a vidé l'Afrique d'une grande partie de sa population la plus vigoureuse.</p>
@@ -1943,6 +2044,23 @@ hg: {
         {q:"Qui contribua à faire reconnaître, dès 1787, que l'esclavage était illégal sur le sol anglais ?", options:["Voltaire","Granville Sharp","Wilberforce uniquement","Kankou Moussa"], correct:1, exp:"Granville Sharp fit reconnaître dès 1787 l'illégalité de l'esclavage sur le sol anglais."},
         {q:"En quelle année la France abolit-elle définitivement la traite/l'esclavage ?", options:["1807","1789","1848","1975"], correct:2, exp:"La France abolit définitivement l'esclavage en 1848."},
         {q:"Quel héritage culturel africain retrouve-t-on au Brésil, conséquence de la traite ?", options:["Aucun, tout a disparu","La samba, le vaudou, certaines pratiques sportives","Uniquement la langue française","Le système CEDEAO"], correct:1, exp:"La société brésilienne a intégré des éléments culturels africains comme la samba, le vaudou et certaines pratiques sportives."}
+      ]
+    },
+    {
+      id: "h6",
+      title: "La révolution française de 1789",
+      content: `<p>À la fin des années 1780, la France traverse une grave <strong>crise financière</strong> (héritée notamment des dettes de la guerre d'indépendance américaine), aggravée par de mauvaises récoltes provoquant famine et pauvreté généralisée. Ce contexte explosif conduit à la <strong>Révolution</strong>.</p>
+      <p>Le <strong>17 juin 1789</strong>, le Tiers-État (le peuple, par opposition à la noblesse et au clergé) se proclame <strong>Assemblée nationale</strong>. Ses membres prêtent le fameux <strong>serment du Jeu de Paume</strong> : ne pas se séparer avant d'avoir doté la France d'une constitution. Le <strong>14 juillet 1789</strong>, la prise de la <strong>Bastille</strong> (prison symbole de l'arbitraire royal) marque symboliquement la fin de l'absolutisme monarchique : le roi Louis XVI doit reconnaître que le pouvoir politique appartient désormais au peuple.</p>
+      <p>La Révolution proclame la <strong>Déclaration des droits de l'homme et du citoyen</strong>, qui affirme des droits naturels : la <strong>liberté</strong> (de conscience, de religion, de la presse) et l'<strong>égalité</strong> (suppression des privilèges hiérarchiques, avancement possible au mérite plutôt qu'à la naissance). Les réformes révolutionnaires abolissent la <strong>féodalité</strong> et suppriment, dans un premier temps, l'esclavage dans les colonies françaises (avant qu'il ne soit rétabli par Napoléon en 1802, puis aboli définitivement en 1848).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> Retiens la chronologie clé : 17 juin 1789 (Assemblée nationale) → serment du Jeu de Paume (volonté d'écrire une constitution) → 14 juillet 1789 (prise de la Bastille) → Déclaration des droits de l'homme et du citoyen. Chaque étape marque un recul supplémentaire du pouvoir absolu du roi au profit de la nation.</p>
+      <h3>📝 Explication détaillée et exemple corrigé</h3>
+      <p>Exercice type : « Explique le lien entre la crise financière et le déclenchement de la Révolution française. » Réponse : la monarchie française, très endettée après avoir financé la guerre d'indépendance américaine, cherche à augmenter les impôts. Mais ce sont surtout le Tiers-État (paysans, bourgeois, artisans) qui paient des impôts, alors que la noblesse et le clergé en sont largement exemptés. Combinée aux mauvaises récoltes qui provoquent la famine, cette injustice fiscale alimente la colère populaire, qui trouve une issue politique quand le Tiers-État se proclame Assemblée nationale en juin 1789, refusant de continuer à subir ce système sans réforme.</p>`,
+      quiz: [
+        {q:"Le Tiers-État se proclame Assemblée nationale le...", options:["14 juillet 1789","17 juin 1789","1er janvier 1789","28 mai 1975"], correct:1, exp:"Le Tiers-État se proclame Assemblée nationale le 17 juin 1789."},
+        {q:"La prise de la Bastille a lieu le...", options:["17 juin 1789","14 juillet 1789","4 août 1789","1er janvier 1790"], correct:1, exp:"La prise de la Bastille, le 14 juillet 1789, symbolise la fin de l'absolutisme."},
+        {q:"Le serment du Jeu de Paume engageait les députés à...", options:["se séparer immédiatement","ne pas se séparer avant d'avoir doté la France d'une constitution","déclarer la guerre à l'Angleterre","abolir immédiatement la monarchie"], correct:1, exp:"Les députés du Tiers-État jurèrent de ne pas se séparer avant d'avoir donné une constitution à la France."},
+        {q:"La Déclaration des droits de l'homme et du citoyen affirme notamment...", options:["le maintien des privilèges de la noblesse","la liberté et l'égalité comme droits naturels","le rétablissement de l'esclavage","l'interdiction de toute religion"], correct:1, exp:"La Déclaration affirme les droits naturels de liberté (conscience, religion, presse) et d'égalité (fin des privilèges hiérarchiques)."},
+        {q:"Parmi les causes de la Révolution française de 1789, on trouve...", options:["uniquement des causes religieuses","la crise financière, les mauvaises récoltes et la pauvreté généralisée","uniquement la pression de pays étrangers","aucune cause économique"], correct:1, exp:"La crise financière, les mauvaises récoltes (famine) et la pauvreté généralisée sont au cœur des causes de la Révolution."}
       ]
     },
     {
@@ -1966,23 +2084,6 @@ hg: {
       ]
     },
     {
-      id: "h6",
-      title: "La révolution française de 1789",
-      content: `<p>À la fin des années 1780, la France traverse une grave <strong>crise financière</strong> (héritée notamment des dettes de la guerre d'indépendance américaine), aggravée par de mauvaises récoltes provoquant famine et pauvreté généralisée. Ce contexte explosif conduit à la <strong>Révolution</strong>.</p>
-      <p>Le <strong>17 juin 1789</strong>, le Tiers-État (le peuple, par opposition à la noblesse et au clergé) se proclame <strong>Assemblée nationale</strong>. Ses membres prêtent le fameux <strong>serment du Jeu de Paume</strong> : ne pas se séparer avant d'avoir doté la France d'une constitution. Le <strong>14 juillet 1789</strong>, la prise de la <strong>Bastille</strong> (prison symbole de l'arbitraire royal) marque symboliquement la fin de l'absolutisme monarchique : le roi Louis XVI doit reconnaître que le pouvoir politique appartient désormais au peuple.</p>
-      <p>La Révolution proclame la <strong>Déclaration des droits de l'homme et du citoyen</strong>, qui affirme des droits naturels : la <strong>liberté</strong> (de conscience, de religion, de la presse) et l'<strong>égalité</strong> (suppression des privilèges hiérarchiques, avancement possible au mérite plutôt qu'à la naissance). Les réformes révolutionnaires abolissent la <strong>féodalité</strong> et suppriment, dans un premier temps, l'esclavage dans les colonies françaises (avant qu'il ne soit rétabli par Napoléon en 1802, puis aboli définitivement en 1848).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Retiens la chronologie clé : 17 juin 1789 (Assemblée nationale) → serment du Jeu de Paume (volonté d'écrire une constitution) → 14 juillet 1789 (prise de la Bastille) → Déclaration des droits de l'homme et du citoyen. Chaque étape marque un recul supplémentaire du pouvoir absolu du roi au profit de la nation.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exercice type : « Explique le lien entre la crise financière et le déclenchement de la Révolution française. » Réponse : la monarchie française, très endettée après avoir financé la guerre d'indépendance américaine, cherche à augmenter les impôts. Mais ce sont surtout le Tiers-État (paysans, bourgeois, artisans) qui paient des impôts, alors que la noblesse et le clergé en sont largement exemptés. Combinée aux mauvaises récoltes qui provoquent la famine, cette injustice fiscale alimente la colère populaire, qui trouve une issue politique quand le Tiers-État se proclame Assemblée nationale en juin 1789, refusant de continuer à subir ce système sans réforme.</p>`,
-      quiz: [
-        {q:"Le Tiers-État se proclame Assemblée nationale le...", options:["14 juillet 1789","17 juin 1789","1er janvier 1789","28 mai 1975"], correct:1, exp:"Le Tiers-État se proclame Assemblée nationale le 17 juin 1789."},
-        {q:"La prise de la Bastille a lieu le...", options:["17 juin 1789","14 juillet 1789","4 août 1789","1er janvier 1790"], correct:1, exp:"La prise de la Bastille, le 14 juillet 1789, symbolise la fin de l'absolutisme."},
-        {q:"Le serment du Jeu de Paume engageait les députés à...", options:["se séparer immédiatement","ne pas se séparer avant d'avoir doté la France d'une constitution","déclarer la guerre à l'Angleterre","abolir immédiatement la monarchie"], correct:1, exp:"Les députés du Tiers-État jurèrent de ne pas se séparer avant d'avoir donné une constitution à la France."},
-        {q:"La Déclaration des droits de l'homme et du citoyen affirme notamment...", options:["le maintien des privilèges de la noblesse","la liberté et l'égalité comme droits naturels","le rétablissement de l'esclavage","l'interdiction de toute religion"], correct:1, exp:"La Déclaration affirme les droits naturels de liberté (conscience, religion, presse) et d'égalité (fin des privilèges hiérarchiques)."},
-        {q:"Parmi les causes de la Révolution française de 1789, on trouve...", options:["uniquement des causes religieuses","la crise financière, les mauvaises récoltes et la pauvreté généralisée","uniquement la pression de pays étrangers","aucune cause économique"], correct:1, exp:"La crise financière, les mauvaises récoltes (famine) et la pauvreté généralisée sont au cœur des causes de la Révolution."}
-      ]
-    },
-    {
       id: "h7",
       title: "L'organisation administrative de la Côte d'Ivoire : déconcentration et décentralisation",
       content: `<p>L'administration territoriale de la Côte d'Ivoire repose sur deux principes complémentaires. La <strong>déconcentration</strong> consiste, pour l'État, à déléguer un pouvoir de décision à des agents locaux (préfets, sous-préfets) qui agissent au nom du gouvernement central. La <strong>décentralisation</strong>, elle, crée des <strong>collectivités territoriales autonomes</strong>, dotées d'une indépendance financière et d'une personnalité juridique propre.</p>
@@ -1998,6 +2099,45 @@ hg: {
         {q:"Depuis la réorganisation de 2011, la Côte d'Ivoire compte combien de régions ?", options:["19","30","95","497"], correct:1, exp:"Le nombre de régions est passé de 19 à 30 lors de la réorganisation de 2011."},
         {q:"Qui administre une région en Côte d'Ivoire ?", options:["Un maire","Un préfet","Un chef de village","Un ministre"], correct:1, exp:"Une région est administrée par un préfet."},
         {q:"Parmi les difficultés de l'administration ivoirienne citées, on trouve...", options:["un excès de ressources financières","des ressources financières limitées et des conflits de compétences","l'absence totale de problèmes","une administration toujours rapide et efficace"], correct:1, exp:"Les ressources financières limitées et les conflits de compétences entre autorités comptent parmi les difficultés identifiées."}
+      ]
+    },
+    {
+      id: "h10",
+      title: "Les insuffisances de l'organisation administrative dans le développement de la Côte d'Ivoire",
+      content: `<p>L'<strong>organisation administrative</strong> est la manière dont l'État répartit son territoire et ses services pour gouverner et développer le pays. En Côte d'Ivoire, elle combine l'<strong>administration déconcentrée</strong> (régions, départements, sous-préfectures, villages, dirigés par des représentants de l'État) et l'<strong>administration décentralisée</strong> (districts autonomes, régions et communes, dirigés par des élus).</p>
+      <h3>1. Le rôle de l'organisation administrative dans le développement</h3>
+      <ul>
+        <li>Elle <strong>rapproche l'administration des citoyens</strong> : on obtient un extrait de naissance, une carte d'identité ou un certificat sans aller à Abidjan.</li>
+        <li>Elle permet de réaliser des <strong>équipements de base</strong> : écoles, centres de santé, routes, marchés, adduction d'eau, éclairage public.</li>
+        <li>Elle favorise le <strong>développement local</strong> et la participation des populations aux décisions qui les concernent.</li>
+      </ul>
+      <h3>2. Les obstacles au bon fonctionnement de l'administration</h3>
+      <ul>
+        <li><strong>Moyens financiers insuffisants</strong> : les collectivités dépendent fortement des dotations de l'État ; les impôts locaux rentrent mal.</li>
+        <li><strong>Manque de personnel qualifié</strong> et d'équipements (bureaux, véhicules, matériel informatique), surtout à l'intérieur du pays.</li>
+        <li><strong>Transfert incomplet des compétences</strong> : l'État confie des missions aux collectivités sans toujours leur donner les ressources correspondantes.</li>
+        <li><strong>Chevauchements et conflits de compétences</strong> entre autorités déconcentrées (préfet, sous-préfet) et élus (maire, président de conseil régional).</li>
+        <li><strong>Lenteurs, lourdeurs et formalisme</strong> administratifs, <strong>corruption</strong> et mauvaise gestion.</li>
+        <li><strong>Concentration</strong> des services et des investissements dans les grandes villes, d'où des <strong>déséquilibres régionaux</strong>.</li>
+        <li>Faible <strong>participation et incivisme</strong> des citoyens (refus de payer les taxes, dégradation des biens publics).</li>
+      </ul>
+      <h3>3. Des solutions pour une administration efficace</h3>
+      <p>Transférer réellement les compétences <strong>et</strong> les ressources aux collectivités ; former et recruter du personnel ; moderniser l'administration (numérisation des actes) ; lutter contre la corruption et rendre des comptes (bonne gouvernance) ; mieux répartir les investissements entre les régions ; sensibiliser les citoyens au civisme fiscal et au respect des biens publics.</p>
+      <table><tr><th></th><th>Déconcentrée</th><th>Décentralisée</th></tr>
+      <tr><td>Dirigée par</td><td>des agents de l'État (préfet)</td><td>des élus (maire, conseil régional)</td></tr>
+      <tr><td>Budget propre</td><td>non</td><td>oui</td></tr>
+      <tr><td>Exemples</td><td>département, sous-préfecture</td><td>commune, région, district autonome</td></tr></table>
+      <p><strong>🔎 Pour aller plus loin :</strong> la région existe à la fois comme <strong>circonscription déconcentrée</strong> (dirigée par un préfet de région) et comme <strong>collectivité décentralisée</strong> (dirigée par un conseil régional élu). Ce double statut explique certains conflits de compétences.</p>
+      <h3>📝 Explication détaillée et exemple corrigé</h3>
+      <p>Exercice type : « La mairie de ta commune n'arrive pas à entretenir le marché. Identifie deux causes possibles et propose deux solutions. » Réponse : causes — <strong>recettes locales insuffisantes</strong> (taxes non payées par certains commerçants) et <strong>mauvaise gestion</strong> ; solutions — <strong>sensibiliser les commerçants au paiement des taxes</strong> et <strong>publier l'utilisation des fonds</strong> (transparence) pour restaurer la confiance.</p>
+      <h3>📌 Point du programme à ne pas manquer : le rôle du citoyen</h3><p>Le bon fonctionnement de l'administration ne dépend pas seulement de l'État : chaque citoyen y contribue en <strong>payant ses impôts et taxes</strong>, en <strong>respectant les biens publics</strong> (écoles, fontaines, lampadaires), en <strong>participant aux élections locales</strong> et en <strong>dénonçant la corruption</strong>.</p>`,
+      quiz: [
+        {q:"Laquelle de ces difficultés freine l'action des communes ?", options:["Des recettes locales insuffisantes","Trop d'argent dans les caisses","L'absence totale de maires","Le manque de villages"], correct:0, exp:"Les communes manquent souvent de ressources propres et dépendent des dotations de l'État."},
+        {q:"Un préfet est...", options:["un élu local","un représentant de l'État (administration déconcentrée)","le chef d'une classe d'âge","un conseiller municipal"], correct:1, exp:"Le préfet est nommé par l'État : il relève de l'administration déconcentrée."},
+        {q:"Qu'appelle-t-on « transfert incomplet des compétences » ?", options:["L'État confie des missions aux collectivités sans leur donner tous les moyens","Le maire refuse d'être élu","Les villages deviennent des pays","Les impôts sont supprimés"], correct:0, exp:"Les collectivités reçoivent des missions sans toujours les ressources correspondantes."},
+        {q:"Quelle est une conséquence de la concentration des services à Abidjan ?", options:["Des déséquilibres entre régions","Plus d'écoles au village","La disparition de la corruption","Une baisse des déplacements"], correct:0, exp:"La concentration crée des déséquilibres régionaux."},
+        {q:"Quelle solution améliore la gestion des collectivités ?", options:["La bonne gouvernance et la transparence","La dégradation des biens publics","Le refus de payer les taxes","La suppression des élections"], correct:0, exp:"Bonne gouvernance, transparence et lutte contre la corruption."},
+        {q:"Un citoyen contribue au bon fonctionnement de l'administration en...", options:["payant ses impôts et taxes","cassant les lampadaires","refusant de voter","corrompant les agents"], correct:0, exp:"Le civisme fiscal et le respect des biens publics sont indispensables."}
       ]
     },
     {
