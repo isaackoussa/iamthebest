@@ -5,7 +5,7 @@
 //  2) Pool de secours : pour toute leçon (y compris celles sans template), on pioche parmi
 //     le quiz de la leçon + ses exercices de pratique, on mélange l'ordre des options d'un
 //     QCM (en recalculant l'index de la bonne réponse), et on évite de répéter deux fois de
-//     suite le même item -> chaque clic donne un rendu différent, pour les 91 leçons.
+//     suite le même item -> chaque clic donne un rendu différent, pour les 85 leçons.
 const LOCAL_GEN = (function(){
 
   /* ---------- Utilitaires ---------- */
@@ -105,257 +105,260 @@ const LOCAL_GEN = (function(){
   }
 
   /* ================= MATHS ================= */
+  // Programme 4ème Côte d'Ivoire (DPFC 2023) : ma1 à ma11.
+  // Générateurs calculatoires : la bonne réponse est recalculée à chaque tirage.
+  const SUP = { "-":"⁻", "0":"⁰", "1":"¹", "2":"²", "3":"³", "4":"⁴", "5":"⁵", "6":"⁶", "7":"⁷", "8":"⁸", "9":"⁹" };
+  const neg = v => String(typeof v === "number" ? fmt(v) : v).replace(/-/g, "−");   // vrai signe moins
+  const lin = (a, b) => (a === 1 ? "x" : a === -1 ? "−x" : `${neg(a)}x`) + (b === 0 ? "" : b > 0 ? ` + ${b}` : ` − ${-b}`); // écrit ax + b
+  // pour une grandeur toujours positive (longueur, angle, effectif...) : on retire les
+  // leurres négatifs que le complément aléatoire de numericOptions peut produire
+  function posOpts(c, decorators){
+    for (let i = 0; i < 20; i++){
+      const r = numericOptions(c, decorators);
+      if (r.options.every(o => !String(o).startsWith("-"))) return r;
+    }
+    return { options: [], correctIndex: -1 };
+  }
+  const frac = (n, d) => neg(fracStr(n, d));      // fraction irréductible avec vrai signe moins
+  const pow10 = p => "10" + String(p).split("").map(c => SUP[c]).join("");
+
   const MATHS = {
-    m1: [ () => {
-      const a = randInt(1, 9) + (Math.random() < 0.5 ? randInt(1, 9) / 10 : 0);
-      const p = randNonZeroInt(-6, 6);
-      const value = a * Math.pow(10, p);
-      const { options, correctIndex } = numericOptions(`${fmt(a)} × 10^${p}`, [
-        () => `${fmt(a)} × 10^${p + 1}`, () => `${fmt(a)} × 10^${p - 1}`, () => `${fmt(a + 1)} × 10^${p}`
-      ]);
-      return qcm(
-        `Écris le nombre ${fmt(value)} sous la forme a × 10^p avec 1 ≤ a < 10.`,
-        options, correctIndex,
-        `${fmt(value)} = ${fmt(a)} × 10^${p} (un seul chiffre non nul avant la virgule dans "a").`
-      );
+    ma1: [ () => {
+      const m = randInt(-9, 9), n = randInt(-9, 9);
+      const op = pick(["×", "÷", "^"]);
+      let res, q;
+      if (op === "×"){ res = m + n; q = `${pow10(m)} × ${pow10(n)}`; }
+      else if (op === "÷"){ res = m - n; q = `${pow10(m)} ÷ ${pow10(n)}`; }
+      else { const k = randInt(-4, 4) || 2; res = m * k; q = `(${pow10(m)})${pow10(k).slice(2)}`; }
+      const wrong = op === "×" ? [m * n, m - n, res + 1] : op === "÷" ? [m + n, n - m, res - 1] : [m + 2, res + 1, -res];
+      const opts = fourWays(pow10(res), wrong.map(pow10));
+      return qcm(`Écris sous la forme d'une puissance de 10 : ${q}`, opts.options, opts.correctIndex,
+        op === "×" ? `On additionne les exposants : ${neg(m)} + (${neg(n)}) = ${neg(res)}.` : op === "÷" ? `On soustrait les exposants : ${neg(m)} − (${neg(n)}) = ${neg(res)}.` : `On multiplie les exposants : le résultat est ${pow10(res)}.`);
     }, () => {
-      const a1 = randInt(1,9), p1 = randInt(1,5), a2 = randInt(1,9), p2 = randInt(1,5);
-      const prod = a1*a2, pSum = p1+p2;
-      const correct = `${prod} × 10^${pSum}`;
-      const { options, correctIndex } = numericOptions(correct, [
-        () => `${a1+a2} × 10^${pSum}`, () => `${prod} × 10^${pSum+1}`, () => `${prod} × 10^${p1*p2}`
-      ]);
-      return qcm(`Calcule (${a1} × 10^${p1}) × (${a2} × 10^${p2}).`, options, correctIndex,
-        `On multiplie les "a" entre eux (${a1}×${a2}=${prod}) et on additionne les exposants (${p1}+${p2}=${pSum}) : ${correct}.`);
-    }],
-    m2: [ () => {
-      const scenario = pick([
-        {text:"(d1) // (d2) et (d3) ⊥ (d1)", answer:"(d3) ⊥ (d2)"},
-        {text:"(d1) ⊥ (d2) et (d3) ⊥ (d1)", answer:"(d3) // (d2)"},
-        {text:"(d1) // (d2) et (d2) // (d3)", answer:"(d1) // (d3)"},
-        {text:"(d1) ⊥ (d2) et (d1) ⊥ (d3)", answer:"(d2) // (d3)"}
-      ]);
-      const wrongs = ["(d3) // (d2)", "(d3) ⊥ (d2)", "on ne peut rien conclure", "(d1) // (d3)"].filter(w => w !== scenario.answer);
-      const options = shuffle([scenario.answer, ...shuffle(wrongs).slice(0,3)]);
-      return qcm(`On sait que ${scenario.text}. Que peut-on en conclure ?`, options, options.indexOf(scenario.answer),
-        `D'après les propriétés du parallélisme et de l'orthogonalité : ${scenario.text} ⟹ ${scenario.answer}.`);
-    }],
-    m3: [ () => {
-      const a=randNonZeroInt(-9,9), b=randNonZeroInt(2,9), c=randNonZeroInt(-9,9), d=randNonZeroInt(2,9);
-      const op = pick(["+","×"]);
-      let numN, denN, statement;
-      if (op === "+"){
-        numN = a*d + c*b; denN = b*d;
-        statement = `Calcule ${fracStr(a,b)} + ${fracStr(c,d)}.`;
-      } else {
-        numN = a*c; denN = b*d;
-        statement = `Calcule ${fracStr(a,b)} × ${fracStr(c,d)}.`;
-      }
-      const correct = fracStr(numN, denN);
-      const { options, correctIndex } = numericOptions(correct, [
-        () => fracStr(numN + gcd(numN,denN), denN), () => fracStr(numN, denN + 1), () => fracStr(-numN, denN)
-      ]);
-      return qcm(statement, options, correctIndex, `On calcule puis on simplifie : le résultat est ${correct}.`);
-    }],
-    m4: [ () => {
-      const a = randNonZeroInt(-12, 12), b = randNonZeroInt(-12, 12);
-      const dist = Math.abs(b - a);
-      const { options, correctIndex } = numericOptions(dist, [v => v+1, v => Math.abs(a+b), v => v-1]);
-      return qcm(`A a pour abscisse ${a} et B a pour abscisse ${b}. Quelle est la distance AB ?`, options, correctIndex,
-        `AB = |${b} − (${a})| = ${dist}.`);
+      // notation scientifique : on part des chiffres significatifs D (premier et dernier non nuls)
+      // et d'un exposant e ; le nombre affiché est construit par décalage de la virgule (exact).
+      const D = String(randInt(1, 9)) + (Math.random() < 0.7 ? String(randInt(0, 99)).padStart(2, "0").replace(/0+$/, "") : "") ;
+      const digits = D.replace(/0+$/, "") || "1";
+      const e = randNonZeroInt(-6, 7);
+      const point = 1 + e;                        // position de la virgule dans digits
+      let shown;
+      if (point <= 0) shown = "0," + "0".repeat(-point) + digits;
+      else if (point >= digits.length) shown = (digits + "0".repeat(point - digits.length)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      else shown = digits.slice(0, point) + "," + digits.slice(point);
+      const mant = digits.length > 1 ? digits[0] + "," + digits.slice(1) : digits;
+      const mant10 = digits.length > 1 ? digits.slice(0, 2) + (digits.length > 2 ? "," + digits.slice(2) : "") : digits + "0";
+      const ans = `${mant} × ${pow10(e)}`;
+      const opts = fourWays(ans, [`${mant} × ${pow10(e + 1)}`, `${mant} × ${pow10(-e)}`, `${mant10} × ${pow10(e - 1)}`, `${mant} × ${pow10(e - 1)}`]);
+      return qcm(`Quelle est la notation scientifique de ${shown} ?`, opts.options, opts.correctIndex,
+        `On place la virgule après le premier chiffre non nul (${mant}) et on compense avec l'exposant : ${ans}.`);
     }, () => {
-      const a = randNonZeroInt(-12, 12), b = randNonZeroInt(-12, 12);
-      const mid = (a+b)/2;
-      const { options, correctIndex } = numericOptions(mid, [v => v+1, v => v-1, v => a+b]);
-      return qcm(`Quelle est l'abscisse du milieu de [AB] si A(${a}) et B(${b}) ?`, options, correctIndex,
-        `x_I = (${a} + ${b}) / 2 = ${fmt(mid)}.`);
+      const a = randInt(2, 9), b = randInt(2, 9), p = randInt(-8, 8), q = randInt(-8, 8);
+      const prod = a * b, e = p + q;
+      const opts = fourWays(`${prod} × ${pow10(e)}`, [`${prod} × ${pow10(p * q)}`, `${a + b} × ${pow10(e)}`, `${prod} × ${pow10(p - q)}`]);
+      return qcm(`Calcule (${a} × ${pow10(p)}) × (${b} × ${pow10(q)}).`, opts.options, opts.correctIndex,
+        `(a × 10ᵖ) × (b × 10ᵠ) = (a × b) × 10ᵖ⁺ᵠ : ${a} × ${b} = ${prod} et ${neg(p)} + (${neg(q)}) = ${neg(e)}.`);
+    }, () => {
+      const n = randInt(1, 6), d = randNonZeroInt(1, 999);
+      const val = (d / Math.pow(10, n)).toFixed(n).replace(".", ",");
+      const s = Math.random() < 0.3 ? "−" : "";
+      // un nombre écrit avec n chiffres après la virgule (le dernier non nul) est d'ordre n
+      if (Math.abs(d) % 10 === 0) return null;
+      const { options, correctIndex } = numericOptions(n, [v=>v+1, v=>v-1, v=>v+2]);
+      return qcm(`Quel est l'ordre du nombre décimal ${s}${val} ?`, options, correctIndex,
+        `Il s'écrit avec ${n} chiffre${n > 1 ? "s" : ""} après la virgule : c'est un nombre décimal d'ordre ${n}.`);
     }],
-    m5: [ () => {
-      const bc = randInt(4, 20) * 2;
-      const ij = bc / 2;
-      const { options, correctIndex } = numericOptions(ij, [v=>v+1, v=>v*2, v=>v-1]);
-      return qcm(`Dans un triangle ABC, I est le milieu de [AB] et J le milieu de [AC]. BC = ${bc} cm. Que vaut IJ ?`, options, correctIndex,
-        `D'après la droite des milieux, IJ = BC/2 = ${bc}/2 = ${ij} cm.`);
+    ma2: [ () => {
+      const r = randInt(1, 9), ang = pick([20, 30, 36, 45, 60, 72, 90, 120, 135, 150, 180]);
+      const L = Math.round(3.14 * r * ang / 180 * 100) / 100;
+      const { options, correctIndex } = posOpts(L, [v=>Math.round(3.14*r*r*ang/180*100)/100, v=>Math.round(2*3.14*r*ang/180*100)/100, v=>Math.round(r*ang/180*100)/100]);
+      return qcm(`Dans un cercle de rayon ${r} cm, calcule la longueur de l'arc intercepté par un angle au centre de ${ang}° (π ≈ 3,14).`,
+        options.map(o=>o+" cm"), correctIndex, `Longueur = π × r × mes / 180 = 3,14 × ${r} × ${ang} / 180 ≈ ${fmt(L)} cm.`);
+    }, () => {
+      const a = randInt(20, 160);
+      const kind = pick(["alterne-interne", "correspondant", "supplémentaire"]);
+      const ans = kind === "supplémentaire" ? 180 - a : a;
+      const { options, correctIndex } = posOpts(ans, [v=>kind === "supplémentaire" ? a : 180 - a, v=>90 - (a % 90), v=>v+10]);
+      const q = kind === "supplémentaire"
+        ? `Deux angles forment un angle plat. L'un mesure ${a}°. Combien mesure l'autre ?`
+        : `Deux droites parallèles sont coupées par une sécante. Un angle mesure ${a}°. Combien mesure l'angle qui lui est ${kind} ?`;
+      return qcm(q, options.map(o=>o+"°"), correctIndex,
+        kind === "supplémentaire" ? `Deux angles supplémentaires ont une somme de 180° : 180 − ${a} = ${ans}°.` : `Formés par deux parallèles et une sécante, deux angles ${kind === "alterne-interne" ? "alternes-internes" : "correspondants"} ont la même mesure : ${a}°.`);
     }],
-    m6: [ () => {
-      const n = randInt(1, 4);
-      const base = pick([2,3,4,5,10]);
-      const correct = fracStr(1, Math.pow(base, n));
-      const { options, correctIndex } = numericOptions(correct, [
-        () => String(-Math.pow(base,n)), () => fracStr(1, base*n), () => String(Math.pow(base,n))
-      ]);
-      return qcm(`Que vaut ${base}⁻${n} ?`, options, correctIndex, `${base}⁻${n} = 1/${base}^${n} = ${correct}.`);
+    ma3: [ () => {
+      const g = pick([2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15]);
+      let x = randInt(2, 9), y = randInt(2, 9);
+      if (gcd(x, y) !== 1 || x === y) return null;
+      const a = g * x, b = g * y;
+      const ask = pick(["PGCD", "PPCM"]);
+      const ans = ask === "PGCD" ? g : g * x * y;
+      const { options, correctIndex } = posOpts(ans, ask === "PGCD" ? [v=>g*x*y, v=>a*b, v=>Math.min(a,b)] : [v=>g, v=>a*b, v=>a+b]);
+      return qcm(`Calcule ${ask}(${a} ; ${b}).`, options, correctIndex,
+        ask === "PGCD" ? `${a} = ${g} × ${x} et ${b} = ${g} × ${y}, avec ${x} et ${y} sans diviseur commun : PGCD = ${g}.` : `PPCM = ${a} × ${b} / PGCD = ${a} × ${b} / ${g} = ${ans}.`);
+    }, () => {
+      const g = randInt(2, 9), x = randInt(1, 9), y = randInt(2, 11);
+      if (gcd(x, y) !== 1) return null;
+      const opts = fourWays(frac(x, y), [`${g*x}/${y}`, `${x}/${g*y}`, frac(y, x)]);
+      return qcm(`Simplifie la fraction ${g*x}/${g*y} pour la rendre irréductible.`, opts.options, opts.correctIndex,
+        `PGCD(${g*x} ; ${g*y}) = ${g} : on divise le numérateur et le dénominateur par ${g}, d'où ${frac(x, y)}.`);
+    }, () => {
+      const a = randNonZeroInt(-9, 9), b = randInt(2, 9), c = randNonZeroInt(-9, 9), d = randInt(2, 9);
+      const op = pick(["×", "÷"]);
+      const num = op === "×" ? a * c : a * d, den = op === "×" ? b * d : b * c;
+      const ans = frac(num, den);
+      const alt = op === "×" ? [frac(a * d, b * c), frac(a + c, b + d), frac(-num, den)] : [frac(a * c, b * d), frac(b * c, a * d), frac(-num, den)];
+      const opts = fourWays(ans, alt);
+      return qcm(`Calcule (${frac(a, b)}) ${op} (${frac(c, d)}) et donne le résultat sous forme irréductible.`, opts.options, opts.correctIndex,
+        op === "×" ? `On multiplie les numérateurs et les dénominateurs : ${neg(a*c)}/${b*d} = ${ans}.` : `Diviser, c'est multiplier par l'inverse : (${frac(a, b)}) × (${frac(d, c)}) = ${ans}.`);
+    }, () => {
+      // nombre à 5 décimales construit en chiffres (pas d'erreur d'arrondi flottant)
+      const I = randInt(0, 99), dec = String(randInt(0, 99999)).padStart(5, "0");
+      const n = pick([2, 3]);
+      const next = Number(dec[n]);
+      if (next < 5) return null;                  // on garde les cas où arrondi et troncature diffèrent
+      const truncInt = I * Math.pow(10, n) + Number(dec.slice(0, n));
+      const show = k => { const s = String(k).padStart(n + 1, "0"); return s.slice(0, -n) + "," + s.slice(-n); };
+      const trunc = show(truncInt), arr = show(truncInt + 1);
+      const ask = pick(["arrondi", "troncature"]);
+      const ans = ask === "arrondi" ? arr : trunc;
+      const x = I + "," + dec;
+      const opts = fourWays(ans, [ask === "arrondi" ? trunc : arr, I + "," + dec.slice(0, n - 1), I + "," + dec.slice(0, n + 1)]);
+      return qcm(`Quel est ${ask === "arrondi" ? "l'arrondi d'ordre " + n : "la troncature à " + n + " décimales"} de ${x} ?`, opts.options, opts.correctIndex,
+        ask === "arrondi" ? `Le ${n + 1}ᵉ chiffre après la virgule est ${next} (≥ 5) : on prend l'approximation par excès, ${ans}.` : `La troncature garde les ${n} premiers chiffres après la virgule sans arrondir : ${ans}.`);
     }],
-    m7: [ () => {
-      const n = randInt(5, 12);
-      const sum = (n-2)*180;
-      const { options, correctIndex } = numericOptions(sum, [v=>v+180, v=>v-180, v=>n*180]);
-      const names = {5:"pentagone",6:"hexagone",7:"heptagone",8:"octogone",9:"ennéagone",10:"décagone"};
-      const name = names[n] || `polygone à ${n} côtés`;
-      return qcm(`Quelle est la somme des angles intérieurs d'un ${name} (${n} côtés) ?`, options.map(o=>o+"°"), correctIndex,
-        `Somme = (n−2) × 180° = (${n}−2) × 180 = ${sum}°.`);
+    ma4: [ () => {
+      const base = randInt(3, 15), h = randInt(2, 12);
+      const aire = base * h / 2;
+      const { options, correctIndex } = posOpts(h, [v=>aire/base, v=>2*aire*base, v=>base]);
+      return qcm(`Un triangle a une aire de ${fmt(aire)} cm² et un côté de ${base} cm. Quelle est la distance du sommet opposé à la droite qui porte ce côté ?`,
+        options.map(o=>o+" cm"), correctIndex, `aire = base × hauteur / 2, donc hauteur = 2 × ${fmt(aire)} / ${base} = ${h} cm.`);
     }],
-    m8: [ () => {
-      const ax=randInt(-5,5), ay=randInt(-5,5), bx=ax+randNonZeroInt(-8,8), by=ay+randNonZeroInt(-8,8);
-      const cx=bx+randNonZeroInt(-8,8), cy=by+randNonZeroInt(-8,8);
-      const dx = cx-(bx-ax), dy = cy-(by-ay);
-      return open(
-        `On donne A(${ax};${ay}), B(${bx};${by}), C(${cx};${cy}) et D(${dx};${dy}). Montre que ABCD est un parallélogramme.`,
-        `<p>Vecteur AB : (${bx-ax} ; ${by-ay}). Vecteur DC : (${cx-dx} ; ${cy-dy}) = (${bx-ax} ; ${by-ay}).<br>Comme vecteur AB = vecteur DC, ABCD est un parallélogramme (caractérisation vectorielle).</p>`
-      );
+    ma5: [ () => {
+      const a = randNonZeroInt(-9, 9), x = randInt(-6, 6), b = randInt(-9, 9);
+      const val = a * x + b;
+      const { options, correctIndex } = numericOptions(val, [v=>a + x + b, v=>a * x - b, v=>-val]);
+      const bTxt = b === 0 ? "" : b > 0 ? ` + ${b}` : ` − ${-b}`;
+      return qcm(`Calcule la valeur numérique de ${lin(a, b)} pour x = ${neg(x)}.`, options.map(neg), correctIndex,
+        `${neg(a)} × (${neg(x)})${bTxt} = ${neg(a * x)}${bTxt} = ${neg(val)}.`);
+    }, () => {
+      const b = randInt(2, 12);
+      const kind = pick(["+", "−", "±"]);
+      const L = kind === "+" ? `(x + ${b})²` : kind === "−" ? `(x − ${b})²` : `(x + ${b})(x − ${b})`;
+      const ans = kind === "+" ? `x² + ${2*b}x + ${b*b}` : kind === "−" ? `x² − ${2*b}x + ${b*b}` : `x² − ${b*b}`;
+      const decoys = kind === "±" ? [`x² + ${b*b}`, `x² − ${2*b}x − ${b*b}`, `x² − ${b}`] : [`x² + ${b*b}`, `x² ${kind === "+" ? "+" : "−"} ${b}x + ${b*b}`, `x² ${kind === "+" ? "−" : "+"} ${2*b}x + ${b*b}`];
+      const opts = fourWays(ans, decoys);
+      return qcm(`Développe et réduis ${L}.`, opts.options, opts.correctIndex,
+        kind === "±" ? `(a + b)(a − b) = a² − b² : x² − ${b*b}.` : `(a ${kind} b)² = a² ${kind} 2ab + b² : 2 × x × ${b} = ${2*b}x et ${b}² = ${b*b}.`);
+    }, () => {
+      const b = randInt(2, 12);
+      const kind = pick(["+", "−", "d"]);
+      const E = kind === "+" ? `x² + ${2*b}x + ${b*b}` : kind === "−" ? `x² − ${2*b}x + ${b*b}` : `x² − ${b*b}`;
+      const ans = kind === "+" ? `(x + ${b})²` : kind === "−" ? `(x − ${b})²` : `(x − ${b})(x + ${b})`;
+      const decoys = [`(x + ${b})²`, `(x − ${b})²`, `(x − ${b})(x + ${b})`, `(x − ${b*b})(x + 1)`].filter(d => d !== ans);
+      const opts = fourWays(ans, decoys);
+      return qcm(`Factorise ${E}.`, opts.options, opts.correctIndex,
+        kind === "d" ? `On reconnaît a² − b² avec b = ${b} : (x − ${b})(x + ${b}).` : `On reconnaît a² ${kind} 2ab + b² avec a = x et b = ${b} : ${ans}.`);
+    }, () => {
+      const k = randInt(2, 9), a = randInt(2, 9), c = randNonZeroInt(-9, 9);
+      const L = `${k}(${a}x ${c > 0 ? "+" : "−"} ${Math.abs(c)})`;
+      const kc = k * c;
+      const ans = `${k*a}x ${kc > 0 ? "+" : "−"} ${Math.abs(kc)}`;
+      const opts = fourWays(ans, [`${k*a}x ${c > 0 ? "+" : "−"} ${Math.abs(c)}`, `${a}x ${kc > 0 ? "+" : "−"} ${Math.abs(kc)}`, `${k*a}x ${kc > 0 ? "−" : "+"} ${Math.abs(kc)}`]);
+      return qcm(`Développe ${L}.`, opts.options, opts.correctIndex, `k(x + y) = kx + ky : ${k} × ${a}x = ${k*a}x et ${k} × (${neg(c)}) = ${neg(kc)}.`);
     }],
-    m9: [ () => {
-      const k = randNonZeroInt(-4, 4);
-      const len = randInt(2, 12);
-      const newLen = Math.abs(k) * len;
-      const { options, correctIndex } = numericOptions(newLen, [v=>v+2, v=>len, v=>v-2]);
-      return qcm(`Un vecteur u a pour longueur ${len} cm. Quelle est la longueur du vecteur ${k}u ?`, options.map(o=>o+" cm"), correctIndex,
-        `La longueur de k×u vaut |k| fois celle de u : |${k}| × ${len} = ${newLen} cm.`);
+    ma6: [ () => {
+      const BC = randInt(4, 40);
+      const ask = pick(["IJ", "BC"]);
+      const ans = ask === "IJ" ? BC / 2 : BC * 2;
+      const { options, correctIndex } = posOpts(ans, [v=>ask === "IJ" ? BC * 2 : BC / 2, v=>BC, v=>ans + 1]);
+      return qcm(ask === "IJ"
+          ? `Dans le triangle ABC, I et J sont les milieux de [AB] et [AC], et BC = ${BC} cm. Calcule IJ.`
+          : `Dans le triangle ABC, I et J sont les milieux de [AB] et [AC], et IJ = ${BC} cm. Calcule BC.`,
+        options.map(o=>o+" cm"), correctIndex,
+        ask === "IJ" ? `IJ = BC/2 = ${fmt(ans)} cm.` : `IJ = BC/2, donc BC = 2 × IJ = ${ans} cm.`);
+    }, () => {
+      const r = randInt(2, 9), d = randInt(1, 12);
+      const ans = d < r ? "sécants" : d === r ? "tangents" : "disjoints";
+      const opts = shuffle(["sécants", "tangents", "disjoints", "parallèles"]);
+      return qcm(`Un cercle a un rayon de ${r} cm et la distance de son centre à une droite (D) est ${d} cm. Le cercle et la droite sont...`,
+        opts, opts.indexOf(ans), `${d} ${d < r ? "<" : d === r ? "=" : ">"} ${r} : ils sont ${ans}.`);
+    }, () => {
+      const m = randInt(2, 15) * 3;
+      const ask = pick(["AG", "GA'"]);
+      const ans = ask === "AG" ? m * 2 / 3 : m / 3;
+      const { options, correctIndex } = posOpts(ans, [v=>m / 2, v=>ask === "AG" ? m / 3 : m * 2 / 3, v=>m]);
+      return qcm(`La médiane [AA'] d'un triangle mesure ${m} cm et G est le centre de gravité. Calcule ${ask}.`,
+        options.map(o=>o+" cm"), correctIndex,
+        `G est aux 2/3 de la médiane à partir du sommet : AG = 2/3 × ${m} = ${m*2/3} cm et GA' = ${m/3} cm.`);
     }],
-    m10: [
-      () => {
-        // Multiplication des deux membres d'une inégalité : a < b est garanti
-        // par construction (l'ancienne version tirait a et b indépendamment,
-        // donc l'énoncé pouvait affirmer une inégalité fausse).
-        const a = randNonZeroInt(-9, 8);
-        const b = randInt(a + 1, 9);
-        const k = randNonZeroInt(-9, 9);
-        const symbol = k > 0 ? "<" : ">";
-        const correct = `${a * k} ${symbol} ${b * k}`;
-        const { options, correctIndex } = fourWays(correct, [
-          `${a * k} ${k > 0 ? ">" : "<"} ${b * k}`,
-          `${a + k} ${symbol} ${b + k}`,
-          `${a * k} = ${b * k}`,
-          `${b * k} ${symbol} ${a * k}`
-        ]);
-        if (correctIndex < 0) return null;
-        return qcm(`On sait que ${a} < ${b}. On multiplie les deux membres par ${k}. Quelle inégalité obtient-on ?`,
-          options, correctIndex,
-          `Multiplier les deux membres par un nombre ${k > 0 ? "positif conserve" : "négatif inverse"} le sens de l'inégalité. Ici ${a} × ${k} = ${a * k} et ${b} × ${k} = ${b * k}, donc ${correct}.`);
-      },
-      () => {
-        // Addition d'un même nombre aux deux membres : le sens est conservé
-        const a = randNonZeroInt(-9, 8);
-        const b = randInt(a + 1, 9);
-        const k = randNonZeroInt(-9, 9);
-        const correct = `${a + k} < ${b + k}`;
-        const { options, correctIndex } = fourWays(correct, [
-          `${a + k} > ${b + k}`,
-          `${a * k} < ${b * k}`,
-          `${a + k} = ${b + k}`,
-          `${a - k} < ${b - k}`
-        ]);
-        if (correctIndex < 0) return null;
-        return qcm(`On sait que ${a} < ${b}. On ajoute ${k} aux deux membres. Quelle inégalité obtient-on ?`,
-          options, correctIndex,
-          `Ajouter un même nombre aux deux membres ne change jamais le sens d'une inégalité : ${a} + ${k} = ${a + k} et ${b} + ${k} = ${b + k}, donc ${correct}.`);
-      },
-      () => {
-        // Plus petit ensemble de nombres contenant une valeur donnée
-        const bank = [
-          { n:"7", a:"ℕ (entiers naturels)" }, { n:"0", a:"ℕ (entiers naturels)" },
-          { n:"12", a:"ℕ (entiers naturels)" }, { n:"√9", a:"ℕ (entiers naturels)" },
-          { n:"−4", a:"ℤ (entiers relatifs)" }, { n:"−15", a:"ℤ (entiers relatifs)" },
-          { n:"2/3", a:"ℚ (rationnels)" }, { n:"−7/2", a:"ℚ (rationnels)" },
-          { n:"0,25", a:"ℚ (rationnels)" }, { n:"1,75", a:"ℚ (rationnels)" },
-          { n:"√2", a:"ℝ (réels) — il est irrationnel" }, { n:"π", a:"ℝ (réels) — il est irrationnel" },
-          { n:"√3", a:"ℝ (réels) — il est irrationnel" }
-        ];
-        return bankQcm(bank,
-          i => `Quel est le plus petit de ces ensembles qui contient le nombre ${i.n} ?`,
-          i => `${i.n} appartient à ${i.a}. Rappel : ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ, et un nombre irrationnel comme √2 ou π est dans ℝ sans être dans ℚ.`,
-          ["ℕ (entiers naturels)", "ℤ (entiers relatifs)", "ℚ (rationnels)", "ℝ (réels) — il est irrationnel"]);
-      },
-      () => {
-        // Rangement de trois réels dans l'ordre croissant
-        const bank = [
-          { l:"−3", v:-3 }, { l:"−1,5", v:-1.5 }, { l:"−2/3", v:-2/3 }, { l:"−1/2", v:-0.5 },
-          { l:"0", v:0 }, { l:"1/4", v:0.25 }, { l:"0,5", v:0.5 }, { l:"2/3", v:2/3 },
-          { l:"1", v:1 }, { l:"3/2", v:1.5 }, { l:"√2", v:Math.SQRT2 }, { l:"2", v:2 },
-          { l:"π", v:Math.PI }, { l:"√9", v:3 }, { l:"7/2", v:3.5 }
-        ];
-        const trio = shuffle(bank).slice(0, 3);
-        // valeurs deux à deux distinctes (évite un "ordre" ambigu)
-        for (let i = 0; i < 3; i++) for (let j = i + 1; j < 3; j++) {
-          if (Math.abs(trio[i].v - trio[j].v) < 1e-9) return null;
-        }
-        const asc = trio.slice().sort((x, y) => x.v - y.v);
-        const correct = asc.map(x => x.l).join(" < ");
-        const perms = [
-          [0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]
-        ].map(p => p.map(k => asc[k].l).join(" < "));
-        const { options, correctIndex } = fourWays(correct, perms);
-        if (correctIndex < 0) return null;
-        return qcm(`Range ces trois nombres réels dans l'ordre croissant : ${trio.map(x => x.l).join(" ; ")}.`,
-          options, correctIndex,
-          `En valeurs approchées : ${asc.map(x => x.l + " ≈ " + fmt(Math.round(x.v * 100) / 100)).join(", ")}. L'ordre croissant est donc ${correct}.`);
+    ma7: [ () => {
+      const a = randNonZeroInt(-9, 9), x = randInt(-12, 12), b = randInt(-20, 20);
+      const c = a * x + b;
+      const { options, correctIndex } = numericOptions(x, [v=>(c + b) / a, v=>-x, v=>c - b]);
+      return qcm(`Résous dans ℚ : ${lin(a, b)} = ${neg(c)}.`, options.map(o=>"x = "+neg(o)), correctIndex,
+        `${lin(a, 0)} = ${neg(c)} − (${neg(b)}) = ${neg(c - b)}, donc x = ${neg(c - b)} / (${neg(a)}) = ${neg(x)}.`);
+    }, () => {
+      const a = randNonZeroInt(-6, 6), b = randInt(-15, 15);
+      const sign = pick(["<", ">"]);
+      const k = b / a;
+      if (!Number.isInteger(k)) return null;
+      const newSign = a < 0 ? (sign === "<" ? ">" : "<") : sign;
+      const ans = `x ${newSign} ${neg(k)}`;
+      const opts = fourWays(ans, [`x ${newSign === "<" ? ">" : "<"} ${neg(k)}`, `x ${newSign} ${neg(-k)}`, `x ${sign} ${neg(b - a)}`]);
+      return qcm(`Résous l'inéquation ${lin(a, 0)} ${sign} ${neg(b)}.`, opts.options, opts.correctIndex,
+        a < 0 ? `On divise par ${neg(a)}, un nombre négatif : on change le sens. ${ans}.` : `On divise par ${a}, un nombre positif : le sens ne change pas. ${ans}.`);
+    }, () => {
+      const a = randInt(1, 9), x = randInt(-10, 10), b = randInt(-9, 9);
+      const c = a * x + b;
+      const test = pick([x, x + 1, x - 2]);
+      const ok = a * test + b === c;
+      const opts = shuffle(["oui", "non", "seulement si x est positif", "on ne peut pas savoir"]);
+      const bTxt = b === 0 ? "" : b > 0 ? ` + ${b}` : ` − ${-b}`;
+      return qcm(`Le nombre ${neg(test)} est-il solution de l'équation ${lin(a, b)} = ${neg(c)} ?`,
+        opts, opts.indexOf(ok ? "oui" : "non"),
+        `On remplace x par ${neg(test)} : ${a} × (${neg(test)})${bTxt} = ${neg(a * test + b)}${ok ? " = " + neg(c) + " : c'est une solution." : " ≠ " + neg(c) + " : ce n'est pas une solution."}`);
+    }],
+    ma10: [ () => {
+      const n = randInt(4, 7);
+      const vals = Array.from({ length: n }, () => randInt(4, 18));
+      const sum = vals.reduce((s, v) => s + v, 0);
+      const m = Math.round(sum / n * 100) / 100;
+      const { options, correctIndex } = posOpts(m, [v=>sum, v=>Math.round(sum/(n-1)*100)/100, v=>Math.max(...vals)]);
+      return qcm(`Calcule la moyenne de la série : ${vals.join(" ; ")}.`, options, correctIndex,
+        `M = ${vals.join(" + ")} / ${n} = ${sum} / ${n} ≈ ${fmt(m)}.`);
+    }, () => {
+      const total = pick([18, 20, 36, 40, 45, 60, 90, 120]);
+      const eff = randInt(1, total - 1);
+      const ang = Math.round(180 * eff / total * 100) / 100;
+      const ask = pick(["angle", "effectif"]);
+      if (ask === "angle"){
+        const { options, correctIndex } = posOpts(ang, [v=>Math.round(360*eff/total*100)/100, v=>eff, v=>Math.round(180/eff*100)/100]);
+        return qcm(`Dans une série d'effectif total ${total}, une modalité a un effectif de ${eff}. Quel angle lui correspond dans un diagramme semi-circulaire ?`,
+          options.map(o=>o+"°"), correctIndex, `angle = 180° × ${eff} / ${total} = ${fmt(ang)}°.`);
       }
-    ],
-    m11: [ () => {
-      const v1=randInt(5,18), e1=randInt(1,6), v2=randInt(5,18), e2=randInt(1,6), v3=randInt(5,18), e3=randInt(1,6);
-      const total = e1+e2+e3;
-      const mean = (v1*e1+v2*e2+v3*e3)/total;
-      const { options, correctIndex } = numericOptions(Math.round(mean*100)/100, [v=>v+1, v=>v-1, v=>(v1+v2+v3)/3]);
-      return qcm(`Série : ${v1} (effectif ${e1}), ${v2} (effectif ${e2}), ${v3} (effectif ${e3}). Quelle est la moyenne (arrondie au centième) ?`,
-        options, correctIndex,
-        `Moyenne = (${v1}×${e1} + ${v2}×${e2} + ${v3}×${e3}) / (${e1}+${e2}+${e3}) = ${fmt(mean)}.`);
+      const { options, correctIndex } = posOpts(eff, [v=>ang, v=>Math.round(ang*total/360*100)/100, v=>v+total/10]);
+      return qcm(`Dans un diagramme semi-circulaire représentant ${total} personnes, un secteur mesure ${fmt(ang)}°. Quel effectif représente-t-il ?`,
+        options, correctIndex, `effectif = angle × total / 180 = ${fmt(ang)} × ${total} / 180 = ${eff}.`);
+    }, () => {
+      const labels = ["A", "B", "C", "D", "E"];
+      const effs = labels.map(() => randInt(1, 15));
+      const max = Math.max(...effs);
+      if (effs.filter(e => e === max).length > 1) return null;
+      const ans = labels[effs.indexOf(max)];
+      const opts = fourWays("la modalité " + ans, labels.filter(l => l !== ans).map(l => "la modalité " + l));
+      return qcm(`Effectifs : ${labels.map((l, i) => l + " = " + effs[i]).join(" ; ")}. Quel est le mode ?`, opts.options, opts.correctIndex,
+        `Le mode est la modalité qui a le plus grand effectif : ${ans} (${max}).`);
     }],
-    m12: [ () => {
-      const a = randNonZeroInt(-6,6), b = randNonZeroInt(-9,9), x = randInt(-8,8);
-      const img = a*x+b;
-      const { options, correctIndex } = numericOptions(img, [v=>v+a, v=>v-b, v=>a*x]);
-      return qcm(`Pour l'application f définie par f(x) = ${a}x ${b>=0?"+":"−"} ${Math.abs(b)}, quelle est l'image de ${x} ?`, options, correctIndex,
-        `f(${x}) = ${a}×${x} ${b>=0?"+":"−"} ${Math.abs(b)} = ${img}.`);
-    }],
-    m13: [ () => {
-      const a = randInt(2,9), b = randInt(2,9);
-      const sign = pick(["+","−"]);
-      const b2 = b*b, ab2 = 2*a*b;
-      const correct = sign === "+" ? `${a*a}x² + ${ab2}x + ${b2}` : `${a*a}x² − ${ab2}x + ${b2}`;
-      const wrong1 = `${a*a}x² + ${b2}`;
-      const wrong2 = sign === "+" ? `${a*a}x² − ${ab2}x + ${b2}` : `${a*a}x² + ${ab2}x + ${b2}`;
-      const wrong3 = `${a*a}x² + ${ab2}x − ${b2}`;
-      const options = shuffle([correct, wrong1, wrong2, wrong3]);
-      return qcm(`Développe (${a}x ${sign} ${b})².`, options, options.indexOf(correct),
-        `(a${sign}b)² = a² ${sign==="+"?"+":"−"} 2ab + b² avec a=${a}x, b=${b} : ${correct}.`);
-    }],
-    m14: [ () => {
-      const px=randInt(-8,8), py=randInt(-8,8), vx=randNonZeroInt(-6,6), vy=randNonZeroInt(-6,6);
-      const ix = px+vx, iy = py+vy;
-      const correct = `(${ix} ; ${iy})`;
-      const { options, correctIndex } = numericOptions(correct, [
-        () => `(${px-vx} ; ${py-vy})`, () => `(${ix} ; ${py})`, () => `(${px} ; ${iy})`
-      ]);
-      return qcm(`Soit M(${px} ; ${py}) et le vecteur de translation u(${vx} ; ${vy}). Quelles sont les coordonnées de l'image M' de M ?`, options, correctIndex,
-        `M'(x+a ; y+b) = (${px}+${vx} ; ${py}+${vy}) = (${ix} ; ${iy}).`);
-    }],
-    m15: [ () => {
-      const ux=randNonZeroInt(-6,6), uy=randNonZeroInt(-6,6), vx=randNonZeroInt(-6,6), vy=randNonZeroInt(-6,6);
-      const sx = ux+vx, sy = uy+vy;
-      const correct = `(${sx} ; ${sy})`;
-      const { options, correctIndex } = numericOptions(correct, [
-        () => `(${ux-vx} ; ${uy-vy})`, () => `(${sx+1} ; ${sy})`, () => `(${ux*vx} ; ${uy*vy})`
-      ]);
-      return qcm(`La composée d'une translation de vecteur u(${ux} ; ${uy}) suivie d'une translation de vecteur v(${vx} ; ${vy}) est une translation de vecteur...`, options, correctIndex,
-        `Le vecteur de la composée est u+v = (${ux}+${vx} ; ${uy}+${vy}) = (${sx} ; ${sy}).`);
-    }],
-    m16: [ () => {
-      const L = randInt(4,15), l = randInt(3,12);
-      const area = L*l;
-      const { options, correctIndex } = numericOptions(area, [v=>v+L, v=>v-l, v=>2*(L+l)]);
-      return qcm(`Un pavé droit a une base rectangulaire de ${L} cm sur ${l} cm. Quelle est l'aire de la section obtenue par un plan parallèle à la base ?`,
-        options.map(o=>o+" cm²"), correctIndex,
-        `La section parallèle à la base d'un pavé droit reproduit exactement cette base : aire = ${L} × ${l} = ${area} cm².`);
-    }],
-    m17: [ () => {
-      const a=randInt(2,9), b=randInt(1,20), c=randInt(1,a-1<1?1:a-1), d=randInt(1,20);
-      // a x + b = c x + d, a != c pour solution unique
-      const cc = c === a ? c+1 : c;
-      const x = (d-b)/(a-cc);
-      const correct = Number.isInteger(x) ? x : Math.round(x*100)/100;
-      const { options, correctIndex } = numericOptions(correct, [v=>v+1, v=>v-1, v=>-v]);
-      return qcm(`Résous : ${a}x + ${b} = ${cc}x + ${d}.`, options.map(o=>"x = "+o), correctIndex,
-        `${a}x − ${cc}x = ${d} − ${b}, donc ${a-cc}x = ${d-b}, d'où x = ${fmt(correct)}.`);
+    ma11: [ () => {
+      const L = randInt(2, 12), c = pick([0.5, 0.75, 0.25, 0.6]);
+      const ans = Math.round(L * c * 100) / 100;
+      const { options, correctIndex } = posOpts(ans, [v=>L, v=>Math.round(L/c*100)/100, v=>L*2]);
+      return qcm(`En perspective cavalière avec un coefficient de réduction c = ${fmt(c)}, quelle longueur donne-t-on sur le dessin à une fuyante qui mesure ${L} cm sur l'objet ?`,
+        options.map(o=>o+" cm"), correctIndex, `On multiplie la longueur des fuyantes par c : ${L} × ${fmt(c)} = ${fmt(ans)} cm.`);
+    }, () => {
+      const l = randInt(3, 10), h = randInt(2, 8), c = pick([0.5, 0.75]);
+      const opts = fourWays(`${l} cm × ${h} cm`, [`${fmt(l*c)} cm × ${fmt(h*c)} cm`, `${fmt(l*c)} cm × ${h} cm`, `${l*2} cm × ${h*2} cm`]);
+      return qcm(`La face avant d'un pavé droit mesure ${l} cm × ${h} cm. On le dessine en perspective cavalière avec c = ${fmt(c)}. Quelles sont les dimensions de la face avant sur le dessin ?`,
+        opts.options, opts.correctIndex, `La face située dans le plan de face est dessinée sans déformation : ${l} cm × ${h} cm. Seules les fuyantes sont multipliées par c.`);
     }]
   };
 
@@ -367,20 +370,20 @@ const LOCAL_GEN = (function(){
     pc2: [ () => {
       const d = randInt(3, 500) * 100000;
       const t = Math.round((d/300000)*1000)/1000;
-      const { options, correctIndex } = numericOptions(t, [v=>Math.round(v*300000)/1000, v=>Math.round(v/2*1000)/1000, v=>v*10]);
+      const { options, correctIndex } = posOpts(t, [v=>Math.round(v*300000)/1000, v=>Math.round(v/2*1000)/1000, v=>v*10]);
       return qcm(`La lumière parcourt ${d.toLocaleString("fr-FR")} km dans le vide (vitesse : 300 000 km/s). Combien de temps met-elle ?`,
         options.map(o=>o+" s"), correctIndex, `t = d / v = ${d.toLocaleString("fr-FR")} / 300 000 = ${fmt(t)} s.`);
     }, () => {
       const n = pick([2, 3, 4, 4.2, 5, 8, 10, 12]);
       const val = Math.round(n*9.46*100)/100;
-      const { options, correctIndex } = numericOptions(val, [v=>n, v=>Math.round(n*3*100)/100, v=>Math.round(v*10*100)/100]);
+      const { options, correctIndex } = posOpts(val, [v=>n, v=>Math.round(n*3*100)/100, v=>Math.round(v*10*100)/100]);
       return qcm(`Une étoile est située à ${fmt(n)} années-lumière de la Terre. Quelle est cette distance (1 a.l ≈ 9,46 × 10¹² km) ?`,
         options.map(o=>o+" × 10¹² km"), correctIndex,
         `L'année-lumière est une distance : ${fmt(n)} × 9,46 × 10¹² = ${fmt(val)} × 10¹² km. Sa lumière met ${fmt(n)} ans pour nous parvenir.`);
     }, () => {
       const t = randInt(2, 15);
       const d = t * 330;
-      const { options, correctIndex } = numericOptions(d, [v=>t*300, v=>Math.round(330/t), v=>v*2]);
+      const { options, correctIndex } = posOpts(d, [v=>t*300, v=>Math.round(330/t), v=>v*2]);
       return qcm(`On entend le tonnerre ${t} s après avoir vu l'éclair. La lumière arrive presque instantanément ; le son va à 330 m/s. À quelle distance est tombé l'éclair ?`,
         options.map(o=>o+" m"), correctIndex,
         `La lumière arrive quasi instantanément (300 000 km/s) ; le retard est celui du son : d = 330 × ${t} = ${d} m.`);
@@ -424,13 +427,13 @@ const LOCAL_GEN = (function(){
     pc7: [ () => {
       const Tms = pick([2, 4, 5, 8, 10, 20, 25, 40, 50, 100, 250, 500]);
       const N = 1000 / Tms;
-      const { options, correctIndex } = numericOptions(N, [v=>Tms, v=>v*10, v=>v/10]);
+      const { options, correctIndex } = posOpts(N, [v=>Tms, v=>v*10, v=>v/10]);
       return qcm(`Une tension alternative sinusoïdale a une période T = ${Tms} ms. Quelle est sa fréquence ?`,
         options.map(o=>o+" Hz"), correctIndex, `T = ${Tms} ms = ${fmt(Tms/1000)} s ; N = 1/T = 1/${fmt(Tms/1000)} = ${fmt(N)} Hz.`);
     }, () => {
       const Ueff = pick([6, 9, 12, 24, 100, 120, 200, 220, 230]);
       const Umax = Math.round(Ueff*1.41*100)/100;
-      const { options, correctIndex } = numericOptions(Umax, [v=>Ueff, v=>Math.round(Ueff/1.41*100)/100, v=>Ueff*2]);
+      const { options, correctIndex } = posOpts(Umax, [v=>Ueff, v=>Math.round(Ueff/1.41*100)/100, v=>Ueff*2]);
       return qcm(`Un voltmètre indique ${Ueff} V aux bornes d'un générateur alternatif sinusoïdal. Quelle est la tension maximale ?`,
         options.map(o=>o+" V"), correctIndex, `Le voltmètre mesure la tension efficace : Umax = 1,41 × Ueff = 1,41 × ${Ueff} = ${fmt(Umax)} V.`);
     }, () => {
@@ -439,18 +442,18 @@ const LOCAL_GEN = (function(){
       const Umax = sv*divV, Tms = sh*divH;
       const ask = pick(["U", "T"]);
       if (ask === "U"){
-        const { options, correctIndex } = numericOptions(Umax, [v=>sv+divV, v=>divV, v=>Math.round(Umax/1.41*100)/100]);
+        const { options, correctIndex } = posOpts(Umax, [v=>sv+divV, v=>divV, v=>Math.round(Umax/1.41*100)/100]);
         return qcm(`Réglage vertical : ${sv} V/div ; horizontal : ${sh} ms/div. Le sommet de la sinusoïde est à ${divV} divisions au-dessus de zéro et une période occupe ${divH} divisions. Quelle est la tension maximale ?`,
           options.map(o=>o+" V"), correctIndex, `Umax = ${divV} div × ${sv} V/div = ${Umax} V.`);
       }
-      const { options, correctIndex } = numericOptions(Tms, [v=>sh+divH, v=>divH, v=>Math.round(1000/Tms*100)/100]);
+      const { options, correctIndex } = posOpts(Tms, [v=>sh+divH, v=>divH, v=>Math.round(1000/Tms*100)/100]);
       return qcm(`Réglage horizontal : ${sh} ms/div. Une période de la sinusoïde occupe ${divH} divisions. Quelle est la période ?`,
         options.map(o=>o+" ms"), correctIndex, `T = ${divH} div × ${sh} ms/div = ${Tms} ms.`);
     }],
     pc8: [ () => {
       const Ueff = pick([110, 120, 200, 220, 230, 240]);
       const Umax = Math.round(Ueff*1.41*10)/10;
-      const { options, correctIndex } = numericOptions(Umax, [v=>Ueff, v=>Math.round(Ueff/1.41*10)/10, v=>Ueff*2]);
+      const { options, correctIndex } = posOpts(Umax, [v=>Ueff, v=>Math.round(Ueff/1.41*10)/10, v=>Ueff*2]);
       return qcm(`Dans une maison, le voltmètre mesure ${Ueff} V sur une prise du secteur. Quelle est la tension maximale ?`,
         options.map(o=>o+" V"), correctIndex, `Umax = 1,41 × Ueff = 1,41 × ${Ueff} = ${fmt(Umax)} V. (Pour le secteur ivoirien normal : 1,41 × 220 ≈ 310 V.)`);
     }, () => {
@@ -474,7 +477,7 @@ const LOCAL_GEN = (function(){
     pc9: [ () => {
       const Ueff = pick([6, 9, 12, 24]);
       const Umax = Math.round(Ueff*1.41*100)/100;
-      const { options, correctIndex } = numericOptions(Umax, [v=>Ueff, v=>220, v=>Math.round(Ueff/1.41*100)/100]);
+      const { options, correctIndex } = posOpts(Umax, [v=>Ueff, v=>220, v=>Math.round(Ueff/1.41*100)/100]);
       return qcm(`Un transformateur branché sur le secteur délivre ${Ueff} V (lu au voltmètre). Quelle est la tension maximale de sortie ?`,
         options.map(o=>o+" V"), correctIndex, `La sortie reste alternative sinusoïdale : Umax = 1,41 × ${Ueff} ≈ ${fmt(Umax)} V.`);
     }, () => bankQcm([
@@ -523,7 +526,7 @@ const LOCAL_GEN = (function(){
     pc12: [ () => {
       const old = randInt(100, 4000), cons = randInt(8, 180);
       const neu = old + cons;
-      const { options, correctIndex } = numericOptions(cons, [v=>old+neu, v=>neu, v=>v+10]);
+      const { options, correctIndex } = posOpts(cons, [v=>old+neu, v=>neu, v=>v+10]);
       return qcm(`Sur une facture SODECI : ancien index ${old} m³, nouvel index ${neu} m³. Quel est le cubage consommé ?`,
         options.map(o=>o+" m³"), correctIndex, `Cubage consommé = nouvel index − ancien index = ${neu} − ${old} = ${cons} m³.`);
     }, () => {
@@ -540,7 +543,7 @@ const LOCAL_GEN = (function(){
       const ans = ca <= 28 ? "très douce" : ca <= 60 ? "douce" : ca <= 120 ? "plutôt dure" : "très dure";
       const opts = shuffle(["très douce","douce","plutôt dure","très dure"]);
       return qcm(`Une eau minérale contient ${ca} mg/L d'ions calcium. D'après le tableau de dureté du cours, cette eau est...`,
-        opts, opts.indexOf(ans), `0-28 mg/L : très douce ; 28-60 : douce ; 60-120 : plutôt dure ; plus de 160 : très dure. Avec ${ca} mg/L, l'eau est ${ans}.`);
+        opts, opts.indexOf(ans), `De 0 à 28 mg/L : très douce ; de 28 à 60 : douce ; de 60 à 120 : plutôt dure ; plus de 160 : très dure. Avec ${ca} mg/L, l'eau est ${ans}.`);
     }, () => {
       const N = [
         { p:"nitrates", max:50 }, { p:"chlorures", max:200 }, { p:"sodium", max:200 }, { p:"magnésium", max:50 }, { p:"sulfates", max:500 }

@@ -5,73 +5,54 @@
 const PRACTICE = {
 
   // ---------- MATHS ----------
-  m1: [
-    { statement:"Écris 560 000 en écriture scientifique (a×10^p).", solution:"<p>5,6 × 10⁵ (on déplace la virgule de 5 rangs vers la gauche).</p>" },
-    { statement:"Calcule (5×10²) × (3×10³) et donne le résultat en écriture scientifique.", solution:"<p>5×3=15 et 10²⁺³=10⁵, donc 15×10⁵ = 1,5×10⁶ (on ajuste car 15 > 10).</p>" }
+  ma1: [
+    { statement:"Donne la notation scientifique de : 1 787 ; 450 000 ; 0,000 009 75 ; 789 400 000 000.", solution:"<p>1,787 × 10³ ; 4,5 × 10⁵ ; 9,75 × 10⁻⁶ ; 7,894 × 10¹¹.</p>" },
+    { statement:"Calcule (1,45 × 10³) × (2,4 × 10²) et (−8 × 10⁴) × (5,3 × 10⁻⁵).", solution:"<p>(1,45 × 2,4) × 10³⁺² = <strong>3,48 × 10⁵</strong> ; (−8 × 5,3) × 10⁴⁻⁵ = −42,4 × 10⁻¹ = <strong>−4,24</strong>.</p>" },
+    { statement:"Compare 0,54 × 10⁻⁴ et 2,7 × 10⁻³, puis −92 × 10⁶ et −11 × 10⁴.", solution:"<p>0,54 × 10⁻⁴ = 5,4 × 10⁻⁵ ; −5 &lt; −3, donc <strong>0,54 × 10⁻⁴ &lt; 2,7 × 10⁻³</strong>. 92 × 10⁶ = 9,2 × 10⁷ &gt; 11 × 10⁴ = 1,1 × 10⁵, donc <strong>−92 × 10⁶ &lt; −11 × 10⁴</strong>.</p>" }
   ],
-  m2: [
-    { statement:"Les droites (d1) et (d2) sont parallèles à (d3). Que peut-on en conclure sur (d1) et (d2) ?", solution:"<p>D'après la propriété du parallélisme, (d1) et (d2) sont parallèles entre elles.</p>" },
-    { statement:"(d1) ⊥ (d2) et (d2) // (d3). Que peut-on dire de (d1) et (d3) ?", solution:"<p>Une droite perpendiculaire à l'une de deux droites parallèles est perpendiculaire à l'autre : (d1) ⊥ (d3).</p>" }
+  ma2: [
+    { statement:"Un cercle a un rayon de 3 cm. Calcule la longueur des arcs interceptés par des angles au centre de 30° et de 135° (π ≈ 3,14).", solution:"<p>30° : π × 3 × 30/180 = π/2 ≈ <strong>1,57 cm</strong>. 135° : π × 3 × 135/180 = 2,25π ≈ <strong>7,07 cm</strong>.</p>" },
+    { statement:"Les droites (D₁) et (D₂) sont parallèles et coupées par une sécante. Un angle mesure 28° ; l'angle 1 lui est supplémentaire et l'angle 2 est alterne-interne avec l'angle 1. Donne les mesures des angles 1 et 2.", solution:"<p>mes(1) = 180° − 28° = <strong>152°</strong>. Les angles 1 et 2 sont alternes-internes, formés par deux droites parallèles : <strong>mes(2) = 152°</strong>.</p>" },
+    { statement:"EFG est un triangle isocèle en E inscrit dans un cercle de centre O, et mes(FÔG) = 140°. Calcule mes(EÔF).", solution:"<p>Les cordes [EF] et [EG] ont la même longueur, donc les arcs EF et EG aussi, et les angles au centre EÔF et EÔG ont la même mesure. 2 × mes(EÔF) + 140° = 360°, donc <strong>mes(EÔF) = 110°</strong>.</p>" }
   ],
-  m3: [
-    { statement:"Calcule A = (3/5) − (1/4).", solution:"<p>Dénominateur commun 20 : 3/5=12/20, 1/4=5/20, donc A = 12/20 − 5/20 = 7/20.</p>" },
-    { statement:"Simplifie et calcule (−2/3) ÷ (4/9).", solution:"<p>(−2/3) × (9/4) = −18/12 = −3/2 après simplification par 6.</p>" }
+  ma3: [
+    { statement:"Calcule le PPCM et le PGCD de 360 et 700 en utilisant leur décomposition en facteurs premiers.", solution:"<p>360 = 2³ × 3² × 5 ; 700 = 2² × 5² × 7. PPCM = 2³ × 3² × 5² × 7 = <strong>12 600</strong>. PGCD = 2² × 5 = <strong>20</strong>.</p>" },
+    { statement:"Simplifie la fraction 147/234 à l'aide du PGCD.", solution:"<p>147 = 3 × 7² et 234 = 2 × 3² × 13, donc PGCD(147 ; 234) = 3. 147/234 = <strong>49/78</strong>.</p>" },
+    { statement:"Donne les arrondis d'ordre 2 et d'ordre 4, puis les troncatures à 2 et à 4 décimales de 22/7 ≈ 3,142857.", solution:"<p>Arrondis : <strong>3,14</strong> (ordre 2) et <strong>3,1429</strong> (ordre 4). Troncatures : <strong>3,14</strong> et <strong>3,1428</strong>.</p>" }
   ],
-  m4: [
-    { statement:"A a pour abscisse −6 et B a pour abscisse 2. Calcule AB et l'abscisse du milieu de [AB].", solution:"<p>AB = |2−(−6)| = 8. Milieu : (−6+2)/2 = −2.</p>" },
-    { statement:"I est le milieu de [AB], A a pour abscisse 3 et I a pour abscisse 7. Trouve l'abscisse de B.", solution:"<p>x_I = (x_A+x_B)/2, donc 7 = (3+x_B)/2, d'où x_B = 14−3 = 11.</p>" }
+  ma4: [
+    { statement:"RST est un triangle d'aire 12 cm² avec RS = 6 cm. Détermine la distance du point T à la droite (RS).", solution:"<p>Si H est le pied de la hauteur issue de T : aire = RS × TH / 2, donc TH = 2 × 12 / 6 = <strong>4 cm</strong>.</p>" },
+    { statement:"Écris un programme de construction de la bissectrice d'un angle AÔB avec la règle et le compas.", solution:"<p>1) Pointe en O, trace un arc qui coupe [OA) en E et [OB) en F. 2) Pointe en E puis en F, trace deux arcs de même rayon qui se coupent en M. 3) Trace la demi-droite [OM) : c'est la bissectrice.</p>" }
   ],
-  m5: [
-    { statement:"Dans un triangle ABC, I milieu de [AB], J milieu de [AC], BC=14cm. Calcule IJ.", solution:"<p>D'après la droite des milieux, IJ = BC/2 = 7 cm.</p>" },
-    { statement:"Explique la différence entre une projection parallèle et une projection orthogonale.", solution:"<p>La projection parallèle se fait selon une direction quelconque (d'), la projection orthogonale se fait selon une direction perpendiculaire à la droite d'arrivée.</p>" }
+  ma5: [
+    { statement:"Développe et réduis : A = (x + 1)(x − 2) ; B = (2x + 7)(2x − 7) ; C = (x − 1)² − (3x − 1)².", solution:"<p>A = x² − 2x + x − 2 = <strong>x² − x − 2</strong>. B = <strong>4x² − 49</strong>. C = (x² − 2x + 1) − (9x² − 6x + 1) = <strong>−8x² + 4x</strong>.</p>" },
+    { statement:"Factorise : M = a² − 16 ; N = x² + 14x + 49 ; P = 10 − 5a ; R = 2x(y − 1) + (y − 1).", solution:"<p>M = <strong>(a + 4)(a − 4)</strong> ; N = <strong>(x + 7)²</strong> ; P = <strong>5(2 − a)</strong> ; R = <strong>(y − 1)(2x + 1)</strong>.</p>" },
+    { statement:"Calcule sans calculatrice, avec les produits remarquables : 11² ; 19 × 21 ; 12² − 11².", solution:"<p>11² = (10 + 1)² = <strong>121</strong> ; 19 × 21 = (20 − 1)(20 + 1) = 400 − 1 = <strong>399</strong> ; 12² − 11² = (12 + 11)(12 − 11) = <strong>23</strong>.</p>" }
   ],
-  m6: [
-    { statement:"Transforme x = 0,4545... (SDIP de période 2) en quotient d'entiers.", solution:"<p>100x = 45,4545..., donc 100x − x = 45, soit 99x = 45, d'où x = 45/99 = 5/11.</p>" },
-    { statement:"1/9 est-il un nombre rationnel ? Justifie et donne son écriture décimale.", solution:"<p>Oui, c'est un quotient d'entiers. 1/9 = 0,111... (SDIP de période 1).</p>" }
+  ma6: [
+    { statement:"ABC est un triangle avec BC = 10 cm ; I et J sont les milieux de [AB] et [AC]. Justifie que (IJ) // (BC) puis calcule IJ.", solution:"<p>Dans le triangle ABC, la droite (IJ) passe par les milieux de deux côtés : elle est parallèle au troisième, donc <strong>(IJ) // (BC)</strong>, et <strong>IJ = BC/2 = 5 cm</strong>.</p>" },
+    { statement:"Un cercle (C) a pour centre O et pour rayon 2,5 cm. Une droite (D) est perpendiculaire à (OA) en A. Donne la position de (C) et (D) si OA = 1,5 cm, 2,5 cm puis 3,5 cm.", solution:"<p>OA = 1,5 &lt; 2,5 : <strong>sécants</strong>. OA = 2,5 : <strong>tangents</strong>. OA = 3,5 &gt; 2,5 : <strong>disjoints</strong>.</p>" }
   ],
-  m7: [
-    { statement:"Quelle est la somme des angles intérieurs d'un décagone (10 côtés) ?", solution:"<p>(10−2)×180 = 1440°.</p>" },
-    { statement:"Un polygone régulier a 9 côtés. Quel est le nom de ce polygone et la mesure de chaque angle ?", solution:"<p>C'est un ennéagone. Somme des angles : (9−2)×180=1260°, donc chaque angle mesure 1260/9=140°.</p>" }
+  ma7: [
+    { statement:"Résous dans ℚ : x + 14 = 6 ; −x − 9 = 0 ; 2t − 5 = 10.", solution:"<p>x = 6 − 14 = <strong>−8</strong> ; −x = 9 donc x = <strong>−9</strong> ; 2t = 15 donc t = <strong>15/2</strong>.</p>" },
+    { statement:"Résous dans ℚ : 2x − 3 &lt; 4x − 7 et −5y + 3 &gt; −7.", solution:"<p>2x − 4x &lt; −7 + 3, soit −2x &lt; −4, donc <strong>x &gt; 2</strong> (on divise par −2 et on change le sens). −5y &gt; −10, donc <strong>y &lt; 2</strong>.</p>" },
+    { statement:"85 spectateurs ont assisté à une pièce : 500 F la place assise, 150 F la place debout, recette 30 250 F. Combien de spectateurs étaient assis ?", solution:"<p>Soit x le nombre de spectateurs assis : 500x + 150(85 − x) = 30 250, soit 350x + 12 750 = 30 250, donc 350x = 17 500 et <strong>x = 50</strong>.</p>" }
   ],
-  m8: [
-    { statement:"MNPQ est tel que le vecteur MN = (3;1) et le vecteur QP = (3;1). MNPQ est-il un parallélogramme ?", solution:"<p>Oui, car vecteur MN = vecteur QP : c'est la caractérisation vectorielle du parallélogramme.</p>" },
-    { statement:"ABCD est un parallélogramme, A(1;1), B(4;1), D(1;3). Trouve les coordonnées de C.", solution:"<p>Vecteur AB = vecteur DC, donc C = D + vecteur AB = (1+3;3+0) = (4;3).</p>" }
+  ma8: [
+    { statement:"ABCD est un parallélogramme. Cite deux égalités de vecteurs et un couple de vecteurs opposés.", solution:"<p><strong>AB→ = DC→</strong> et <strong>AD→ = BC→</strong>. AB→ et CD→ sont <strong>opposés</strong> (même direction et même longueur, sens contraires).</p>" },
+    { statement:"Simplifie à l'aide de l'égalité de Chasles : AB→ + BC→ + CD→ ; MN→ + PM→ ; AB→ + BA→.", solution:"<p><strong>AD→</strong> ; PM→ + MN→ = <strong>PN→</strong> ; <strong>AA→ = 0→</strong>.</p>" }
   ],
-  m9: [
-    { statement:"Simplifie vecteur AB + vecteur BC + vecteur CD.", solution:"<p>D'après Chasles : AB+BC=AC, puis AC+CD=AD. Résultat : vecteur AD.</p>" },
-    { statement:"I est le milieu de [AB]. Exprime vecteur AB en fonction de vecteur AI.", solution:"<p>Vecteur AI = vecteur IB, donc vecteur AB = vecteur AI + vecteur IB = 2×vecteur AI.</p>" }
+  ma9: [
+    { statement:"Définis l'image d'un point M par une symétrie orthogonale d'axe (D), par une symétrie centrale de centre O et par une translation de vecteur AB→.", solution:"<p>Symétrie orthogonale : (D) est la <strong>médiatrice</strong> de [MM']. Symétrie centrale : O est le <strong>milieu</strong> de [MM']. Translation : <strong>MM'→ = AB→</strong>.</p>" },
+    { statement:"Le cercle (C) a pour centre I et pour rayon 4 cm. Décris son image par la translation de vecteur AB→.", solution:"<p>C'est le cercle de centre I' (avec II'→ = AB→) et de <strong>même rayon 4 cm</strong>, car la translation conserve les distances.</p>" }
   ],
-  m10: [
-    { statement:"3/4 est-il un nombre réel ? Est-il rationnel ?", solution:"<p>Oui aux deux : 3/4 est un quotient d'entiers (rationnel), et ℚ ⊂ ℝ, donc c'est aussi un réel.</p>" },
-    { statement:"√2 est-il rationnel ? Justifie brièvement.", solution:"<p>Non, √2 est irrationnel : son écriture décimale est illimitée et non périodique (elle ne peut pas s'écrire comme quotient exact de deux entiers).</p>" }
+  ma10: [
+    { statement:"Les notes de 25 élèves : 7 (×4), 8 (×6), 9 (×5), 10 (×1), 11 (×1), 12 (×3), 13 (×2), 14 (×2), 15 (×1). Donne le mode et calcule la moyenne.", solution:"<p>Mode : <strong>8</strong> (effectif 6). Moyenne : (28 + 48 + 45 + 10 + 11 + 36 + 26 + 28 + 15) / 25 = 247/25 = <strong>9,88</strong>.</p>" },
+    { statement:"1 000 abonnés sont répartis entre 4 compagnies représentées par des secteurs de 36°, 54°, 72° et 18°. Dresse le tableau des effectifs.", solution:"<p>Effectif = angle × 1 000 / 180 : <strong>200 ; 300 ; 400 ; 100</strong> (total 1 000). Le mode est la compagnie du secteur de 72°.</p>" }
   ],
-  m11: [
-    { statement:"Une série a les valeurs 5(×3), 10(×4), 15(×3). Calcule la moyenne.", solution:"<p>(5×3+10×4+15×3)/(3+4+3) = (15+40+45)/10 = 100/10 = 10.</p>" },
-    { statement:"Dans un diagramme circulaire, une catégorie a une fréquence de 40%. Quel est l'angle de son secteur ?", solution:"<p>360° × 0,40 = 144°.</p>" }
-  ],
-  m12: [
-    { statement:"Cite trois applications étudiées en 4e.", solution:"<p>La symétrie centrale, la symétrie orthogonale, la projection (ou les fonctions monômes/polynômes).</p>" },
-    { statement:"Si f(x)=x−1 et g(x)=2x, calcule (g∘f)(5).", solution:"<p>f(5)=4, puis g(4)=8. Donc (g∘f)(5)=8.</p>" }
-  ],
-  m13: [
-    { statement:"Développe (2x+3)(x−4).", solution:"<p>2x²−8x+3x−12 = 2x²−5x−12.</p>" },
-    { statement:"Factorise 5x²−20.", solution:"<p>5x²−20 = 5(x²−4) = 5(x−2)(x+2).</p>" }
-  ],
-  m14: [
-    { statement:"A(3;−2), vecteur de translation u(−1;5). Trouve les coordonnées de l'image A' de A.", solution:"<p>A' = (3−1;−2+5) = (2;3).</p>" },
-    { statement:"Cite deux propriétés conservées par une translation.", solution:"<p>Les longueurs et les angles (aussi le parallélisme).</p>" }
-  ],
-  m15: [
-    { statement:"Quelle est la composée d'une translation de vecteur u(2;3) suivie d'une translation de vecteur v(−1;4) ?", solution:"<p>C'est une translation de vecteur u+v = (1;7).</p>" },
-    { statement:"Que donne la composée de deux symétries orthogonales d'axes perpendiculaires ?", solution:"<p>Une symétrie centrale, de centre le point d'intersection des deux axes.</p>" }
-  ],
-  m16: [
-    { statement:"Un cube d'arête 6 cm est coupé par un plan parallèle à une face. Quelle est la forme et la taille de la section ?", solution:"<p>C'est un carré de 6 cm de côté, identique à la face du cube.</p>" },
-    { statement:"À quoi sert la perspective cavalière ?", solution:"<p>Elle permet de représenter un solide en 3 dimensions sur une feuille plane.</p>" }
-  ],
-  m17: [
-    { statement:"Résous l'équation 7x − 4 = 3x + 8.", solution:"<p>7x−3x = 8+4, donc 4x=12, d'où x=3.</p>" },
-    { statement:"Résous l'inéquation −4x + 8 ≤ 0.", solution:"<p>−4x ≤ −8, on divise par −4 en inversant le sens : x ≥ 2.</p>" }
+  ma11: [
+    { statement:"Cite les cinq règles de la perspective cavalière.", solution:"<p>1) Les arêtes parallèles restent parallèles. 2) La face de face est dessinée sans déformation. 3) Les arêtes cachées sont en pointillés. 4) Les fuyantes font un angle α avec l'horizontale. 5) Les fuyantes sont multipliées par un coefficient de réduction c.</p>" },
+    { statement:"Un pavé droit a une face avant ABCD de 5 cm sur 3 cm et une arête [CG] de 4 cm. Avec c = 0,75, quelles sont les dimensions sur le dessin ?", solution:"<p>Face avant sans déformation : <strong>5 cm × 3 cm</strong>. Fuyante [CG] : 4 × 0,75 = <strong>3 cm</strong>.</p>" }
   ],
 
   // ---------- FRANÇAIS ----------
@@ -432,25 +413,43 @@ const SITUATIONS = {
 
   maths: [
     {
-      title:"Le jardin de Konan",
-      context:"Konan possède un jardin rectangulaire de 12 m de longueur sur 8 m de largeur. Il veut l'entourer d'une clôture, puis calculer combien elle va lui coûter, sachant que le mètre de clôture coûte 2500 FCFA et que le vendeur lui propose une remise de 10 % s'il paie comptant.",
+      title:"La distance Terre-Soleil",
+      context:"Pendant un cours de géographie à Béoumi, les élèves apprennent que la lumière se propage à 3 × 10⁸ m/s et qu'un rayon partant du Soleil arrive sur la Terre au bout de 8 min 20 s. Un élève affirme que ces données suffisent pour calculer la distance Terre-Soleil.",
       tasks:[
-        {prompt:"1) Calcule le périmètre du jardin.", solution:"Périmètre = 2×(12+8) = <strong>40 m</strong>"},
-        {prompt:"2) Calcule l'aire du jardin.", solution:"Aire = 12 × 8 = <strong>96 m²</strong>"},
-        {prompt:"3) Calcule le prix total de la clôture avant remise.", solution:"Prix = 40 × 2500 = <strong>100 000 FCFA</strong>"},
-        {prompt:"4) Calcule le prix final après la remise de 10 %.", solution:"Remise = 10 000 FCFA. Prix final = <strong>90 000 FCFA</strong>"}
+        {prompt:"1) Convertis 8 min 20 s en secondes, puis écris ce nombre en notation scientifique.", solution:"8 × 60 + 20 = 500 s = <strong>5 × 10² s</strong>."},
+        {prompt:"2) Calcule la distance Terre-Soleil en mètres (distance = vitesse × temps).", solution:"(3 × 10⁸) × (5 × 10²) = 15 × 10¹⁰ = <strong>1,5 × 10¹¹ m</strong>."},
+        {prompt:"3) Donne ce résultat en kilomètres et en notation scientifique.", solution:"1,5 × 10¹¹ m = 1,5 × 10⁸ km, soit <strong>150 000 000 km</strong>."}
       ]
     },
     {
-      title:"Le chantier de Monsieur Yao",
-      context:"Monsieur Yao, maçon, veut vérifier qu'un angle de mur est bien droit en mesurant 3 m et 4 m sur les deux murs, puis la diagonale. Il envisage aussi un réservoir cylindrique de rayon 1 m et de hauteur 2 m.",
+      title:"Les équipes de propreté",
+      context:"Le collège moderne de Daoukro compte 400 élèves dont 120 filles. Les élèves veulent former le plus grand nombre possible d'équipes de propreté, toutes identiques (même nombre de filles et même nombre de garçons).",
       tasks:[
-        {prompt:"1) Quelle doit être la longueur de la diagonale si l'angle est droit ?", solution:"√(3²+4²) = √25 = <strong>5 m</strong>"},
-        {prompt:"2) Il mesure exactement 5 m. Que peut-il conclure ?", solution:"L'égalité de Pythagore est vérifiée, donc <strong>l'angle est bien droit</strong> (réciproque du théorème)."},
-        {prompt:"3) Calcule le volume du réservoir (π≈3,14).", solution:"V = 3,14×1²×2 = <strong>6,28 m³</strong>"}
+        {prompt:"1) Combien y a-t-il de garçons ?", solution:"400 − 120 = <strong>280 garçons</strong>."},
+        {prompt:"2) Décompose 120 et 280 en produits de facteurs premiers, puis calcule PGCD(120 ; 280).", solution:"120 = 2³ × 3 × 5 et 280 = 2³ × 5 × 7, donc PGCD = 2³ × 5 = <strong>40</strong>."},
+        {prompt:"3) Déduis-en le nombre d'équipes et leur composition.", solution:"<strong>40 équipes</strong>, chacune de 120/40 = <strong>3 filles</strong> et 280/40 = <strong>7 garçons</strong>."}
+      ]
+    },
+    {
+      title:"Les cahiers de la rentrée",
+      context:"Après l'achat des livres, il reste moins de 10 000 F à ton père pour les autres fournitures. Il te propose une calculatrice à 8 000 F et des cahiers à 300 F l'unité.",
+      tasks:[
+        {prompt:"1) On note x le nombre de cahiers. Écris l'inéquation qui traduit la situation.", solution:"<strong>8 000 + 300x &lt; 10 000</strong>."},
+        {prompt:"2) Résous cette inéquation.", solution:"300x &lt; 2 000, donc x &lt; 2 000/300 ≈ 6,67."},
+        {prompt:"3) Quel est le nombre maximum de cahiers que tu peux acheter ?", solution:"x est un nombre entier : au plus <strong>6 cahiers</strong> (8 000 + 1 800 = 9 800 F &lt; 10 000 F)."}
+      ]
+    },
+    {
+      title:"Le bal de fin d'année",
+      context:"Pour choisir l'artiste du bal, on interroge 72 élèves de 4ème. Résultats : DJ Lewis 14, Matty Dollar 18, Garagistes 8, Antoinette Konan 12, Billy Billy 20.",
+      tasks:[
+        {prompt:"1) Quel est le mode de cette série ?", solution:"<strong>Billy Billy</strong> (effectif 20, le plus grand)."},
+        {prompt:"2) Calcule l'angle de chaque secteur du diagramme semi-circulaire.", solution:"angle = 180 × effectif / 72 = 2,5 × effectif : Lewis <strong>35°</strong>, Matty <strong>45°</strong>, Garagistes <strong>20°</strong>, Antoinette <strong>30°</strong>, Billy <strong>50°</strong> (total 180°)."},
+        {prompt:"3) Peut-on calculer une moyenne pour cette série ? Pourquoi ?", solution:"Non : le caractère étudié (l'artiste préféré) est <strong>qualitatif</strong>. On peut seulement donner le mode."}
       ]
     }
   ],
+
 
   francais: [
     {

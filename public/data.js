@@ -7,346 +7,404 @@ maths: {
   name: "Mathématiques",
   color: "#F2B84B",
   icon: "📐",
+  // Programme éducatif officiel 4ème Côte d'Ivoire (DPFC, 2023), aligné sur le cours
+  // complet "Maths 4ième — Côte d'Ivoire École numérique" (leçons 1 à 7, 10 et 11) ;
+  // les leçons 8 (Vecteurs) et 9 (Symétries et translations), absentes du document,
+  // sont rédigées d'après les habiletés du programme officiel.
   lessons: [
     {
-      id: "m1",
-      title: "Les nombres décimaux relatifs (écriture a×10^p)",
-      content: `<p>Un <strong>nombre décimal relatif</strong> peut s'écrire sous la forme <strong>a × 10<sup>p</sup></strong>, avec a un nombre décimal relatif et p un entier relatif. Cette écriture est très pratique pour manipuler de très grands ou très petits nombres.</p>
-      <p>Pour écrire un nombre sous cette forme avec 1 ≤ |a| &lt; 10 (écriture scientifique), on déplace la virgule jusqu'à obtenir un seul chiffre non nul avant elle, et p indique le nombre de rangs déplacés (positif vers la gauche, négatif vers la droite).</p>
-      <p>Exemple : 45 000 = 4,5 × 10⁴ et 0,0032 = 3,2 × 10⁻³.</p>
-      <p><strong>Multiplier</strong> deux nombres écrits sous cette forme : on multiplie les « a » entre eux et on additionne les exposants « p ». <strong>Additionner</strong> deux nombres sous cette forme nécessite d'abord de les ramener à la même puissance de 10.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Exemple de multiplication : (3 × 10²) × (2 × 10⁴) = (3×2) × 10^(2+4) = 6 × 10⁶. Exemple d'addition : pour additionner 3×10³ et 5×10², on réécrit 3×10³ = 30×10², donc 30×10² + 5×10² = 35×10² = 3,5×10³.</p>
+      id: "ma1",
+      title: "Calculs algébriques — Nombres décimaux relatifs",
+      content: `<h3>Puissances de 10 d'exposant entier relatif</h3>
+      <p>Pour un entier n positif non nul : <strong>10ⁿ = 1 suivi de n zéros</strong> et <strong>10⁻ⁿ = 0,0…01</strong> (avec n − 1 zéros après la virgule). Par convention, <strong>10⁰ = 1</strong>. Exemples : 10⁴ = 10 000 ; 10⁶ = 1 000 000 ; 10⁻³ = 0,001 ; 10⁻⁸ = 0,000 000 01. On a aussi 10⁻ⁿ = 1/10ⁿ.</p>
+      <p><strong>Propriétés</strong> (m et n entiers relatifs) :</p>
+      <ul>
+        <li>10ᵐ × 10ⁿ = 10ᵐ⁺ⁿ &nbsp;(ex. : 10⁵ × 10² = 10⁷ ; 10⁻¹² × 10¹² = 10⁰ = 1)</li>
+        <li>(10ᵐ)ⁿ = 10ᵐˣⁿ &nbsp;(ex. : (10³)⁵ = 10¹⁵ ; (10⁻²)⁻⁵ = 10¹⁰)</li>
+        <li>10ᵐ / 10ⁿ = 10ᵐ⁻ⁿ &nbsp;(ex. : 10² / 10⁷ = 10⁻⁵)</li>
+      </ul>
+      <p><strong>Produit</strong> : (a × 10ᵖ) × (b × 10ᵠ) = (a × b) × 10ᵖ⁺ᵠ. Ex. : (−7,5 × 10⁻⁹) × (2 × 10¹⁰) = −15 × 10¹ = −150.</p>
+      <h3>Écriture a × 10ᵖ et notation scientifique</h3>
+      <p>Un nombre décimal peut s'écrire de plusieurs façons sous la forme a × 10ᵖ : −49 = −4,9 × 10 = −4 900 × 10⁻² ; 0,0078 = 7,8 × 10⁻³ = 78 × 10⁻⁴.</p>
+      <p>La <strong>notation scientifique</strong> d'un nombre décimal est son écriture <strong>a × 10ᵖ</strong> où <strong>a a un seul chiffre non nul avant la virgule</strong> (1 ≤ a &lt; 10 en valeur absolue) et p est un entier relatif. Ex. : 12 000 = 1,2 × 10⁴ ; 0,5689 = 5,689 × 10⁻¹ ; −681,204 = −6,81204 × 10². Ne sont pas en notation scientifique : 83 × 10⁻³ et −0,4 × 10⁻²⁴.</p>
+      <h3>Comparer des nombres écrits a × 10ᵖ</h3>
+      <p>On écrit d'abord les deux nombres (positifs) en notation scientifique A = a × 10ᵐ et B = b × 10ⁿ. <strong>Si m = n</strong>, A et B sont rangés comme a et b. <strong>Si m ≠ n</strong>, ils sont rangés comme les exposants m et n. Pour deux nombres négatifs, on compare leurs opposés et on inverse l'ordre ; un négatif est toujours plus petit qu'un positif.</p>
+      <h3>Nombre décimal d'ordre n</h3>
+      <p>Un nombre décimal est <strong>d'ordre n</strong> s'il peut s'écrire d × 10⁻ⁿ avec d entier relatif. Ex. : 52,658 = 52 658 × 10⁻³ est d'ordre 3 ; −0,000054 = −54 × 10⁻⁶ est d'ordre 6. Un nombre écrit avec n chiffres après la virgule est d'ordre n — et aussi d'ordre supérieur à n.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> pour passer à la notation scientifique, on déplace la virgule derrière le premier chiffre non nul et on compense avec l'exposant : chaque rang vers la gauche ajoute 1 à l'exposant, chaque rang vers la droite retire 1. 0,000 17 → 1,7 × 10⁻⁴ (virgule déplacée de 4 rangs vers la droite).</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Écris 0,00056 sous la forme a×10^p avec 1 ≤ a &lt; 10 : on déplace la virgule de 4 rangs vers la droite pour obtenir 5,6, donc 0,00056 = 5,6 × 10⁻⁴. Vérification inverse : 5,6 × 10⁻⁴ = 5,6 ÷ 10 000 = 0,00056. ✓ Cette écriture scientifique permet de comparer facilement deux nombres très différents en taille : il suffit de comparer d'abord les exposants, puis les « a » si les exposants sont égaux.</p>
-      <h3>📌 Point du programme à ne pas manquer : puissances de 10</h3>
-      <p>Avant de manipuler l'écriture a×10^p, il faut maîtriser la <strong>puissance entière de 10</strong> : 10ⁿ (avec n entier naturel) vaut 1 suivi de n zéros (10³ = 1000, 10⁵ = 100 000), et 10⁻ⁿ = 1/10ⁿ vaut 0, suivi de (n−1) zéros puis 1 (10⁻² = 1/100 = 0,01 ; 10⁻⁴ = 0,0001). Règle : 10⁰ = 1.</p>`,
+      <p>Des cellules rectangulaires de 30 µm sur 2 µm (1 µm = 10⁻⁶ m) recouvrent une lamelle de 0,000032568 m².</p>
+      <p>1) 0,000032568 = <strong>3,2568 × 10⁻⁵</strong> m². 2) Aire d'une cellule : (30 × 10⁻⁶) × (2 × 10⁻⁶) = 60 × 10⁻¹² = <strong>6 × 10⁻¹¹ m²</strong>. 3) Nombre de cellules : (3,2568 × 10⁻⁵) / (6 × 10⁻¹¹) = 0,5428 × 10⁶ = <strong>5,428 × 10⁵</strong>.</p>
+      <h3>📌 Point du programme à ne pas manquer : comparer sans se tromper</h3><p>Il faut <strong>toujours repasser en notation scientifique</strong> avant de comparer les exposants. Exemple : 53 × 10⁵ et 7 × 10⁶ ; on croit que 53 &gt; 7, mais 53 × 10⁵ = 5,3 × 10⁶, donc 7 × 10⁶ &gt; 53 × 10⁵. Autre piège : −7,15 × 10⁻² et −3,6 × 10⁻⁴. Comme 7,15 × 10⁻² &gt; 3,6 × 10⁻⁴, on a <strong>−7,15 × 10⁻² &lt; −3,6 × 10⁻⁴</strong>.</p>`,
       quiz: [
-        {q:"Quelle est l'écriture scientifique de 72 000 ?", options:["72 × 10³","7,2 × 10⁴","7,2 × 10³","0,72 × 10⁵"], correct:1, exp:"On déplace la virgule de 4 rangs vers la gauche : 72 000 = 7,2 × 10⁴."},
-        {q:"Quelle est l'écriture scientifique de 0,0091 ?", options:["9,1 × 10⁻³","9,1 × 10³","0,91 × 10⁻²","91 × 10⁻⁴"], correct:0, exp:"On déplace la virgule de 3 rangs vers la droite : 0,0091 = 9,1 × 10⁻³."},
-        {q:"Que vaut (2 × 10³) × (4 × 10²) ?", options:["8 × 10⁶","6 × 10⁵","8 × 10⁵","6 × 10⁶"], correct:2, exp:"On multiplie 2×4=8 et on additionne les exposants 3+2=5, soit 8 × 10⁵."},
-        {q:"Combien vaut 1 ≤ a dans l'écriture scientifique a × 10^p ?", options:["a peut être n'importe quel nombre","1 ≤ a < 10","0 ≤ a < 1","a est toujours entier"], correct:1, exp:"Par convention, l'écriture scientifique impose 1 ≤ a < 10."},
-        {q:"Quelle est l'écriture scientifique de 3,5 (déjà écrit sous forme a×10^p) ?", options:["3,5 × 10⁰","3,5 × 10¹","35 × 10⁻¹","0,35 × 10¹"], correct:0, exp:"3,5 est déjà compris entre 1 et 10, donc p = 0 : 3,5 = 3,5 × 10⁰."},
-        {q:"Que vaut 10⁻³ ?", options:["1000","0,001","100","0,01"], correct:1, exp:"10⁻³ = 1/10³ = 1/1000 = 0,001."}
+        {q:"10⁻³ est égal à...", options:["−1 000","0,001","0,0001","−0,001"], correct:1, exp:"10⁻³ = 1/10³ = 0,001 (n − 1 = 2 zéros après la virgule)."},
+        {q:"10⁵ × 10² = ...", options:["10¹⁰","10⁷","10³","100⁷"], correct:1, exp:"On additionne les exposants : 10⁵⁺² = 10⁷."},
+        {q:"(10⁻²)⁻⁵ = ...", options:["10⁻⁷","10¹⁰","10⁻¹⁰","10³"], correct:1, exp:"On multiplie les exposants : (−2) × (−5) = 10, donc 10¹⁰."},
+        {q:"La notation scientifique de 0,000 17 est...", options:["17 × 10⁻⁵","0,17 × 10⁻³","1,7 × 10⁻⁴","1,7 × 10⁴"], correct:2, exp:"Un seul chiffre non nul avant la virgule : 1,7 ; la virgule a été déplacée de 4 rangs vers la droite, donc 10⁻⁴."},
+        {q:"Lequel de ces nombres est écrit en notation scientifique ?", options:["83 × 10⁻³","−0,4 × 10⁻²⁴","−3,5 × 10⁸","12,4 × 10⁵"], correct:2, exp:"−3,5 a un seul chiffre non nul avant la virgule ; ce n'est pas le cas de 83, 0,4 ni 12,4."},
+        {q:"(3 × 10⁶) × (2 × 10⁻⁴) = ...", options:["6 × 10²","5 × 10²","6 × 10⁻²⁴","6 × 10¹⁰"], correct:0, exp:"(3 × 2) × 10⁶⁺⁽⁻⁴⁾ = 6 × 10²."},
+        {q:"Quel est l'ordre du nombre décimal −0,005 ?", options:["2","3","5","−3"], correct:1, exp:"−0,005 = −5 × 10⁻³ : il est d'ordre 3 (3 chiffres après la virgule)."},
+        {q:"Compare 7 × 10⁶ et 53 × 10⁵.", options:["7 × 10⁶ < 53 × 10⁵","7 × 10⁶ > 53 × 10⁵","Ils sont égaux","On ne peut pas comparer"], correct:1, exp:"53 × 10⁵ = 5,3 × 10⁶ ; même exposant, et 7 > 5,3."}
       ]
     },
     {
-      id: "m2",
-      title: "Positions relatives de deux droites du plan",
-      content: `<p>Dans le plan, deux droites peuvent être <strong>parallèles</strong> (elles ne se coupent jamais, ou sont confondues) ou <strong>sécantes</strong> (elles se coupent en un seul point). Un cas particulier important de droites sécantes est celui des droites <strong>perpendiculaires</strong>, qui se coupent en formant un angle droit (90°).</p>
-      <p><strong>Propriétés du parallélisme :</strong> si deux droites sont parallèles à une même troisième droite, alors elles sont parallèles entre elles. Si une droite est parallèle à une droite (d), alors elle est parallèle à toute droite parallèle à (d).</p>
-      <p><strong>Propriétés de l'orthogonalité :</strong> si deux droites sont perpendiculaires à une même troisième droite, alors elles sont parallèles entre elles. Si une droite est parallèle à une droite perpendiculaire à (d), alors elle est aussi perpendiculaire à (d).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Ces propriétés permettent souvent de démontrer un parallélisme sans mesurer, uniquement par déduction logique. C'est une bonne préparation au raisonnement géométrique que tu approfondiras avec le théorème de Thalès en classe de 3ème.</p>
+      id: "ma2",
+      title: "Géométrie du plan — Angles",
+      content: `<p>Une droite (L) coupe deux droites (D₁) et (D₂) en A et en B ; (L) est appelée la <strong>sécante</strong>.</p>
+      <ul>
+        <li>Deux <strong>angles alternes-internes</strong> sont situés <strong>entre</strong> (D₁) et (D₂), <strong>de part et d'autre</strong> de la sécante, avec des sommets différents (A et B).</li>
+        <li>Deux <strong>angles correspondants</strong> sont situés <strong>du même côté</strong> de la sécante, l'un entre les deux droites et l'autre à l'extérieur, « à la même place » en A et en B.</li>
+      </ul>
+      <h3>Propriétés (directes et réciproques)</h3>
+      <ul>
+        <li>Si deux angles <strong>alternes-internes</strong> sont formés par <strong>deux droites parallèles</strong> et une sécante, alors ils ont <strong>la même mesure</strong>.</li>
+        <li>Si deux droites forment avec une sécante deux angles alternes-internes <strong>de même mesure</strong>, alors ces droites sont <strong>parallèles</strong>.</li>
+        <li>Si deux angles <strong>correspondants</strong> sont formés par deux droites parallèles et une sécante, alors ils ont la même mesure.</li>
+        <li>Si deux droites forment avec une sécante deux angles correspondants de même mesure, alors elles sont parallèles.</li>
+      </ul>
+      <p>On utilise aussi : deux angles <strong>opposés par le sommet</strong> ont la même mesure ; deux angles qui forment un angle plat sont <strong>supplémentaires</strong> (somme 180°).</p>
+      <h3>Angle au centre, arcs et cordes</h3>
+      <p>Un <strong>angle au centre</strong> d'un cercle est un angle dont le <strong>sommet est le centre</strong> du cercle. Deux points A et B du cercle déterminent deux arcs ; l'angle au centre AÔB <strong>intercepte</strong> l'arc AB.</p>
+      <p>La longueur d'un arc est <strong>proportionnelle</strong> à la mesure de l'angle au centre qui l'intercepte : <strong>longueur de l'arc AB = π × r × mes(AÔB) / 180°</strong>.</p>
+      <p>Une <strong>corde</strong> est un segment dont les extrémités sont deux points du cercle ; la corde [AB] <strong>sous-tend</strong> les deux arcs d'extrémités A et B. Dans un même cercle :</p>
+      <ul>
+        <li>deux angles au centre de même mesure interceptent deux arcs de même longueur (et réciproquement) ;</li>
+        <li>deux arcs de même longueur sont sous-tendus par deux cordes de même longueur (et réciproquement).</li>
+      </ul>
+      <p><strong>🔎 Pour aller plus loin :</strong> pour bien reconnaître les angles, repère la forme de la lettre <strong>Z</strong> pour des alternes-internes et de la lettre <strong>F</strong> pour des correspondants. Attention : sans droites parallèles, ces angles n'ont aucune raison d'être égaux.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de démonstration : soit (d₁) parallèle à (d₂), et (d₃) perpendiculaire à (d₁). Montrons que (d₃) est perpendiculaire à (d₂). Comme (d₃) ⊥ (d₁) et (d₁) // (d₂), on applique la propriété : « si une droite est perpendiculaire à une droite parallèle à (d), elle est perpendiculaire à (d) », donc (d₃) ⊥ (d₂). Cette chaîne de déductions, purement logique, ne nécessite aucune mesure sur la figure.</p>
-      <h3>📌 Point du programme à ne pas manquer : reconnaître le parallélisme grâce aux angles</h3><p>Une autre méthode très utilisée pour démontrer que deux droites sont parallèles (sans passer par une troisième droite) s'appuie sur les <strong>angles formés par une sécante</strong>. Si une droite coupe deux autres droites en formant des <strong>angles alternes-internes égaux</strong> (ou des <strong>angles correspondants égaux</strong>), alors ces deux droites sont parallèles — c'est la réciproque de la propriété vue en classe sur les angles. Inversement, si deux droites sont parallèles, une sécante forme forcément des angles alternes-internes égaux (et des angles correspondants égaux) avec elles. C'est un outil de démonstration très fréquent dans les exercices de géométrie.</p>`,
+      <p>Un cercle de centre O a un rayon de 2 cm ; mes(AÔB) = 60°. Longueur de l'arc AB = π × 2 × 60/180 = <strong>2π/3 cm ≈ 2,09 cm</strong> (avec π = 3,14).</p>
+      <p>Les droites (D₁) et (D₂) sont parallèles ; un angle mesure 28° et l'angle 1 lui est supplémentaire : mes(1) = 180° − 28° = 152°. L'angle 2 est alterne-interne avec l'angle 1 (droites parallèles) : <strong>mes(2) = 152°</strong>.</p>
+      <h3>📌 Point du programme à ne pas manquer : rédiger une justification</h3><p>Une justification suit toujours le même schéma : <strong>données → propriété → conclusion</strong>. Ex. : « Les angles EAB et ABF sont alternes-internes, formés par (D), (L) et la sécante (Δ). Ils ont la même mesure. <strong>Or</strong> si deux droites forment avec une sécante deux angles alternes-internes de même mesure, elles sont parallèles. <strong>Donc</strong> (D) // (L). » On utilise la propriété <em>directe</em> pour trouver des angles égaux, et la <em>réciproque</em> pour prouver un parallélisme.</p>`,
       quiz: [
-        {q:"Deux droites parallèles à une même troisième droite sont...", options:["perpendiculaires entre elles","parallèles entre elles","sécantes","aucune de ces réponses"], correct:1, exp:"Deux droites parallèles à une même troisième droite sont parallèles entre elles."},
-        {q:"Deux droites perpendiculaires à une même troisième droite sont...", options:["parallèles entre elles","perpendiculaires entre elles","confondues obligatoirement","sécantes non perpendiculaires"], correct:0, exp:"Deux droites perpendiculaires à une même droite sont parallèles entre elles."},
-        {q:"Si (d1) // (d2) et (d3) ⊥ (d1), alors (d3) et (d2) sont...", options:["parallèles","perpendiculaires","confondues","on ne peut pas savoir"], correct:1, exp:"Une droite perpendiculaire à l'une de deux droites parallèles est perpendiculaire à l'autre."},
-        {q:"Deux droites sécantes...", options:["ne se coupent jamais","se coupent en un seul point","sont toujours perpendiculaires","sont toujours parallèles"], correct:1, exp:"Des droites sécantes se coupent en exactement un point."},
-        {q:"Un angle droit mesure...", options:["45°","180°","90°","60°"], correct:2, exp:"Un angle droit mesure exactement 90°, c'est la marque de la perpendicularité."}
-      ,
-        { q: "Une sécante coupe deux droites (d₁) et (d₂) en formant deux angles alternes-internes de mesures égales. Que peut-on en conclure ?", options: ["(d₁) et (d₂) sont perpendiculaires", "(d₁) et (d₂) sont parallèles", "(d₁) et (d₂) sont confondues", "On ne peut rien conclure"], correct: 1, exp: "Si une sécante forme des angles alternes-internes égaux avec deux droites, alors ces deux droites sont parallèles : c'est un critère de reconnaissance du parallélisme basé sur les angles." }
+        {q:"Deux angles alternes-internes sont situés...", options:["du même côté de la sécante, à l'extérieur","entre les deux droites, de part et d'autre de la sécante","au même sommet","à l'extérieur des deux droites"], correct:1, exp:"Alternes = de part et d'autre de la sécante ; internes = entre les deux droites."},
+        {q:"Deux angles correspondants formés par deux droites parallèles et une sécante...", options:["sont supplémentaires","ont la même mesure","sont complémentaires","n'ont aucun lien"], correct:1, exp:"C'est la propriété directe des angles correspondants."},
+        {q:"Si deux droites forment avec une sécante deux angles alternes-internes de même mesure, alors...", options:["elles sont perpendiculaires","elles sont parallèles","elles sont sécantes","la sécante est une bissectrice"], correct:1, exp:"C'est la réciproque : elle sert à démontrer un parallélisme."},
+        {q:"Un angle au centre d'un cercle est un angle dont...", options:["un côté est une corde","le sommet est le centre du cercle","le sommet est sur le cercle","la mesure est 90°"], correct:1, exp:"Définition : son sommet est le centre du cercle."},
+        {q:"La longueur d'un arc de cercle de rayon r intercepté par un angle au centre de mesure a° vaut...", options:["π × r × a / 180","2 × r × a","π × r² × a / 360","r × a / 360"], correct:0, exp:"La longueur est proportionnelle à l'angle : π × r × a / 180."},
+        {q:"Cercle de rayon 3 cm, angle au centre de 60°. La longueur de l'arc vaut (π ≈ 3,14)...", options:["3,14 cm","9,42 cm","1,57 cm","6,28 cm"], correct:0, exp:"π × 3 × 60/180 = π ≈ 3,14 cm."},
+        {q:"Dans un cercle, deux cordes de même longueur sous-tendent...", options:["deux arcs de même longueur","deux arcs de longueurs différentes","toujours des demi-cercles","deux diamètres"], correct:0, exp:"Propriété : cordes de même longueur ⇔ arcs de même longueur."}
       ]
     },
     {
-      id: "m3",
-      title: "Quotient d'entiers relatifs",
-      content: `<p>Le <strong>quotient de deux entiers relatifs</strong> a et b (avec b ≠ 0) se note a/b. C'est un nombre qui, multiplié par b, redonne a.</p>
-      <p><strong>Égalité de deux quotients :</strong> a/b = c/d (avec b, d ≠ 0) si et seulement si a × d = b × c (produit en croix).</p>
-      <p><strong>Opposé et inverse :</strong> l'opposé de a/b est −a/b = a/(−b). L'inverse d'un quotient non nul a/b est b/a.</p>
-      <p><strong>Opérations :</strong> pour additionner ou soustraire deux quotients, on les met au même dénominateur. Pour multiplier deux quotients, on multiplie numérateurs entre eux et dénominateurs entre eux. Pour diviser par un quotient, on multiplie par son inverse.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Règle des signes à retenir absolument : a/b et (−a)/(−b) représentent le même nombre (les deux signes s'annulent). On écrit toujours un quotient avec, au plus, un seul signe négatif, placé devant la fraction : −a/b et non a/(−b).</p>
+      id: "ma3",
+      title: "Calculs algébriques — Nombres rationnels",
+      content: `<h3>PPCM et PGCD</h3>
+      <p>Le <strong>PPCM</strong> de deux entiers naturels non nuls a et b est le <strong>plus petit multiple commun non nul</strong> de a et b. Ex. : multiples de 10 : 10, 20, 30, 40… ; de 15 : 15, 30, 45… ; donc PPCM(10 ; 15) = 30.</p>
+      <p>Le <strong>PGCD</strong> de a et b est le <strong>plus grand diviseur commun</strong>. Ex. : diviseurs de 18 : 1, 2, 3, 6, 9, 18 ; de 12 : 1, 2, 3, 4, 6, 12 ; donc PGCD(18 ; 12) = 6.</p>
+      <p><strong>Méthode par décomposition en facteurs premiers</strong> (ex. : 360 = 2³ × 3² × 5 et 700 = 2² × 5² × 7) :</p>
+      <ul>
+        <li><strong>PPCM</strong> : produit de <strong>tous</strong> les facteurs apparus, chacun avec son <strong>plus grand</strong> exposant : PPCM(360 ; 700) = 2³ × 3² × 5² × 7 = 12 600.</li>
+        <li><strong>PGCD</strong> : produit des facteurs <strong>communs</strong>, chacun avec son <strong>plus petit</strong> exposant : PGCD(360 ; 700) = 2² × 5 = 20.</li>
+      </ul>
+      <p>Le PGCD sert à <strong>simplifier une fraction</strong> (on divise numérateur et dénominateur par le PGCD : la fraction devient irréductible) ; le PPCM sert à trouver le <strong>plus petit dénominateur commun</strong> de deux fractions.</p>
+      <h3>Nombres rationnels</h3>
+      <p>Un <strong>nombre rationnel</strong> est un nombre égal à une fraction ou à l'opposé d'une fraction. L'ensemble des nombres rationnels se note <strong>ℚ</strong>. Exemples : 0 ; 2 ; −3 ; 4,75 ; −0,023 ; 7/2 ; −9/5. <strong>Tout nombre décimal est un rationnel</strong> (on a ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ). Un rationnel s'écrit a/b avec a et b entiers relatifs, b ≠ 0, et −a/b = a/(−b) = −(a/b).</p>
+      <h3>Opérations</h3>
+      <ul>
+        <li><strong>Produit</strong> : (a/b) × (c/d) = (a × c)/(b × d). Ex. : (−9/5) × (4/7) = −36/35.</li>
+        <li><strong>Inverse</strong> : l'inverse de a/b (a et b non nuls) est b/a ; le produit d'un nombre et de son inverse vaut 1. <strong>0 n'a pas d'inverse.</strong> Ex. : l'inverse de −7/13 est −13/7.</li>
+        <li><strong>Quotient</strong> : (a/b) ÷ (c/d) = (a/b) × (d/c). Diviser, c'est multiplier par l'inverse.</li>
+        <li><strong>Somme</strong> : on réduit au même dénominateur (le PPCM des dénominateurs) puis on additionne les numérateurs.</li>
+      </ul>
+      <h3>Approximation, arrondi et troncature</h3>
+      <p>Comme 1,85 &lt; 13/7 &lt; 1,86 (écart 10⁻²), 1,85 est l'<strong>approximation décimale par défaut d'ordre 2</strong> de 13/7 et 1,86 son <strong>approximation par excès d'ordre 2</strong>.</p>
+      <p><strong>Arrondi d'ordre n</strong> : on calcule le quotient avec n + 1 chiffres après la virgule. Si le (n+1)-ième chiffre est 0, 1, 2, 3 ou 4, l'arrondi est l'approximation par défaut ; si c'est 5, 6, 7, 8 ou 9, c'est l'approximation par excès. <strong>Troncature à n décimales</strong> : on garde simplement les n premiers chiffres après la virgule. Ex. : 18/7 ≈ 2,5714285 ; arrondi d'ordre 5 : 2,57143 ; troncature à 5 décimales : 2,57142.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> pour deux entiers a et b, on a toujours <strong>a × b = PPCM(a ; b) × PGCD(a ; b)</strong>. Ex. : 18 × 32 = 576 = 288 × 2.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple complet : calcule A = (−3/4) + (5/6). On cherche le plus petit dénominateur commun de 4 et 6, qui est 12. On a −3/4 = −9/12 et 5/6 = 10/12, donc A = −9/12 + 10/12 = 1/12. Autre exemple avec la division : (2/3) ÷ (−4/5) = (2/3) × (−5/4) = −10/12 = −5/6 (en simplifiant par 2).</p>
-      <h3>📌 Point du programme à ne pas manquer : puissance d'une fraction</h3>
-      <p>Pour élever une fraction à une puissance entière, on élève séparément le numérateur et le dénominateur : (a/b)ⁿ = aⁿ/bⁿ. Exemple : (2/3)² = 2²/3² = 4/9. Autre exemple avec un exposant plus grand : (1/2)³ = 1³/2³ = 1/8.</p>`,
+      <p>Deux voitures partent ensemble. La bleue fait un tour en 36 min, la jaune en 30 min. Se retrouvent-elles sur la ligne de départ ? 36 = 2² × 3² et 30 = 2 × 3 × 5, donc PPCM(36 ; 30) = 2² × 3² × 5 = <strong>180</strong>. Au bout de 180 minutes, la bleue a fait 5 tours et la jaune 6 : elles se retrouvent sur la ligne.</p>
+      <p>Un collège de 400 élèves compte 120 filles et 280 garçons. Pour former le plus grand nombre d'équipes identiques, on calcule PGCD(120 ; 280) = <strong>40</strong> équipes, chacune de 3 filles et 7 garçons.</p>
+      <h3>📌 Point du programme à ne pas manquer : arrondi ou troncature ?</h3><p>Ne pas confondre : la <strong>troncature</strong> coupe sans regarder la suite ; l'<strong>arrondi</strong> regarde le chiffre suivant. Pour 22/7 ≈ 3,142857 : troncature à 2 décimales = 3,14 ; arrondi d'ordre 2 = 3,14 (le 3ᵉ chiffre est 2) ; mais arrondi d'ordre 4 = 3,1429 (le 5ᵉ chiffre est 5), alors que la troncature à 4 décimales est 3,1428.</p>`,
       quiz: [
-        {q:"Les quotients 2/3 et 8/12 sont-ils égaux ?", options:["Oui, car 2×12 = 3×8","Non, car les dénominateurs diffèrent","Oui, car 2+12 = 3+8","On ne peut pas savoir"], correct:0, exp:"2×12 = 24 et 3×8 = 24 : les produits en croix sont égaux, donc les quotients sont égaux."},
-        {q:"Quel est l'inverse de −3/7 ?", options:["3/7","−7/3","7/3","−3/7"], correct:1, exp:"L'inverse de a/b est b/a : l'inverse de −3/7 est −7/3."},
-        {q:"Que vaut (−2/5) × (3/4) ?", options:["−6/20 soit −3/10","6/20 soit 3/10","−5/9","5/9"], correct:0, exp:"On multiplie numérateurs et dénominateurs : (−2×3)/(5×4) = −6/20 = −3/10 après simplification."},
-        {q:"Que vaut (1/2) ÷ (−1/3) ?", options:["−3/2","3/2","−1/6","1/6"], correct:0, exp:"Diviser par −1/3 revient à multiplier par son inverse −3 : (1/2) × (−3) = −3/2."},
-        {q:"Comment écrit-on correctement le quotient −5 sur 8 avec un seul signe ?", options:["5/(−8)","−5/8 ou 5/(−8) sont équivalents mais on préfère −5/8","−(−5)/8","5/8"], correct:1, exp:"On préfère toujours placer le signe négatif devant la fraction entière : −5/8."},
-        {q:"Que vaut (2/3)² ?", options:["4/9","2/9","4/6","2/6"], correct:0, exp:"(2/3)² = 2²/3² = 4/9."}
+        {q:"PPCM(10 ; 15) = ...", options:["5","30","150","60"], correct:1, exp:"30 est le plus petit multiple commun non nul de 10 et 15."},
+        {q:"PGCD(18 ; 12) = ...", options:["2","3","6","36"], correct:2, exp:"Diviseurs communs : 1, 2, 3, 6 ; le plus grand est 6."},
+        {q:"Pour calculer le PGCD avec la décomposition, on prend les facteurs...", options:["tous, avec le plus grand exposant","communs, avec le plus petit exposant","communs, avec le plus grand exposant","non communs uniquement"], correct:1, exp:"PGCD : facteurs communs, plus petit exposant ; PPCM : tous les facteurs, plus grand exposant."},
+        {q:"L'ensemble des nombres rationnels se note...", options:["ℕ","ℤ","𝔻","ℚ"], correct:3, exp:"ℚ désigne l'ensemble des nombres rationnels."},
+        {q:"L'inverse de −7/13 est...", options:["7/13","−13/7","13/7","−7/13"], correct:1, exp:"L'inverse de a/b est b/a : l'inverse de −7/13 est −13/7 (même signe)."},
+        {q:"(3/5) ÷ (7/4) = ...", options:["21/20","12/35","3/7","35/12"], correct:1, exp:"On multiplie par l'inverse : (3/5) × (4/7) = 12/35."},
+        {q:"18/7 ≈ 2,5714285. Sa troncature à 3 décimales est...", options:["2,572","2,571","2,57","2,5714"], correct:1, exp:"On garde les 3 premiers chiffres après la virgule : 2,571."},
+        {q:"Quel nombre n'a pas d'inverse ?", options:["1","−1","0","1/2"], correct:2, exp:"0 n'a pas d'inverse, car aucun nombre multiplié par 0 ne donne 1."}
       ]
     },
     {
-      id: "m4",
-      title: "Repérage linéaire",
-      content: `<p>Sur une <strong>droite graduée</strong>, chaque point est repéré par un nombre appelé son <strong>abscisse</strong>. La distance entre deux points A et B d'abscisses respectives a et b est donnée par AB = |b − a| (la valeur absolue de leur différence).</p>
-      <p><strong>Milieu de deux points :</strong> l'abscisse du milieu I du segment [AB] est la moyenne des abscisses de A et B : x<sub>I</sub> = (a + b) / 2.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> La distance AB est toujours positive, quel que soit l'ordre des points : AB = BA. C'est pour cela qu'on utilise la valeur absolue, qui « efface » le signe négatif éventuel de la soustraction.</p>
+      id: "ma4",
+      title: "Géométrie du plan — Distances",
+      content: `<h3>Distance d'un point à une droite</h3>
+      <p>(D) est une droite et K un point qui n'appartient pas à (D). La perpendiculaire à (D) passant par K coupe (D) en M. La longueur <strong>KM</strong> est la <strong>distance du point K à la droite (D)</strong>. C'est la <strong>plus courte</strong> distance entre K et un point de (D) : pour tout autre point G de (D), KM &lt; KG. Si un point est sur (D), sa distance à (D) est nulle.</p>
+      <p><strong>Méthode</strong> : on trace la perpendiculaire à (L) passant par A, on note H son point d'intersection avec (L), puis on mesure [AH].</p>
+      <h3>Distance de deux droites parallèles</h3>
+      <p>(L) et (D) sont parallèles ; A ∈ (L) et B ∈ (D) tels que (AB) ⊥ (L). La distance <strong>AB</strong> est la <strong>distance des droites parallèles</strong> (L) et (D). Elle est la même quel que soit le point A choisi. Dans un rectangle ABCD, la distance de (AD) à (BC) est AB.</p>
+      <p>Les points situés à une distance donnée d d'une droite (D) sont sur <strong>deux droites parallèles à (D)</strong>, une de chaque côté, à la distance d.</p>
+      <h3>Caractérisation de la bissectrice d'un angle</h3>
+      <ul>
+        <li>Si un point appartient à la <strong>bissectrice</strong> d'un angle, alors il est <strong>équidistant</strong> des supports des côtés de cet angle.</li>
+        <li>Réciproquement, si un point est équidistant des supports des côtés d'un angle, alors il appartient à la bissectrice de cet angle.</li>
+      </ul>
+      <p><strong>Construction de la bissectrice au compas</strong> : du sommet O, on trace un arc qui coupe les deux côtés en A et B ; de A et de B, on trace deux arcs de même rayon qui se coupent en M ; la droite (OM) est la bissectrice.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> les trois bissectrices d'un triangle se coupent en un point I, équidistant des trois côtés : c'est le <strong>centre du cercle inscrit</strong>. C'est la bonne place pour un mât « à égale distance des côtés » d'un terrain triangulaire.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : sur une droite graduée, A a pour abscisse −5 et B a pour abscisse 3. La distance AB = |3 − (−5)| = |8| = 8. L'abscisse du milieu I de [AB] est x<sub>I</sub> = (−5 + 3)/2 = −2/2 = −1. Vérification : la distance de A à I est |−1−(−5)| = 4, et la distance de I à B est |3−(−1)| = 4 : les deux distances sont bien égales, I est bien au milieu.</p>
-      <h3>📌 Point du programme à ne pas manquer : comparer et ordonner des abscisses</h3><p>Sur une droite graduée, l'ordre des nombres correspond exactement à l'ordre des points : si a &lt; b, alors le point d'abscisse a est situé <strong>à gauche</strong> du point d'abscisse b. Cela permet de savoir si un point est <strong>entre</strong> deux autres sans faire de calcul de distance : le point M d'abscisse m est entre A(a) et B(b) (avec a &lt; b) si et seulement si a ≤ m ≤ b. C'est un raisonnement très utile pour vérifier rapidement la position relative de plusieurs points sur une droite graduée.</p>`,
+      <p>Le triangle RST a une aire de 12 cm² et RS = 6 cm. Avec H le pied de la hauteur issue de T : aire = RS × TH / 2, donc TH = 2 × 12 / 6 = <strong>4 cm</strong>. La distance de T à la droite (RS) est 4 cm.</p>
+      <p>Un triangle ABC a pour côtés AB = 24 m, AC = 20 m, BC = 16 m, et O est le centre du cercle inscrit de rayon r. Aire(AOB) = 24r/2 = 12r ; aire(AOC) = 10r ; aire(BOC) = 8r ; donc <strong>aire(ABC) = 30r</strong> (en m²).</p>
+      <h3>📌 Point du programme à ne pas manquer : la voie la plus courte</h3><p>Pour relier un champ C à une route rectiligne par le chemin le plus court, on trace la <strong>perpendiculaire</strong> à la route passant par C : le pied H de cette perpendiculaire donne le tracé, et CH est la distance du champ à la route. Tout autre chemin rectiligne CG vers la route est plus long.</p>`,
       quiz: [
-        {q:"A a pour abscisse −2 et B a pour abscisse 7. Quelle est la distance AB ?", options:["5","9","−9","14"], correct:1, exp:"AB = |7 − (−2)| = |9| = 9."},
-        {q:"Quelle est l'abscisse du milieu de [AB] si A(4) et B(−10) ?", options:["−3","7","−7","3"], correct:0, exp:"x_I = (4 + (−10))/2 = −6/2 = −3."},
-        {q:"Si AB = 6 et A a pour abscisse 1, quelles sont les abscisses possibles de B ?", options:["7 seulement","−5 seulement","7 ou −5","6 ou −6"], correct:2, exp:"B est à distance 6 de A : soit 1+6=7, soit 1−6=−5."},
-        {q:"La distance entre deux points peut-elle être négative ?", options:["Oui, si le second point est à gauche","Non, jamais","Oui, toujours","Seulement si les abscisses sont négatives"], correct:1, exp:"Une distance, grâce à la valeur absolue, est toujours positive ou nulle."},
-        {q:"Le milieu de [AB] avec A(−3) et B(3) a pour abscisse...", options:["0","3","−3","6"], correct:0, exp:"x_I = (−3+3)/2 = 0/2 = 0."}
-      ,
-        { q: "Sur une droite graduée, A a pour abscisse −3, B a pour abscisse 6 et M a pour abscisse 2. Le point M est-il situé entre A et B ?", options: ["Oui, car −3 ≤ 2 ≤ 6", "Non, car 2 est positif", "Non, car M n'est pas le milieu de [AB]", "On ne peut pas savoir sans mesurer"], correct: 0, exp: "M est entre A et B si son abscisse est comprise entre celles de A et B : −3 ≤ 2 ≤ 6 est vrai, donc M est bien situé entre A et B sur la droite graduée." }
+        {q:"La distance d'un point K à une droite (D) est...", options:["KG pour n'importe quel point G de (D)","KM, où M est le pied de la perpendiculaire à (D) passant par K","toujours nulle","la longueur de (D)"], correct:1, exp:"C'est la longueur KM, M étant le pied de la perpendiculaire issue de K."},
+        {q:"Si M est le pied de la perpendiculaire à (D) issue de K, et G un autre point de (D), alors...", options:["KG < KM","KM < KG","KM = KG","KM = 0"], correct:1, exp:"La distance KM est la plus courte : KM < KG."},
+        {q:"Un point qui appartient à la bissectrice d'un angle est...", options:["sur un côté de l'angle","équidistant des supports des côtés de l'angle","toujours le sommet","à 1 cm du sommet"], correct:1, exp:"Propriété directe de la bissectrice."},
+        {q:"Un point équidistant des supports des côtés d'un angle...", options:["appartient à la bissectrice de l'angle","est le sommet de l'angle","n'existe pas","est sur la médiatrice d'un côté"], correct:0, exp:"C'est la propriété réciproque."},
+        {q:"Où se trouvent tous les points situés à 2 cm d'une droite (D) ?", options:["Sur un cercle","Sur deux droites parallèles à (D), à 2 cm de chaque côté","Sur une seule droite perpendiculaire à (D)","En un seul point"], correct:1, exp:"Ce sont deux parallèles à (D), une de chaque côté."},
+        {q:"Un triangle a une aire de 12 cm² et une base de 6 cm. La distance du sommet opposé à cette base vaut...", options:["2 cm","4 cm","6 cm","72 cm"], correct:1, exp:"hauteur = 2 × aire / base = 24 / 6 = 4 cm."},
+        {q:"Le point de concours des bissectrices d'un triangle est...", options:["le centre de gravité","l'orthocentre","le centre du cercle inscrit","le milieu d'un côté"], correct:2, exp:"Il est équidistant des trois côtés : centre du cercle inscrit."}
       ]
     },
     {
-      id: "m5",
-      title: "Projection",
-      content: `<p>La <strong>projection d'un point M sur une droite (d) parallèlement à une droite (d')</strong> est le point d'intersection de (d) avec la droite passant par M et parallèle à (d'). Quand la droite (d') est perpendiculaire à (d), on parle de <strong>projection orthogonale</strong> : c'est le pied de la perpendiculaire abaissée de M sur (d).</p>
-      <p><strong>Propriété de la droite des milieux :</strong> dans un triangle, la droite qui joint les milieux de deux côtés est parallèle au troisième côté, et sa longueur vaut la moitié de celle de ce troisième côté.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> La projection conserve l'alignement : si trois points sont alignés, leurs projetés (selon une même direction) sont aussi alignés. C'est un outil puissant pour construire des figures sans mesurer directement certaines longueurs.</p>
+      id: "ma5",
+      title: "Calculs algébriques — Calcul littéral",
+      content: `<p>Une <strong>expression littérale</strong> contient une ou plusieurs lettres (2a ; a − 5b ; 2πr ; 3x + 4). Pour calculer sa <strong>valeur numérique</strong>, on remplace chaque lettre par le nombre donné : pour x = 5, 3x + 4 = 3 × 5 + 4 = 19.</p>
+      <p><strong>Règles d'écriture</strong> : on n'écrit pas le signe × devant une lettre ou une parenthèse : 2x (et non x2), ab, 2(x − 7). On écrit 2 × (−9) et non 2 × −9.</p>
+      <h3>Suppression de parenthèses et priorités</h3>
+      <ul>
+        <li>Parenthèses précédées de <strong>+</strong> (ou d'aucun signe) : on les supprime <strong>sans rien changer</strong> : (−7 + a) + (b − 3 + c) = −7 + a + b − 3 + c.</li>
+        <li>Parenthèses précédées de <strong>−</strong> : on les supprime en <strong>changeant tous les signes</strong> à l'intérieur : a − (b − 3 + c) = a − b + 3 − c.</li>
+        <li>Priorités : d'abord les parenthèses, puis les <strong>puissances</strong>, puis les <strong>multiplications et divisions</strong>, enfin les <strong>additions et soustractions</strong>.</li>
+      </ul>
+      <h3>Développer</h3>
+      <p><strong>Développer</strong> un produit, c'est l'écrire sous la forme d'une <strong>somme</strong>.</p>
+      <ul>
+        <li>a(x + y) = ax + ay &nbsp;;&nbsp; a(x − y) = ax − ay. Ex. : −2,5(x − 4) = −2,5x + 10.</li>
+        <li>(a + b)(x + y) = ax + ay + bx + by. Ex. : (3x + 2)(2y − 1) = 6xy − 3x + 4y − 2.</li>
+      </ul>
+      <p><strong>Produits remarquables</strong> :</p>
+      <ul>
+        <li><strong>(a + b)² = a² + 2ab + b²</strong> &nbsp;(ex. : (a + 7)² = a² + 14a + 49)</li>
+        <li><strong>(a − b)² = a² − 2ab + b²</strong> &nbsp;(ex. : (a − 3)² = a² − 6a + 9)</li>
+        <li><strong>(a + b)(a − b) = a² − b²</strong> &nbsp;(ex. : (a + 8)(a − 8) = a² − 64)</li>
+      </ul>
+      <h3>Factoriser</h3>
+      <p><strong>Factoriser</strong> une somme, c'est l'écrire sous la forme d'un <strong>produit</strong>.</p>
+      <ul>
+        <li>Facteur commun : ax + ay = a(x + y). Ex. : 12x² − 18x = 6x(2x − 3) ; 2x(y − 1) + (y − 1) = (y − 1)(2x + 1).</li>
+        <li>Avec les identités remarquables : x² + 6x + 9 = (x + 3)² ; x² − 10x + 25 = (x − 5)² ; x² − 121 = (x − 11)(x + 11).</li>
+      </ul>
+      <p><strong>🔎 Pour aller plus loin :</strong> les produits remarquables servent aussi au calcul mental : 11² = (10 + 1)² = 100 + 20 + 1 = 121 ; 19 × 21 = (20 − 1)(20 + 1) = 400 − 1 = 399 ; 12² − 11² = (12 + 11)(12 − 11) = 23.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Application de la droite des milieux : dans un triangle ABC, I est le milieu de [AB] et J est le milieu de [AC]. D'après la propriété, (IJ) est parallèle à (BC) et IJ = BC/2. Si BC = 8 cm, alors IJ = 4 cm — sans avoir besoin de mesurer directement IJ sur la figure. Cette propriété est très utile pour calculer une longueur inaccessible à partir des milieux d'un triangle.</p>
-      <h3>📌 Point du programme à ne pas manquer : la projection conserve le milieu</h3><p>Une propriété importante et souvent utilisée : si I est le <strong>milieu</strong> du segment [AB], alors le projeté I' de I (selon une direction donnée) est aussi le milieu du segment [A'B'], où A' et B' sont les projetés respectifs de A et B. Autrement dit, la projection <strong>conserve le milieu</strong> d'un segment. C'est une conséquence directe du fait que la projection conserve l'alignement et les proportions le long d'une même direction.</p>`,
+      <p>Un champ rectangulaire est formé de deux parcelles de longueurs x et y et de même largeur z. Son périmètre est <strong>P = 2(x + y) + 2z</strong>. Pour x = 15 m, y = 30 m, z = 20 m : P = 2 × 45 + 40 = <strong>130 m</strong>. Avec une porte de 1 m à 10 000 F et le grillage à 1 500 F le mètre : coût = (130 − 1) × 1 500 + 10 000 = <strong>203 500 F</strong>, inférieur aux 250 000 F en caisse.</p>
+      <h3>📌 Point du programme à ne pas manquer : le double produit</h3><p>Erreur classique : écrire (a + b)² = a² + b². Il ne faut <strong>jamais oublier le double produit 2ab</strong>. Vérification : pour a = 3 et b = 4, (3 + 4)² = 49, alors que 3² + 4² = 25 ; la différence 24 est bien 2 × 3 × 4. Pour factoriser x² + 14x + 49, on reconnaît a = x, b = 7 et 2ab = 14x : c'est (x + 7)².</p>`,
       quiz: [
-        {q:"La projection orthogonale d'un point M sur une droite (d) est...", options:["le point de (d) le plus proche de M","le pied de la perpendiculaire abaissée de M sur (d)","un point choisi au hasard sur (d)","le milieu de (d)"], correct:1, exp:"La projection orthogonale correspond au pied de la perpendiculaire abaissée de M sur (d), qui est bien aussi le point le plus proche."},
-        {q:"Dans un triangle ABC, I milieu de [AB], J milieu de [AC], BC = 10 cm. Que vaut IJ ?", options:["10 cm","5 cm","20 cm","2,5 cm"], correct:1, exp:"D'après la droite des milieux, IJ = BC/2 = 10/2 = 5 cm."},
-        {q:"La droite des milieux d'un triangle est...", options:["perpendiculaire au troisième côté","parallèle au troisième côté","confondue avec le troisième côté","aucune de ces réponses"], correct:1, exp:"La droite joignant les milieux de deux côtés est parallèle au troisième côté du triangle."},
-        {q:"Si trois points sont alignés, que peut-on dire de leurs projetés sur une droite ?", options:["Ils sont aussi alignés","Ils sont confondus en un seul point","Ils forment un triangle","Rien de particulier"], correct:0, exp:"La projection conserve l'alignement des points."},
-        {q:"Une projection parallèlement à une droite (d') sur (d) est orthogonale quand...", options:["(d) et (d') sont parallèles","(d) et (d') sont perpendiculaires","(d) et (d') sont confondues","jamais"], correct:1, exp:"On parle de projection orthogonale précisément quand la direction de projection (d') est perpendiculaire à (d)."}
-      ,
-        { q: "I est le milieu de [AB]. On projette A, I et B parallèlement à une droite (d') sur une droite (d), obtenant A', I' et B'. Que peut-on affirmer sur I' ?", options: ["I' n'a aucun lien particulier avec A' et B'", "I' est le milieu de [A'B']", "I' est toujours confondu avec A'", "I' est en dehors du segment [A'B']"], correct: 1, exp: "La projection conserve le milieu : puisque I est le milieu de [AB], son projeté I' est nécessairement le milieu du segment [A'B'] obtenu en projetant A et B." }
+        {q:"Pour x = 5, la valeur de 3x + 4 est...", options:["12","19","35","39"], correct:1, exp:"3 × 5 + 4 = 15 + 4 = 19."},
+        {q:"a − (b − 3 + c) = ...", options:["a − b − 3 + c","a − b + 3 − c","a + b − 3 + c","a − b + 3 + c"], correct:1, exp:"Parenthèses précédées de − : on change tous les signes à l'intérieur."},
+        {q:"Développer 5(x + 7) donne...", options:["5x + 7","5x + 35","x + 35","5x + 12"], correct:1, exp:"5 × x + 5 × 7 = 5x + 35."},
+        {q:"(a + 7)² = ...", options:["a² + 49","a² + 7a + 49","a² + 14a + 49","a² + 14a + 14"], correct:2, exp:"(a + b)² = a² + 2ab + b² avec b = 7 : a² + 14a + 49."},
+        {q:"(a + 8)(a − 8) = ...", options:["a² − 64","a² + 64","a² − 16a + 64","a² − 16"], correct:0, exp:"(a + b)(a − b) = a² − b² = a² − 64."},
+        {q:"Factoriser x² − 121 donne...", options:["(x − 11)²","(x − 11)(x + 11)","x(x − 121)","(x − 121)(x + 1)"], correct:1, exp:"x² − 11² = (x − 11)(x + 11)."},
+        {q:"Factoriser 12x² − 18x donne...", options:["6x(2x − 3)","6(2x² − 3)","x(12 − 18x)","3x(4x − 18)"], correct:0, exp:"Le facteur commun est 6x : 6x × 2x − 6x × 3 = 6x(2x − 3)."},
+        {q:"Développer, c'est transformer un produit en...", options:["une somme","un quotient","une fraction","une puissance"], correct:0, exp:"Développer : produit → somme. Factoriser : somme → produit."}
       ]
     },
     {
-      id: "m6",
-      title: "Les nombres rationnels",
-      content: `<p>Un <strong>nombre rationnel</strong> est un nombre qui peut s'écrire comme le quotient de deux entiers relatifs (a/b, avec b ≠ 0). L'ensemble des nombres rationnels se note <strong>ℚ</strong>. On a l'inclusion ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ (les entiers naturels, puis relatifs, puis décimaux, sont tous des rationnels particuliers).</p>
-      <p>Tout nombre rationnel peut s'écrire sous la forme d'une <strong>SDIP</strong> (Suite Décimale Illimitée Périodique) : son écriture décimale, après un certain rang, répète indéfiniment le même motif de chiffres.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Exemple de SDIP : 1/3 = 0,333333… (le chiffre 3 se répète indéfiniment), et 1/7 = 0,142857142857… (le motif « 142857 » se répète). Pour retrouver un quotient à partir d'une SDIP, il existe une méthode algébrique utilisant la multiplication par une puissance de 10 adaptée à la période.</p>
+      id: "ma6",
+      title: "Géométrie du plan — Cercles et triangles",
+      content: `<h3>Positions relatives d'un cercle et d'une droite</h3>
+      <p>(𝒞) est un cercle de centre O et de rayon r, (D) une droite, et H le pied de la perpendiculaire à (D) passant par O (OH est la distance de O à (D)).</p>
+      <ul>
+        <li><strong>OH &lt; r</strong> : (𝒞) et (D) ont deux points communs, ils sont <strong>sécants</strong>.</li>
+        <li><strong>OH = r</strong> : un seul point commun, ils sont <strong>tangents</strong>.</li>
+        <li><strong>OH &gt; r</strong> : aucun point commun, ils sont <strong>disjoints</strong>.</li>
+      </ul>
+      <p>La <strong>tangente</strong> en un point H du cercle est la droite passant par H et <strong>perpendiculaire au rayon [OH]</strong>.</p>
+      <p><strong>Tangentes issues d'un point A extérieur</strong> : on place I, milieu de [AO] ; on trace le cercle de centre I passant par A ; il coupe (𝒞) en T et T' ; les droites (AT) et (AT') sont les tangentes à (𝒞) passant par A.</p>
+      <h3>Droite des milieux</h3>
+      <ul>
+        <li>Dans un triangle, si une droite passe par les <strong>milieux de deux côtés</strong>, alors elle est <strong>parallèle au troisième côté</strong>.</li>
+        <li>La longueur du segment qui joint les milieux de deux côtés est égale à la <strong>moitié</strong> de la longueur du troisième côté : <strong>B'C' = BC / 2</strong>.</li>
+        <li>Si une droite passe par le <strong>milieu d'un côté</strong> et est <strong>parallèle à un deuxième côté</strong>, alors elle passe par le <strong>milieu du troisième côté</strong>.</li>
+      </ul>
+      <h3>Droites particulières et points remarquables</h3>
+      <ul>
+        <li>Les trois <strong>hauteurs</strong> sont concourantes en l'<strong>orthocentre</strong>.</li>
+        <li>Les trois <strong>médianes</strong> (sommet → milieu du côté opposé) sont concourantes au <strong>centre de gravité G</strong>, situé aux <strong>2/3 de chaque médiane à partir du sommet</strong> : AG = (2/3)AA'. Chaque médiane partage le triangle en deux triangles de même aire.</li>
+        <li>Les trois <strong>bissectrices</strong> sont concourantes au <strong>centre du cercle inscrit</strong> (cercle intérieur, tangent aux trois côtés).</li>
+      </ul>
+      <p><strong>🔎 Pour aller plus loin :</strong> associe chaque point à sa droite : <strong>h</strong>auteurs → ort<strong>h</strong>ocentre ; <strong>m</strong>édianes → centre de gravité ; <strong>b</strong>issectrices → cercle inscrit (et, déjà vu, médiatrices → cercle circonscrit).</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Retrouver le quotient à partir de x = 0,777... (SDIP de période 1) : on pose x = 0,7777..., donc 10x = 7,7777... En soustrayant, 10x − x = 7,7777... − 0,7777... = 7, donc 9x = 7, d'où x = 7/9. Vérification : 7 ÷ 9 = 0,7777... ✓ Cette méthode (multiplier par 10^période puis soustraire) fonctionne pour transformer n'importe quelle SDIP en quotient d'entiers.</p>
-      <h3>📌 Point du programme à ne pas manquer : ordre, puissances et approximations dans ℚ</h3>
-      <p><strong>Ordre et opérations :</strong> si on additionne (ou soustrait) un même nombre aux deux membres d'une inégalité, l'ordre est conservé. Si on multiplie (ou divise) les deux membres par un nombre POSITIF, l'ordre est conservé ; par un nombre NÉGATIF, l'ordre est inversé. Exemple : 2 &lt; 5, mais en multipliant par −1 : −2 &gt; −5.</p>
-      <p><strong>Puissance dans ℚ (exposant négatif) :</strong> pour tout rationnel a non nul et tout entier naturel n, a⁻ⁿ = 1/aⁿ. Exemple : 2⁻¹ = 1/2 = 0,5 ; 2⁻³ = 1/2³ = 1/8.</p>
-      <p><strong>Approximation décimale par défaut / par excès :</strong> pour un nombre rationnel x et une précision 10⁻ⁿ donnée, la valeur approchée par défaut est le plus grand décimal ayant n chiffres après la virgule qui est ≤ x ; la valeur approchée par excès est le plus petit qui est ≥ x. Exemple : pour x = 1/3 à 10⁻² près, la valeur approchée par défaut est 0,33 et par excès est 0,34 (car 0,33 ≤ 1/3 &lt; 0,34).</p>`,
+      <p>ABC est un triangle avec AB = 6, AC = 7, BC = 10 ; I et J sont les milieux de [AB] et [AC]. La droite (IJ) passe par les milieux de deux côtés, donc <strong>(IJ) // (BC)</strong> et <strong>IJ = BC/2 = 5</strong>.</p>
+      <p>Un géomètre code sa figure : G milieu de [AC], F milieu de [AB]. Alors (GF) // (BC) et BC = 2 × GF. Si GF = 24 m, la hauteur de l'immeuble est <strong>BC = 48 m</strong>.</p>
+      <h3>📌 Point du programme à ne pas manquer : démontrer qu'un point est un milieu</h3><p>ABC est rectangle en B ; la médiatrice (D) de [BC] coupe [AC] en I. (AB) ⊥ (BC) et (D) ⊥ (BC), donc (D) // (AB). Dans le triangle ABC, (D) passe par le milieu de [BC] et est parallèle à (AB) : elle passe donc par le milieu de [AC]. Comme I est sur [AC] et sur (D), <strong>I est le milieu de [AC]</strong>.</p>`,
       quiz: [
-        {q:"L'ensemble des nombres rationnels se note...", options:["ℕ","ℤ","ℚ","ℝ"], correct:2, exp:"ℚ désigne l'ensemble des nombres rationnels."},
-        {q:"Un nombre rationnel peut toujours s'écrire...", options:["comme quotient de deux entiers relatifs","uniquement comme un entier","uniquement comme un décimal fini","comme un nombre irrationnel"], correct:0, exp:"Par définition, un rationnel s'écrit a/b avec a et b entiers relatifs, b non nul."},
-        {q:"Que signifie SDIP ?", options:["Somme Décimale Infinie Positive","Suite Décimale Illimitée Périodique","Système Décimal International Précis","Suite Décimale Intégrale Positive"], correct:1, exp:"SDIP signifie Suite Décimale Illimitée Périodique."},
-        {q:"1/3 s'écrit sous forme décimale...", options:["0,3","0,333... (illimité et périodique)","0,33 exactement","1,3"], correct:1, exp:"1/3 = 0,3333... avec le chiffre 3 qui se répète indéfiniment : c'est une SDIP."},
-        {q:"Parmi ℕ, ℤ, 𝔻, ℚ, quel est l'ordre correct d'inclusion ?", options:["ℚ ⊂ 𝔻 ⊂ ℤ ⊂ ℕ","ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ","ℤ ⊂ ℕ ⊂ ℚ ⊂ 𝔻","aucun de ces ordres"], correct:1, exp:"Les entiers naturels sont inclus dans les relatifs, eux-mêmes inclus dans les décimaux, eux-mêmes inclus dans les rationnels."},
-        {q:"Que vaut 2⁻¹ ?", options:["−2","0,5","2","−0,5"], correct:1, exp:"2⁻¹ = 1/2¹ = 1/2 = 0,5."}
+        {q:"Un cercle de rayon 3 cm et une droite à 5 cm de son centre sont...", options:["sécants","tangents","disjoints","confondus"], correct:2, exp:"OH = 5 > r = 3 : aucun point commun, ils sont disjoints."},
+        {q:"Si la distance du centre à la droite est égale au rayon, la droite et le cercle sont...", options:["sécants","tangents","disjoints","parallèles"], correct:1, exp:"OH = r : un seul point commun, ils sont tangents."},
+        {q:"La tangente à un cercle en un point H est...", options:["parallèle au rayon [OH]","perpendiculaire au rayon [OH] en H","confondue avec le diamètre","une corde"], correct:1, exp:"Par définition, elle est perpendiculaire au rayon [OH] en H."},
+        {q:"Dans un triangle ABC, I et J sont les milieux de [AB] et [AC], et BC = 15 cm. Alors IJ = ...", options:["15 cm","30 cm","7,5 cm","5 cm"], correct:2, exp:"IJ = BC/2 = 7,5 cm (propriété de la droite des milieux)."},
+        {q:"Le point de concours des hauteurs d'un triangle s'appelle...", options:["le centre de gravité","l'orthocentre","le centre du cercle inscrit","le milieu"], correct:1, exp:"Hauteurs → orthocentre."},
+        {q:"Le centre de gravité G est situé sur chaque médiane...", options:["au milieu","aux 2/3 à partir du sommet","aux 1/3 à partir du sommet","au sommet"], correct:1, exp:"AG = (2/3) AA'."},
+        {q:"Une droite qui passe par le milieu d'un côté d'un triangle et qui est parallèle à un deuxième côté...", options:["est une hauteur","passe par le milieu du troisième côté","est une bissectrice","passe par le sommet opposé"], correct:1, exp:"C'est la troisième propriété de la droite des milieux."}
       ]
     },
     {
-      id: "m7",
-      title: "Les polygones",
-      content: `<p>Un <strong>polygone</strong> est une figure fermée formée de segments (ses côtés). Le nom d'un polygone dépend de son nombre de côtés : triangle (3), quadrilatère (4), pentagone (5), hexagone (6), heptagone (7), octogone (8), ennéagone (9), décagone (10).</p>
-      <p>Un polygone est <strong>convexe</strong> si tous ses angles intérieurs sont saillants (compris entre 0° et 180°) — autrement dit, aucun de ses sommets ne « rentre » vers l'intérieur. Il est <strong>concave</strong> si au moins un de ses angles intérieurs est rentrant (entre 180° et 360°).</p>
-      <p>Un polygone <strong>régulier</strong> a tous ses côtés de même longueur et tous ses angles de même mesure (exemples : triangle équilatéral, carré, pentagone régulier).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Pour un polygone à n côtés, la somme de ses angles intérieurs vaut (n−2) × 180°. Exemple : un hexagone (6 côtés) a une somme d'angles de (6−2)×180 = 720°, et s'il est régulier, chaque angle mesure 720°/6 = 120°.</p>
+      id: "ma7",
+      title: "Calculs algébriques — Équations et inéquations dans ℚ",
+      content: `<h3>Équations du premier degré</h3>
+      <p>a, b et c sont des rationnels avec a ≠ 0. Une égalité du type <strong>ax + b = c</strong> est une <strong>équation d'inconnue x</strong>. ax + b est le <strong>premier membre</strong> (membre de gauche) et c le <strong>second membre</strong> (membre de droite). Un nombre qui rend l'égalité vraie est une <strong>solution</strong> ; <strong>résoudre</strong> une équation, c'est trouver toutes ses solutions. Ex. : 1 est solution de 2x + 3 = 5 car 2 × 1 + 3 = 5.</p>
+      <p><strong>Égalités et opérations</strong> : si a = b, alors a + c = b + c ; et si k ≠ 0, ka = kb. On peut donc ajouter un même nombre aux deux membres, ou les multiplier par un même nombre non nul.</p>
+      <ul>
+        <li>L'équation <strong>a + x = b</strong> a pour unique solution <strong>b − a</strong>. Ex. : x + 12 = 1 donne x = −11.</li>
+        <li>L'équation <strong>ax = b</strong> (a ≠ 0) a pour unique solution <strong>b/a</strong>. Ex. : −3x = 5 donne x = −5/3.</li>
+      </ul>
+      <h3>Inéquations du premier degré</h3>
+      <p>Une inégalité du type <strong>ax + b &lt; c</strong> ou <strong>ax + b &gt; c</strong> (a ≠ 0) est une <strong>inéquation d'inconnue x</strong>. Ex. : −2 est une solution de 3x + 4 &lt; 7 car 3 × (−2) + 4 = −2 et −2 &lt; 7. Une inéquation a en général une infinité de solutions.</p>
+      <ul>
+        <li>En <strong>ajoutant</strong> un même nombre aux deux membres, on obtient une inégalité <strong>de même sens</strong>.</li>
+        <li>En <strong>multipliant</strong> par un nombre <strong>positif</strong> non nul : inégalité <strong>de même sens</strong>.</li>
+        <li>En <strong>multipliant</strong> par un nombre <strong>négatif</strong> non nul : inégalité <strong>de sens contraire</strong>. Ex. : 5x &lt; 7, donc −3 × 5x &gt; −3 × 7, soit −15x &gt; −21.</li>
+      </ul>
+      <p><strong>Méthode</strong> : pour x + a &lt; b, on ajoute −a aux deux membres (x − 8 &lt; 5 donne x &lt; 13). Pour ax &lt; b, on multiplie par l'inverse de a, en changeant le sens si a est négatif (−3x &lt; −18 donne x &gt; 6). On représente les solutions sur une droite graduée.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> pour vérifier un résultat, remplace x par un nombre de ta solution. Pour −3x &lt; −18 → x &gt; 6 : avec x = 7, −21 &lt; −18 ✔ ; avec x = 5, −15 &lt; −18 est faux ✔.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Pour construire un polygone régulier à n côtés inscrit dans un cercle, on divise le cercle en n arcs égaux : l'angle au centre entre deux sommets consécutifs vaut 360°/n. Exemple : pour un pentagone régulier, l'angle au centre est 360°/5 = 72°. On place donc 5 points sur le cercle en tournant de 72° à chaque fois, puis on relie les points consécutifs pour obtenir le pentagone régulier.</p>
-      <h3>📌 Point du programme à ne pas manquer : le nombre de diagonales</h3><p>Une <strong>diagonale</strong> d'un polygone relie deux sommets non consécutifs (non voisins). Pour un polygone à n côtés, le nombre total de diagonales se calcule avec la formule : <strong>n(n−3)/2</strong>. Exemple : un hexagone (n=6) possède 6×(6−3)/2 = 6×3/2 = 9 diagonales. Un triangle (n=3) en possède 3×0/2 = 0, ce qui est logique : un triangle n'a aucun sommet non consécutif à un autre.</p>`,
+      <p>Une pièce de théâtre réunit 85 spectateurs : les places assises coûtent 500 F, les places debout 150 F, et la recette est de 30 250 F. Soit x le nombre de spectateurs assis : 500x + 150(85 − x) = 30 250, soit 350x + 12 750 = 30 250, donc 350x = 17 500 et <strong>x = 50</strong> spectateurs assis (et 35 debout).</p>
+      <p>René et Bilé livrent 3 tonnes de cacao à 700 F le kilo ; René en a livré plus de 2 tonnes (x &gt; 2 000). Bilé a donc moins de 1 000 kg, soit moins de 700 000 F : les 750 000 F restants suffisent.</p>
+      <h3>📌 Point du programme à ne pas manquer : traduire une phrase</h3><p>« La moitié d'un nombre est égale à 11 » : x/2 = 11. « Le double d'un nombre diminué de 3 est égal à 0 » : 2x − 3 = 0. « Il lui reste moins de 10 000 F après avoir payé une calculatrice à 8 000 F et des cahiers à 300 F » : 8 000 + 300x &lt; 10 000, donc 300x &lt; 2 000 et x &lt; 6,67 : au plus <strong>6 cahiers</strong>.</p>`,
       quiz: [
-        {q:"Comment appelle-t-on un polygone à 7 côtés ?", options:["Hexagone","Octogone","Heptagone","Ennéagone"], correct:2, exp:"Un polygone à 7 côtés est un heptagone."},
-        {q:"Un polygone convexe a tous ses angles intérieurs...", options:["compris entre 0° et 180°","compris entre 180° et 360°","tous égaux à 90°","tous égaux à 180°"], correct:0, exp:"Un polygone convexe a tous ses angles intérieurs saillants, entre 0° et 180°."},
-        {q:"Quelle est la somme des angles intérieurs d'un octogone (8 côtés) ?", options:["720°","1080°","900°","1440°"], correct:1, exp:"(8−2) × 180 = 6 × 180 = 1080°."},
-        {q:"Un polygone régulier a...", options:["seulement des côtés égaux","seulement des angles égaux","des côtés ET des angles tous égaux","4 côtés obligatoirement"], correct:2, exp:"Un polygone régulier a à la fois tous ses côtés et tous ses angles égaux."},
-        {q:"Un polygone est concave si...", options:["tous ses angles sont aigus","au moins un angle intérieur est rentrant (>180°)","il a plus de 6 côtés","il est régulier"], correct:1, exp:"Un polygone concave a au moins un angle intérieur rentrant, entre 180° et 360°."}
-      ,
-        { q: "Combien de diagonales possède un octogone (polygone à 8 côtés) ?", options: ["8", "16", "20", "24"], correct: 2, exp: "Nombre de diagonales = n(n−3)/2 = 8×(8−3)/2 = 8×5/2 = 20." }
+        {q:"Dans l'équation 2x + 3 = 5, le second membre est...", options:["2x","2x + 3","5","x"], correct:2, exp:"Le second membre est le membre de droite : 5."},
+        {q:"La solution de x + 12 = 1 est...", options:["13","−11","11","−13"], correct:1, exp:"x = 1 − 12 = −11."},
+        {q:"La solution de 4x = 8 est...", options:["32","4","2","1/2"], correct:2, exp:"x = 8/4 = 2."},
+        {q:"−3x = 5 a pour solution...", options:["−5/3","5/3","−3/5","15"], correct:0, exp:"x = 5/(−3) = −5/3."},
+        {q:"Quand on multiplie les deux membres d'une inégalité par un nombre négatif...", options:["le sens reste le même","le sens change","l'inégalité devient une égalité","on ne peut pas le faire"], correct:1, exp:"Multiplier par un négatif inverse le sens de l'inégalité."},
+        {q:"Les solutions de x − 8 < 5 sont les nombres...", options:["x < −3","x < 13","x > 13","x = 13"], correct:1, exp:"On ajoute 8 aux deux membres : x < 13."},
+        {q:"Les solutions de −3x < −18 sont les nombres...", options:["x < 6","x > 6","x > −6","x < −6"], correct:1, exp:"On multiplie par −1/3 et on change le sens : x > 6."},
+        {q:"Laquelle de ces écritures est une inéquation ?", options:["3x + 3","6 + a = 27","4t + 1 < 6","3 = 9 − x"], correct:2, exp:"Une inéquation contient un symbole < ou >."}
       ]
     },
     {
-      id: "m8",
-      title: "Le parallélogramme",
-      content: `<p>Un <strong>parallélogramme</strong> ABCD est un quadrilatère dont les côtés opposés sont parallèles deux à deux. Sa <strong>caractérisation vectorielle</strong> est essentielle : ABCD est un parallélogramme si et seulement si le vecteur AB est égal au vecteur DC (ou, de façon équivalente, le vecteur AD est égal au vecteur BC).</p>
-      <p>Cette caractérisation permet de <strong>démontrer</strong> qu'un quadrilatère est un parallélogramme, simplement en montrant l'égalité de deux vecteurs, sans avoir à mesurer les longueurs ou les angles.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Retiens bien le sens des lettres : dans « vecteur AB = vecteur DC », les lettres tournent dans le même sens autour du quadrilatère (A→B et D→C), ce qui correspond bien aux côtés opposés [AB] et [DC] de ABCD.</p>
+      id: "ma8",
+      title: "Géométrie du plan — Vecteurs",
+      content: `<p>Un couple de points (A ; B) définit un <strong>vecteur</strong>, noté <strong>AB→</strong> (on écrit la flèche au-dessus de AB). Il est caractérisé par :</p>
+      <ul>
+        <li>sa <strong>direction</strong> : celle de la droite (AB) ;</li>
+        <li>son <strong>sens</strong> : de A vers B ;</li>
+        <li>sa <strong>longueur</strong> : la distance AB.</li>
+      </ul>
+      <p>Deux droites parallèles ont la <strong>même direction</strong>. Deux couples de points (A ; B) et (C ; D) de même direction sont de <strong>même sens</strong> si les « flèches » A→B et C→D vont du même côté. Les vecteurs AB→ et BA→ ont la même direction et la même longueur, mais des sens contraires : ils sont <strong>opposés</strong>.</p>
+      <h3>Vecteurs égaux</h3>
+      <p>Deux vecteurs sont <strong>égaux</strong> lorsqu'ils ont <strong>la même direction, le même sens et la même longueur</strong>. On peut tracer un vecteur égal à AB→ à partir de n'importe quel point (c'est le même déplacement).</p>
+      <ul>
+        <li><strong>Caractérisation du parallélogramme</strong> : AB→ = DC→ si et seulement si <strong>ABCD est un parallélogramme</strong> (attention à l'ordre des lettres).</li>
+        <li><strong>Caractérisation du milieu</strong> : I est le milieu de [AB] si et seulement si <strong>AI→ = IB→</strong>.</li>
+      </ul>
+      <h3>Somme de vecteurs : l'égalité de Chasles</h3>
+      <p>Pour tous points A, B et C : <strong>AB→ + BC→ = AC→</strong>. On « enchaîne » les déplacements : aller de A à B puis de B à C revient à aller de A à C. Ex. : MN→ + NP→ + PQ→ = MQ→ ; AB→ + BA→ = AA→ = 0→ (vecteur nul).</p>
+      <p>Pour construire la somme de deux vecteurs u→ et v→ : on trace u→ à partir d'un point A (on obtient B), puis v→ à partir de B (on obtient C) ; la somme est AC→.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> deux vecteurs égaux ont la même longueur et des supports parallèles : une égalité de vecteurs permet donc de démontrer à la fois une <strong>égalité de distances</strong> et un <strong>parallélisme</strong>.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de démonstration : on donne quatre points M(1;2), N(5;2), P(6;5), Q(2;5) et on veut montrer que MNPQ est un parallélogramme. On calcule le vecteur MN : (5−1 ; 2−2) = (4 ; 0). On calcule le vecteur QP : (6−2 ; 5−5) = (4 ; 0). Comme vecteur MN = vecteur QP, MNPQ est bien un parallélogramme (d'après la caractérisation vectorielle), sans avoir eu besoin de tracer la figure ni de mesurer quoi que ce soit.</p>
-      <h3>📌 Point du programme à ne pas manquer : les diagonales et les cas particuliers</h3><p>Une autre caractérisation très utile du parallélogramme concerne ses <strong>diagonales</strong> : un quadrilatère est un parallélogramme si et seulement si ses diagonales se coupent en leur milieu. Les cas particuliers à connaître : un <strong>rectangle</strong> est un parallélogramme qui a un angle droit (ses diagonales sont alors de même longueur) ; un <strong>losange</strong> est un parallélogramme qui a deux côtés consécutifs de même longueur (ses diagonales sont alors perpendiculaires) ; un <strong>carré</strong> est à la fois un rectangle et un losange (diagonales de même longueur ET perpendiculaires).</p>`,
+      <p>Des nageurs partent des points A, B, C de la ligne de départ et arrivent en A', B', C' en suivant des trajets rectilignes de même direction et de même sens. Si de plus AA' = BB', alors <strong>AA'→ = BB'→</strong> : les deux nageurs ont effectué le même déplacement, et le quadrilatère <strong>ABB'A'</strong> est un parallélogramme.</p>
+      <p>Simplifie AB→ + CA→ : on réordonne en CA→ + AB→ = <strong>CB→</strong> (Chasles).</p>
+      <h3>📌 Point du programme à ne pas manquer : l'ordre des lettres</h3><p>Pour le parallélogramme ABCD (sommets dans l'ordre), on a <strong>AB→ = DC→</strong> et <strong>AD→ = BC→</strong>, mais <strong>pas</strong> AB→ = CD→ : CD→ est l'opposé de AB→. Une égalité de vecteurs est fausse si l'un des sens est inversé, même si les longueurs sont égales.</p>`,
       quiz: [
-        {q:"ABCD est un parallélogramme. Que peut-on dire du vecteur AB et du vecteur DC ?", options:["Ils sont égaux","Ils sont opposés","Ils sont perpendiculaires","Rien de particulier"], correct:0, exp:"La caractérisation vectorielle du parallélogramme donne vecteur AB = vecteur DC."},
-        {q:"Pour démontrer que MNPQ est un parallélogramme par la méthode vectorielle, il suffit de montrer que...", options:["MN = QP en longueur seulement","le vecteur MN est égal au vecteur QP","les angles sont tous égaux","les diagonales sont perpendiculaires"], correct:1, exp:"Il suffit de montrer l'égalité vectorielle vecteur MN = vecteur QP."},
-        {q:"Dans un parallélogramme ABCD, les côtés opposés sont...", options:["perpendiculaires","parallèles","de longueurs différentes obligatoirement","aucune de ces réponses"], correct:1, exp:"Par définition, un parallélogramme a ses côtés opposés parallèles deux à deux."},
-        {q:"Si vecteur AB = vecteur DC, alors ABCD est...", options:["un triangle","un parallélogramme","un cercle","toujours un carré"], correct:1, exp:"C'est exactement la caractérisation vectorielle du parallélogramme."},
-        {q:"Le vecteur AD dans un parallélogramme ABCD est égal à...", options:["vecteur BC","vecteur CB","vecteur AB","vecteur DC"], correct:0, exp:"De façon équivalente à AB=DC, on a aussi vecteur AD = vecteur BC."}
-      ,
-        { q: "Un parallélogramme a des diagonales de même longueur ET perpendiculaires. Quelle est sa nature précise ?", options: ["Un simple parallélogramme", "Un rectangle (non carré)", "Un losange (non carré)", "Un carré"], correct: 3, exp: "Diagonales de même longueur = propriété du rectangle ; diagonales perpendiculaires = propriété du losange. Un parallélogramme qui a les deux à la fois est donc un carré (à la fois rectangle et losange)." }
+        {q:"Un vecteur est caractérisé par...", options:["sa direction seulement","sa direction, son sens et sa longueur","sa longueur seulement","ses coordonnées uniquement"], correct:1, exp:"Direction, sens et longueur."},
+        {q:"Deux vecteurs égaux ont...", options:["la même longueur seulement","la même direction, le même sens et la même longueur","des sens contraires","la même origine"], correct:1, exp:"Les trois caractéristiques doivent être les mêmes."},
+        {q:"Les vecteurs AB→ et BA→ sont...", options:["égaux","opposés","de directions différentes","nuls"], correct:1, exp:"Même direction, même longueur, sens contraires : ils sont opposés."},
+        {q:"AB→ + BC→ = ...", options:["AC→","CA→","BA→","0→"], correct:0, exp:"C'est l'égalité de Chasles."},
+        {q:"ABCD est un parallélogramme si et seulement si...", options:["AB→ = CD→","AB→ = DC→","AC→ = BD→","AB→ = BC→"], correct:1, exp:"AB→ = DC→ caractérise le parallélogramme ABCD."},
+        {q:"I est le milieu de [AB] si et seulement si...", options:["AI→ = BI→","AI→ = IB→","AB→ = IB→","IA→ = IB→"], correct:1, exp:"AI→ = IB→ : même direction, même sens, même longueur."},
+        {q:"MN→ + NP→ + PQ→ = ...", options:["MQ→","QM→","NQ→","MP→"], correct:0, exp:"Chasles appliqué deux fois : MN→ + NP→ = MP→, puis MP→ + PQ→ = MQ→."}
       ]
     },
     {
-      id: "m9",
-      title: "Les vecteurs",
-      content: `<p>Deux <strong>bipoints</strong> (A ; B) et (B' ; A') sont dits <strong>équipollents</strong> si ABB'A' est un parallélogramme (A est l'origine, B l'extrémité). Un <strong>vecteur</strong> représente l'ensemble de tous les bipoints équipollents entre eux : il a une direction, un sens et une longueur (norme).</p>
-      <p>Deux vecteurs sont égaux s'ils ont même direction, même sens et même longueur — on peut les représenter par des bipoints équipollents n'importe où dans le plan.</p>
-      <p><strong>Relation de Chasles :</strong> pour tous points A, B, C, on a vecteur AB + vecteur BC = vecteur AC. Cette relation permet d'additionner des vecteurs facilement, en les mettant « bout à bout ».</p>
-      <p><strong>Caractérisation vectorielle du milieu :</strong> I est le milieu de [AB] si et seulement si vecteur AI = vecteur IB.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> La relation de Chasles permet aussi de démontrer que des points sont alignés : si vecteur AB et vecteur AC sont colinéaires (l'un est un multiple de l'autre), alors A, B et C sont alignés.</p>
+      id: "ma9",
+      title: "Transformations du plan — Symétries et translations",
+      content: `<p>Une <strong>application du plan dans le plan</strong> associe à tout point M du plan un unique point M', appelé <strong>image</strong> de M. On peut la décrire par un <strong>tableau de correspondance</strong> : une ligne des points, une ligne de leurs images.</p>
+      <h3>Les trois transformations</h3>
+      <ul>
+        <li><strong>Symétrie orthogonale d'axe (D)</strong> : l'image de M est le point M' tel que (D) est la <strong>médiatrice</strong> de [MM'] ; si M ∈ (D), M' = M.</li>
+        <li><strong>Symétrie centrale de centre O</strong> : l'image de M est le point M' tel que O est le <strong>milieu</strong> de [MM'] ; l'image de O est O.</li>
+        <li><strong>Translation de vecteur AB→</strong> : l'image de M est le point M' tel que <strong>MM'→ = AB→</strong> (ABM'M est un parallélogramme). Tous les points « glissent » de la même façon ; aucun point n'est fixe (sauf si le vecteur est nul).</li>
+      </ul>
+      <h3>Ce que ces transformations conservent</h3>
+      <p>Les symétries et les translations <strong>conservent les distances, les mesures d'angles, l'alignement et le parallélisme</strong>. Donc l'image :</p>
+      <ul>
+        <li>d'un <strong>segment</strong> est un segment de même longueur ;</li>
+        <li>d'une <strong>droite</strong> est une droite ; par une translation ou une symétrie centrale, c'est une droite <strong>parallèle</strong> ;</li>
+        <li>d'un <strong>angle</strong> est un angle de même mesure ;</li>
+        <li>d'un <strong>cercle</strong> de centre C et de rayon r est le cercle de centre C' (image de C) et de <strong>même rayon</strong> ;</li>
+        <li>du milieu d'un segment est le milieu du segment image.</li>
+      </ul>
+      <p>Ces propriétés servent à <strong>démontrer</strong> un alignement, une perpendicularité, un parallélisme, une égalité de longueurs ou d'angles, ou qu'un point est un milieu.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> pour construire une figure complexe (un motif décoratif), on rédige un <strong>programme de construction</strong> : on trace une figure de base, puis on construit ses images successives par des symétries ou des translations, en précisant à chaque étape l'axe, le centre ou le vecteur.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple d'utilisation de Chasles : simplifie l'expression vecteur AC + vecteur CB + vecteur BD. En regroupant deux à deux : vecteur AC + vecteur CB = vecteur AB (Chasles), puis vecteur AB + vecteur BD = vecteur AD (Chasles à nouveau). Donc l'expression complète se simplifie en un seul vecteur AD. Cette technique de simplification par Chasles est très utile pour résoudre des exercices de géométrie vectorielle.</p>
-      <h3>📌 Point du programme à ne pas manquer : multiplication d'un vecteur par un nombre</h3>
-      <p>Multiplier un vecteur u par un nombre réel k donne un nouveau vecteur k×u : s'il est non nul, k×u a la même direction que u, le même sens que u si k &gt; 0 (sens opposé si k &lt; 0), et une longueur (norme) égale à |k| fois celle de u. Exemple : si u a pour longueur 3 cm, alors 2u a pour longueur 6 cm et pointe dans le même sens que u, tandis que −2u a aussi pour longueur 6 cm mais pointe dans le sens opposé.</p>`,
+      <p>Soit t la translation de vecteur AB→ et le triangle MNP. Pour construire l'image M' de M, on trace le parallélogramme ABM'M (MM'→ = AB→) ; de même pour N' et P'. Le triangle M'N'P' a les mêmes longueurs et les mêmes angles que MNP, et (MN) // (M'N').</p>
+      <table><tr><th>Point</th><th>A</th><th>B</th><th>C</th></tr><tr><td>Image par la symétrie de centre O</td><td>A'</td><td>B'</td><td>C'</td></tr></table>
+      <p>Si A, B, C sont alignés, alors leurs images A', B', C' sont alignées (l'alignement est conservé).</p>
+      <h3>📌 Point du programme à ne pas manquer : bien choisir la transformation</h3><p>Pour reconnaître une transformation : si les points se reflètent comme dans un miroir le long d'une droite, c'est une <strong>symétrie orthogonale</strong> ; si la figure fait un « demi-tour » autour d'un point (le point milieu de chaque segment [MM']), c'est une <strong>symétrie centrale</strong> ; si tous les points se déplacent dans la même direction, le même sens et de la même longueur, c'est une <strong>translation</strong>.</p>`,
       quiz: [
-        {q:"Deux bipoints (A;B) et (B';A') sont équipollents si...", options:["ABB'A' est un parallélogramme","A=A'","AB=A'B' en longueur seulement","B est le milieu de AA'"], correct:0, exp:"L'équipollence signifie exactement que ABB'A' forme un parallélogramme."},
-        {q:"D'après la relation de Chasles, vecteur AB + vecteur BC =", options:["vecteur AC","vecteur CA","vecteur BA","0"], correct:0, exp:"La relation de Chasles donne directement vecteur AB + vecteur BC = vecteur AC."},
-        {q:"I est le milieu de [AB] si et seulement si...", options:["vecteur AI = vecteur BI","vecteur AI = vecteur IB","AI est perpendiculaire à IB","vecteur AI = 2×vecteur IB"], correct:1, exp:"Le milieu vérifie vecteur AI = vecteur IB (même direction, sens et longueur des deux moitiés)."},
-        {q:"Simplifie vecteur MN + vecteur NP :", options:["vecteur MP","vecteur PM","vecteur MN","0"], correct:0, exp:"D'après Chasles, vecteur MN + vecteur NP = vecteur MP."},
-        {q:"Deux vecteurs égaux ont...", options:["même direction et même sens mais pas forcément même longueur","même direction, même sens et même longueur","seulement la même longueur","des directions différentes"], correct:1, exp:"Deux vecteurs égaux ont exactement même direction, même sens et même longueur (norme)."},
-        {q:"Si u a pour longueur 4 cm, quelle est la longueur du vecteur −3u ?", options:["4 cm","12 cm","−12 cm","3 cm"], correct:1, exp:"La longueur de k×u est |k| fois celle de u : |−3|×4 = 12 cm."}
+        {q:"Par la symétrie orthogonale d'axe (D), l'image M' de M est telle que...", options:["(D) est la médiatrice de [MM']","M est le milieu de [DM']","MM'→ est parallèle à (D)","M' est sur (D)"], correct:0, exp:"L'axe (D) est la médiatrice du segment [MM']."},
+        {q:"Par la symétrie centrale de centre O, l'image M' de M est telle que...", options:["OM' = 2 OM","O est le milieu de [MM']","M est le milieu de [OM']","(OM) ⊥ (OM')"], correct:1, exp:"O est le milieu de [MM']."},
+        {q:"Par la translation de vecteur AB→, l'image M' de M vérifie...", options:["MM'→ = BA→","MM'→ = AB→","AM→ = BM'→ seulement si M = A","M' = B"], correct:1, exp:"Définition : MM'→ = AB→."},
+        {q:"L'image d'un segment de 5 cm par une translation est...", options:["un segment de 10 cm","un segment de 5 cm","un point","un cercle"], correct:1, exp:"Les translations conservent les distances."},
+        {q:"L'image d'un cercle de rayon 3 cm par une symétrie centrale est...", options:["un cercle de rayon 6 cm","un cercle de rayon 3 cm","une droite","un cercle de même centre obligatoirement"], correct:1, exp:"Le rayon est conservé ; le centre est l'image du centre."},
+        {q:"Laquelle de ces propriétés n'est PAS conservée par une symétrie ?", options:["Les distances","Les mesures d'angles","L'alignement","La position de tous les points"], correct:3, exp:"Les points changent de place, mais distances, angles et alignement sont conservés."},
+        {q:"Par une translation de vecteur non nul, combien de points restent à leur place ?", options:["Aucun","Un seul","Deux","Tous"], correct:0, exp:"Tous les points se déplacent du même vecteur : aucun n'est fixe."}
       ]
     },
     {
-      id: "m10",
-      title: "Les nombres réels",
-      content: `<p>Tous les nombres rationnels peuvent s'écrire sous forme de SDIP (Suite Décimale Illimitée Périodique). Mais il existe des nombres dont l'écriture décimale est illimitée et NON périodique : ce sont les <strong>nombres irrationnels</strong> (exemple : π = 3,1415926535… dont les décimales ne se répètent jamais selon un motif).</p>
-      <p>L'ensemble regroupant les nombres rationnels ET les nombres irrationnels s'appelle l'ensemble des <strong>nombres réels</strong>, noté <strong>ℝ</strong>. On a donc ℚ ⊂ ℝ, mais tout nombre réel n'est pas forcément rationnel.</p>
-      <p>On note ℝ⁺ l'ensemble des réels positifs, ℝ⁻ l'ensemble des réels négatifs, et ℝ* = ℝ − {0} l'ensemble des réels non nuls. On a ℝ = ℝ⁺ ∪ ℝ⁻ et ℝ⁺ ∩ ℝ⁻ = {0}.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> D'autres nombres irrationnels célèbres : √2 (la diagonale d'un carré de côté 1) et le nombre d'or φ ≈ 1,618. La découverte de l'irrationalité de √2 par les mathématiciens grecs de l'Antiquité a d'ailleurs été un choc scientifique majeur à l'époque !</p>
+      id: "ma10",
+      title: "Organisation et traitement des données — Statistique",
+      content: `<h3>Mode d'une série statistique</h3>
+      <p>Le <strong>mode</strong> d'une série statistique est toute modalité qui a le <strong>plus grand effectif</strong> (ou la plus grande fréquence). Une série peut avoir <strong>un ou plusieurs modes</strong>. Ex. : si le handball et la natation ont tous deux le plus grand effectif, la série a deux modes.</p>
+      <h3>Moyenne d'une série statistique</h3>
+      <p>La <strong>moyenne</strong> d'une série à caractère quantitatif est le quotient de la <strong>somme de toutes les valeurs</strong> par l'<strong>effectif total</strong>. Ex. : 12 ; 6 ; 20 ; 12 ; 15 → M = 65/5 = 13.</p>
+      <p><strong>Méthode avec un tableau des effectifs</strong> : on multiplie chaque valeur par son effectif, on additionne ces produits, puis on divise par l'effectif total.</p>
+      <table><tr><th>Valeur</th><th>2</th><th>5</th><th>6</th><th>8</th><th>12</th><th>15</th></tr><tr><td>Effectif</td><td>8</td><td>5</td><td>9</td><td>2</td><td>9</td><td>7</td></tr></table>
+      <p>M = (2×8 + 5×5 + 6×9 + 8×2 + 12×9 + 15×7) / (8+5+9+2+9+7) = 324 / 40 = <strong>8,1</strong>.</p>
+      <h3>Diagramme semi-circulaire</h3>
+      <p>Un <strong>diagramme semi-circulaire</strong> représente les effectifs (ou les fréquences) par des secteurs d'un <strong>demi-disque</strong>. La mesure de chaque secteur est proportionnelle à l'effectif, et la somme des angles vaut <strong>180°</strong> :</p>
+      <p style="text-align:center"><strong>angle du secteur = 180° × effectif de la modalité / effectif total</strong></p>
+      <p><strong>Lire un diagramme</strong> : inversement, <strong>effectif = angle × effectif total / 180°</strong> et <strong>fréquence = angle / 180°</strong>. Ex. : Koné a vendu 50 articles ; un secteur de 72° représente 72 × 50 / 180 = <strong>20 articles</strong>, soit une fréquence de 72/180 = 0,4 = 40 %.</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> ne confonds pas le mode (la valeur la plus fréquente) et la moyenne. Pour des données qualitatives (artistes préférés, sports), on peut donner un mode mais <strong>pas de moyenne</strong>.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Pour savoir si un nombre est rationnel ou irrationnel, on cherche s'il peut s'écrire comme un quotient exact d'entiers. Exemple : 3/2 ∈ ℚ (et donc aussi ∈ ℝ, car ℚ ⊂ ℝ), tandis que π ∈ ℝ mais π ∉ ℚ (π n'est pas un quotient exact d'entiers, ses décimales ne se répètent jamais). En résumé : « rationnel » ⟹ toujours « réel », mais « réel » n'implique pas toujours « rationnel ».</p>
-      <h3>📌 Point du programme à ne pas manquer : opérations, puissances et ordre dans ℝ</h3>
-      <p>Les règles de calcul déjà vues dans ℚ (addition, soustraction, multiplication, division, puissance entière — y compris les exposants négatifs, a⁻ⁿ = 1/aⁿ) restent valables dans ℝ. Les règles d'ordre également : ajouter un même nombre aux deux membres conserve l'ordre ; multiplier par un positif conserve l'ordre, par un négatif l'inverse. Exemple : √2 ≈ 1,414 &lt; 1,5, donc en multipliant par −3 (négatif) : −3√2 ≈ −4,243 &gt; −4,5.</p>`,
+      <p>Les notes sur 10 de 20 élèves : 3 (×2), 5 (×5), 6 (×4), 7 (×1), 7,5 (×2), 8 (×3), 9 (×2), 10 (×1). Le mode est <strong>5</strong> (effectif 5). Moyenne : (6 + 25 + 24 + 7 + 15 + 24 + 18 + 10) / 20 = 129/20 = <strong>6,45</strong>.</p>
+      <p>Diagramme semi-circulaire de 1 000 abonnés : un secteur de 36° représente 36 × 1 000 / 180 = <strong>200 abonnés</strong> ; un secteur de 72° représente 400 abonnés.</p>
+      <h3>📌 Point du programme à ne pas manquer : 180° et non 360°</h3><p>En 4ème, le diagramme est <strong>semi-circulaire</strong> : on utilise 180°, et non 360° comme pour un diagramme circulaire. Vérifie toujours que la somme des angles fait 180°. Ex. : pour des effectifs 3, 9 et 6 (total 18), les angles valent 30°, 90° et 60°, soit 180° au total.</p>`,
       quiz: [
-        {q:"L'ensemble des nombres réels se note...", options:["ℚ","ℝ","ℤ","𝔻"], correct:1, exp:"ℝ désigne l'ensemble des nombres réels (rationnels et irrationnels réunis)."},
-        {q:"Un nombre irrationnel a une écriture décimale...", options:["finie","illimitée et périodique","illimitée et NON périodique","toujours négative"], correct:2, exp:"Un nombre irrationnel a une écriture décimale illimitée dont les décimales ne suivent aucun motif périodique."},
-        {q:"Tout nombre rationnel est-il un nombre réel ?", options:["Oui, toujours (ℚ ⊂ ℝ)","Non, jamais","Seulement s'il est positif","Seulement s'il est entier"], correct:0, exp:"ℚ est inclus dans ℝ : tout rationnel est un réel."},
-        {q:"π (pi) est un nombre...", options:["rationnel","irrationnel","entier","négatif"], correct:1, exp:"π est un nombre irrationnel : ses décimales sont illimitées et non périodiques."},
-        {q:"Que vaut ℝ⁺ ∩ ℝ⁻ ?", options:["ℝ tout entier","∅ (l'ensemble vide)","{0}","{1}"], correct:2, exp:"L'intersection des réels positifs et négatifs est réduite au seul nombre 0."},
-        {q:"En multipliant les deux membres de l'inégalité 3 < 7 par −2, on obtient...", options:["−6 < −14","−6 > −14","6 < 14","6 > 14"], correct:1, exp:"Multiplier par un nombre négatif inverse le sens de l'inégalité : −6 > −14."}
+        {q:"Le mode d'une série statistique est...", options:["la plus grande valeur","la modalité qui a le plus grand effectif","la moyenne des valeurs","la valeur du milieu"], correct:1, exp:"Le mode est la modalité de plus grand effectif."},
+        {q:"La moyenne de 12 ; 6 ; 20 ; 12 ; 15 est...", options:["12","13","14","65"], correct:1, exp:"(12 + 6 + 20 + 12 + 15) / 5 = 65/5 = 13."},
+        {q:"Dans un diagramme semi-circulaire, la somme des angles vaut...", options:["90°","180°","270°","360°"], correct:1, exp:"Un demi-disque correspond à 180°."},
+        {q:"L'angle d'un secteur se calcule par...", options:["effectif × 360 / total","180 × effectif / total","total / effectif","effectif / 180"], correct:1, exp:"angle = 180° × effectif / effectif total."},
+        {q:"Total 50 articles, secteur de 72°. L'effectif correspondant est...", options:["20","36","72","40"], correct:0, exp:"72 × 50 / 180 = 20."},
+        {q:"Une série statistique peut avoir...", options:["exactement un mode","un ou plusieurs modes","aucun mode jamais","deux moyennes"], correct:1, exp:"Si plusieurs modalités ont le plus grand effectif, la série a plusieurs modes."},
+        {q:"Pour calculer la moyenne à partir d'un tableau des effectifs, on divise la somme des produits valeur × effectif par...", options:["le nombre de valeurs différentes","l'effectif total","180","le mode"], correct:1, exp:"On divise par l'effectif total."}
       ]
     },
     {
-      id: "m11",
-      title: "Statistiques",
-      content: `<p>Une étude statistique porte sur une <strong>population</strong> (l'ensemble des individus étudiés) et un <strong>caractère</strong> (la propriété étudiée, comme la note obtenue). L'<strong>effectif</strong> d'une valeur est le nombre d'individus qui possèdent cette valeur. La <strong>fréquence</strong> d'une valeur est son effectif divisé par l'effectif total (souvent exprimée en pourcentage).</p>
-      <p>La <strong>moyenne</strong> d'une série se calcule en multipliant chaque valeur par son effectif, en additionnant tous ces produits, puis en divisant par l'effectif total.</p>
-      <p>Les données statistiques se représentent sous forme de <strong>tableau</strong>, de <strong>diagramme en bâtons</strong>, de <strong>diagramme circulaire</strong> (ou « camembert ») ou d'<strong>histogramme</strong> (pour des données regroupées en classes).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Le diagramme circulaire répartit un cercle de 360° proportionnellement aux fréquences : une catégorie de fréquence 25 % occupera un secteur de 360° × 0,25 = 90°. C'est un excellent outil pour visualiser des parts d'un ensemble.</p>
+      id: "ma11",
+      title: "Géométrie de l'espace — Perspective cavalière",
+      content: `<p>La <strong>perspective cavalière</strong> est une technique de dessin qui permet de représenter dans le plan (sur une feuille) un solide de l'espace, en rendant visibles les parties cachées.</p>
+      <h3>Vocabulaire</h3>
+      <ul>
+        <li><strong>Plan vertical de face</strong> : la face « devant nous » (face avant) et la face arrière.</li>
+        <li><strong>Plan vertical de profil</strong> : les faces de côté (gauche et droite).</li>
+        <li><strong>Plan horizontal</strong> : le dessus et le dessous.</li>
+        <li>Les <strong>fuyantes</strong> sont les arêtes perpendiculaires au plan de face (elles « s'enfoncent » dans la feuille).</li>
+      </ul>
+      <h3>Les cinq règles</h3>
+      <ol>
+        <li>Des arêtes à supports <strong>parallèles</strong> sur l'objet sont représentées par des segments à supports <strong>parallèles</strong>.</li>
+        <li>Toute face située dans le <strong>plan vertical de face</strong> est dessinée <strong>sans déformation</strong> (en vraie grandeur ou à l'échelle choisie).</li>
+        <li>Les arêtes <strong>cachées</strong> sont représentées en <strong>pointillés</strong>.</li>
+        <li>Les <strong>fuyantes</strong> sont dessinées parallèles entre elles, en faisant un angle fixé <strong>α</strong> avec l'horizontale (l'<strong>angle de fuite</strong>, souvent 30°, 40° ou 45°).</li>
+        <li>Les longueurs des fuyantes sont multipliées par un <strong>coefficient de réduction c</strong> (souvent 0,5 ou 0,75), c étant compris entre 0 et 1.</li>
+      </ol>
+      <p>Ces règles permettent de représenter un <strong>pavé droit</strong>, un <strong>cube</strong>, un <strong>prisme droit</strong> et un <strong>cylindre droit</strong> (pour le cylindre, les deux bases vues de face sont des cercles, reliés par deux génératrices).</p>
+      <p><strong>🔎 Pour aller plus loin :</strong> sur un cube dessiné en perspective cavalière, seule la face avant (et la face arrière) apparaissent comme de vrais carrés. Les faces de profil et du dessus apparaissent comme des <strong>parallélogrammes</strong>, même si dans la réalité ce sont des carrés.</p>
       <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de calcul de moyenne à partir d'un tableau d'effectifs : pour les notes 8 (effectif 2), 12 (effectif 5), 16 (effectif 3), la moyenne est (8×2 + 12×5 + 16×3) / (2+5+3) = (16+60+48)/10 = 124/10 = 12,4. La fréquence de la note 12 est 5/10 = 0,5, soit 50 %. Dans un diagramme circulaire, cette catégorie occuperait donc un secteur de 360° × 0,5 = 180°, soit la moitié du cercle.</p>
-      <h3>📌 Point du programme à ne pas manquer : le mode et le diagramme semi-circulaire</h3><p>Le <strong>mode</strong> d'une série statistique est la valeur qui a le plus grand effectif (celle qui revient le plus souvent). Le programme officiel utilise aussi une représentation particulière : le <strong>diagramme semi-circulaire</strong> (un demi-cercle, 180°, plutôt qu'un cercle complet). La mesure de l'angle d'un secteur se calcule ainsi : <strong>angle = 180° × (effectif de la modalité ÷ effectif total)</strong>.</p>`,
+      <p>On représente une boîte de craie (pavé droit) avec une face avant IJ = 9 cm et IF = 6 cm, et une arête [IK] = 6 cm perpendiculaire à la face avant. On prend c = 0,5 et α = 40°.</p>
+      <p>La face avant est dessinée <strong>sans déformation</strong> : un rectangle de 9 cm sur 6 cm. [IK] est une fuyante : sa longueur sur le dessin est 6 × 0,5 = <strong>3 cm</strong>, tracée à 40° de l'horizontale. Les quatre fuyantes mesurent toutes 3 cm et sont parallèles ; les arêtes cachées sont en pointillés.</p>
+      <h3>📌 Point du programme à ne pas manquer : on ne réduit que les fuyantes</h3><p>Le coefficient c ne s'applique <strong>qu'aux fuyantes</strong>. La face de face n'est jamais réduite (règle 2). Exemple : un pavé de face 5 cm × 3 cm avec une arête de profondeur de 4 cm et c = 0,75 → la face avant mesure 5 cm × 3 cm sur le dessin et la fuyante 4 × 0,75 = <strong>3 cm</strong>.</p>`,
       quiz: [
-        {q:"L'effectif total d'une série de notes 8(×2), 12(×5), 16(×3) est...", options:["3","10","36","8"], correct:1, exp:"2 + 5 + 3 = 10 individus au total."},
-        {q:"La fréquence d'une valeur se calcule comme...", options:["effectif total ÷ effectif de la valeur","effectif de la valeur ÷ effectif total","effectif de la valeur × effectif total","effectif de la valeur − effectif total"], correct:1, exp:"La fréquence = effectif de la valeur divisé par l'effectif total."},
-        {q:"Pour une fréquence de 25 %, l'angle du secteur dans un diagramme circulaire est...", options:["25°","90°","180°","360°"], correct:1, exp:"360° × 0,25 = 90°."},
-        {q:"La moyenne d'une série 10(×1), 20(×1), 30(×1) vaut...", options:["20","30","60","10"], correct:0, exp:"(10+20+30)/3 = 60/3 = 20."},
-        {q:"Quel diagramme convient le mieux pour des données regroupées en classes (intervalles) ?", options:["Diagramme circulaire","Histogramme","Tableau seul","Aucun de ces outils"], correct:1, exp:"L'histogramme est adapté aux données regroupées en classes (intervalles de valeurs)."}
-      ,
-        { q: "Dans une série de 15 notes, la note 12 a un effectif de 5. Quelle est la mesure de son secteur dans un diagramme semi-circulaire ?", options: ["30°", "60°", "90°", "120°"], correct: 1, exp: "Angle = 180° × (effectif ÷ effectif total) = 180° × (5 ÷ 15) = 180° × 1/3 = 60°." }
-      ]
-    },
-    {
-      id: "m12",
-      title: "Les applications (symétries, projection, fonctions)",
-      content: `<p>En mathématiques, une <strong>application</strong> est une règle qui, à chaque élément d'un ensemble de départ, associe un UNIQUE élément d'un ensemble d'arrivée. En géométrie et en calcul, plusieurs notions déjà étudiées sont en réalité des applications : la <strong>symétrie centrale</strong>, la <strong>symétrie orthogonale</strong>, la <strong>projection</strong>, ainsi que les <strong>fonctions monômes</strong> et les <strong>fonctions polynômes</strong>.</p>
-      <p>On peut <strong>composer</strong> deux applications : appliquer d'abord l'une, puis l'autre au résultat obtenu. La composée de deux applications f et g (appliquer d'abord f, puis g) se note g∘f.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Reconnaître qu'une transformation est une application, c'est vérifier que chaque point de départ a bien UNE SEULE image (jamais deux images différentes pour un même point de départ). C'est cette unicité qui distingue une application d'une simple relation.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : la fonction monôme f(x) = 3x est une application qui, à chaque nombre x, associe l'unique nombre 3x. Si on lui associe une autre application g(x) = x + 2, la composée g∘f associe à x d'abord f(x) = 3x, puis g(3x) = 3x + 2. Exemple numérique : pour x = 4, f(4) = 12, puis g(12) = 14, donc (g∘f)(4) = 14. On retrouve la même règle géométrique lorsqu'on compose deux transformations du plan, comme deux symétries.</p>
-      <h3>📌 Point du programme à ne pas manquer : application dans ℝ (fonction réelle)</h3>
-      <p>Une fonction réelle comme x ↦ 3x + 2 est un exemple d'application dans ℝ : à chaque réel x, elle associe l'unique réel 3x + 2. Exemple : l'image de 4 par cette application est 3×4+2 = 14 ; l'image de −1 est 3×(−1)+2 = −1. Comme pour les autres applications du programme, chaque nombre de départ a bien une seule image.</p>`,
-      quiz: [
-        {q:"Une application associe à chaque élément de départ...", options:["plusieurs éléments d'arrivée possibles","un unique élément d'arrivée","aucun élément d'arrivée","toujours le même élément"], correct:1, exp:"Par définition, une application associe UN SEUL élément d'arrivée à chaque élément de départ."},
-        {q:"Parmi les transformations suivantes, laquelle N'EST PAS citée comme une application au programme ?", options:["La symétrie centrale","La symétrie orthogonale","La rotation de 45°","La projection"], correct:2, exp:"Le programme de 4e cite la symétrie centrale, orthogonale, la projection et les fonctions monômes/polynômes, pas la rotation."},
-        {q:"La composée de f puis g se note...", options:["f∘g","g∘f","f+g","f×g"], correct:1, exp:"« g rond f » signifie qu'on applique d'abord f, puis g, et se note g∘f."},
-        {q:"Si f(x) = 2x et g(x) = x+1, que vaut (g∘f)(3) ?", options:["6","7","8","9"], correct:1, exp:"f(3)=6, puis g(6)=7. Donc (g∘f)(3) = 7."},
-        {q:"Une fonction monôme est un exemple de...", options:["application","relation non définie","nombre irrationnel","polygone"], correct:0, exp:"Une fonction monôme, comme toute fonction bien définie, est une application."},
-        {q:"Pour l'application x ↦ 3x + 2, quelle est l'image de −1 ?", options:["−1","−3","1","5"], correct:0, exp:"3×(−1)+2 = −3+2 = −1."}
-      ]
-    },
-    {
-      id: "m13",
-      title: "Monômes et polynômes",
-      content: `<p>Un <strong>monôme</strong> est une expression de la forme a×xⁿ, où a est un nombre (le coefficient) et n un entier naturel (le degré du monôme). Un <strong>polynôme</strong> est une somme de plusieurs monômes.</p>
-      <p><strong>Développer</strong> une expression, c'est la transformer d'un produit en une somme (en distribuant). <strong>Factoriser</strong>, c'est l'opération inverse : transformer une somme en un produit, souvent en mettant un facteur commun en évidence.</p>
-      <p><strong>Identités remarquables</strong> à connaître par cœur : (a+b)² = a² + 2ab + b² ; (a−b)² = a² − 2ab + b² ; (a+b)(a−b) = a² − b².</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Attention à l'erreur classique : (x + 3)² n'est PAS égal à x² + 9 ! Il faut développer avec la règle (a+b)² = a² + 2ab + b², ce qui donne x² + 6x + 9.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple de factorisation avec facteur commun : 6x² + 9x = 3x(2x + 3), car 3x divise à la fois 6x² et 9x. Exemple avec identité remarquable : factorise x² − 16. On reconnaît a² − b² avec a = x et b = 4 (car 16 = 4²), donc x² − 16 = (x−4)(x+4). Vérification en développant : (x−4)(x+4) = x² + 4x − 4x − 16 = x² − 16. ✓</p>
-      <h3>📌 Point du programme à ne pas manquer : le degré d'un polynôme</h3><p>Le <strong>degré d'un polynôme</strong> est le plus grand des degrés de ses monômes. Exemple : dans le polynôme 5x³ − 2x² + 7x − 1, les degrés des monômes sont respectivement 3, 2, 1 et 0 (une constante est un monôme de degré 0) ; le degré du polynôme est donc 3 (le plus grand). On dit qu'un polynôme est <strong>ordonné</strong> selon les puissances décroissantes (ou croissantes) de x quand ses monômes sont écrits dans cet ordre — ce qui facilite les calculs, en particulier l'addition et la soustraction de deux polynômes (on regroupe les monômes de même degré entre eux).</p>`,
-      quiz: [
-        {q:"Développe (x + 3)² correctement :", options:["x² + 9","x² + 6x + 9","x² + 3x + 9","2x + 6"], correct:1, exp:"(a+b)² = a²+2ab+b², donc (x+3)² = x² + 6x + 9."},
-        {q:"Factorise x² − 25 :", options:["(x−5)²","(x+5)²","(x−5)(x+5)","(x−25)(x+1)"], correct:2, exp:"x² − 25 = x² − 5² = (x−5)(x+5), identité remarquable a²−b²."},
-        {q:"Factorise 8x² + 12x (facteur commun) :", options:["4x(2x+3)","4(2x²+3x)","4x(2x+3x)","2x(4x+6)"], correct:0, exp:"4x est le facteur commun de 8x² et 12x : 8x²+12x = 4x(2x+3)."},
-        {q:"Le degré du monôme 5x³ est...", options:["5","3","8","15"], correct:1, exp:"Le degré d'un monôme a×xⁿ est l'exposant n, ici 3."},
-        {q:"Développe (2x − 1)² :", options:["4x² − 1","4x² − 4x + 1","2x² − 4x + 1","4x² + 4x + 1"], correct:1, exp:"(a−b)² = a²−2ab+b² avec a=2x, b=1 : 4x² − 4x + 1."}
-      ,
-        { q: "Quel est le degré du polynôme 4x² − 9x⁵ + 3x − 2 ?", options: ["2", "3", "4", "5"], correct: 3, exp: "Le degré du polynôme est le plus grand degré parmi ses monômes : ici, −9x⁵ est de degré 5, qui est le plus grand — donc le polynôme est de degré 5." }
-      ]
-    },
-    {
-      id: "m14",
-      title: "Translation",
-      content: `<p>Une <strong>translation</strong> est une transformation du plan qui déplace tous les points d'une figure dans une même direction, un même sens, et sur une même distance, définis par un <strong>vecteur</strong>. Si A' est l'image de A par la translation de vecteur u, alors vecteur AA' = u.</p>
-      <p>Pour construire l'image d'une figure par translation, il suffit de construire l'image de chacun de ses sommets (en reportant le vecteur depuis chaque point), puis de relier les images obtenues dans le même ordre.</p>
-      <p><strong>Propriétés</strong> conservées par une translation : les longueurs, les angles, le parallélisme, et les figures particulières (un parallélogramme reste un parallélogramme).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> En coordonnées, si le vecteur de translation est u(a ; b), l'image d'un point M(x ; y) a pour coordonnées M'(x + a ; y + b) : on ajoute simplement les coordonnées du vecteur à celles du point de départ.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : soit A(2 ; 3) et le vecteur de translation u(4 ; −1). L'image A' de A a pour coordonnées (2+4 ; 3+(−1)) = (6 ; 2). Si on translate aussi B(0 ; 0) par le même vecteur u, son image B' a pour coordonnées (0+4 ; 0−1) = (4 ; −1). On remarque que vecteur AB = (0−2 ; 0−3) = (−2 ; −3) et vecteur A'B' = (4−6 ; −1−2) = (−2 ; −3) : ils sont égaux, ce qui confirme que la translation conserve bien les longueurs et les directions.</p>
-      <h3>📌 Point du programme à ne pas manquer : la translation réciproque</h3><p>Toute translation possède une <strong>translation réciproque</strong> qui « annule » son effet : c'est la translation de <strong>vecteur opposé</strong>. Si A' est l'image de A par la translation de vecteur u, alors A est l'image de A' par la translation de vecteur −u (l'opposé de u). Autrement dit, composer une translation de vecteur u avec la translation de vecteur −u redonne le point de départ : c'est la transformation identité.</p>`,
-      quiz: [
-        {q:"Une translation est définie par...", options:["un point","un vecteur","un angle","un cercle"], correct:1, exp:"Une translation est entièrement définie par un vecteur (direction, sens, longueur du déplacement)."},
-        {q:"Si le vecteur de translation est u(3 ; −2), l'image de M(1 ; 5) a pour coordonnées...", options:["(4 ; 3)","(−2 ; 7)","(3 ; −10)","(1 ; 5)"], correct:0, exp:"On ajoute les coordonnées : (1+3 ; 5+(−2)) = (4 ; 3)."},
-        {q:"Une translation conserve...", options:["uniquement les longueurs","uniquement les angles","les longueurs, les angles et le parallélisme","rien de la figure d'origine"], correct:2, exp:"Une translation est une isométrie : elle conserve longueurs, angles et parallélisme."},
-        {q:"Si A' est l'image de A par la translation de vecteur u, alors vecteur AA' vaut...", options:["u","−u","2u","0"], correct:0, exp:"Par définition de la translation, vecteur AA' est exactement égal au vecteur de translation u."},
-        {q:"L'image d'un parallélogramme par translation est...", options:["un triangle","un parallélogramme","un cercle","cela dépend du vecteur"], correct:1, exp:"La translation conserve le parallélisme, donc l'image d'un parallélogramme reste un parallélogramme."}
-      ,
-        { q: "A'(6 ; 2) est l'image de A par la translation de vecteur u(4 ; −1). Quel vecteur permet de retrouver A à partir de A' ?", options: ["u(4 ; −1)", "Le vecteur opposé −u(−4 ; 1)", "Le vecteur nul (0 ; 0)", "u(−4 ; −1)"], correct: 1, exp: "Pour « annuler » l'effet d'une translation de vecteur u, on applique la translation de vecteur opposé −u : ici −u(−4 ; 1), qui ramène A' vers A." }
-      ]
-    },
-    {
-      id: "m15",
-      title: "Composition d'applications du plan",
-      content: `<p><strong>Composer deux applications du plan</strong>, c'est appliquer la première, puis appliquer la seconde à l'image obtenue. Le programme de 4e étudie en particulier trois cas : la composée de deux translations, la composée de deux symétries centrales, et la composée de deux symétries orthogonales d'axes perpendiculaires.</p>
-      <p><strong>Composée de deux translations :</strong> la composée d'une translation de vecteur u suivie d'une translation de vecteur v est une translation de vecteur u + v.</p>
-      <p><strong>Composée de deux symétries centrales :</strong> la composée de la symétrie de centre O₁ suivie de la symétrie de centre O₂ est une translation.</p>
-      <p><strong>Composée de deux symétries orthogonales d'axes perpendiculaires :</strong> c'est une symétrie centrale, de centre le point d'intersection des deux axes.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Retiens la règle pratique : composer deux transformations « qui retournent » la figure (comme deux symétries) peut redonner une transformation « qui ne retourne pas » la figure (comme une translation ou une symétrie centrale) — deux renversements s'annulent, un peu comme deux signes moins qui se compensent.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : soit la symétrie centrale de centre O₁(0;0) puis celle de centre O₂(4;0), appliquées successivement à un point M(1;1). Image de M par la 1ère symétrie (centre O₁) : M'(−1;−1) (on prend l'opposé des coordonnées). Image de M' par la 2ème symétrie (centre O₂) : M''(2×4−(−1) ; 2×0−(−1)) = (9 ; 1). On peut vérifier que ce résultat correspond bien à une translation de vecteur 2×(vecteur O₁O₂) = 2×(4;0) = (8;0) appliquée directement à M(1;1) : (1+8 ; 1+0) = (9;1). ✓</p>
-      <h3>📌 Point du programme à ne pas manquer : composer une transformation avec sa réciproque</h3><p>Un cas particulier important : composer une transformation avec sa <strong>réciproque</strong> (celle qui « annule » son effet) redonne toujours la <strong>transformation identité</strong> (chaque point reste à sa place). Exemple : la composée d'une translation de vecteur u avec la translation de vecteur −u est l'identité. De même, appliquer deux fois de suite la même symétrie centrale (de même centre) redonne aussi l'identité : chaque point retourne à sa position initiale.</p>`,
-      quiz: [
-        {q:"La composée de deux translations de vecteurs u et v est une translation de vecteur...", options:["u × v","u − v","u + v","u/v"], correct:2, exp:"La composée de deux translations est une translation dont le vecteur est la somme des deux vecteurs."},
-        {q:"La composée de deux symétries centrales (centres différents) est...", options:["une translation","une symétrie centrale","une symétrie orthogonale","l'identité"], correct:0, exp:"Composer deux symétries centrales de centres distincts donne une translation."},
-        {q:"La composée de deux symétries orthogonales d'axes perpendiculaires est...", options:["une translation","une symétrie centrale de centre le point d'intersection des axes","une symétrie orthogonale","une rotation de 45°"], correct:1, exp:"C'est une symétrie centrale, de centre le point d'intersection des deux axes perpendiculaires."},
-        {q:"Pour composer deux applications f puis g, on note le résultat...", options:["f∘g","g∘f","f+g","fg"], correct:1, exp:"g∘f signifie qu'on applique d'abord f, puis g."},
-        {q:"Composer deux symétries (centrales ou orthogonales) donne en général...", options:["toujours une symétrie","une transformation qui ne « retourne » plus la figure (translation ou symétrie centrale)","toujours l'identité","un agrandissement"], correct:1, exp:"Deux renversements successifs s'annulent : on obtient une translation ou une symétrie centrale selon le cas."}
-      ,
-        { q: "On applique deux fois de suite la symétrie centrale de centre O à un point M. Où se retrouve M après ces deux applications ?", options: ["À sa position de départ (identité)", "Au centre O", "À l'opposé de sa position de départ", "On ne peut pas savoir"], correct: 0, exp: "Appliquer deux fois la même symétrie centrale annule son propre effet : M' (symétrique de M) redonne M en appliquant à nouveau la symétrie — le résultat est l'identité, M revient à sa position initiale." }
-      ]
-    },
-    {
-      id: "m16",
-      title: "Section de solides",
-      content: `<p>Une <strong>section</strong> d'un solide par un plan est la figure plane obtenue à l'intersection du solide et de ce plan. Le programme de 4e étudie en particulier les sections obtenues par un <strong>plan parallèle à la base</strong> du solide (cube, pavé droit, pyramide, prisme...).</p>
-      <p>Pour un <strong>pavé droit</strong> ou un <strong>cube</strong>, une section par un plan parallèle à une face est toujours un rectangle (ou un carré) de mêmes dimensions que cette face.</p>
-      <p>Pour une <strong>pyramide</strong>, une section par un plan parallèle à la base est une réduction de la base (une figure de même forme, mais plus petite).</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> On représente souvent ces sections en <strong>perspective cavalière</strong>, une technique de dessin qui permet de représenter un solide en 3 dimensions sur une feuille plane, en conservant le parallélisme des arêtes et en réduisant les longueurs « en profondeur ».</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple : un pavé droit mesure 8 cm × 5 cm × 6 cm de hauteur. On le coupe par un plan horizontal parallèle à la base, à mi-hauteur (3 cm du bas). La section obtenue est un rectangle identique à la base : 8 cm × 5 cm, quelle que soit la hauteur à laquelle on coupe (tant que le plan reste parallèle à la base et à l'intérieur du solide). Pour une pyramide de base carrée de 8 cm de côté et de hauteur 6 cm, une section à mi-hauteur (3 cm) donnerait un carré réduit de moitié en dimension par rapport à la base, soit 4 cm de côté.</p>
-      <h3>📌 Point du programme à ne pas manquer : section d'un cylindre et d'un cône</h3><p>Pour un <strong>cylindre de révolution</strong>, une section par un plan parallèle à la base est un <strong>cercle</strong> de même rayon que la base (identique quelle que soit la hauteur de coupe, comme pour le pavé droit). Pour un <strong>cône de révolution</strong>, une section par un plan parallèle à la base est un <strong>cercle réduit</strong> (comme pour la pyramide) : plus on coupe près du sommet, plus le cercle obtenu est petit.</p>`,
-      quiz: [
-        {q:"La section d'un pavé droit par un plan parallèle à une face est...", options:["un triangle","un rectangle identique à cette face","un cercle","un pentagone"], correct:1, exp:"Pour un pavé droit, une section parallèle à une face reproduit exactement cette face (même dimensions)."},
-        {q:"La section d'une pyramide par un plan parallèle à sa base est...", options:["identique à la base","une réduction de la base","un cercle toujours","impossible à déterminer"], correct:1, exp:"La section d'une pyramide par un plan parallèle à la base est une réduction (figure semblable plus petite) de la base."},
-        {q:"La perspective cavalière sert à...", options:["calculer un volume","représenter un solide en 3D sur une feuille plane","mesurer un angle","calculer une aire"], correct:1, exp:"C'est une technique de représentation en 3 dimensions sur une surface plane."},
-        {q:"Dans une perspective cavalière, les arêtes fuyantes (en profondeur) sont généralement...", options:["agrandies","dessinées à leur taille réelle","réduites","supprimées"], correct:2, exp:"Les longueurs « en profondeur » sont réduites selon un coefficient pour donner une impression de perspective."},
-        {q:"Une section de cube par un plan parallèle à une face est toujours...", options:["un triangle","un carré identique à la face","un rectangle non carré","un cercle"], correct:1, exp:"Pour un cube, toutes les faces sont carrées, donc la section parallèle à une face est un carré de même dimension."}
-      ,
-        { q: "On coupe un cylindre de révolution de rayon 5 cm par un plan parallèle à sa base, à mi-hauteur. Quelle est la forme et la taille de la section obtenue ?", options: ["Un rectangle de 5 cm de large", "Un cercle de rayon 2,5 cm (réduit de moitié)", "Un cercle de rayon 5 cm (identique à la base)", "Un triangle"], correct: 2, exp: "Pour un cylindre, une section parallèle à la base est toujours un cercle de même rayon que la base, quelle que soit la hauteur de coupe (contrairement au cône, où la section se réduit en se rapprochant du sommet)." }
-      ]
-    },
-    {
-      id: "m17",
-      title: "Équations et inéquations du premier degré dans ℝ",
-      content: `<p>Une <strong>équation du premier degré</strong> à une inconnue x est une égalité de la forme ax + b = cx + d (avec a, b, c, d des nombres réels). Résoudre l'équation, c'est trouver toutes les valeurs de x qui rendent l'égalité vraie.</p>
-      <p>Une <strong>inéquation du premier degré</strong> est une inégalité de même forme (avec &lt;, &gt;, ≤ ou ≥ à la place de =). Sa résolution donne un ensemble de valeurs (un intervalle), qu'on peut représenter sur une droite graduée.</p>
-      <p><strong>Règle essentielle pour les inéquations :</strong> multiplier ou diviser les deux membres par un nombre NÉGATIF inverse le sens de l'inégalité.</p>
-      <p><strong>🔎 Pour aller plus loin :</strong> Après avoir trouvé la solution d'une équation, prends l'habitude de vérifier en remplaçant x par ta valeur dans l'équation de départ : si les deux membres sont égaux, ta solution est correcte.</p>
-      <h3>📝 Explication détaillée et exemple corrigé</h3>
-      <p>Exemple d'équation : résous 5x − 3 = 2x + 9. On regroupe les x d'un côté : 5x − 2x = 9 + 3, soit 3x = 12, donc x = 4. Vérification : 5×4−3 = 17 et 2×4+9 = 17. ✓ Exemple d'inéquation : résous −2x + 6 &lt; 0. On isole x : −2x &lt; −6, puis on divise par −2 (nombre négatif, donc on inverse le sens) : x &gt; 3. La solution est donc l'ensemble des réels strictement supérieurs à 3, qu'on représente sur une droite graduée par une demi-droite ouverte partant de 3 vers la droite.</p>
-      <h3>📌 Point du programme à ne pas manquer : résolution de problèmes</h3>
-      <p>Pour résoudre un problème concret avec une équation : on choisit une inconnue x, on traduit l'énoncé en équation, on la résout, puis on vérifie que la solution a un sens dans le contexte. Exemple : « Karim a 3 ans de plus que le double de l'âge de sa sœur. Ensemble ils ont 33 ans. Quel est l'âge de la sœur ? » On note x l'âge de la sœur : Karim a 2x+3 ans. L'équation est x + (2x+3) = 33, soit 3x+3=33, donc 3x=30, x=10. La sœur a 10 ans (et Karim a 2×10+3 = 23 ans ; vérification : 10+23=33 ✓).</p>`,
-      quiz: [
-        {q:"Résous 4x + 5 = 2x + 17.", options:["x = 4","x = 6","x = 12","x = 2"], correct:1, exp:"4x−2x = 17−5, donc 2x=12, x=6."},
-        {q:"En résolvant une inéquation, quand faut-il inverser le sens de l'inégalité ?", options:["En additionnant un nombre positif","En divisant par un nombre positif","En multipliant ou divisant par un nombre négatif","Jamais"], correct:2, exp:"Multiplier ou diviser par un nombre négatif inverse le sens de l'inégalité."},
-        {q:"Résous −3x + 9 > 0.", options:["x > 3","x < 3","x > −3","x < −3"], correct:1, exp:"−3x > −9, puis on divise par −3 (on inverse le sens) : x < 3."},
-        {q:"Une équation du premier degré a en général...", options:["aucune solution toujours","une solution unique","toujours deux solutions","une infinité de solutions toujours"], correct:1, exp:"Une équation du premier degré (avec a≠c) a en général une unique solution."},
-        {q:"Comment vérifier la solution d'une équation ?", options:["On ne peut pas vérifier","En remplaçant x par la solution trouvée dans l'équation de départ","En redessinant la figure","En multipliant par 2"], correct:1, exp:"On remplace x par la valeur trouvée : si les deux membres deviennent égaux, la solution est correcte."},
-        {q:"Un problème se traduit par l'équation x + (2x+3) = 33. Quelle est la valeur de x ?", options:["10","12","15","30"], correct:0, exp:"3x+3=33, donc 3x=30, x=10."}
+        {q:"En perspective cavalière, les arêtes cachées sont représentées...", options:["en traits continus","en pointillés","en couleur rouge","on ne les dessine pas"], correct:1, exp:"Règle 3 : les arêtes cachées sont en pointillés."},
+        {q:"La face située dans le plan vertical de face est dessinée...", options:["réduite de moitié","sans déformation","inclinée de 45°","en pointillés"], correct:1, exp:"Règle 2 : la face de face est dessinée sans déformation."},
+        {q:"Des arêtes parallèles sur l'objet sont représentées par des segments...", options:["perpendiculaires","parallèles","de même longueur toujours","concourants"], correct:1, exp:"Règle 1 : le parallélisme est conservé."},
+        {q:"Le coefficient de réduction s'applique...", options:["à toutes les arêtes","seulement aux fuyantes","seulement à la face avant","aux arêtes cachées uniquement"], correct:1, exp:"On ne réduit que les fuyantes (arêtes perpendiculaires au plan de face)."},
+        {q:"Une fuyante mesure 6 cm sur l'objet et c = 0,5. Sur le dessin elle mesure...", options:["12 cm","6 cm","3 cm","0,5 cm"], correct:2, exp:"6 × 0,5 = 3 cm."},
+        {q:"L'angle α en perspective cavalière est...", options:["l'angle entre les fuyantes et l'horizontale","l'angle droit de la face avant","toujours 90°","l'angle entre deux arêtes cachées"], correct:0, exp:"α est l'angle de fuite, entre les fuyantes et l'horizontale."},
+        {q:"Sur un cube en perspective cavalière, une face de profil apparaît comme...", options:["un carré","un parallélogramme","un cercle","un triangle"], correct:1, exp:"Seules les faces de face restent des carrés ; les autres deviennent des parallélogrammes."}
       ]
     }
   ]
